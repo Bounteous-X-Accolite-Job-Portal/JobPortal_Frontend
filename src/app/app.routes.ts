@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LandingComponent } from './Components/landing/landing.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
+import { JobsComponent } from './Components/jobs/jobs.component';
 
 export const routes: Routes = [
     {
@@ -17,7 +18,16 @@ export const routes: Routes = [
         component: RegisterComponent
     },
     {
+        path: 'jobs',
+        component: JobsComponent
+    },
+    {
         path: '',
+        redirectTo: 'landing',
+        pathMatch: 'full'
+    },
+    {
+        path: '**',
         component: LandingComponent
     }
 ];
