@@ -3,5 +3,5 @@
     margin: 0;
     padding: 0;
     background-image: url(../../../assets/Images/cover-img2.jpg);
-    
+    background-size: contain;
 }
