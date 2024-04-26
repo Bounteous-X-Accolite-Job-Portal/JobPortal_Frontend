@@ -15,6 +15,9 @@ export class RegisterComponent implements OnInit{
     constructor(){
       
     }
+    onSignup(){
+      
+    }
 
     ngOnInit():void{
 
