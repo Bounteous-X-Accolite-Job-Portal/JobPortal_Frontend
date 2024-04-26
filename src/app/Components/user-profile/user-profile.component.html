@@ -1,0 +1,112 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="m-3 p-3">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" formControlName="firstName" class="form-control" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" formControlName="lastName" class="form-control" />
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" formControlName="email" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" formControlName="password" class="form-control" />
+  </div>
+
+  <div class="form-group starlabel">
+    <label for="phoneNo">Phone Number</label>
+    <input type="text" formControlName="phoneNo" class="form-control" />
+  </div>
+
+  <div class="form-group form-check">
+    <input
+      type="checkbox"
+      formControlName="isEmailVerified"
+      class="form-check-input"
+      id="isEmailVerified"
+    />
+    <label class="form-check-label" for="isEmailVerified"
+      >Is Email Verified</label
+    >
+  </div>
+
+  <div formGroupName="address">
+    <h5>Address</h5>
+    <div class="form-group">
+      <label for="houseNo">House No</label>
+      <input type="text" formControlName="houseNo" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="locality">Locality</label>
+      <input type="text" formControlName="locality" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" formControlName="city" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" formControlName="state" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="country">Country</label>
+      <input type="text" formControlName="country" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="zipCode">Zip Code</label>
+      <input type="text" formControlName="zipCode" class="form-control" />
+    </div>
+  </div>
+
+  <div formGroupName="education">
+    <h5>Education Details </h5>
+    <div class="form-group">
+      <label for="degree">Degree : </label>
+      <input type="text" formControlName="degree" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="college">College :</label>
+      <input type="text" formControlName="college" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="university">University:</label>
+      <input type="text" formControlName="university" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="startDate">Start Date:</label>
+      <input type="date" formControlName="startDate" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="endDate">End Date:</label>
+      <input type="date" formControlName="endDate" class="form-control" />
+    </div>
+    <div class="form-group form-check">
+        <input
+          type="checkbox"
+          formControlName="isDegreeOnGoing"
+          class="form-check-input"
+          id="isDegreeOnGoing"
+        />
+        <label class="form-check-label" for="isDegreeOnGoing"
+          >Currently Persuing</label>
+        >
+      </div>
+    <div class="form-group">
+      <label for="grade">Grade (CGPA):</label>
+      <input type="text" formControlName="grade" class="form-control" />
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

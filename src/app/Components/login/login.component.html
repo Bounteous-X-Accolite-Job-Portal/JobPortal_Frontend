@@ -1,8 +1,6 @@
-<!-- Section: Design Block -->
 <section class="background-radial-gradient overflow-hidden">
     <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-      <div class="row gx-lg-5 align-items-center mb-5">
-        
+      <div class="row gx-lg-5 align-items-center mb-5"> 
   
         <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
           <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
@@ -10,17 +8,29 @@
   
           <div class="card bg-glass">
             <div class="card-body px-4 py-5 px-md-5">
-              <form>
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form3Example3">Email address</label>
-                  <input type="email" id="form3Example3" class="form-control" />
+                  <input type='email' id="form3Example3" class="form-control" formControlName="email"/>
+                  <small *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="block p-error">
+
+                    <div *ngIf="f.email.errors?.['required']">Email is required</div>
+                    <div *ngIf="f.email.errors?.['email']">Email should be valid</div>
+
+                  </small>
                 </div>
   
                 <!-- Password input -->
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form3Example4">Password</label>
-                  <input type="password" id="form3Example4" class="form-control" />
+                  <input type="password" id="form3Example4" class="form-control" formControlName="password"/>
+                  <small *ngIf="(f.password.invalid) && ((f.password.dirty) || (f.password.touched))"  class="block p-error">
+
+                    <div *ngIf="f.password.errors?.['required']">Password is required</div>
+                    <div *ngIf="f.password.errors?.['password']">Password should be valid</div>
+
+                  </small>
                 </div>
   
                 <!-- Checkbox -->
@@ -33,7 +43,7 @@
   
                 <!-- Submit button -->
                 <div class="d-flex justify-content-center w-70px">
-                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block">
+                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block" [disabled]="loginForm.invalid">
                         Login
                     </button>
                 </div>

@@ -3,8 +3,14 @@ import { LandingComponent } from './Components/landing/landing.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { JobsComponent } from './Components/jobs/jobs.component';
+import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 
 export const routes: Routes = [
+    {
+        path: '',
+        redirectTo: 'landing',
+        pathMatch: 'full'
+    },
     {
         path: 'landing',
         component: LandingComponent
@@ -22,9 +28,8 @@ export const routes: Routes = [
         component: JobsComponent
     },
     {
-        path: '',
-        redirectTo: 'landing',
-        pathMatch: 'full'
+        path: 'user-profile',
+        component: UserProfileComponent
     },
     {
         path: '**',

@@ -1,0 +1,4 @@
+.starlabel label:after {
+  content: "*";
+  color: red;
+}
