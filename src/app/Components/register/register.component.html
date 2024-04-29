@@ -24,18 +24,18 @@
   
           <div class="card bg-glass">
             <div class="card-body px-4 py-5 px-md-5">
-              <form>
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row">
                   <div class="col-md-6 mb-4">
                     <div  class="form-outline">
-                      <input type="text" id="FirstName" class="form-control" [(ngModel)]="RegObj.firstName"/>
+                      <input type="text" id="FirstName" class="form-control" formControlName="firstName"/>
                       <label class="form-label" for="FirstName">First name</label>
                     </div>
                   </div>
                   <div class="col-md-6 mb-4">
                     <div data-mdb-input-init class="form-outline">
-                      <input type="text" id="LastName" class="form-control" [(ngModel)]="RegObj.lastName"/>
+                      <input type="text" id="LastName" class="form-control" formControlName="lastName"/>
                       <label class="form-label" for="LastName">Last name</label>
                     </div>
                   </div>
@@ -43,24 +43,24 @@
   
                 <!-- Email input -->
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="email" id="Email" class="form-control" [(ngModel)]="RegObj.email"/>
+                  <input type="email" id="Email" class="form-control" formControlName="email"/>
                   <label class="form-label" for="Email">Email address</label>
                 </div>
   
                 <!-- Password input -->
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" id="Password" class="form-control" [(ngModel)]="RegObj.password"/>
+                  <input type="password" id="Password" class="form-control" formControlName="password"/>
                   <label class="form-label" for="Password">Password</label>
                 </div>
 
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" id="ConfirmPassword" class="form-control" [(ngModel)]="RegObj.confirmPassword"/>
+                  <input type="password" id="ConfirmPassword" class="form-control" formControlName="confirmPassword"/>
                   <label class="form-label" for="ConfirmPassword">Confirm Password</label>
                 </div>
   
                 <!-- Submit button -->
                 <div class="d-flex justify-content-center">
-                    <button (click)="onSignup()" type="submit" class="btn btn-primary mb-2 p-2" style="width: 70%;">
+                    <button (click)="onSubmitRegister()" type="submit" class="btn btn-primary mb-2 p-2" style="width: 70%;">
                         Sign up
                     </button>
                 </div>
