@@ -4,6 +4,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { JobsComponent } from './Components/jobs/jobs.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,10 @@ export const routes: Routes = [
     {
         path: 'user-profile',
         component: UserProfileComponent
+    },
+    {
+        path: 'edit-profile',
+        component: EditProfileComponent
     },
     {
         path: '**',

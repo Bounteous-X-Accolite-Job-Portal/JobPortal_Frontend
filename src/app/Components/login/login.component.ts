@@ -2,8 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
-import {parse, stringify, toJSON, fromJSON} from 'flatted';
-
 
 @Component({
   selector: 'app-login',
@@ -32,7 +30,7 @@ export class LoginComponent {
       )
       .subscribe(
         (data) => {
-          console.log(stringify(data));
+          //  console.log(stringify(data));
           console.log('Login successful');
           //.message = 'Login successful!';
         },
@@ -41,5 +39,10 @@ export class LoginComponent {
           //this.message = 'Invalid email or password.';
         }
       );
+
+    // loginObj =  Login;
+    // constructor(){
+    //   this.loginObj = new Login();
+    // }
   }
 }
