@@ -3,6 +3,7 @@ import { LandingComponent } from './Components/landing/landing.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { JobsComponent } from './Components/jobs/jobs.component';
+import { DashboardComponent } from './Components/dashboard/dashboard.component';
 
 export const routes: Routes = [
     {
@@ -20,6 +21,10 @@ export const routes: Routes = [
     {
         path: 'jobs',
         component: JobsComponent
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent
     },
     {
         path: '',
