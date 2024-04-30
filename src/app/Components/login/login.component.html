@@ -1,72 +1,123 @@
 <section class="background-radial-gradient overflow-hidden">
-    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-      <div class="row gx-lg-5 align-items-center mb-5"> 
-  
-        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-          <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-          <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
-  
-          <div class="card bg-glass">
-            <div class="card-body px-4 py-5 px-md-5">
-              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="email">Email address</label>
-                  <input type='email' id="email" class="form-control" formControlName="email"/>
-                  <small *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="block p-error">
+  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+    <div class="row gx-lg-5 align-items-center mb-5">
+      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div
+          id="radius-shape-1"
+          class="position-absolute rounded-circle shadow-5-strong"
+        ></div>
+        <div
+          id="radius-shape-2"
+          class="position-absolute shadow-5-strong"
+        ></div>
 
-                    <div *ngIf="f.email.errors?.['required']">Email is required</div>
-                    <div *ngIf="f.email.errors?.['email']">Email should be valid</div>
+        <div class="card bg-glass">
+          <div class="card-body px-4 py-5 px-md-5">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="email">Email address</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control"
+                  formControlName="email"
+                />
+                <small
+                  *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)"
+                  class="block p-error"
+                >
+                  <div *ngIf="f.email.errors?.['required']">
+                    Email is required
+                  </div>
+                  <div *ngIf="f.email.errors?.['email']">
+                    Email should be valid
+                  </div>
+                </small>
+              </div>
 
-                  </small>
-                </div>
-  
-                <!-- Password input -->
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="password">Password</label>
-                  <input type="password" id="password" class="form-control" formControlName="password"/>
-                  <small *ngIf="(f.password.invalid) && ((f.password.dirty) || (f.password.touched))"  class="block p-error">
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  formControlName="password"
+                />
+                <small
+                  *ngIf="
+                    f.password.invalid &&
+                    (f.password.dirty || f.password.touched)
+                  "
+                  class="block p-error"
+                >
+                  <div *ngIf="f.password.errors?.['required']">
+                    Password is required
+                  </div>
+                  <div *ngIf="f.password.errors?.['password']">
+                    Password should be valid
+                  </div>
+                </small>
+              </div>
 
-                    <div *ngIf="f.password.errors?.['required']">Password is required</div>
-                    <div *ngIf="f.password.errors?.['password']">Password should be valid</div>
+              <!-- Checkbox -->
+              <div class="form-check d-flex justify-content-center mb-4">
+                <input
+                  class="form-check-input me-2"
+                  type="checkbox"
+                  value=""
+                  name="rememberMe"
+                  id="rememberMe"
+                  formControlName="rememberMe"
+                />
+                <label class="form-check-label" for="rememberMe">
+                  Remember me
+                </label>
+              </div>
 
-                  </small>
-                </div>
-  
-                <!-- Checkbox -->
-                <div class="form-check d-flex justify-content-center mb-4">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="rememberMe" checked />
-                  <label class="form-check-label" for="rememberMe">
-                    Remember me
-                  </label>
-                </div>
-  
-                <!-- Submit button -->
-                <div class="d-flex justify-content-center w-70px">
-                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block" [disabled]="loginForm.invalid">
-                        Login
-                    </button>
-                </div>
-              </form>
-            </div>
+              <!-- Submit button -->
+              <div class="d-flex justify-content-center w-70px">
+                <button
+                  type="submit"
+                  data-mdb-button-init
+                  data-mdb-ripple-init
+                  class="btn btn-primary btn-block"
+                 
+                >
+                  Login
+                </button>
+              </div>
+              <span
+                >Don't have an account?
+                <a href="register" style="color: #0a0150">Register</a></span
+              >
+            </form>
           </div>
         </div>
-        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-          <h1 class="my-5 display-inline fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-            Login<br />
-            <span style="color: hsl(218, 81%, 75%)">for Candidates</span>
-          </h1>
-          <p class="mb-4 opacity-70 text-justify" style="color: hsl(223, 54%, 97%);">
-            Bounteous x Accolite accelerates the future for the world’s most
-             ambitious brands through a range of services including Strategy,
-              Analytics, Digital Engineering, Cloud, Data & AI, Experience
-               Design, and Marketing. With a workforce of over 5000 employees
-                spanning North America, APAC, and EMEA, and partnerships with 
-                leading technology providers, Bounteous x Accolite creates exceptional
-                 and efficient business impact, helping clients win.
-          </p>
-        </div>
+      </div>
+      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+        <h1
+          class="my-5 display-inline fw-bold ls-tight"
+          style="color: hsl(218, 81%, 95%)"
+        >
+          Login<br />
+          <span style="color: hsl(218, 81%, 75%)">for Candidates</span>
+        </h1>
+        <p
+          class="mb-4 opacity-70 text-justify"
+          style="color: hsl(223, 54%, 97%)"
+        >
+          Bounteous x Accolite accelerates the future for the world’s most
+          ambitious brands through a range of services including Strategy,
+          Analytics, Digital Engineering, Cloud, Data & AI, Experience Design,
+          and Marketing. With a workforce of over 5000 employees spanning North
+          America, APAC, and EMEA, and partnerships with leading technology
+          providers, Bounteous x Accolite creates exceptional and efficient
+          business impact, helping clients win.
+        </p>
       </div>
     </div>
+  </div>
 </section>
 <!-- Section: Design Block -->

@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 import {
   FormBuilder,
   FormsModule,
@@ -16,14 +17,15 @@ import { AuthService } from '../../Services/auth.service';
   imports: [HttpClientModule, FormsModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
-  providers: [AuthService],
+  providers: [AuthService, Router],
 })
 export class RegisterComponent implements OnInit {
   //public RegObj: RegisClass = new RegisClass();
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   registerForm = this.fb.group({
@@ -33,27 +35,6 @@ export class RegisterComponent implements OnInit {
     password: ['', Validators.required],
     confirmPassword: ['', Validators.required],
   });
-
-  // onSignup() {
-  //   this.authService.register(registerUser).subscribe((res) => {
-  //     //console.log(this.res);
-  //   })
-  // }
-
-  //   onSubmitRegister(): void {
-  //     const formData = this.registerForm.value;
-  // const registerData: string[] = [
-  //   formData.firstName || '',
-  //   formData.lastName || '',
-  //   formData.email || '',
-  //   formData.password || ''
-  //   // Add more fields if needed
-  // ];
-  //     this.authService.register(registerData): Observable<any> {
-  //       // Handle response here
-  //       console.log(res);
-  //     }
-  //   }
 
   ngOnInit(): void {}
 
@@ -66,21 +47,15 @@ export class RegisterComponent implements OnInit {
         password: this.registerForm.value.password,
       };
 
-      // this.authService
-      //   .registerUser(registerData)
-      //   .then((response) => {
-      //     console.log('Registration successful:', response.data);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
       this.authService.registerUser(registerData).subscribe(
         (res) => {
-          // Handle successful registration
+         
           console.log('Registration successful:', res);
+
+          this.router.navigate(['/login']);
         },
         (error) => {
-          // Handle registration error
+        
           console.error('Registration error:', error);
         }
       );
