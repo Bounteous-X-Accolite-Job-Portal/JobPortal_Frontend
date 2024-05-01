@@ -59,6 +59,7 @@
                     Password should be valid
                   </div>
                 </small>
+                <div class="p-error">{{ message }}</div>
               </div>
 
               <!-- Checkbox -->
@@ -87,10 +88,12 @@
                   Login
                 </button>
               </div>
-              <span>
-                Don't have an account?
-                <a href="register" style="color: #0a0150">Register</a>
-                </span>
+              <span
+                >Don't have an account?
+                <a routerLink="../register" style="color: #0a0150"
+                  >Register</a
+                ></span
+              >
             </form>
           </div>
         </div>
