@@ -1,6 +1,13 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RegisClass } from '../../Models/registerUser';
 import { AuthService } from '../../Services/auth.service';
 
@@ -9,40 +16,51 @@ import { AuthService } from '../../Services/auth.service';
   standalone: true,
   imports: [HttpClientModule, FormsModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
+  providers: [AuthService, Router],
 })
+export class RegisterComponent implements OnInit {
+  //public RegObj: RegisClass = new RegisClass();
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
+  registerForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+    confirmPassword: ['', Validators.required],
+  });
 
-// export class RegisterComponent implements OnInit{
-//     public RegObj: RegisClass = new RegisClass();
-//     constructor(private job:AuthService){ 
-//     }
-//     onSignup(){
-//       this.job.registerCandidate(this.RegObj).subscribe((res: any)=>{
-//         if(res.result){
-//           alert(res.message)
-//         } else{
-//           alert(res.message)
-//         }
-//       })
-//     }
+  ngOnInit(): void {}
 
-//     ngOnInit():void{
+  onSubmitRegister(): void {
+    if (this.registerForm.valid) {
+      const registerData = {
+        firstName: this.registerForm.value.firstName,
+        lastName: this.registerForm.value.lastName,
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password,
+      };
 
-//     }
-// }
+      this.authService.registerUser(registerData).subscribe(
+        (res) => {
+         
+          console.log('Registration successful:', res);
 
-
-export class RegisterComponent {
-  public RegObj: RegisClass = new RegisClass();
-  constructor(private job:AuthService){}
-  onSignup(){
-    this.job.registerCandidate(this.RegObj).subscribe((res: any)=>{
-      if(res){
-        alert("success" + res)
-      } else{
-        alert("error")
-      }
-    })
+          this.router.navigate(['/login']);
+        },
+        (error) => {
+        
+          console.error('Registration error:', error);
+        }
+      );
+    } else {
+      // Form is invalid, handle accordingly
+    }
   }
 }

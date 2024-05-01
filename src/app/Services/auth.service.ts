@@ -1,15 +1,35 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { EmailValidator } from '@angular/forms';
+
+// import axios from 'axios';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  apiEndpoint: string = "http://localhost:5234/api/";
+  private baseURL = 'http://localhost:5234/api/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  registerCandidate(obj: any){
-    return this.http.post(this.apiEndpoint+'CandidateAccount/register', obj)
+  registerUser(registerData: any): Observable<any> {
+    // Assuming you are making an HTTP POST request to the backend API
+    let body = registerData;
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST',
+      'Access-Control-Allow-Headers': '*',
+    });
+
+    return this.http.post<any>(
+      'http://localhost:5234/api/CandidateAccount/register',
+      body
+    );
+  }
+
+  loginUser(loginData: any): Observable<any> {
+    return this.http.post<any>(this.baseURL + 'Account/login', loginData);
   }
 }

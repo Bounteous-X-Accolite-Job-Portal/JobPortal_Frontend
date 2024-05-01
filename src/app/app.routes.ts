@@ -14,6 +14,11 @@ import { Child1Component } from './Components/user-profile/child1/child1.compone
 
 export const routes: Routes = [
     {
+        path: '',
+        redirectTo: 'landing',
+        pathMatch: 'full'
+    },
+    {
         path: 'landing',
         component: LandingComponent
     },
