@@ -3,7 +3,14 @@ import { LandingComponent } from './Components/landing/landing.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { JobsComponent } from './Components/jobs/jobs.component';
-import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { UserProfileComponent } from './Components/user-profile/user-profile.component';
+import { Child1Component } from './Components/user-profile/child1/child1.component';
+
+// export const childRoutes: Routes = [
+//     { path: 'child1', component: LoginComponent },
+//     { path: 'child2', component: RegisterComponent}
+// ];
+
 
 export const routes: Routes = [
     {
@@ -24,7 +31,11 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardComponent
+        component: UserProfileComponent,
+        children: [
+            { path: 'child1', component: Child1Component },
+            { path: '', component: Child1Component}
+        ]
     },
     {
         path: '',
@@ -36,3 +47,6 @@ export const routes: Routes = [
         component: LandingComponent
     }
 ];
+
+
+  

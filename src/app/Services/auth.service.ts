@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  apiEndpoint: string = "URL";
+  apiEndpoint: string = "http://localhost:5234/api/";
 
   constructor(private http: HttpClient) { }
 
   registerCandidate(obj: any){
-    return this.http.post(this.apiEndpoint+'AddCandidate', obj)
+    return this.http.post(this.apiEndpoint+'CandidateAccount/register', obj)
   }
 }

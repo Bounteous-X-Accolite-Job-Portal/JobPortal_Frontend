@@ -1,13 +1,13 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisClass } from '../../Models/registerUser';
 import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [HttpClientModule, FormsModule],
+  imports: [HttpClientModule, FormsModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -35,14 +35,14 @@ import { AuthService } from '../../Services/auth.service';
 
 export class RegisterComponent {
   public RegObj: RegisClass = new RegisClass();
-  // constructor(private job:AuthService){}
-  // onSignup(){
-  //   this.job.registerCandidate(this.RegObj).subscribe((res: any)=>{
-  //     if(res.result){
-  //       alert(res.message)
-  //     } else{
-  //       alert(res.message)
-  //     }
-  //   })
-  // }
+  constructor(private job:AuthService){}
+  onSignup(){
+    this.job.registerCandidate(this.RegObj).subscribe((res: any)=>{
+      if(res){
+        alert("success" + res)
+      } else{
+        alert("error")
+      }
+    })
+  }
 }
