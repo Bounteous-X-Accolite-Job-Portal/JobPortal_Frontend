@@ -9,7 +9,7 @@ import axios from 'axios';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseURL = 'http://localhost:5234/api/';
+  private baseURL = 'https://localhost:7283/api/';
 
   constructor(private http: HttpClient) {}
 
@@ -24,7 +24,7 @@ export class AuthService {
     });
 
     return this.http.post<any>(
-      'http://localhost:5234/api/CandidateAccount/register',
+      this.baseURL+ 'CandidateAccount/register',
       body
     );
   }
