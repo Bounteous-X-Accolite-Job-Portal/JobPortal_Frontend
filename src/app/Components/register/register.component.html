@@ -72,7 +72,20 @@
                   class="form-control"
                   formControlName="email"
                 />
-
+                <small
+                  *ngIf="
+                    f['email'].invalid &&
+                    (f['email'].dirty || f['email'].touched)
+                  "
+                  class="block p-error"
+                >
+                  <div *ngIf="f['email'].errors?.['required']">
+                    Email is required
+                  </div>
+                  <div *ngIf="f['email'].errors?.['email']">
+                    Email should be valid
+                  </div>
+                </small>
                 <label class="form-label" for="Email">Email address</label>
               </div>
 
@@ -84,6 +97,20 @@
                   class="form-control"
                   formControlName="password"
                 />
+                <small
+                  *ngIf="
+                    f['password'].invalid &&
+                    (f['password'].dirty || f['password'].touched)
+                  "
+                  class="block p-error"
+                >
+                  <div *ngIf="f['password'].errors?.['required']">
+                    Password is required
+                  </div>
+                  <div *ngIf="f['password'].errors?.['password']">
+                    Password should be valid
+                  </div>
+                </small>
                 <label class="form-label" for="Password">Password</label>
               </div>
 
@@ -94,6 +121,22 @@
                   class="form-control"
                   formControlName="confirmPassword"
                 />
+                <small
+                  *ngIf="
+                    f['confirmPassword'].invalid &&
+                    (f['confirmPassword'].dirty || f['confirmPassword'].touched)
+                  "
+                  class="block p-error"
+                >
+                  <div *ngIf="f['confirmPassword'].errors?.['required']">
+                    Confirm Password is required
+                  </div>
+                  <div
+                    *ngIf="f['confirmPassword'].errors?.['passwordMismatch']"
+                  >
+                    Confirm Password should be same as Password
+                  </div>
+                </small>
                 <label class="form-label" for="ConfirmPassword"
                   >Confirm Password</label
                 >
@@ -104,15 +147,14 @@
                 <button
                   (click)="onSubmitRegister()"
                   type="submit"
-                  class="btn btn-primary mb-2 p-2"
-                  style="width: 70%"
+                  class="btn btn-primary mb-2 px-3"
                 >
                   Sign up
                 </button>
               </div>
-              <span
+              <span class="d-flex justify-content-center"
                 >Already have an account?
-                <a href="login" style="color: #0a0150">Login</a></span
+                <a routerLink="../login" style="color: #0a0150">Login</a></span
               >
             </form>
           </div>
@@ -121,4 +163,3 @@
     </div>
   </div>
 </section>
-<!-- Section: Design Block -->

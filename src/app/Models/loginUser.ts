@@ -1,9 +1,5 @@
-export class Login{
+export interface Login{
     Email: string;
     Password: string;
-
-    constructor(){
-        this.Email = '';
-        this.Password= '';
-    }
+    RememberMe: boolean;
 }
