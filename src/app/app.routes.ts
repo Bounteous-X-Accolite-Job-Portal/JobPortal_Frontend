@@ -5,6 +5,7 @@ import { RegisterComponent } from './Components/register/register.component';
 import { JobsComponent } from './Components/jobs/jobs.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 import { EditProfileComponent } from './Components/edit-profile/edit-profile.component';
+import { authGuard } from './Guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
@@ -30,10 +31,12 @@ export const routes: Routes = [
   {
     path: 'user-profile',
     component: UserProfileComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'edit-profile',
     component: EditProfileComponent,
+    canActivate: [authGuard]
   },
   {
     path: '**',
