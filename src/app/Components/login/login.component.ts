@@ -50,21 +50,21 @@ export class LoginComponent  {
 
      console.log(loginData);
 
-      this.authService.loginUser(loginData).subscribe(
-        (data: any) => {
-          console.log('Status', data.status, "data message", data.message);
-          if(data.status == 200){
-              this.router.navigate(['/user-profile']);
-          }
-          else{
-            this.message = data.message;
+      // this.authService.loginUser(loginData).subscribe(
+      //   (data: any) => {
+      //     console.log('Status', data.status, "data message", data.message);
+      //     if(data.status == 200){
+      //         this.router.navigate(['/user-profile']);
+      //     }
+      //     else{
+      //       this.message = data.message;
            
-          } 
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      );
+      //     } 
+      //   },
+      //   (error: any) => {
+      //     console.log(error);
+      //   }
+      // );
     }
   }
 }
