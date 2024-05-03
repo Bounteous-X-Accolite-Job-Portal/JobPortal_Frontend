@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmailValidator } from '@angular/forms';
 
 import axios from 'axios';
-import { Login } from '../Models/loginUser';
+import { ILogin } from '../../Models/login.interface';
+import { IRegister } from '../../Models/register.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -24,10 +24,13 @@ export class AuthService {
       'Access-Control-Allow-Headers': '*',
     });
 
-    return this.http.post<any>(this.baseURL +'CandidateAccount/register',body);
+    return this.http.post<any>(
+      this.baseURL + 'CandidateAccount/register',
+      body
+    );
   }
 
   loginUser(loginData: any): Observable<any> {
-    return this.http.post<Login>(this.baseURL + 'Account/login', loginData);
+    return this.http.post<any>(this.baseURL + 'Account/login', loginData);
   }
 }

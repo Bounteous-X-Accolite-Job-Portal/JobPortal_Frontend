@@ -110,6 +110,7 @@
                   <div *ngIf="f['password'].errors?.['password']">
                     Password should be valid
                   </div>
+                 
                 </small>
                 <label class="form-label" for="Password">Password</label>
               </div>
@@ -141,7 +142,7 @@
                   >Confirm Password</label
                 >
               </div>
-
+              <div class="p-error">{{ message }}</div>
               <!-- Submit button -->
               <div class="d-flex justify-content-center">
                 <button
@@ -151,11 +152,12 @@
                 >
                   Sign up
                 </button>
+               
               </div>
-              <span class="d-flex justify-content-center"
-                >Already have an account?
-                <a routerLink="../login" style="color: #0a0150">Login</a></span
-              >
+              <span class="d-flex text-center"
+              >Already have an account?
+              <a routerLink="../login" style="color: #0a0150">Login</a></span
+            >
             </form>
           </div>
         </div>

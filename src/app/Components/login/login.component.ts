@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../Services/auth.service';
+import { AuthService } from '../../Services/CandidateAuthentication/auth.service';
 import { Router, RouterModule } from '@angular/router';
-import { Login } from '../../Models/loginUser';
 
 @Component({
   selector: 'app-login',
@@ -12,15 +11,16 @@ import { Login } from '../../Models/loginUser';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent  {
-  message: string = "";
-  checkBoxValue: any = false;
+export class LoginComponent {
+//   @Input() ngModel: any;
+//   @Output() isAcceptedChange = new EventEmitter();
+  // isAccepted = true;
+
+  message: string = '';
+
+  checkBoxValue: boolean = false;
   checkCheckBoxvalue(): boolean {
-    if (this.checkBoxValue == true) {
-      this.checkBoxValue = false;
-    } else {
-      this.checkBoxValue = true;
-    }
+    this.checkBoxValue = !this.checkBoxValue;
     return this.checkBoxValue;
   }
   constructor(
@@ -41,25 +41,23 @@ export class LoginComponent  {
 
   onSubmit() {
     if (this.loginForm.valid) {
+
       const loginData = {
         Email: this.loginForm.value.email,
         Password: this.loginForm.value.password,
         RememberMe: this.checkCheckBoxvalue(),
       };
-      
 
-     console.log(loginData);
+      console.log(loginData);
 
       this.authService.loginUser(loginData).subscribe(
         (data: any) => {
-          console.log('Status', data.status, "data message", data.message);
-          if(data.status == 200){
-              this.router.navigate(['/user-profile']);
-          }
-          else{
+          console.log('Status', data.status, 'data message', data.message);
+          if (data.status == 200) {
+            this.router.navigate(['/user-profile']);
+          } else {
             this.message = data.message;
-           
-          } 
+          }
         },
         (error: any) => {
           console.log(error);
