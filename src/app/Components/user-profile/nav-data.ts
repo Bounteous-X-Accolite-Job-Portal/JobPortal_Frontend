@@ -1,37 +1,37 @@
 export const navbarData = [
     {
-        routeLink: 'child1',
-        icon: 'fal fa-home',
-        label: 'Child1Comp'
+        routeLink: 'per-info',
+        icon: 'fal fa-id-card',
+        label: 'Personal Information'
     },
     {
-        routeLink: 'child1',
+        routeLink: 'edu',
+        icon: 'fal fa-book',
+        label: 'Education'
+    },
+    {
+        routeLink: 'exp',
         icon: 'fal fa-box-open',
-        label: 'Child2Comp'
+        label: 'Experience'
     },
     {
-        routeLink: 'child1',
-        icon: 'fal fa-chart-bar',
-        label: 'Child3Comp'
+        routeLink: 'skills',
+        icon: 'fal fa-cogs',
+        label: 'Skills'
     },
     {
-        routeLink: 'child1',
-        icon: 'fal fa-tags',
-        label: 'Child4Comp'
-    },
-    {
-        routeLink: 'child1',
+        routeLink: 'resume',
         icon: 'fal fa-file',
-        label: 'Child5Comp'
+        label: 'Resume'
     },
     {
-        routeLink: 'child1',
+        routeLink: 'sml',
         icon: 'fal fa-camera',
-        label: 'Child5Comp'
+        label: 'Social Profiles'
     },
     {
-        routeLink: 'child1',
+        routeLink: 'pass-reset',
         icon: 'fal fa-cog',
-        label: 'Child5Comp'
+        label: 'Password Reset'
     },
 ];

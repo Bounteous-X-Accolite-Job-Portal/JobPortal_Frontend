@@ -8,6 +8,7 @@
     /* width: 16.5625rem; */
     box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
     height: 100vh;
+    /* justify-content: start; */
 }
 
 .logo-container {
@@ -83,6 +84,10 @@
     transition: all .3s ease;
 }
 
+.sidenav-link-text{
+    margin-left: 1.6rem;
+}
+
 .sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-nav-icon {
     font-size: 22px;
     width: 2rem;
@@ -91,9 +96,6 @@
     text-align: center;
 }
 
-.sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-nav-text {
-    margin-left: 1.5rem;
-}
 
 .sidenav-nav .sidenav-nav-item:hover .sidenav-nav-link {
     background-color: #fff;

@@ -4,7 +4,14 @@ import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { JobsComponent } from './Components/jobs/jobs.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
-import { Child1Component } from './Components/user-profile/child1/child1.component';
+import { TryComponent } from './Components/try/try.component';
+import { CandidateEducationComponent } from './Components/candidate-education/candidate-education.component';
+import { ExperienceComponent } from './Components/experience/experience.component';
+import { PersonalInfoComponent } from './Components/personal-info/personal-info.component';
+import { SkillsComponent } from './Components/skills/skills.component';
+import { ResumeComponent } from './Components/resume/resume.component';
+import { SocialProfilesComponent } from './Components/social-profiles/social-profiles.component';
+import { PasswordResetComponent } from './Components/password-reset/password-reset.component';
 
 // export const childRoutes: Routes = [
 //     { path: 'child1', component: LoginComponent },
@@ -35,11 +42,22 @@ export const routes: Routes = [
         component: JobsComponent
     },
     {
-        path: 'dashboard',
+        path: 'try',
+        component: TryComponent
+    },
+    {
+        path: 'profile',
         component: UserProfileComponent,
         children: [
-            { path: 'child1', component: Child1Component },
-            { path: '', component: Child1Component}
+            { path: 'edu', component: CandidateEducationComponent },
+            { path: 'exp', component: ExperienceComponent },
+            { path: 'per-info', component: PersonalInfoComponent },
+            { path: 'skills', component: SkillsComponent },
+            { path: 'resume', component: ResumeComponent },
+            { path: 'sml', component: SocialProfilesComponent },
+            { path: 'pass-reset', component: PasswordResetComponent },
+            { path: '', component: TryComponent},
+            { path: '**', component: TryComponent}
         ]
     },
     {

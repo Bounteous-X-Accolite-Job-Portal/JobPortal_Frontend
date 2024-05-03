@@ -1,16 +1,16 @@
 <!-- Test nav -->
-<div style="width: 100vw; display: flex; flex-direction: row;" >
+<div style="display: flex; flex-direction: row;" >
   <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : 'sidenav' ">
     <div class="logo-container">
       <button class="logo" (click)="toggleCollapse()">A</button>
-      <div class="logo-text" *ngIf="collapsed">Sidebar</div>
+      <div class="logo-text" *ngIf="collapsed">Candidate</div>
       <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()" >
         <i class="fal fa-times close-icon"></i>
       </button>
     </div>
     <ul class="sidenav-nav">
       <li class="sidenav-nav-item" *ngFor="let data of navData">
-        <a [routerLink]="['/dashboard/'+data.routeLink]" class="sidenav-nav-link" routerLinkActive="active" >
+        <a [routerLink]="['/profile/'+data.routeLink]" class="sidenav-nav-link" routerLinkActive="active" >
           <i class="sidenav-link-icon " [class]="data.icon"></i>
           <span class="sidenav-link-text" *ngIf="collapsed">{{data.label}}</span>
         </a>

@@ -24,7 +24,7 @@ export class AuthService {
     });
 
     return this.http.post<any>(
-      'http://localhost:5234/api/CandidateAccount/register',
+      this.baseURL +'CandidateAccount/register',
       body
     );
   }
