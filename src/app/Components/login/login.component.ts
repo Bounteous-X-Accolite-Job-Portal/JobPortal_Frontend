@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/CandidateAuthentication/auth.service';
 import { Router, RouterModule } from '@angular/router';
 
@@ -12,17 +12,16 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-//   @Input() ngModel: any;
-//   @Output() isAcceptedChange = new EventEmitter();
-  // isAccepted = true;
-
   message: string = '';
 
-  checkBoxValue: boolean = false;
-  checkCheckBoxvalue(): boolean {
-    this.checkBoxValue = !this.checkBoxValue;
-    return this.checkBoxValue;
-  }
+  SignInForm = new FormGroup({
+    email : new FormControl(''),
+    password : new FormControl(''),
+    rememberMe : new FormControl(false)
+  })
+
+
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -43,11 +42,11 @@ export class LoginComponent {
     if (this.loginForm.valid) {
 
       const loginData = {
-        Email: this.loginForm.value.email,
+        Email: this.f['email'].value,
         Password: this.loginForm.value.password,
-        RememberMe: this.checkCheckBoxvalue(),
+        RememberMe: this.loginForm.controls['rememberMe'].value,
       };
-
+      console.log(this.SignInForm);
       console.log(loginData);
 
       this.authService.loginUser(loginData).subscribe(
