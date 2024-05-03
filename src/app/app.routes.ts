@@ -2,10 +2,10 @@ import { Routes } from '@angular/router';
 import { LandingComponent } from './Components/landing/landing.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
-import { JobsComponent } from './Components/jobs/jobs.component';
-import { EditProfileComponent } from './Components/edit-profile/edit-profile.component';
 import { AddEmployeeComponent } from './Components/add-employee/add-employee.component';
 import { AddJobComponent } from './Components/add-job/add-job.component';
+import { EditProfileComponent } from './Components/edit-profile/edit-profile.component';
+import { JobHomeComponent } from './Components/job-home/job-home.component';
 export const routes: Routes = [
   {
     path: '',
@@ -26,7 +26,7 @@ export const routes: Routes = [
   },
   {
     path: 'jobs',
-    component: JobsComponent,
+    component: JobHomeComponent,
   },
   {
     path: 'edit-profile',

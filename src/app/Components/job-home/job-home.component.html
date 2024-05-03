@@ -1,0 +1,49 @@
+<h1 class="heading">Find Out Jobs ! </h1>
+<div class="Jobhunt">
+    <div class="Filters">
+        <h3>Filters</h3>
+        <div class="filter">
+            <p>Job Position</p>
+            <select>
+                <option *ngFor="let pos of jobPositions">
+                    [ {{pos.PositionName}} ]
+                </option>
+            </select>
+        </div>        
+        <div>
+            <p>Job Category</p>
+            <select>
+                <option *ngFor="let cat of jobCategories">
+                    {{cat.categoryName}}  {{cat.categoryCode}}  {{cat.description}}
+                </option>
+            </select>
+        </div>        
+        <div>
+            <p>Job Location</p>
+            @for (category of jobCategories; track $index) {
+                <li>{{category.categoryName!=null?1:-1}}</li>
+            }
+            <select >
+                <option *ngFor="let loc of locations">
+                    {{loc.address}} , {{loc.city}} , {{loc.state}} , {{loc.country}}
+                </option>
+            </select>
+        </div>        
+        <div>
+            <p>Job Type</p>
+            <ul>
+                <li *ngFor="let typ of jobTypes">
+                    {{typ.typeName}}
+                </li>
+            </ul>
+        </div>
+        <div>
+            <button>Search</button>
+        </div>        
+    </div>
+    <div class="jobListing">
+        <div *ngFor="let i of arr">
+            <app-job-card></app-job-card>
+        </div>
+    </div>
+</div>
