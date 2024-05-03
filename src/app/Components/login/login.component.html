@@ -59,6 +59,7 @@
                     Password should be valid
                   </div>
                 </small>
+                <div class="p-error">{{ message }}</div>
               </div>
 
               <!-- Checkbox -->
@@ -83,14 +84,15 @@
                   data-mdb-button-init
                   data-mdb-ripple-init
                   class="btn btn-primary btn-block"
-                 
                 >
                   Login
                 </button>
               </div>
               <span
                 >Don't have an account?
-                <a href="register" style="color: #0a0150">Register</a></span
+                <a routerLink="../register" style="color: #0a0150"
+                  >Register</a
+                ></span
               >
             </form>
           </div>

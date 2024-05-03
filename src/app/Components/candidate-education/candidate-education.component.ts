@@ -26,6 +26,7 @@ const ELEMENT_DATA: Education[] = [
   styleUrl: './candidate-education.component.css'
 })
 export class CandidateEducationComponent {
+
   eduList = ELEMENT_DATA;
   httpService=inject(CandidateServicesService)
   ngOnInit(){
@@ -44,6 +45,9 @@ export class CandidateEducationComponent {
   //   this.dataSource.push(ELEMENT_DATA[randomElementIndex]);
   //   this.table.renderRows();
   // }
+  addE() {
+    this.eduList.push({Grade:1 ,InstitutionOrSchoolName:'abcd',StartYear:2018,EndYear:2025,Degree:'chal'});
+  }
 
   // removeData() {
   //   this.dataSource.pop();

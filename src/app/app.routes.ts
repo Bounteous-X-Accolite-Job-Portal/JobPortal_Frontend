@@ -19,6 +19,7 @@ import { PasswordResetComponent } from './Components/password-reset/password-res
 // ];
 
 
+import { authGuard } from './Guards/auth.guard';
 export const routes: Routes = [
     {
         path: '',
@@ -48,6 +49,7 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: UserProfileComponent,
+        // canActivate: [authGuard],
         children: [
             { path: 'edu', component: CandidateEducationComponent },
             { path: 'exp', component: ExperienceComponent },
@@ -69,6 +71,7 @@ export const routes: Routes = [
         path: '**',
         component: LandingComponent
     }
+
 ];
 
 
