@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/CandidateAuthentication/auth.service';
 import { Router, RouterModule } from '@angular/router';
+import { LoginResponse } from '../../Models/loginResponse';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,6 @@ export class LoginComponent {
     password : new FormControl(''),
     rememberMe : new FormControl(false)
   })
-
-
 
   constructor(
     private fb: FormBuilder,
@@ -50,13 +49,19 @@ export class LoginComponent {
       console.log(loginData);
 
       this.authService.loginUser(loginData).subscribe(
-        (data: any) => {
-          console.log('Status', data.status, 'data message', data.message);
-          if (data.status == 200) {
-            this.router.navigate(['/user-profile']);
-          } else {
-            this.message = data.message;
+        (data: LoginResponse) => {
+          console.log(data);
+          console.log('Status', data.status, "data message", data.message);
+          if(data.status == 200){
+                console.log(data.token);
+              this.authService.storeToken(data.token ? data.token : "");
+              console.log(this.authService.getToken());
+              console.log("vishal", data.token);
+              this.router.navigate(['/user-profile']);
           }
+          else{
+            this.message = data.message;
+          } 
         },
         (error: any) => {
           console.log(error);
