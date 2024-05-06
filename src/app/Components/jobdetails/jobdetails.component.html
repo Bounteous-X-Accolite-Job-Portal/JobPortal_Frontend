@@ -1,0 +1,24 @@
+<section class="details">
+    <h2>Job Title : {{job?.jobTitle}}</h2>
+    <h3>Job Code : {{job?.jobCode}}</h3>
+    <h5>Post Date : {{job?.postDate}}</h5>
+    <h4>Description : {{job?.jobDescription}}</h4>
+    <h3>Last Date : {{job?.lastDate}}</h3>
+
+    <h4>Experience : {{job?.experience}}</h4>
+
+    <h3>Location : {{location?.address}} , {{location?.city}} , {{location?.state}} , {{location?.country}}</h3>
+    
+    <h4>Required Degree : {{degree?.degreeName}}</h4>
+    
+    <h3>Job Type : {{jobtype?.typeName}} </h3>
+
+    <h3>Job Position : </h3>
+    <h4>Job Position Code : {{jobPosition?.positionCode}}</h4>
+    <h4>Job Position Name : {{jobPosition?.positionName | uppercase}}</h4>
+    <h4>Job Position Description : {{jobPosition?.description}}</h4>
+
+    <h3>Job Category : </h3>
+    <h4>Job Category Code : {{jobcategory?.categoryCode}}</h4>
+    <h4>Job Category Name : {{jobcategory?.categoryName | uppercase}}</h4>
+</section>

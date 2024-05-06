@@ -6,16 +6,17 @@ import { location } from "../JoblocationResponse/location";
 import { Guid } from "guid-typescript";
 
 export interface Job{
-    jobId: Guid;
-    jobCode:string;
-    jobTitle:string;
-    jobDescription:string;
-    postDate:Date;
-    lastDate:Date;
+    categoryId : string;
+    degreeId : string;
+    empId: string;
     experience:string;
-    degreeId : Degree;
-    positionId : position;
-    categoryId : JobCategory;
-    typeId : JobType;
-    locationId : location;
+    jobCode:string;
+    jobDescription:string;
+    jobId: string;
+    jobTitle:string;
+    jobType : string;
+    lastDate: Date;
+    locationId : string;
+    positionId : string;
+    postDate:Date;
 }

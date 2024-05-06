@@ -1,0 +1,10 @@
+.details
+{
+    height: 90%;
+    width: 60%;
+    margin: 0% 20% 5% 20%;
+    padding: 10px 5px 10px 5px;
+    text-align: center;
+    background-color: rgb(91, 214, 214);
+    border-radius: 20px;
+}
