@@ -1,5 +1,5 @@
 export interface JobCategory{
-    CategoryCode : string;
-    CategoryName : string;
-    Description : string;
+    categoryCode : string;
+    categoryName : string;
+    description : string;
 }

@@ -5,6 +5,9 @@ import { AllJobLocations } from '../Models/JoblocationResponse/AllJobLocations';
 import { AllJobTypes } from '../Models/JobTypeResponse/AllJobType';
 import { AllJobCategory } from '../Models/JobCategoryResponse/AllJobCategory';
 import { AllJobPosition } from '../Models/JobPositionResponse/AllJobPosition';
+import { AllJob } from '../Models/JobResponse/AllJobs';
+import { Job } from '../Models/JobResponse/Job';
+import { Guid } from 'guid-typescript';
 @Injectable({
     providedIn: 'root',
   })
@@ -14,6 +17,10 @@ import { AllJobPosition } from '../Models/JobPositionResponse/AllJobPosition';
     private baseURL = 'https://localhost:7283/api/';
 
     constructor(private http: HttpClient) {}
+
+    getAllJobs():Observable<AllJob>{
+      return this.http.get<AllJob>(this.baseURL+'Job/getAllJobs');
+    };
 
     getAllJobLocations():Observable<AllJobLocations> {
       return this.http.get<AllJobLocations>(this.baseURL+'JobLocation/getAllJobLocations');
@@ -30,4 +37,8 @@ import { AllJobPosition } from '../Models/JobPositionResponse/AllJobPosition';
     getAllJobPosition():Observable<AllJobPosition>{
       return this.http.get<AllJobPosition>(this.baseURL+'JobPosition/getAllJobPositions');
     };
+
+    getJobById(Id:string):Observable<Job>{
+      return this.http.get<Job>(this.baseURL+'Job/getJob/'+Id);
+    }
   }

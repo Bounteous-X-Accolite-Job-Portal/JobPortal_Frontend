@@ -26,12 +26,8 @@ export class AuthService {
     return this.http.post<any>(this.baseURL +'CandidateAccount/register',registerData);
   }
 
-  // loginUser(loginData: any): Observable<any> {
-  //   console.log("login api");
-  //   return this.http.post<Login>(this.baseURL + 'Account/login', loginData);
-  // }
-
-//   GetAllLocations() {
-//     return this.http.get(this.baseURL +'JobLocation/getAllJobLocations').toPromise();
-// }
+  loginUser(loginData: any): Observable<any> {
+    console.log("login api");
+    return this.http.post<Login>(this.baseURL + 'Account/login', loginData);
+  }
 }

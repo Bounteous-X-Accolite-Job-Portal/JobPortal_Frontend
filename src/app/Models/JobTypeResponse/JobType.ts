@@ -1,3 +1,3 @@
 export interface JobType{
-    TypeName: string;
+    typeName: string;
 }

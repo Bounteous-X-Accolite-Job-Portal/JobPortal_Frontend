@@ -5,6 +5,7 @@ import { RegisterComponent } from './Components/register/register.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 import { EditProfileComponent } from './Components/edit-profile/edit-profile.component';
 import { JobHomeComponent } from './Components/job-home/job-home.component';
+import { JobDetailsComponent } from './Components/job-details/job-details.component';
 export const routes: Routes = [
   {
     path: '',
@@ -39,4 +40,11 @@ export const routes: Routes = [
     path: '**',
     component: LandingComponent,
   },
+  {
+    // path: 'job-details/:jobId',
+    path: 'jobdetails',
+    component: JobDetailsComponent,
+  }
 ];
+
+export default routes;

@@ -6,6 +6,7 @@ import { JobType } from '../../Models/JobTypeResponse/JobType';
 import { JobCategory } from '../../Models/JobCategoryResponse/JobCategory';
 import { location } from '../../Models/JoblocationResponse/location';
 import { position } from '../../Models/JobPositionResponse/position';
+import { Job } from '../../Models/JobResponse/Job';
 
 @Component({
   standalone: true,
@@ -21,6 +22,7 @@ export class JobHomeComponent implements OnInit {
   jobTypes: JobType[] = [];
   jobCategories: JobCategory[] = [];
   jobPositions: position[] =[];
+  jobs: Job[] = [];
 
   constructor(private jobService: JobService) {}
 
@@ -29,6 +31,7 @@ export class JobHomeComponent implements OnInit {
     this.loadJobTypes();
     this.loadJobCategories();
     this.loadJobPositions();
+    this.loadJobs();
   }
 
   private loadJobLocations(): void {
@@ -75,6 +78,18 @@ export class JobHomeComponent implements OnInit {
       },
       (error) => {
         console.error('Error loading job Positions:',error);
+      }
+    );
+  }
+
+  private loadJobs():void{
+    this.jobService.getAllJobs().subscribe(
+      (res) => {
+        this.jobs = res.allJobs;
+        console.log(this.jobs);
+      },
+      (error) => {
+        console.error('Error loading Jobs',error);
       }
     );
   }
