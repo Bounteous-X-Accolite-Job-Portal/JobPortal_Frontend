@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PermissionService } from './Services/permission.service';
-
+import {CookieService} from 'ngx-cookie-service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { tokenInterceptor } from './Interceptors/token.interceptor';
 
@@ -15,5 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     PermissionService,
     provideHttpClient(withInterceptors([tokenInterceptor])),
+    CookieService
   ]
 };
