@@ -1,6 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { AuthService } from '../Services/auth.service';
+import { AuthService } from '../Services/CandidateAuthentication/auth.service';
 import { Router } from '@angular/router';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
@@ -9,9 +9,9 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
 
   const userToken = authService.getToken();
 
-    const modifiedReq = req.clone({
-      headers: req.headers.set('Authorization', `Bearer ${userToken}`),
-    });
+  const modifiedReq = req.clone({
+    headers: req.headers.set('Authorization', `Bearer ${userToken}`),
+  });
 
   return next(modifiedReq);
   // return next(modifiedReq).pipe(

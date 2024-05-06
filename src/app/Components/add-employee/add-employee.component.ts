@@ -26,8 +26,6 @@ export class AddEmployeeComponent implements OnInit {
   loading = false;
   submitting = false;
   submitted = false;
-  handleError: any;
-  handleUpdateResponse: any;
 
   constructor(
     private formBuilder: FormBuilder,

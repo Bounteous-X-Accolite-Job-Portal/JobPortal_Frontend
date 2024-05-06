@@ -1,9 +1,8 @@
 <div class="container mw-80">
   <div class="card bg-glass px-5 mt-3">
-  <h3 class="my-4">Add Job</h3>
-  <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
-
-      <div class="mb-3 col">
+    <h3 class="my-4">Add Job</h3>
+    <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4 col">
         <label class="form-label">Job Code</label>
         <input
           type="text"
@@ -11,11 +10,8 @@
           class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f['jobCode'].errors }"
         />
-        <div
-          *ngIf="submitted && f['jobCode'].errors"
-          class="invalid-feedback"
-        >
-          <div *ngIf="f['jobCode'].errors?.['required']">
+        <div *ngIf="submitted && f['jobCode'].errors" class="invalid-feedback">
+          <div *ngIf="f['jobCode'].errors?.['required']" class="mb-3">
             Job Code is required
           </div>
         </div>
@@ -43,13 +39,15 @@
           class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f['jobDescription'].errors }"
         />
-        <div *ngIf="submitted && f['jobDescription'].errors" class="invalid-feedback">
+        <div
+          *ngIf="submitted && f['jobDescription'].errors"
+          class="invalid-feedback"
+        >
           <div *ngIf="f['jobDescription'].errors?.['required']">
             Job Description is required
           </div>
         </div>
       </div>
-
 
       <div class="mb-3 col">
         <label class="form-label">Last Date</label>
@@ -60,18 +58,24 @@
           [ngClass]="{ 'is-invalid': submitted && f['lastDate'].errors }"
         />
         <div *ngIf="submitted && f['lastDate'].errors" class="invalid-feedback">
-          <div *ngIf="f['lastDate'].errors?.['required']">Last Date is required</div>
-          <div *ngIf="f['lastDate'].errors?.['lastDate']">Last Date is invalid</div> last date should be greater than today
+          <div *ngIf="f['lastDate'].errors?.['required']">
+            Last Date is required
+          </div>
+          <div *ngIf="f['lastDate'].errors?.['lastDateValidator']">
+            Last Date is invalid
+          </div>
+          last date should be greater than today
         </div>
       </div>
-       
+
       <div class="mb-3 col">
-        <label class="form-label">Job Location</label>
-        <select >
+        <label class="form-label">Job Location</label><br/>
+        <select>
           <option *ngFor="let loc of locations">
-              {{loc.address}} , {{loc.city}} , {{loc.state}} , {{loc.country}}
+            {{ loc.address }} , {{ loc.city }} , {{ loc.state }} ,
+            {{ loc.country }}
           </option>
-      </select>
+        </select>
       </div>
 
       <div class="mb-3 col">
@@ -84,53 +88,43 @@
         />
       </div>
       <div class="mb-3 col">
-        <label class="form-label">Job Category</label>
+        <label class="form-label">Job Category</label><br />
         <select>
           <option *ngFor="let cat of jobCategories">
-              {{ cat.categoryName }}
-            
-          </option>
-      </select>
-      <div class="mb-3 col">
-        <label class="form-label">Job Type</label><br/>
-        <select>
-          <option *ngFor="let jobType of jobTypes">
-              {{ jobType.typeName }}
-            
+            {{ cat.categoryName }}
           </option>
         </select>
       </div>
-      </div>
-      <div class="mb-3 col">
-        <label class="form-label"> Designation </label>
-        <input
-          type="number"
-          formControlName="designation"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f['designation'].errors }"
-        />
-
-        <div
-          *ngIf="submitted && f['designation'].errors"
-          class="invalid-feedback"
-        >
-          <div *ngIf="f['designation'].errors?.['required']">
-            Designation is required
-          </div>
+        <div class="mb-3 col">
+          <label class="form-label">Job Type</label><br />
+          <select>
+            <option *ngFor="let jobType of jobTypes">
+              {{ jobType.typeName }}
+            </option>
+          </select>
         </div>
+        <div class="mb-3 col">
+          <label class="form-label">Job Position</label><br />
+          <select>
+            <option *ngFor="let jobPositions of jobPosition">
+              {{ jobPositions.positionName }}
+            </option>
+          </select>
+        </div>
+      
+    
+      <div class="mb-3">
+        <button [disabled]="submitting" class="btn btn-primary">
+          <span
+            *ngIf="submitting"
+            class="spinner-border spinner-border-sm me-1"
+          ></span>
+          Save
+        </button>
       </div>
-    <div class="mb-3">
-      <button [disabled]="submitting" class="btn btn-primary">
-        <span
-          *ngIf="submitting"
-          class="spinner-border spinner-border-sm me-1"
-        ></span>
-        Save
-      </button>
-    </div>
-  </form>
-</div>
-<div *ngIf="isLoading" class="text-center m-5">
-  <span class="spinner-border spinner-border-lg align-center"></span>
-</div>
+    </form>
+  </div>
+  <div *ngIf="isLoading" class="text-center m-5">
+    <span class="spinner-border spinner-border-lg align-center"></span>
+  </div>
 </div>

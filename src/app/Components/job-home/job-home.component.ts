@@ -68,6 +68,7 @@ export class JobHomeComponent implements OnInit {
     this.jobService.getAllJobPosition().subscribe(
       (res) => {
         this.jobPositions = res.allJobPositions;
+        console.log(this.jobPositions);
       },
       (error) => {
         console.error('Error loading job Positions:',error);

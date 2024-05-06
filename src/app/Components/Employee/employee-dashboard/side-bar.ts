@@ -1,0 +1,37 @@
+export const sideBarData = [
+  {
+    routeLink: 'add-job',
+    icon: 'fal fa-id-card',
+    label: 'Add New Job',
+  },
+  // {
+  //     routeLink: 'edu',
+  //     icon: 'fal fa-book',
+  //     label: 'Education'
+  // },
+  // {
+  //     routeLink: 'exp',
+  //     icon: 'fal fa-box-open',
+  //     label: 'Experience'
+  // },
+  // {
+  //     routeLink: 'skills',
+  //     icon: 'fal fa-cogs',
+  //     label: 'Skills'
+  // },
+  // {
+  //     routeLink: 'resume',
+  //     icon: 'fal fa-file',
+  //     label: 'Resume'
+  // },
+  // {
+  //     routeLink: 'sml',
+  //     icon: 'fal fa-camera',
+  //     label: 'Social Profiles'
+  // },
+  // {
+  //     routeLink: 'pass-reset',
+  //     icon: 'fal fa-cog',
+  //     label: 'Password Reset'
+  // },
+];

@@ -3,7 +3,7 @@ import { LandingComponent } from './Components/landing/landing.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { AddEmployeeComponent } from './Components/add-employee/add-employee.component';
-import { AddJobComponent } from './Components/add-job/add-job.component';
+import { AddJobComponent } from './Components/Employee/add-job/add-job.component';
 import { JobHomeComponent } from './Components/job-home/job-home.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 import { TryComponent } from './Components/try/try.component';
@@ -14,6 +14,7 @@ import { SkillsComponent } from './Components/skills/skills.component';
 import { ResumeComponent } from './Components/resume/resume.component';
 import { SocialProfilesComponent } from './Components/social-profiles/social-profiles.component';
 import { PasswordResetComponent } from './Components/password-reset/password-reset.component';
+import { EmployeeDashboardComponent } from './Components/Employee/employee-dashboard/employee-dashboard.component';
 export const routes: Routes = [
   {
     path: 'jobs',
@@ -24,18 +25,13 @@ export const routes: Routes = [
     component: AddEmployeeComponent,
   },
   {
-    path: 'add-job',
-    component: AddJobComponent,
-  },
-  {
-    path: '',
-    redirectTo: 'landing',
-    pathMatch: 'full',
-  },
-  {
     path: 'landing',
     component: LandingComponent,
   },
+  // {
+  //   path: 'add-job',
+  //   component: AddJobComponent,
+  // },
   {
     path: 'login',
     component: LoginComponent,
@@ -51,7 +47,6 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: UserProfileComponent,
-    // canActivate: [authGuard],
     children: [
       { path: 'edu', component: CandidateEducationComponent },
       { path: 'exp', component: ExperienceComponent },
@@ -63,6 +58,11 @@ export const routes: Routes = [
       { path: '', component: TryComponent },
       { path: '**', component: TryComponent },
     ],
+  },
+  {
+    path: 'employee-dashboard',
+    component: EmployeeDashboardComponent,
+    children: [{ path: 'add-job', component: AddJobComponent }],
   },
   {
     path: '',

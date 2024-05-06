@@ -1,6 +1,5 @@
-export interface position
-{
-    PositionCode : string;
-    PositionName : string;
-    Description : string;
+export interface position {
+  positionCode: string;
+  positionName: string;
+  description: string;
 }
