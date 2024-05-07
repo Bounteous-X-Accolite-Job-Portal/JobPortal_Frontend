@@ -20,6 +20,9 @@ import { PasswordResetComponent } from './Components/password-reset/password-res
 
 
 import { authGuard } from './Guards/auth.guard';
+import { childAuthGuard } from './Guards/child-auth.guard';
+import { loggedInGuard } from './Guards/logged-in.guard';
+
 export const routes: Routes = [
     {
         path: '',
@@ -32,11 +35,13 @@ export const routes: Routes = [
     },
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [loggedInGuard]
     },
     {
         path: 'register',
-        component: RegisterComponent
+        component: RegisterComponent,
+        canActivate: [loggedInGuard]
     },
     {
         path: 'jobs',
@@ -49,7 +54,8 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: UserProfileComponent,
-        // canActivate: [authGuard],
+        canActivate: [authGuard],
+        canActivateChild: [childAuthGuard],
         children: [
             { path: 'edu', component: CandidateEducationComponent },
             { path: 'exp', component: ExperienceComponent },
