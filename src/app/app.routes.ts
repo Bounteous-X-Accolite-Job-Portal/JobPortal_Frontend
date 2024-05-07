@@ -15,6 +15,8 @@ import { ResumeComponent } from './Components/resume/resume.component';
 import { SocialProfilesComponent } from './Components/social-profiles/social-profiles.component';
 import { PasswordResetComponent } from './Components/password-reset/password-reset.component';
 import { EmployeeDashboardComponent } from './Components/Employee/employee-dashboard/employee-dashboard.component';
+import { InterviewHubComponent } from './Components/Employee/interview-hub/interview-hub.component';
+import { InterviewComponent } from './Components/Employee/interview/interview.component';
 export const routes: Routes = [
   {
     path: 'jobs',
@@ -62,7 +64,11 @@ export const routes: Routes = [
   {
     path: 'employee-dashboard',
     component: EmployeeDashboardComponent,
-    children: [{ path: 'add-job', component: AddJobComponent }],
+    children: [
+      { path: 'add-job', component: AddJobComponent },
+      { path: 'interview', component: InterviewComponent },
+      { path: 'interview-hub', component: InterviewHubComponent },
+    ],
   },
   {
     path: '',

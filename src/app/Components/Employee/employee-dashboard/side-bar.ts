@@ -4,21 +4,16 @@ export const sideBarData = [
     icon: 'fal fa-id-card',
     label: 'Add New Job',
   },
-  // {
-  //     routeLink: 'edu',
-  //     icon: 'fal fa-book',
-  //     label: 'Education'
-  // },
-  // {
-  //     routeLink: 'exp',
-  //     icon: 'fal fa-box-open',
-  //     label: 'Experience'
-  // },
-  // {
-  //     routeLink: 'skills',
-  //     icon: 'fal fa-cogs',
-  //     label: 'Skills'
-  // },
+  {
+    routeLink: 'interview',
+    icon: 'fal fa-question',
+    label: 'Inteview Hub',
+  },
+  {
+    routeLink: 'interview-hub',
+    icon: 'fal fa-cogs',
+    label: 'Interview Feedback',
+  },
   // {
   //     routeLink: 'resume',
   //     icon: 'fal fa-file',

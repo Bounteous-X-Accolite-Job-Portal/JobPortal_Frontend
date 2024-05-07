@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CookieServiceService } from '../cookie-service.service';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseURL = 'https://localhost:7283/api/';
+  // private baseURL = 'https://localhost:7283/api/';
 
   constructor(
     private http: HttpClient,
@@ -24,18 +25,18 @@ export class AuthService {
     });
 
     return this.http.post<any>(
-      this.baseURL + 'CandidateAccount/register',
+      environment.baseURL + 'CandidateAccount/register',
       body
     );
     // return this.http.post<any>(this.baseURL +'CandidateAccount/register', registerData);
   }
 
   loginUser(loginData: any): Observable<any> {
-    return this.http.post<any>(this.baseURL + 'Account/login', loginData);
+    return this.http.post<any>(environment.baseURL + 'Account/login', loginData);
   }
 
   getResumes(id: any): Observable<any> {
-    return this.http.get(this.baseURL + 'Resume/resume/' + id);
+    return this.http.get(environment.baseURL + 'Resume/resume/' + id);
   }
 
   storeToken(tokenValue: string) {

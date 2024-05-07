@@ -1,0 +1,16 @@
+<div class="container mt-3">
+  <h3>Hii, Interviewer.</h3>
+  <h6>Upcoming Interview Schedules</h6>
+  <form [formGroup]="feedbackForm">
+    <div class="get-feedback">
+      <label for="Feedback">Feedback</label><br />
+      <textarea
+        class="Feedback"
+        rows="10"
+        cols="70"
+        formControlName="feedback"
+      ></textarea>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>

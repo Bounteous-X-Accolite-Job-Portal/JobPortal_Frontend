@@ -1,17 +1,17 @@
 import { Guid } from "guid-typescript";
 export interface Job{
-    jobId: string;
+    jobId: Guid;
     jobCode:string;
     jobTitle:string;
     jobDescription:string;
-    postDate:Date;
+    // postDate:Date;
     lastDate:Date;
     experience:string;
     degreeId : string;
-    positionId : string;
-    categoryId : string;
-    typeId : string;
-    locationId : string;
+    positionId : Guid;
+    categoryId : Guid;
+    typeId : Guid;
+    locationId : Guid;
 }
 
 

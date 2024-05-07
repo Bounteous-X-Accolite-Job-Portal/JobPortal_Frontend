@@ -48,6 +48,23 @@
           </div>
         </div>
       </div>
+      <div class="mb-3 col">
+        <label class="form-label">Degree</label>
+        <input
+          type="text"
+          formControlName="degreeId"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['degreeId'].errors }"
+        />
+        <div
+          *ngIf="submitted && f['degreeId'].errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f['degreeId'].errors?.['required']">
+            Degree is required
+          </div>
+        </div>
+      </div>
 
       <div class="mb-3 col">
         <label class="form-label">Last Date</label>
@@ -69,8 +86,8 @@
       </div>
 
       <div class="mb-3 col">
-        <label class="form-label">Job Location</label><br/>
-        <select>
+        <label class="form-label">Job Location</label><br />
+        <select formControlName="locationId">
           <option *ngFor="let loc of locations">
             {{ loc.address }} , {{ loc.city }} , {{ loc.state }} ,
             {{ loc.country }}
@@ -89,30 +106,29 @@
       </div>
       <div class="mb-3 col">
         <label class="form-label">Job Category</label><br />
-        <select>
-          <option *ngFor="let cat of jobCategories">
+        <select formControlName="categoryId">
+          <option *ngFor="let cat of jobCategories" [value]="cat.jobCategoryId">
             {{ cat.categoryName }}
           </option>
         </select>
       </div>
-        <div class="mb-3 col">
-          <label class="form-label">Job Type</label><br />
-          <select>
-            <option *ngFor="let jobType of jobTypes">
-              {{ jobType.typeName }}
-            </option>
-          </select>
-        </div>
-        <div class="mb-3 col">
-          <label class="form-label">Job Position</label><br />
-          <select>
-            <option *ngFor="let jobPositions of jobPosition">
-              {{ jobPositions.positionName }}
-            </option>
-          </select>
-        </div>
-      
-    
+      <div class="mb-3 col">
+        <label class="form-label">Job Type</label><br />
+        <select formControlName="typeId">
+          <option *ngFor="let jobType of jobTypes">
+            {{ jobType.typeName }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3 col">
+        <label class="form-label">Job Position</label><br />
+        <select formControlName="positionId">
+          <option *ngFor="let jobPositions of jobPosition">
+            {{ jobPositions.positionName }}
+          </option>
+        </select>
+      </div>
+
       <div class="mb-3">
         <button [disabled]="submitting" class="btn btn-primary">
           <span
