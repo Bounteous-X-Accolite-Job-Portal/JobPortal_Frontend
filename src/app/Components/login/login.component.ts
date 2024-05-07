@@ -5,6 +5,7 @@ import { AuthService } from '../../Services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { Login } from '../../Models/loginUser';
 import { LoginResponse } from '../../Models/loginResponse';
+import { UserStoreService } from '../../Services/user-store.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,8 @@ export class LoginComponent  {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private userStore : UserStoreService
   ) {}
 
   loginForm = this.fb.group({
@@ -55,12 +57,21 @@ export class LoginComponent  {
         (data: LoginResponse) => {
           console.log(data);
           console.log('Status', data.status, "data message", data.message);
+          
           if(data.status == 200){
-                console.log(data.token);
+              console.log(data.token);
               this.authService.storeToken(data.token ? data.token : "");
-              console.log(this.authService.getToken());
-              console.log("vishal", data.token);
-              this.router.navigate(['/user-profile']);
+
+              // setting up user store
+              const tokenPayload : any = this.authService.decodedToken();
+              console.log("Token payload in login line 67 ", tokenPayload);
+
+              this.userStore.setEmailForStore(tokenPayload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]);
+              this.userStore.setIsEmployeeForStore(tokenPayload["IsEmployee"]);
+              this.userStore.setRoleForStore(tokenPayload["Role"]);
+              this.userStore.setIdForStore(tokenPayload["Id"]);
+
+              this.router.navigate(['/profile']);
           }
           else{
             this.message = data.message;
