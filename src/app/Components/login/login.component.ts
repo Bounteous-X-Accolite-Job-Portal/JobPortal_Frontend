@@ -66,12 +66,21 @@ export class LoginComponent  {
               const tokenPayload : any = this.authService.decodedToken();
               console.log("Token payload in login line 67 ", tokenPayload);
 
-              this.userStore.setEmailForStore(tokenPayload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]);
+              this.userStore.setEmailForStore(tokenPayload["Email"]);
+              this.userStore.setNameForStore(tokenPayload["Name"]);
               this.userStore.setIsEmployeeForStore(tokenPayload["IsEmployee"]);
               this.userStore.setRoleForStore(tokenPayload["Role"]);
               this.userStore.setIdForStore(tokenPayload["Id"]);
 
-              this.router.navigate(['/profile']);
+              this.authService.AuthEvent.emit(true);
+
+              console.log("CheckIsEmployee", tokenPayload["IsEmployee"]);
+              if(tokenPayload["IsEmployee"]) {
+                this.router.navigate(['/profile']);
+              }
+              else{
+                this.router.navigate(['/profile/skills']);
+              }
           }
           else{
             this.message = data.message;
