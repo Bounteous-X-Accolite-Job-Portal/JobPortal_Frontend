@@ -9,6 +9,7 @@ export class UserStoreService {
   private isEmployee$ = new BehaviorSubject<boolean>(false);
   private role$ = new BehaviorSubject<string>("");
   private id$ = new BehaviorSubject<string>("");
+  private name$ = new BehaviorSubject<string>("");
 
   constructor() { }
   
@@ -18,6 +19,14 @@ export class UserStoreService {
 
   public setEmailForStore(email : string){
     this.email$.next(email);
+  }
+
+  public getNameFromStore(){
+    return this.name$.asObservable();
+  }
+
+  public setNameForStore(name : string){
+    this.name$.next(name);
   }
 
   public checkIsEmployeeFromStore(){

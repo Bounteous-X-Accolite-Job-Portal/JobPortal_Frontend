@@ -16,7 +16,7 @@ export class UserProfileComponent implements OnInit {
     collapsed = false;
     navData = navbarData;
 
-    public email : string = "";
+    public name : string = "";
 
     constructor(
         private userStore : UserStoreService, 
@@ -24,10 +24,10 @@ export class UserProfileComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.userStore.getEmailFromStore()
+        this.userStore.getNameFromStore()
         .subscribe((val) => {
-            let emailFromToken = this.auth.getEmailFromToken();
-            this.email = val || emailFromToken;
+            let emailFromToken = this.auth.getNameFromToken();
+            this.name = val || emailFromToken;
         })
     }
 

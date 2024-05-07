@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import {CookieService} from 'ngx-cookie-service';
 import { Login } from '../Models/loginUser';
@@ -10,10 +10,12 @@ import { jwtDecode } from "jwt-decode";
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService {
   private baseURL = 'http://localhost:5234/api/';
   private userPayload : any;
+
+  // emits event on login
+  AuthEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     private http: HttpClient,
@@ -34,6 +36,7 @@ export class AuthService {
 
   logout(){
     this.removeToken();
+    this.AuthEvent.emit(false);
     this.router.navigate(['login']);
   }
 
@@ -75,7 +78,13 @@ export class AuthService {
 
   getEmailFromToken(){
     if(this.userPayload){
-      return this.userPayload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+      return this.userPayload.Email;
+    }
+  }
+
+  getNameFromToken(){
+    if(this.userPayload){
+      return this.userPayload.Name;
     }
   }
 
