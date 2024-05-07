@@ -21,4 +21,6 @@
     <h3>Job Category : </h3>
     <h4>Job Category Code : {{jobcategory?.categoryCode}}</h4>
     <h4>Job Category Name : {{jobcategory?.categoryName | uppercase}}</h4>
+
+    <button (click)="applynow(job?.jobId)"> Apply Now !</button>
 </section>

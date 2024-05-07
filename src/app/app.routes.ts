@@ -6,6 +6,7 @@ import { UserProfileComponent } from './Components/user-profile/user-profile.com
 import { EditProfileComponent } from './Components/edit-profile/edit-profile.component';
 import { JobHomeComponent } from './Components/job-home/job-home.component';
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
+import { JobApplicatonComponent } from './Components/job-applicaton/job-applicaton.component';
 export const routes: Routes = [
   {
     path: '',
@@ -40,7 +41,10 @@ export const routes: Routes = [
     path: 'job-details/:jobId',
     component: JobdetailsComponent,
   },
-
+  {
+    path: 'apply-now/:jobId',
+    component:JobApplicatonComponent,
+  },
   {
     path: '**',
     component: LandingComponent,

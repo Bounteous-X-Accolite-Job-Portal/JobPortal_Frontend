@@ -8,12 +8,12 @@ import { Degree } from '../../Models/DegreeResponse/Degree';
 import { JobType } from '../../Models/JobTypeResponse/JobType';
 import { JobCategory } from '../../Models/JobCategoryResponse/JobCategory';
 import { position } from '../../Models/JobPositionResponse/position';
-import { JobResponse } from '../../Models/JobResponse/JobResponse';
 import { DegreeResponse } from '../../Models/DegreeResponse/DegreeRespose';
 import { JobCategoryResponse } from '../../Models/JobCategoryResponse/JobCategoryResponse';
 import { JobTypeResponse } from '../../Models/JobTypeResponse/JobTypeResponse';
 import { JobLocationResponse } from '../../Models/JoblocationResponse/JobLocationResponse';
 import { JobPositionResponse } from '../../Models/JobPositionResponse/JobPositionResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-jobdetails',
@@ -31,7 +31,7 @@ export class JobdetailsComponent {
   jobcategory?: JobCategory;
   jobPosition?: position ;
 
-  constructor(private jobService : JobService) {}
+  constructor(private jobService : JobService , private router : Router) {}
 
   ngOnInit():void{
     this.loadJobDetails();
@@ -108,5 +108,10 @@ export class JobdetailsComponent {
       console.error(error);
     }
   );
+  }
+
+  public applynow(jobId?:string):void
+  {
+    this.router.navigate(['apply-now/',jobId]);
   }
 }
