@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/CandidateAuthentication/auth.service';
 import { Router, RouterModule } from '@angular/router';
+// import { Login } from '../../Models/loginUser';
 import { LoginResponse } from '../../Models/loginResponse';
 
 @Component({

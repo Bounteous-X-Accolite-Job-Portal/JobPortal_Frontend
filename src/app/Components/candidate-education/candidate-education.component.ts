@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Education } from '../../Models/candidateEducation';
-// import { CandidateServicesService } from '../../Services/candidate-services.service';
+import { CandidateServicesService } from '../../Services/candidate-services.service';
 import { CommonModule } from '@angular/common';
 
 
@@ -28,12 +28,12 @@ const ELEMENT_DATA: Education[] = [
 export class CandidateEducationComponent {
 
   eduList = ELEMENT_DATA;
-  // httpService=inject(CandidateServicesService)
+  httpService=inject(CandidateServicesService)
   ngOnInit(){
-    // this.httpService.getAllEducation().subscribe(result => {
-    //   this.eduList=result;
-    //   console.log(this.eduList);
-    // })
+    this.httpService.getAllEducation().subscribe(result => {
+      this.eduList=result;
+      console.log(this.eduList);
+    })
   }
 
   // displayedColumns: string[] = ['Grade', 'StartYear', 'EndYear', 'InstitutionOrSchoolName', 'Degree'];
