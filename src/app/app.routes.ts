@@ -11,6 +11,9 @@ import { SkillsComponent } from './Components/skills/skills.component';
 import { ResumeComponent } from './Components/resume/resume.component';
 import { SocialProfilesComponent } from './Components/social-profiles/social-profiles.component';
 import { PasswordResetComponent } from './Components/password-reset/password-reset.component';
+import { authGuard } from './Guards/auth.guard';
+import { childAuthGuard } from './Guards/child-auth.guard';
+import { loggedInGuard } from './Guards/logged-in.guard';
 import { JobHomeComponent } from './Components/job-home/job-home.component';
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
 import { JobApplicatonComponent } from './Components/job-applicaton/job-applicaton.component';
@@ -26,11 +29,13 @@ export const routes: Routes = [
     },
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [loggedInGuard]
     },
     {
         path: 'register',
-        component: RegisterComponent
+        component: RegisterComponent,
+        canActivate: [loggedInGuard]
     },
     {
         path: 'try',
@@ -39,7 +44,8 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: UserProfileComponent,
-        // canActivate: [authGuard],
+        canActivate: [authGuard],
+        canActivateChild: [childAuthGuard],
         children: [
             { path: 'edu', component: CandidateEducationComponent },
             { path: 'exp', component: ExperienceComponent },
