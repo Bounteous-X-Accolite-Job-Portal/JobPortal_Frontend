@@ -6,6 +6,7 @@ import { AllJobTypes } from '../Models/JobTypeResponse/AllJobType';
 import { AllJobCategory } from '../Models/JobCategoryResponse/AllJobCategory';
 import { AllJobPosition } from '../Models/JobPositionResponse/AllJobPosition';
 import { environment } from '../../environments/environment.development';
+
 @Injectable({
   providedIn: 'root',
 })

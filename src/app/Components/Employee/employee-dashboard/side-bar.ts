@@ -11,7 +11,7 @@ export const sideBarData = [
   },
   {
     routeLink: 'interview-hub',
-    icon: 'fal fa-cogs',
+    icon: 'fa-solid fa-users',
     label: 'Interview Feedback',
   },
   // {
