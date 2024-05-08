@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../Services/CandidateAuthentication/auth.service';
+import { AuthService } from '../../Services/auth.service';
 import { error } from 'console';
 import { AddEmployeeService } from '../../Services/AddEmployee/add-employee.service';
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from './CandidateAuthentication/auth.service';
+import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -18,6 +18,24 @@ export class PermissionService {
     }
 
     this.router.navigate(['login'])
+    return false;
+  }
+
+  canActivateChild() : boolean {
+    if(this.auth.isLoggedIn()){
+      return true;
+    }
+
+    this.router.navigate(['login'])
+    return false;
+  }
+
+  isLoggedIn() : boolean {
+    if(!this.auth.isLoggedIn()){
+      return true;
+    }
+
+    this.router.navigate([''])
     return false;
   }
 }

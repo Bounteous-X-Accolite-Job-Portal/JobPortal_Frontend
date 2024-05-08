@@ -12,7 +12,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../Services/CandidateAuthentication/auth.service';
+import { AuthService } from '../../Services/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { InterviewCardComponent } from '../interview-card/interview-card.component';
 import { CommonModule } from '@angular/common';
 import { GetInterviewsService } from '../../../Services/InterviewService/get-interviews.service';
+import { interviewResponse } from '../../../Models/InterviewResponse/InterviewResponse';
 
 @Component({
   selector: 'app-interview-hub',
@@ -13,13 +14,14 @@ import { GetInterviewsService } from '../../../Services/InterviewService/get-int
 })
 export class InterviewHubComponent implements OnInit {
   public ActiveInterviewToggle : boolean = true;
+  interviews : interviewResponse[] = [];
 
   constructor(private getInterviewsService : GetInterviewsService){
 
   }
 
   ngOnInit(): void {
-      // this.loadInterviews();
+      this.loadInterviews();
   }
 
   ActiveInterview(){
@@ -30,17 +32,17 @@ export class InterviewHubComponent implements OnInit {
     this.ActiveInterviewToggle = false;
   }
 
-  // private loadInterviews(): void {
-  //   this.getInterviewsService.getAllJobLocations().subscribe(
-  //     (res) => {
-  //       this.locations = res.allJobLocations;
-  //       console.log(this.locations);
-  //     },
-  //     (error) => {
-  //       console.error('Error loading job locations:', error);
-  //     }
-  //   );
-  // }
+  private loadInterviews(): void {
+    this.getInterviewsService.getAllInterviewsOfLoggedInEmployee().subscribe(
+      (res) => {
+        console.log(res);
+        this.interviews = res.allInterviews;
+      },
+      (error) => {
+        console.error('Error loading job locations:', error);
+      }
+    );
+  }
 
   feedbackForm = new FormGroup({
     feedback : new FormControl('',Validators.required)
