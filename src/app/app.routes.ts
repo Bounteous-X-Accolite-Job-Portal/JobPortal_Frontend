@@ -74,16 +74,16 @@ export const routes: Routes = [
     component: JobHomeComponent,
   },
   {
-    path: 'user-profile',
-    component: UserProfileComponent,
-  },
-  {
     path: 'job-details/:jobId',
     component: JobdetailsComponent,
   },
   {
     path: 'apply-now/:jobId',
     component:JobApplicatonComponent,
+  },
+  {
+    path: 'user-profile',
+    component: UserProfileComponent,
   },
   {
     path: '**',

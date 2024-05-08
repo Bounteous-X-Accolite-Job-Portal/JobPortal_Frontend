@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmailValidator } from '@angular/forms';
-
-import axios from 'axios';
 import { location } from '../Models/JoblocationResponse/location';
 import { Login } from '../Models/loginUser';
 import { CookieServiceService } from './cookie-service.service';

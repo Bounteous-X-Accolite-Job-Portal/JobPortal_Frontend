@@ -1,6 +1,6 @@
 import { Guid } from "guid-typescript";
 
 export interface JobType{
-    typeId: Guid;
+    jobTypeId: string;
     typeName: string;
 }
