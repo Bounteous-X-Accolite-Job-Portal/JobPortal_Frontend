@@ -12,12 +12,12 @@ export class PermissionService {
     private router: Router
   ) { }
 
-  canActivate(): boolean {
-    if(this.auth.isLoggedIn()){
-      return true;
-    }
+  // canActivate(): boolean {
+  //   if(this.auth.isLoggedIn()){
+  //     return true;
+  //   }
 
-    this.router.navigate(['login'])
-    return false;
-  }
+  //   this.router.navigate(['login'])
+  //   return false;
+  // }
 }

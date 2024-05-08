@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { EmailValidator } from '@angular/forms';
 
 import { Login } from '../Models/loginUser';
-import { CookieServiceService } from './cookie-service.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +14,6 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private cookieService : CookieServiceService
 
   ) {}
 
@@ -32,18 +30,15 @@ export class AuthService {
     return this.http.get(this.baseURL + "Resume/resume/" + id);
   }
 
-  storeToken(tokenValue: string){
-    this.cookieService.set("Token", tokenValue);
-    //localStorage.setItem('token', tokenValue);
-  }
+  // storeToken(tokenValue: string){
+  //   localStorage.setItem('token', tokenValue);
+  // }
 
-  getToken(){
-    return this.cookieService.get("Token");
-    //return localStorage.getItem('token');
-  }
+  // getToken(){
+  //   return localStorage.getItem('token');
+  // }
 
-  isLoggedIn(): boolean{
-    return !!this.cookieService.get("Token");
-    //return !!localStorage.getItem('token');
-  }
+  // isLoggedIn(): boolean{
+  //   return !!localStorage.getItem('token');
+  // }
 }

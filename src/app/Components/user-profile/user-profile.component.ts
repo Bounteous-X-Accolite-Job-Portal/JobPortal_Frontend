@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class UserProfileComponent {
 
+    id:string = 'f0f253e3-d28d-4d05-9909-a95804d93cea';
     collapsed = false;
     navData = navbarData;
 

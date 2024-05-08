@@ -1,1 +1,40 @@
-<p>experience works!</p>
+<div class="d-flex gradient-custom-2 justify-content-center flex-wrap" style="padding: 20vh;">
+    <div class="w-75 bg-white rounded p-5" style="height: auto;">
+      <h2>Experience</h2>
+      <div>Candidate with user ID : </div><hr>
+      <div class="d-flex justify-content-end p-1">
+        <a class="btn btn-primary px-3 text-style-add fs-5 fw-bold" (click)="addE()">Increase here</a>
+        <a [routerLink]="['add-exp']" class="btn btn-primary px-3 text-style-add fs-5 fw-bold">Route to add</a>
+      </div>  
+      <hr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Company</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Currently Working</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+            <tbody>
+              <tr *ngFor="let tmp of expList">
+                <td>{{tmp.experienceTitle}}</td>
+                <td>{{tmp.description}}</td>
+                <td>{{tmp.companyId}}</td>
+                <td>{{tmp.startDate}}</td>
+                <td>{{tmp.endDate}}</td>
+                <td>{{tmp.isCurrentlyWorking}}</td>
+                <td>
+                    <a class='btn btn-primary text-style-add' [routerLink]="['update-exp']"><i class="fas fa-edit"></i>
+                    </a>
+                    <button class='btn btn-outline-primary text-style-del' (click)="onDel()"><i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+        </table>
+    </div>
+  </div>

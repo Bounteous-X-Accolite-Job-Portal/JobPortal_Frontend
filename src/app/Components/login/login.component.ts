@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
 import { Router, RouterModule } from '@angular/router';
-import { Login } from '../../Models/loginUser';
 import { LoginResponse } from '../../Models/loginResponse';
 
 @Component({
@@ -57,8 +56,8 @@ export class LoginComponent  {
           console.log('Status', data.status, "data message", data.message);
           if(data.status == 200){
                 console.log(data.token);
-              this.authService.storeToken(data.token ? data.token : "");
-              console.log(this.authService.getToken());
+              // this.authService.storeToken(data.token ? data.token : "");
+              // console.log(this.authService.getToken());
               console.log("vishal", data.token);
               this.router.navigate(['/user-profile']);
           }

@@ -1,0 +1,38 @@
+import { Component, inject } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { CandidateServicesService } from '../../Services/candidate-services.service';
+import { candidateEducation } from '../../Models/candidateEducation';
+
+@Component({
+  selector: 'app-update-education',
+  standalone: true,
+  imports: [FormsModule, ReactiveFormsModule],
+  templateUrl: './update-education.component.html',
+  styleUrl: './update-education.component.css'
+})
+export class UpdateEducationComponent {
+  formBuilder = inject(FormBuilder);
+  updateEducation = this.formBuilder.group({
+    institutionOrSchoolName: ['', Validators.required],
+    grade: ['',Validators.required],
+    startYear: ['',Validators.required],
+    degree: ['',Validators.required],
+    endYear: ['',Validators.required],
+    educationalInstitution: ['',[]],
+    degreeId: ['',[]],
+    candidate: ['',[]],
+    candidateId: ['',[]]
+  });
+
+
+  httpService = inject(CandidateServicesService);
+  Education: candidateEducation[] = [];
+
+  save() {
+    console.log(this.updateEducation.value);
+    // this.Education = this.candidateEducation.value;
+    // this.httpService.addEducation(this.candidateEducation.value);
+  }
+
+
+}
