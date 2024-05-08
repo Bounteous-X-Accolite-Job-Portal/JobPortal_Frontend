@@ -32,6 +32,7 @@ export class AddJobComponent implements OnInit {
   jobPosition: position[] = [];
   data: Job[] = [];
   jobData: any;
+  locationindex: number = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -135,7 +136,8 @@ export class AddJobComponent implements OnInit {
 
   onSubmit() {
     // if (this.jobForm.valid) {
-
+    console.log(this.locations[this.locationindex]);
+    
     console.log(this.jobForm.controls['']);
     this.jobData = {
       jobCode: this.jobForm.value.jobCode,

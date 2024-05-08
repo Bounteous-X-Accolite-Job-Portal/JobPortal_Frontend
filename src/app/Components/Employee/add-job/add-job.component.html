@@ -87,8 +87,8 @@
 
       <div class="mb-3 col">
         <label class="form-label">Job Location</label><br />
-        <select formControlName="locationId">
-          <option *ngFor="let loc of locations">
+        <select formControlName="locationId" [(ngModel)]="locationindex">
+          <option *ngFor="let loc of locations; let i=index"[value]="i">
             {{ loc.address }} , {{ loc.city }} , {{ loc.state }} ,
             {{ loc.country }}
           </option>
@@ -106,7 +106,7 @@
       </div>
       <div class="mb-3 col">
         <label class="form-label">Job Category</label><br />
-        <select formControlName="categoryId">
+        <select formControlName="categoryId" >
           <option *ngFor="let cat of jobCategories" [value]="cat.jobCategoryId">
             {{ cat.categoryName }}
           </option>

@@ -1,0 +1,10 @@
+import { Time } from "@angular/common";
+import { Guid } from "guid-typescript";
+export interface Interview{
+    applicationId: Guid;
+    interviewDate : Date;
+    interviewTime: Time;
+    interviewerId: Guid;
+    link: string;
+    empId: Guid;
+}

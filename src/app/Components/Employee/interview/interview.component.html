@@ -1,1 +1,28 @@
-<p>interview works!</p>
+<div class="container">
+  <h1>Find your interviewer</h1>
+  <label for="search-text">Search</label>
+  <input
+    type="text"
+    [(ngModel)]="searchText"
+    class="form-control"
+    id="search-text"
+    aria-describedby="search-text"
+    placeholder="Enter text to search Interviewer"
+    autofocus
+  />
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let c of employee">
+      {{ c }}
+    </li>
+  </ul>
+</div>
+
+<!-- <div class="search-container">
+    <input type="text" [(ngModel)]="searchText" (input)="filterItems()" placeholder="Search...">
+  </div>
+  
+  <ul>
+    <li *ngFor="let character of filteredCharacters">
+      {{ character }}
+    </li>
+  </ul> -->

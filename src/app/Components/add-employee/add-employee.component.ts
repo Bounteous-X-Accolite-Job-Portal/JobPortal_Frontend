@@ -82,9 +82,6 @@ export class AddEmployeeComponent implements OnInit {
           } else {
             console.log('error');
           }
-        },
-        (error: any) => {
-          console.log(error);
         }
       );
       this.submitting = true;
