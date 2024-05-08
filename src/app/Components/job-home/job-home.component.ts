@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { JobCardComponent } from '../job-card/job-card.component';
 import { JobService } from '../../Services/job.service';
 import { JobType } from '../../Models/JobTypeResponse/JobType';
@@ -8,6 +8,7 @@ import { location } from '../../Models/JoblocationResponse/location';
 import { position } from '../../Models/JobPositionResponse/position';
 import { Job } from '../../Models/JobResponse/Job';
 import { ToastrModule } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 @Component({
   standalone: true,
@@ -18,6 +19,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   moduleId: module.id, 
 })
 export class JobHomeComponent  {
+  toaster = inject(ToastrService);
+
   locations: location[] = [];
   jobTypes: JobType[] = [];
   jobCategories: JobCategory[] = [];
@@ -177,7 +180,15 @@ export class JobHomeComponent  {
           this.Filterjobs.push(job);
         }
       }
+
     );
+    if(this.Filterjobs.length>0)
+      this.displayJobsToast();
+    else
+    {
+      this.displayEmptyJobsToast();
+      this.resetFilters();
+    }
   }
 
   public resetFilters():void
@@ -187,5 +198,22 @@ export class JobHomeComponent  {
     this.positionIndex =0;
     this.locationIndex =0;
     this.typeIndex =0;
+
+    this.displayResetToast();
+  }
+
+  private displayResetToast(): void
+  {
+    this.toaster.success("Filters Reset Successfully !!");
+  }
+  
+  private displayEmptyJobsToast(): void
+  {
+    this.toaster.error("No Jobs Found !!");
+  }
+  
+  private displayJobsToast(): void
+  {
+    this.toaster.success("Jobs Found !!");
   }
 }
