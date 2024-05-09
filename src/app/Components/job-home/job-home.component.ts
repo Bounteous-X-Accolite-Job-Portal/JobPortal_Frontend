@@ -122,6 +122,7 @@ export class JobHomeComponent  {
   public onSubmit() : void{
     if(this.categoryIndex==0 && this.locationIndex==0 && this.positionIndex==0 && this.typeIndex==0)
     {
+      this.displayFilterEmptyToast();
       return;
     }
 
@@ -215,5 +216,10 @@ export class JobHomeComponent  {
   private displayJobsToast(): void
   {
     this.toaster.success("Jobs Found !!");
+  }
+  
+  private displayFilterEmptyToast(): void
+  {
+    this.toaster.error("NO Filter Selected !!");
   }
 }

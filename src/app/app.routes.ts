@@ -54,6 +54,7 @@ export const routes: Routes = [
             { path: 'resume', component: ResumeComponent },
             { path: 'sml', component: SocialProfilesComponent },
             { path: 'pass-reset', component: PasswordResetComponent },
+            {path: 'applyjobs' , component: JobHomeComponent},
             { path: '', component: TryComponent},
             { path: '**', component: TryComponent}
         ]

@@ -14,6 +14,8 @@ import { JobTypeResponse } from '../../Models/JobTypeResponse/JobTypeResponse';
 import { JobLocationResponse } from '../../Models/JoblocationResponse/JobLocationResponse';
 import { JobPositionResponse } from '../../Models/JobPositionResponse/JobPositionResponse';
 import { Router } from '@angular/router';
+import { UserStoreService } from '../../Services/user-store.service';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-jobdetails',
@@ -30,11 +32,24 @@ export class JobdetailsComponent {
   jobtype?: JobType;
   jobcategory?: JobCategory;
   jobPosition?: position ;
+  logginnedUserId : string = '';
 
-  constructor(private jobService : JobService , private router : Router) {}
+  constructor(
+    private jobService : JobService ,
+    private router : Router , 
+    private userStore : UserStoreService,
+    private auth : AuthService) {}
 
   ngOnInit():void{
     this.loadJobDetails();
+    this.userStore.getIdFromStore()
+        .subscribe((val) => {
+            console.log(val);
+            let idFromToken = this.auth.getIdFromToken();
+            console.log(idFromToken);
+            this.logginnedUserId = val || idFromToken;
+            console.log("Logged User Id : ",this.logginnedUserId);
+        })
   }
   
   private loadJobDetails(): void{

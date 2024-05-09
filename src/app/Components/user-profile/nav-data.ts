@@ -34,4 +34,9 @@ export const navbarData = [
         icon: 'fal fa-cog',
         label: 'Password Reset'
     },
+    {
+        routeLink: 'applyjobs',
+        icon: 'fal fa-briefcase',
+        label: 'Apply For Jobs'
+    }
 ];

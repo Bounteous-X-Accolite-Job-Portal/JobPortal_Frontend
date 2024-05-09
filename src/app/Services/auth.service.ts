@@ -11,7 +11,7 @@ import { jwtDecode } from "jwt-decode";
   providedIn: 'root',
 })
 export class AuthService {
-  private baseURL = 'http://localhost:5234/api/';
+  private baseURL = 'https://localhost:7283/api/';
   private userPayload : any;
 
   // emits event on login
@@ -26,7 +26,6 @@ export class AuthService {
   }
 
   registerUser(registerData: any): Observable<any> {
-    // Assuming you are making an HTTP POST request to the backend API
     return this.http.post<any>(this.baseURL +'CandidateAccount/register', registerData);
   }
 
@@ -34,34 +33,40 @@ export class AuthService {
     return this.http.post<Login>(this.baseURL + 'Account/login', loginData);
   }
 
-  logout(){
+  logout()
+  {
     this.removeToken();
     this.AuthEvent.emit(false);
     this.router.navigate(['login']);
   }
 
-  getResumes(id: any): Observable<any>{
+  getResumes(id: any): Observable<any>
+  {
     return this.http.get(this.baseURL + "Resume/resume/" + id);
   }
 
-  // Authetication portion ------------------------------------------------
-  storeToken(tokenValue: string){
+  storeToken(tokenValue: string)
+  {
     this.cookieService.set("token", tokenValue, 30, '/', 'localhost', true, 'Lax');
   }
 
-  getToken(){
+  getToken()
+  {
     return this.cookieService.get("token");
   }
 
-  removeToken(){
+  removeToken()
+  {
     this.cookieService.delete("token");
   }
 
-  isLoggedIn(): boolean{
+  isLoggedIn(): boolean
+  {
     return !!this.cookieService.get("token");
   }
 
-  decodedToken(){
+  decodedToken()
+  {
     const token = this.getToken();
     if (!token) {
       return null; // Handle case where token is not available
