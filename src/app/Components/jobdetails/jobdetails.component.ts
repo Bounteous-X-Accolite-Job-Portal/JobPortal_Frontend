@@ -16,16 +16,20 @@ import { JobPositionResponse } from '../../Models/JobPositionResponse/JobPositio
 import { Router } from '@angular/router';
 import { UserStoreService } from '../../Services/user-store.service';
 import { AuthService } from '../../Services/auth.service';
+import { JobApplication } from '../../Models/JobApplicationResponse/JobApplication';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-jobdetails',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule,ToastrModule],
   templateUrl: './jobdetails.component.html',
   styleUrl: './jobdetails.component.css'
 })
 export class JobdetailsComponent {
-  route: ActivatedRoute = inject(ActivatedRoute);  
+  route: ActivatedRoute = inject(ActivatedRoute);
+  toaster = inject(ToastrService);  
   job?: Job;
   location?: location ;
   degree?: Degree;
@@ -33,6 +37,7 @@ export class JobdetailsComponent {
   jobcategory?: JobCategory;
   jobPosition?: position ;
   logginnedUserId : string = '';
+  userapplied :boolean = false;
 
   constructor(
     private jobService : JobService ,
@@ -40,7 +45,9 @@ export class JobdetailsComponent {
     private userStore : UserStoreService,
     private auth : AuthService) {}
 
-  ngOnInit():void{
+  ngOnInit():void
+  {
+    this.userapplied = false;
     this.loadJobDetails();
     this.userStore.getIdFromStore()
         .subscribe((val) => {
@@ -127,6 +134,33 @@ export class JobdetailsComponent {
 
   public applynow(jobId?:string):void
   {
-    this.router.navigate(['apply-now/',jobId]);
+    this.jobService.applyForJob(jobId).subscribe(
+      (res) =>
+        {
+          this.userapplied = true;
+          this.displayAppliedMessage();
+          console.log("Success",res);
+        },
+      (error) =>
+        {
+          this.displayNotAppliedMessage();
+          console.log("Error",error);
+        }
+    )
+  }
+
+  private displayAppliedMessage(): void
+  {
+    this.toaster.success("Successfully Applied !!");
+  }
+  
+  private displayNotAppliedMessage(): void
+  {
+    this.toaster.success("Error in Application !!");
+  }
+
+  public getName(val:boolean):string
+  {
+    return val?"Already Applied":"Apply Now";
   }
 }
