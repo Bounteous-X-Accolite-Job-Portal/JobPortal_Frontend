@@ -14,6 +14,7 @@ import { JobLocationResponse } from '../Models/JoblocationResponse/JobLocationRe
 import { JobPositionResponse } from '../Models/JobPositionResponse/JobPositionResponse';
 import { JobApplication } from '../Models/JobApplicationResponse/JobApplication';
 import { AllDegreeResponse } from '../Models/DegreeResponse/AllDegreeResponse';
+import { ApplicationResponse } from '../Models/JobApplicationResponse/ApplicationResponse';
 @Injectable({
     providedIn: 'root',
   })
@@ -76,5 +77,9 @@ import { AllDegreeResponse } from '../Models/DegreeResponse/AllDegreeResponse';
       return this.http.post<any>(this.baseURL+'Application/apply',{
         "jobId":jobId
       });
+    };
+
+    checkCandidateApplicable(jobId?:string):Observable<ApplicationResponse>{
+        return this.http.get<ApplicationResponse>(this.baseURL+'Application/jobApplication/isCandidateApplicable/'+jobId);
     }
   }

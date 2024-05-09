@@ -5,7 +5,7 @@
     <h4>Description : {{job?.jobDescription}}</h4>
     <h3>Last Date : {{job?.lastDate}}</h3>
 
-    <h4>Experience : {{job?.experience}}</h4>
+    <h4>Experience : {{job?.experience}} Years</h4>
 
     <h3>Location : {{location?.address}} , {{location?.city}} , {{location?.state}} , {{location?.country}}</h3>
     
@@ -22,5 +22,5 @@
     <h4>Job Category Code : {{jobcategory?.categoryCode}}</h4>
     <h4>Job Category Name : {{jobcategory?.categoryName | uppercase}}</h4>
 
-    <button (click)="applynow(job?.jobId)">{{getName(this.userapplied)}}</button>
+    <button [disabled]="canApply" (click)="applynow(job?.jobId)">{{this.stringForButton}}</button>
 </section>

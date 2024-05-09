@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, Renderer2, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JobService } from '../../Services/job.service';
 import { Job } from '../../Models/JobResponse/Job';
@@ -38,12 +38,16 @@ export class JobdetailsComponent {
   jobPosition?: position ;
   logginnedUserId : string = '';
   userapplied :boolean = false;
+  stringForButton:string = '';
+  canApply:boolean = false;
 
   constructor(
     private jobService : JobService ,
     private router : Router , 
     private userStore : UserStoreService,
-    private auth : AuthService) {}
+    private auth : AuthService,
+    private renderer: Renderer2,
+    private elementRef: ElementRef) {}
 
   ngOnInit():void
   {
@@ -68,6 +72,7 @@ export class JobdetailsComponent {
       this.loadCategoryDetails();
       this.loadDegreeDetails();
       this.loadTypeDetails();
+      this.loadcheckCandidateApplicable();
     });
   }
 
@@ -137,7 +142,8 @@ export class JobdetailsComponent {
     this.jobService.applyForJob(jobId).subscribe(
       (res) =>
         {
-          this.userapplied = true;
+          this.stringForButton = "Already Applied !";
+          this.disableApplyButton();
           this.displayAppliedMessage();
           console.log("Success",res);
         },
@@ -147,6 +153,52 @@ export class JobdetailsComponent {
           console.log("Error",error);
         }
     )
+  }
+
+  private loadcheckCandidateApplicable():void{
+    this.jobService.checkCandidateApplicable(this.job?.jobId).subscribe(
+      (res) =>{
+        console.log(res);
+        var status = res.status;
+        console.log("rece : ",status);
+          if(status=="400")
+          {
+            this.stringForButton = "Employee Logged In !!";
+            this.disableApplyButton();
+          }
+          else if(status=="401")
+          {
+            this.stringForButton = "Not Logged In !!";
+            this.disableApplyButton();
+          }
+          else if(status=="403")
+          {
+            this.stringForButton = "Already Applied !";
+            this.disableApplyButton();
+          }
+          else if(status=="200")
+          {
+            this.stringForButton = "Apply Now";
+            this.enableApplyButton();
+          }
+
+          console.log(">>>button : ",this.stringForButton);
+      },
+      (error) =>
+        {
+          console.log(error);
+        }
+    )
+  }
+
+  private disableApplyButton():void
+  {
+    this.renderer.setProperty(this.elementRef.nativeElement.querySelector('button'), 'disabled', true);
+  }
+  
+  private enableApplyButton():void
+  {
+    this.renderer.setProperty(this.elementRef.nativeElement.querySelector('button'), 'disabled', false);
   }
 
   private displayAppliedMessage(): void
