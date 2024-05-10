@@ -7,7 +7,7 @@ import { forkJoin } from 'rxjs';
 import { SkillsServiceService } from '../../../Services/Skills/skills-service.service';
 import { ExperienceServiceService } from '../../../Services/Experience/experience-service.service';
 import { CompanyServiceService } from '../../../Services/Company/company-service.service';
-import { Skills } from '../../../Models/Skills';
+import { Skills } from '../../../Models/SkillsResponse/Skills';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { InterviewFeedbackService } from '../../../Services/InterviewFeedback/interview-feedback.service';
 import { AddInterviewFeedbackResponse } from '../../../Models/InterviewFeedback/AddInterviewFeedbackResponse';

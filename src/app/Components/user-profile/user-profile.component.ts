@@ -15,8 +15,8 @@ import { AuthService } from '../../Services/auth.service';
 export class UserProfileComponent implements OnInit {
     collapsed = false;
     navData = navbarData;
-
-    public name : string = "";
+    id:string = "";
+    public name : string = "User";
 
     constructor(
         private userStore : UserStoreService, 
@@ -26,8 +26,11 @@ export class UserProfileComponent implements OnInit {
     ngOnInit(): void {
         this.userStore.getNameFromStore()
         .subscribe((val) => {
-            let emailFromToken = this.auth.getNameFromToken();
-            this.name = val || emailFromToken;
+            console.log(val);
+            let nameFromToken = this.auth.getNameFromToken();
+            console.log(nameFromToken);
+            this.name = val || nameFromToken;
+            console.log(this.name);
         })
     }
 
