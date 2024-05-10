@@ -1,4 +1,4 @@
-import { Resume } from "../Resume";
+import { Resume } from "./Resume";
 
 export interface ResumeResponse{
   status: number,
