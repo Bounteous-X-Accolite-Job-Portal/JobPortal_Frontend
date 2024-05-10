@@ -1,0 +1,38 @@
+<div class="d-flex gradient-custom-2 justify-content-center flex-wrap" style="padding: 20vh;">
+  <div class="w-75 bg-white rounded p-5" style="height: auto;">
+    <h2>Education</h2>
+    <div>Candidate with user ID : {{userId}}</div><hr>
+    <div class="d-flex justify-content-end p-1">
+      <a class="btn btn-primary px-3 text-style-add fs-5 fw-bold" (click)="addE()">Increase here</a>
+      <a [routerLink]="['add-edu']" class="btn btn-primary px-3 text-style-add fs-5 fw-bold">Route to add</a>
+    </div>  
+    <hr>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Percentage</th>
+          <th>InstitutionOrSchoolName</th>
+          <th>Degree</th>
+          <th>StartYear</th>
+          <th>EndYear</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+          <tbody>
+            <tr *ngFor="let tmp of eduList">
+              <td>{{tmp.grade}}</td>
+              <td>{{tmp.institutionOrSchoolName}}</td>
+              <td>{{tmp.degree}}</td>
+              <td>{{tmp.startYear}}</td>
+              <td>{{tmp.endYear}}</td>
+              <td>
+                  <a class='btn btn-primary text-style-add' [routerLink]="['update-edu']"><i class="fas fa-edit"></i>
+                  </a>
+                  <button class='btn btn-outline-primary text-style-del' (click)="onDel()"><i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+      </table>
+  </div>
+</div>

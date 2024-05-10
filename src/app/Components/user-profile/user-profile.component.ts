@@ -15,7 +15,7 @@ import { AuthService } from '../../Services/auth.service';
 export class UserProfileComponent implements OnInit {
     collapsed = false;
     navData = navbarData;
-
+    id:string = "";
     public name : string = "User";
 
     constructor(

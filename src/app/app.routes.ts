@@ -7,13 +7,17 @@ import { AddJobComponent } from './Components/Employee/add-job/add-job.component
 import { JobHomeComponent } from './Components/job-home/job-home.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 import { TryComponent } from './Components/try/try.component';
-import { CandidateEducationComponent } from './Components/candidate-education/candidate-education.component';
-import { ExperienceComponent } from './Components/experience/experience.component';
-import { PersonalInfoComponent } from './Components/personal-info/personal-info.component';
-import { SkillsComponent } from './Components/skills/skills.component';
-import { ResumeComponent } from './Components/resume/resume.component';
-import { SocialProfilesComponent } from './Components/social-profiles/social-profiles.component';
-import { PasswordResetComponent } from './Components/password-reset/password-reset.component';
+import { ExperienceComponent } from './Components/Candidate/experience/experience.component';
+import { PersonalInfoComponent } from './Components/Candidate/personal-info/personal-info.component';
+import { SkillsComponent } from './Components/Candidate/skills/skills.component';
+import { ResumeComponent } from './Components/Candidate/resume/resume.component';
+import { SocialProfilesComponent } from './Components/Candidate/social-profiles/social-profiles.component';
+import { PasswordResetComponent } from './Components/Candidate/password-reset/password-reset.component';
+import { AddEducationComponent } from './Components/Candidate/add-education/add-education.component';
+import { UpdateEducationComponent } from './Components/Candidate/update-education/update-education.component';
+import { AddExperienceComponent } from './Components/Candidate/add-experience/add-experience.component';
+import { UpdateExperienceComponent } from './Components/Candidate/update-experience/update-experience.component';
+import { CandidateEducationComponent } from './Components/Candidate/candidate-education/candidate-education.component';
 import { authGuard } from './Guards/auth.guard';
 import { childAuthGuard } from './Guards/child-auth.guard';
 import { loggedInGuard } from './Guards/logged-in.guard';
@@ -33,6 +37,10 @@ export const routes: Routes = [
     {
         path: 'landing',
         component: LandingComponent
+    },
+    {
+        path: 'about',
+        component: AddEducationComponent
     },
     {
         path: 'login',
@@ -69,6 +77,10 @@ export const routes: Routes = [
         component: TryComponent
     },
     {
+        path: 'update',
+        component: UpdateEducationComponent
+    },
+    {
       path: 'employee-dashboard',
       component: EmployeeDashboardComponent,
       canActivate: [authGuard],
@@ -83,18 +95,25 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: UserProfileComponent,
-        canActivate: [authGuard],
-        canActivateChild: [childAuthGuard],
+        // canActivate: [authGuard],
+        // canActivateChild: [childAuthGuard],
         children: [
-            { path: 'edu', component: CandidateEducationComponent },
-            { path: 'exp', component: ExperienceComponent },
-            { path: 'per-info', component: PersonalInfoComponent },
-            { path: 'skills', component: SkillsComponent },
-            { path: 'resume', component: ResumeComponent },
-            { path: 'sml', component: SocialProfilesComponent },
-            { path: 'pass-reset', component: PasswordResetComponent },
-            {path: 'applyjobs' , component: JobHomeComponent},
-            { path: '', component: TryComponent},
+            { path: 'edu/:id', component: CandidateEducationComponent },
+            { path: 'edu/:id', children:[
+                { path: 'add-edu' , component: AddEducationComponent},
+                { path: 'update-edu' , component: UpdateEducationComponent},
+            ] },
+            { path: 'exp/:id', component: ExperienceComponent },
+            { path: 'exp/:id', children:[
+                { path: 'add-exp' , component: AddExperienceComponent},
+                { path: 'update-exp' , component: UpdateExperienceComponent},
+            ] },
+            { path: 'per-info/:id', component: PersonalInfoComponent },
+            { path: 'skills/::id', component: SkillsComponent },
+            { path: 'resume/:id', component: ResumeComponent },
+            { path: 'sml/:id', component: SocialProfilesComponent },
+            { path: 'pass-reset/:id', component: PasswordResetComponent },
+            // { path: '', component: TryComponent},
             { path: '**', component: TryComponent}
         ]
     },
