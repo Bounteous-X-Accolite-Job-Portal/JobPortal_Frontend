@@ -1,6 +1,38 @@
 <section class="listing">
-    <h2 id="title">{{job.jobTitle}}</h2>
-    <h4 id="jobcode">{{job.lastDate}}</h4>
-    <h5 id="date">{{job.experience}}</h5>
+    <div class="heading">
+        <div>
+            <h1 id="title">{{job.jobTitle}}</h1>
+        </div>
+        <div class="logo">
+            <img class="accolite" src="../../../assets/Logos/accolite_logo.jpg"/>
+        </div>
+    </div>
+
+    <div>
+        <i class="fa fa-location-arrow" aria-hidden="true"></i>
+        {{location?.city}} , {{location?.state}} , {{location?.country}}
+    </div>
+    
+    <div class="dateId">
+        <div class="block1">
+            <i class="fa fa-address-card" aria-hidden="true"></i>
+           <p>{{job.jobCode}} </p>
+        </div>
+        <div class="block2">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+           <p>Last Date - {{job.lastDate}} </p>
+        </div>
+    </div>
+    
+    <div>
+        <p>{{job.jobDescription}}</p>
+    </div>
+
+    <div>
+        <div class="option">{{jobtype?.typeName}}</div>
+        <div class="option">{{jobcategory?.categoryName}}</div>
+        <div class="option">{{jobPosition?.positionName}}</div>
+    </div>
+
     <h5 id="details"><a [routerLink]="['/job-details',job.jobId]" >Click Here for Details..</a></h5>
 </section> 

@@ -7,10 +7,46 @@
     margin: 10px 5px 10px 5px;
     display: flex;
     flex-direction: column;
+    padding: 5px 10px 5px 10px;
+}
+.accolite{
+    height: 6vh;
+    width: 3vw;
+    border-radius: 2rem;
+    overflow: hidden;
+}
+.logo{
+    align-items:right;
+}
+.heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: 5px 5px 5px 5px;
+}
+.dateId{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
     align-items: center;
 }
-
-.listing:hover{
+.block1 , .block2
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.option
+{
+    padding: 5px 5px 5px 5px;
+    border:10px black;
+    border-radius: 50px;
+}
+.listing:hover
+{
     background-color: aquamarine;
     box-shadow: 20px;
 }

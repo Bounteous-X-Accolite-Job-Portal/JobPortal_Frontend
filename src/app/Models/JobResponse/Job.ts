@@ -1,10 +1,3 @@
-import { Degree } from "../DegreeResponse/Degree";
-import { JobCategory } from "../JobCategoryResponse/JobCategory";
-import { position } from "../JobPositionResponse/position";
-import { JobType } from "../JobTypeResponse/JobType";
-import { location } from "../JoblocationResponse/location";
-import { Guid } from "guid-typescript";
-
 export interface Job{
     categoryId : string;
     degreeId : string;
@@ -15,7 +8,7 @@ export interface Job{
     jobId: string;
     jobTitle:string;
     jobType : string;
-    lastDate: Date;
+    lastDate: string;
     locationId : string;
     positionId : string;
     postDate:Date;

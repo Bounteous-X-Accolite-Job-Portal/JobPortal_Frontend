@@ -67,11 +67,13 @@ export class JobdetailsComponent {
     const id = String(this.route.snapshot.params['jobId']);
     this.jobService.getJobById(id).subscribe(event => {
       this.job = event.job;
+
       this.loadLocationDetails();
       this.loadPositionDetails();
       this.loadCategoryDetails();
       this.loadDegreeDetails();
       this.loadTypeDetails();
+      
       this.loadcheckCandidateApplicable();
     });
   }
