@@ -95,8 +95,8 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: UserProfileComponent,
-        canActivate: [authGuard],
-        canActivateChild: [childAuthGuard],
+        // canActivate: [authGuard],
+        // canActivateChild: [childAuthGuard],
         children: [
             { path: 'edu/:id', component: CandidateEducationComponent },
             { path: 'edu/:id', children:[

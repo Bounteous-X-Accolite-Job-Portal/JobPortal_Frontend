@@ -2,7 +2,7 @@ export const navbarData = [
     {
         routeLink: 'per-info',
         icon: 'fal fa-id-card',
-        label: 'Personal Information'
+        label: 'Personal Info'
     },
     {
         routeLink: 'edu',

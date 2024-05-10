@@ -9,10 +9,10 @@
       </button>
     </div>
     <ul class="sidenav-nav">
-      <li class="sidenav-nav-item" *ngFor="let data of navData">
-        <a [routerLink]="[data.routeLink, id]" class="sidenav-nav-link" routerLinkActive="active" >
-          <i class="sidenav-link-icon " [class]="data.icon"></i>
-          <span class="sidenav-link-text" *ngIf="collapsed">{{data.label}}</span>
+      <li class="sidenav-nav-item  float:left" *ngFor="let data of navData">
+        <a [routerLink]="[data.routeLink, id]" class="sidenav-nav-link w-100 px-3" routerLinkActive="active" >
+          <i class="sidenav-link-icon ml-5" [class]="data.icon"></i>
+          <span class="sidenav-link-text " *ngIf="collapsed">{{data.label}}</span>
         </a>
       </li>
     </ul>

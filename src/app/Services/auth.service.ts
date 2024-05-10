@@ -5,7 +5,6 @@ import {CookieService} from 'ngx-cookie-service';
 import { LoginResponse } from '../Models/loginResponse';
 import { Router } from '@angular/router';
 
-import { Login } from '../Models/loginUser';
 import { jwtDecode } from "jwt-decode";
 import { environment } from '../../environments/environment.development';
 

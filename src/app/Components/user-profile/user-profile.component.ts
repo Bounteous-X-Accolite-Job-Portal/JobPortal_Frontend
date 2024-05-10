@@ -16,6 +16,7 @@ export class UserProfileComponent implements OnInit {
     collapsed = false;
     navData = navbarData;
 
+    id: string="";
     public name : string = "";
 
     constructor(
