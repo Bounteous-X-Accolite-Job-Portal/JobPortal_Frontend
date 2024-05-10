@@ -34,7 +34,8 @@ export class AuthService {
     return this.http.post<LoginResponse>(environment.baseURL + 'Account/login', loginData);
   }
 
-  logout(){
+  logout()
+  {
     this.removeToken();
     this.AuthEvent.emit(false);
     this.router.navigate(['login']);
@@ -44,24 +45,28 @@ export class AuthService {
     return this.http.get(environment.baseURL + "Resume/resume/" + id);
   }
 
-  // Authetication portion ------------------------------------------------
-  storeToken(tokenValue: string){
+  storeToken(tokenValue: string)
+  {
     this.cookieService.set("token", tokenValue, 30, '/', 'localhost', true, 'Lax');
   }
 
-  getToken(){
+  getToken()
+  {
     return this.cookieService.get("token");
   }
 
-  removeToken(){
+  removeToken()
+  {
     this.cookieService.delete("token");
   }
 
-  isLoggedIn(): boolean{
+  isLoggedIn(): boolean
+  {
     return !!this.cookieService.get("token");
   }
 
-  decodedToken(){
+  decodedToken()
+  {
     const token = this.getToken();
     if (!token) {
       return null; // Handle case where token is not available

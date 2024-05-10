@@ -1,4 +1,3 @@
-import { Time } from "@angular/common"
 import { Guid } from "guid-typescript"
 
 export interface interviewResponse{
@@ -7,7 +6,7 @@ export interface interviewResponse{
     applicationId: Guid,
     closedApplicationId: Guid,
     interviewDate: Date,
-    interviewTime: Time,
+    interviewTime: string,
     interViewerId: Guid,
     link: string,
     empId: Guid

@@ -10,6 +10,7 @@ import { Job } from '../../Models/JobResponse/Job';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Degree } from '../../Models/DegreeResponse/Degree';
 @Component({
   standalone: true,
   selector: 'app-job-home',
@@ -25,6 +26,7 @@ export class JobHomeComponent  {
   jobTypes: JobType[] = [];
   jobCategories: JobCategory[] = [];
   jobPositions: position[] =[];
+  degrees: Degree[] = [];
   jobs: Job[] = [];
   Filterjobs: Job[] = [];
 
@@ -32,17 +34,21 @@ export class JobHomeComponent  {
   typeIndex: number = 0;
   locationIndex: number = 0;
   categoryIndex: number = 0;
-  
+  degreeIndex :number = 0;
+    
   constructor(private jobService: JobService , private fb : FormBuilder ) {}
   filtersForm = this.fb.group({
     location: [''],
     jobType: [''],
     jobCategory: [''],
-    jobPosition:['']
+    jobPosition:[''],
+    degree:['']
   });
 
 
   ngOnInit(): void {
+    this.loadJobs();
+
     this.locations.push({locationId: "null" , address: "Select Job Location :" , city: "" , state: "" , country : ""});
     this.loadJobLocations();
 
@@ -55,7 +61,8 @@ export class JobHomeComponent  {
     this.jobPositions.push({positionId:"null",positionName:"Select Job Position :",positionCode:"",description:""});
     this.loadJobPositions();
 
-    this.loadJobs();
+    this.degrees.push({degreeId:"null",degreeName:"Select Degree :",durationInYears:0});
+    this.loadDegrees();
   }
 
   private loadJobLocations(): void {
@@ -122,9 +129,21 @@ export class JobHomeComponent  {
     );
   }
 
+  private loadDegrees(): void{
+    this.jobService.getAllDegrees().subscribe(
+      (res) => {
+        this.degrees = this.degrees.concat(res.degrees);
+        console.log(this.degrees);
+      },
+      (error) => {
+        console.error('Error loading Degrees:',error);
+      }
+    )
+  }
   public onSubmit() : void{
-    if(this.categoryIndex==0 && this.locationIndex==0 && this.positionIndex==0 && this.typeIndex==0)
+    if(this.categoryIndex==0 && this.locationIndex==0 && this.positionIndex==0 && this.typeIndex==0 && this.degreeIndex==0)
     {
+      this.displayFilterEmptyToast();
       return;
     }
 
@@ -132,17 +151,19 @@ export class JobHomeComponent  {
     console.log(this.jobCategories[this.categoryIndex]);
     console.log(this.jobTypes[this.typeIndex]);
     console.log(this.locations[this.locationIndex]);
+    console.log(this.degrees[this.degreeIndex]);
     
-    this.filterJobs(this.jobPositions[this.positionIndex].positionId,this.locations[this.locationIndex].locationId,this.jobTypes[this.typeIndex].jobTypeId,this.jobCategories[this.categoryIndex].categoryId); 
+    this.filterJobs(this.jobPositions[this.positionIndex].positionId,this.locations[this.locationIndex].locationId,this.jobTypes[this.typeIndex].jobTypeId,this.jobCategories[this.categoryIndex].categoryId,this.degrees[this.degreeIndex].degreeId); 
   }
 
-  private filterJobs(positionId: string , locationId : string , typeId : string , categoryId : string) : void
+  private filterJobs(positionId: string , locationId : string , typeId : string , categoryId : string , degreeId : string) : void
   {
     this.Filterjobs = [];
     let typecheck: boolean = false;
     let positioncheck: boolean = false;
     let locationcheck: boolean = false;
     let categorycheck: boolean = false;
+    let degreecheck: boolean = false;
 
     if(positionId!="null")
         positioncheck = true;
@@ -152,6 +173,8 @@ export class JobHomeComponent  {
         categorycheck = true;
     if(typeId!="null")
         typecheck = true;
+    if(degreeId!="null")
+        degreecheck = true;
 
     this.jobs.forEach((job) =>
       {      
@@ -174,6 +197,11 @@ export class JobHomeComponent  {
         if(categorycheck)
         {
           if(job.categoryId != categoryId)
+            flg = false;
+        }
+        if(degreecheck)
+        {
+          if(job.degreeId != degreeId)
             flg = false;
         }
         
@@ -200,6 +228,7 @@ export class JobHomeComponent  {
     this.categoryIndex =0;
     this.positionIndex =0;
     this.locationIndex =0;
+    this.degreeIndex =0;
     this.typeIndex =0;
 
     this.displayResetToast();
@@ -218,5 +247,10 @@ export class JobHomeComponent  {
   private displayJobsToast(): void
   {
     this.toaster.success("Jobs Found !!");
+  }
+  
+  private displayFilterEmptyToast(): void
+  {
+    this.toaster.error("NO Filter Selected !!");
   }
 }

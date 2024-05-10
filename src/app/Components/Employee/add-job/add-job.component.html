@@ -49,18 +49,12 @@
         </div>
       </div>
       <div class="mb-3 col">
-        <label class="form-label">Degree</label>
-        <input
-          type="text"
-          formControlName="degreeId"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f['degreeId'].errors }"
-        />
-        <div *ngIf="submitted && f['degreeId'].errors" class="invalid-feedback">
-          <div *ngIf="f['degreeId'].errors?.['required']">
-            Degree is required
-          </div>
-        </div>
+        <label class="form-label">Degree</label><br />
+        <select formControlName="degreeId" [(ngModel)]="degreeIndex">
+          <option *ngFor="let deg of degrees; let i = index" [value]="i">
+            {{ deg.degreeName }}
+          </option>
+        </select>
       </div>
 
       <div class="mb-3 col">
@@ -75,23 +69,11 @@
           <div *ngIf="f['lastDate'].errors?.['required']">
             Last Date is required
           </div>
-          <div *ngIf="f['lastDate'].errors?.['lastDateValidator']">
+          <!-- <div *ngIf="f['lastDate'].errors?.['lastDateValidator']">
             Last Date is invalid
-          </div>
-          last date should be greater than today
+          </div> -->
         </div>
       </div>
-
-      <div class="mb-3 col">
-        <label class="form-label">Job Location</label><br />
-        <select formControlName="locationId" [(ngModel)]="locationindex">
-          <option *ngFor="let loc of locations; let i = index" [value]="i">
-            {{ loc.address }} , {{ loc.city }} , {{ loc.state }} ,
-            {{ loc.country }}
-          </option>
-        </select>
-      </div>
-
       <div class="mb-3 col">
         <label class="form-label">Experience</label>
         <input
@@ -101,29 +83,37 @@
           [ngClass]="{ 'is-invalid': submitted && f['experience'].errors }"
         />
       </div>
+
+      <div class="mb-3 col">
+        <label class="form-label">Job Location</label><br />
+        <select formControlName="locationId" [(ngModel)]="locationIndex">
+          <option *ngFor="let loc of locations; let i = index" [value]="i">
+            {{ loc.address }} {{ loc.city }} {{ loc.state }} {{ loc.country }}
+          </option>
+        </select>
+      </div>
+
       <div class="mb-3 col">
         <label class="form-label">Job Category</label><br />
-        <select formControlName="categoryId">
-          <option>Select Job Categories</option>
-          <option *ngFor="let cat of jobCategories">
-            {{ cat.categoryName }}
+        <select formControlName="categoryId" [(ngModel)]="categoryIndex">
+          <option *ngFor="let cat of jobCategories; let i = index" [value]="i">
+            {{ cat.categoryName }} {{ cat.categoryCode }} {{ cat.description }}
           </option>
         </select>
       </div>
       <div class="mb-3 col">
         <label class="form-label">Job Type</label><br />
-        <select formControlName="typeId">
-          <option [disabled]="">Select Job Types</option>
-          <option *ngFor="let jobType of jobTypes">
-            {{ jobType.typeName }}
+        <select formControlName="jobType" [(ngModel)]="typeIndex">
+          <option *ngFor="let typ of jobTypes; let i = index" [value]="i">
+            {{ typ.typeName }}
           </option>
         </select>
       </div>
       <div class="mb-3 col">
         <label class="form-label">Job Position</label><br />
-        <select formControlName="positionId">
-          <option *ngFor="let jobPositions of jobPosition">
-            {{ jobPositions.positionName }}
+        <select formControlName="positionId" [(ngModel)]="positionIndex">
+          <option *ngFor="let pos of jobPositions; let i = index" [value]="i">
+            {{ pos.positionName }}
           </option>
         </select>
       </div>

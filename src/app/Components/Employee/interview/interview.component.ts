@@ -25,8 +25,6 @@ import { interviewResponse } from '../../../Models/InterviewResponse/InterviewRe
   styleUrl: './interview.component.css',
 })
 export class InterviewComponent {
-
-
   AddInterviewForm!: FormGroup;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
@@ -90,10 +88,14 @@ export class InterviewComponent {
     // };
 
     if (this.AddInterviewForm.valid) {
-      this.http.post(environment.baseURL + 'Interview/AddInterview', this.AddInterviewForm.value)
+      this.http
+        .post(
+          environment.baseURL + 'Interview/AddInterview',
+          this.AddInterviewForm.value
+        )
         .subscribe(
           (response) => {
-            console.log('POST request successful:', response);
+            console.log('success : ', response);
             this.AddInterviewForm.reset();
           },
           (error) => {
