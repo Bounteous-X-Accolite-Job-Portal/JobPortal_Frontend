@@ -1,5 +1,7 @@
-export interface resume{
-    resumeId: string;
-    resumeUrl: string;
-    candidateId: string;
+import { Guid } from "guid-typescript";
+
+export interface Resume{
+    resumeId: Guid,
+    resumeUrl: string,
+    candidateId: Guid
 }

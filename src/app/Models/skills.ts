@@ -1,5 +1,7 @@
-export interface skills{
-    skillsId: string;
-    candidateSkills: string;
-    candidateId: string;
+import { Guid } from "guid-typescript";
+
+export interface Skills{
+    skillsId: Guid,
+    candidateSkills: string,
+    candidateId: Guid
 }
