@@ -14,6 +14,7 @@ import { JobType } from '../../../Models/JobTypeResponse/JobType';
 import { AddJobService } from '../../../Services/add-job.service';
 import { position } from '../../../Models/JobPositionResponse/position';
 import { Job } from '../../../Models/Job';
+import { Degree } from '../../../Models/DegreeResponse/Degree';
 @Component({
   selector: 'app-add-job',
   standalone: true,
@@ -26,13 +27,21 @@ export class AddJobComponent implements OnInit {
   isLoading: boolean = false;
   submitting = false;
   submitted = false;
-  jobCategories: JobCategory[] = [];
+
   locations: location[] = [];
   jobTypes: JobType[] = [];
-  jobPosition: position[] = [];
-  data: Job[] = [];
+  jobCategories: JobCategory[] = [];
+  jobPositions: position[] = [];
+  degrees: Degree[] = [];
+  jobs: Job[] = [];
+  // Filterjobs: Job[] = [];
   jobData: any;
-  locationindex: number = 0;
+
+  positionIndex: number = 0;
+  typeIndex: number = 0;
+  locationIndex: number = 0;
+  categoryIndex: number = 0;
+  degreeIndex: number = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,6 +52,7 @@ export class AddJobComponent implements OnInit {
     this.loadJobTypes();
     this.loadJobCategories();
     this.loadJobPositions();
+    this.loadDegrees();
   }
 
   ngOnInit(): void {
@@ -55,7 +65,7 @@ export class AddJobComponent implements OnInit {
         categoryId: new FormControl(''),
         positionId: new FormControl(''),
         locationId: new FormControl(''),
-        typeId: new FormControl(''),
+        jobType: new FormControl(''),
         experience: new FormControl(''),
         lastDate: new FormControl(Date, Validators.required),
       }
@@ -121,11 +131,23 @@ export class AddJobComponent implements OnInit {
   private loadJobPositions(): void {
     this.jobService.getAllJobPosition().subscribe(
       (res) => {
-        this.jobPosition = res.allJobPositions;
-        console.log(this.jobPosition);
+        this.jobPositions = res.allJobPositions;
+        console.log(this.jobPositions);
       },
       (error) => {
         console.error('Error loading job types:', error);
+      }
+    );
+  }
+
+  private loadDegrees(): void {
+    this.jobService.getAllDegrees().subscribe(
+      (res) => {
+        this.degrees = res.degrees;
+        console.log(this.degrees);
+      },
+      (error) => {
+        console.error('Error loading Degrees:', error);
       }
     );
   }
@@ -135,36 +157,36 @@ export class AddJobComponent implements OnInit {
   }
 
   onSubmit() {
-   
-    console.log(this.locations[this.locationindex]);
-    
+    console.log(this.locations[this.locationIndex]);
+
     console.log(this.jobForm.controls['']);
     this.jobData = {
       jobCode: this.jobForm.value.jobCode,
       jobDescription: this.jobForm.value.jobDescription,
       jobTitle: this.jobForm.value.jobTitle,
-      degreeId: this.jobForm.value.degreeId,
-      categoryId: this.jobForm.value.categoryId,
-      positionId: this.jobForm.value.positionId,
-      locationId: this.jobForm.value.locationId,
-      typeId: this.jobForm.value.typeId,
+      degreeId: this.degrees[this.degreeIndex].degreeId,
+      categoryId: this.jobCategories[this.categoryIndex].categoryId,
+      positionId: this.jobPositions[this.positionIndex].positionId,
+      locationId: this.locations[this.locationIndex].locationId,
+      jobType: this.jobTypes[this.typeIndex].jobTypeId,
       experience: this.jobForm.value.experience,
       lastDate: this.jobForm.value.lastDate,
     };
-    console.log(this.jobData.categoryId + this.jobData.lastDate);
-    this.addJobService.addJobs(this.jobData).subscribe(
-      (res) => {
-        console.log('success ' + res);
-      },
-      (error) => {
-        console.error('Error submission:', error);
-      }
-    );
-
-    // }
-    // else{
-    //   console.log("invalid form");
-    // }
+    if (this.jobForm.valid) {
+      this.addJobService.addJobs(this.jobData).subscribe(
+        (res) => {
+          console.log(
+            'success ' + res.categoryId + ' ' + res.lastDate + ' ' + res.jobCode
+          );
+        },
+        (error) => {
+          console.error('Error submission:', error);
+        }
+      );
+    } else {
+      this.jobForm.reset();
+      console.log('invalid form');
+    }
     this.submitted = true;
   }
 }

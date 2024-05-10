@@ -21,6 +21,7 @@ import { JobCategoryResponse } from '../Models/JobCategoryResponse/JobCategoryRe
 import { JobTypeResponse } from '../Models/JobTypeResponse/JobTypeResponse';
 import { JobLocationResponse } from '../Models/JoblocationResponse/JobLocationResponse';
 import { JobPositionResponse } from '../Models/JobPositionResponse/JobPositionResponse';
+import { AllDegreeResponse } from '../Models/DegreeResponse/AllDegreeResponse';
 @Injectable({
   providedIn: 'root',
 })
@@ -45,6 +46,10 @@ export class JobService {
 
     getAllJobPosition():Observable<AllJobPosition>{
       return this.http.get<AllJobPosition>(environment.baseURL+'JobPosition/getAllJobPositions');
+    };
+
+    getAllDegrees():Observable<AllDegreeResponse>{
+      return this.http.get<AllDegreeResponse>(environment.baseURL+'Degree/getAllDegrees');
     };
 
     getJobById(Id:string):Observable<JobResponse>{
