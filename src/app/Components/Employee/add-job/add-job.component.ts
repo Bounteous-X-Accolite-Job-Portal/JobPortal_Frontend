@@ -13,7 +13,7 @@ import { location } from '../../../Models/JoblocationResponse/location';
 import { JobType } from '../../../Models/JobTypeResponse/JobType';
 import { AddJobService } from '../../../Services/add-job.service';
 import { position } from '../../../Models/JobPositionResponse/position';
-import { Job } from '../../../Models/Job';
+import { Job } from '../../../Models/JobResponse/Job';
 @Component({
   selector: 'app-add-job',
   standalone: true,
@@ -57,7 +57,7 @@ export class AddJobComponent implements OnInit {
         locationId: new FormControl(''),
         typeId: new FormControl(''),
         experience: new FormControl(''),
-        lastDate: new FormControl(new Date(), Validators.required),
+        lastDate: new FormControl(Date, Validators.required),
       }
       // {
       //   validators: this.lastDateValidator,
@@ -135,7 +135,7 @@ export class AddJobComponent implements OnInit {
   }
 
   onSubmit() {
-    // if (this.jobForm.valid) {
+   
     console.log(this.locations[this.locationindex]);
     
     console.log(this.jobForm.controls['']);
@@ -151,7 +151,7 @@ export class AddJobComponent implements OnInit {
       experience: this.jobForm.value.experience,
       lastDate: this.jobForm.value.lastDate,
     };
-    console.log(this.jobData.jobCategory + this.jobData.lastDate);
+    console.log(this.jobData.categoryId + this.jobData.lastDate);
     this.addJobService.addJobs(this.jobData).subscribe(
       (res) => {
         console.log('success ' + res);

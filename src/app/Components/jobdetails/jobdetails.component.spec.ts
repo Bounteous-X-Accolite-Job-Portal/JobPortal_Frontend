@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+mport { ComponentFixture, TestBed } from '@angular/core/testing';
 
 <<<<<<<< HEAD:src/app/Components/jobdetails/jobdetails.component.spec.ts
 import { JobdetailsComponent } from './jobdetails.component';

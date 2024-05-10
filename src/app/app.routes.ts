@@ -14,13 +14,6 @@ import { SkillsComponent } from './Components/skills/skills.component';
 import { ResumeComponent } from './Components/resume/resume.component';
 import { SocialProfilesComponent } from './Components/social-profiles/social-profiles.component';
 import { PasswordResetComponent } from './Components/password-reset/password-reset.component';
-
-// export const childRoutes: Routes = [
-//     { path: 'child1', component: LoginComponent },
-//     { path: 'child2', component: RegisterComponent}
-// ];
-
-
 import { authGuard } from './Guards/auth.guard';
 import { childAuthGuard } from './Guards/child-auth.guard';
 import { loggedInGuard } from './Guards/logged-in.guard';
@@ -28,6 +21,9 @@ import { loggedInGuard } from './Guards/logged-in.guard';
 import { EmployeeDashboardComponent } from './Components/Employee/employee-dashboard/employee-dashboard.component';
 import { InterviewHubComponent } from './Components/Employee/interview-hub/interview-hub.component';
 import { InterviewComponent } from './Components/Employee/interview/interview.component';
+import { SettingsComponent } from './Components/Employee/settings/settings.component';
+import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
+import { JobApplicatonComponent } from './Components/job-applicaton/job-applicaton.component';
 export const routes: Routes = [
     {
         path: '',
@@ -57,6 +53,18 @@ export const routes: Routes = [
         component: JobHomeComponent,
     },
     {
+      path: 'job-details/:jobId',
+      component: JobdetailsComponent,
+    },
+    {
+      path: 'apply-now/:jobId',
+      component:JobApplicatonComponent,
+    }, 
+    {
+      path: 'user-profile',
+      component: UserProfileComponent,
+    }, 
+    {
         path: 'try',
         component: TryComponent
     },
@@ -69,6 +77,7 @@ export const routes: Routes = [
         { path: 'add-job', component: AddJobComponent },
         { path: 'interview', component: InterviewComponent },
         { path: 'interview-hub', component: InterviewHubComponent },
+        { path: 'settings', component: SettingsComponent}
       ],
     },
     {
@@ -88,16 +97,7 @@ export const routes: Routes = [
             { path: '**', component: TryComponent}
         ]
     },
-    {
-        path: '',
-        redirectTo: 'landing',
-        pathMatch: 'full'
-    },
-    {
-        path: '**',
-        component: LandingComponent
-    }
+
 ];
 
-
-  
+export default routes;

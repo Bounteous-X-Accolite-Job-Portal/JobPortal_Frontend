@@ -56,10 +56,7 @@
           class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f['degreeId'].errors }"
         />
-        <div
-          *ngIf="submitted && f['degreeId'].errors"
-          class="invalid-feedback"
-        >
+        <div *ngIf="submitted && f['degreeId'].errors" class="invalid-feedback">
           <div *ngIf="f['degreeId'].errors?.['required']">
             Degree is required
           </div>
@@ -88,7 +85,7 @@
       <div class="mb-3 col">
         <label class="form-label">Job Location</label><br />
         <select formControlName="locationId" [(ngModel)]="locationindex">
-          <option *ngFor="let loc of locations; let i=index"[value]="i">
+          <option *ngFor="let loc of locations; let i = index" [value]="i">
             {{ loc.address }} , {{ loc.city }} , {{ loc.state }} ,
             {{ loc.country }}
           </option>
@@ -106,8 +103,9 @@
       </div>
       <div class="mb-3 col">
         <label class="form-label">Job Category</label><br />
-        <select formControlName="categoryId" >
-          <option *ngFor="let cat of jobCategories" [value]="cat.jobCategoryId">
+        <select formControlName="categoryId">
+          <option>Select Job Categories</option>
+          <option *ngFor="let cat of jobCategories">
             {{ cat.categoryName }}
           </option>
         </select>
@@ -115,6 +113,7 @@
       <div class="mb-3 col">
         <label class="form-label">Job Type</label><br />
         <select formControlName="typeId">
+          <option [disabled]="">Select Job Types</option>
           <option *ngFor="let jobType of jobTypes">
             {{ jobType.typeName }}
           </option>

@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { LoginResponse } from '../../Models/loginResponse';
@@ -16,23 +22,17 @@ import { UserStoreService } from '../../Services/user-store.service';
 export class LoginComponent {
   message: string = '';
 
-  SignInForm = new FormGroup({
-    email : new FormControl(''),
-    password : new FormControl(''),
-    rememberMe : new FormControl(false)
-  })
-
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private userStore : UserStoreService
+    private userStore: UserStoreService
   ) {}
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    rememberMe: [''],
+    rememberMe: [true],
   });
 
   get f() {
@@ -41,47 +41,43 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-
       const loginData = {
         Email: this.f['email'].value,
         Password: this.loginForm.value.password,
         RememberMe: this.loginForm.controls['rememberMe'].value,
       };
-      console.log(this.SignInForm);
       console.log(loginData);
 
-      this.authService.loginUser(loginData).subscribe(
+      this.authService.loginUser(this.loginForm.value).subscribe(
         (data: LoginResponse) => {
           console.log(data);
-          console.log('Status', data.status, "data message", data.message);
-          
-          if(data.status == 200){
-              console.log(data.token);
-              this.authService.storeToken(data.token ? data.token : "");
+          console.log('Status', data.status, 'data message', data.message);
 
-              // setting up user store
-              const tokenPayload : any = this.authService.decodedToken();
-              console.log("Token payload in login line 67 ", tokenPayload);
+          if (data.status == 200) {
+            console.log(data.token);
+            this.authService.storeToken(data.token ? data.token : '');
 
-              this.userStore.setEmailForStore(tokenPayload["Email"]);
-              this.userStore.setNameForStore(tokenPayload["Name"]);
-              this.userStore.setIsEmployeeForStore(tokenPayload["IsEmployee"]);
-              this.userStore.setRoleForStore(tokenPayload["Role"]);
-              this.userStore.setIdForStore(tokenPayload["Id"]);
+            // setting up user store
+            const tokenPayload: any = this.authService.decodedToken();
+            console.log('Token payload in login line 67 ', tokenPayload);
 
-              this.authService.AuthEvent.emit(true);
+            this.userStore.setEmailForStore(tokenPayload['Email']);
+            this.userStore.setNameForStore(tokenPayload['Name']);
+            this.userStore.setIsEmployeeForStore(tokenPayload['IsEmployee']);
+            this.userStore.setRoleForStore(tokenPayload['Role']);
+            this.userStore.setIdForStore(tokenPayload['Id']);
 
-              console.log("CheckIsEmployee", tokenPayload["IsEmployee"]);
-              if(!tokenPayload["IsEmployee"]) {
-                this.router.navigate(['/profile']);
-              }
-              else{
-                this.router.navigate(['/employee-dashboard']);
-              }
-          }
-          else{
+            this.authService.AuthEvent.emit(true);
+
+            console.log('CheckIsEmployee', tokenPayload['IsEmployee']);
+            if (tokenPayload['IsEmployee']) {
+              this.router.navigate(['/employee-dashboard']);
+            } else {
+              this.router.navigate(['/profile']);
+            }
+          } else {
             this.message = data.message;
-          } 
+          }
         },
         (error: any) => {
           console.log(error);
