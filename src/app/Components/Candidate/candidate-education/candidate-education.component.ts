@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { candidateEducation } from '../../Models/candidateEducation';
-import { CandidateServicesService } from '../../Services/candidate-services.service';
+import { candidateEducation } from '../../../Models/candidateEducation';
+import { CandidateServicesService } from '../../../Services/candidate-services.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
-import { AllCandidateEducation } from '../../Models/AllCandidateEducation';
+import { AllCandidateEducation } from '../../../Models/AllCandidateEducation';
 
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CandidateServicesService } from '../../Services/candidate-services.service';
-import { candidateExperience } from '../../Models/candidateExperience';
+import { CandidateServicesService } from '../../../Services/candidate-services.service';
+import { candidateExperience } from '../../../Models/candidateExperience';
 
 @Component({
   selector: 'app-update-experience',

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { CandidateServicesService } from '../../Services/candidate-services.service';
-import { candidateEducation } from '../../Models/candidateEducation';
+import { CandidateServicesService } from '../../../Services/candidate-services.service';
+import { candidateEducation } from '../../../Models/candidateEducation';
 
 @Component({
   selector: 'app-add-education',
@@ -11,6 +11,9 @@ import { candidateEducation } from '../../Models/candidateEducation';
   styleUrl: './add-education.component.css'
 })
 export class AddEducationComponent {
+add() {
+throw new Error('Method not implemented.');
+}
 
   formBuilder = inject(FormBuilder);
   candidateEducation = this.formBuilder.group({

@@ -5,17 +5,17 @@ import { RegisterComponent } from './Components/register/register.component';
 import { JobsComponent } from './Components/jobs/jobs.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 import { TryComponent } from './Components/try/try.component';
-import { CandidateEducationComponent } from './Components/candidate-education/candidate-education.component';
-import { ExperienceComponent } from './Components/experience/experience.component';
-import { PersonalInfoComponent } from './Components/personal-info/personal-info.component';
-import { SkillsComponent } from './Components/skills/skills.component';
-import { ResumeComponent } from './Components/resume/resume.component';
-import { SocialProfilesComponent } from './Components/social-profiles/social-profiles.component';
-import { PasswordResetComponent } from './Components/password-reset/password-reset.component';
-import { AddEducationComponent } from './Components/add-education/add-education.component';
-import { UpdateEducationComponent } from './Components/update-education/update-education.component';
-import { AddExperienceComponent } from './Components/add-experience/add-experience.component';
-import { UpdateExperienceComponent } from './Components/update-experience/update-experience.component';
+import { ExperienceComponent } from './Components/Candidate/experience/experience.component';
+import { PersonalInfoComponent } from './Components/Candidate/personal-info/personal-info.component';
+import { SkillsComponent } from './Components/Candidate/skills/skills.component';
+import { ResumeComponent } from './Components/Candidate/resume/resume.component';
+import { SocialProfilesComponent } from './Components/Candidate/social-profiles/social-profiles.component';
+import { PasswordResetComponent } from './Components/Candidate/password-reset/password-reset.component';
+import { AddEducationComponent } from './Components/Candidate/add-education/add-education.component';
+import { UpdateEducationComponent } from './Components/Candidate/update-education/update-education.component';
+import { AddExperienceComponent } from './Components/Candidate/add-experience/add-experience.component';
+import { UpdateExperienceComponent } from './Components/Candidate/update-experience/update-experience.component';
+import { CandidateEducationComponent } from './Components/Candidate/candidate-education/candidate-education.component';
 export const routes: Routes = [
     {
         path: '',
@@ -70,7 +70,7 @@ export const routes: Routes = [
             { path: 'resume/:id', component: ResumeComponent },
             { path: 'sml/:id', component: SocialProfilesComponent },
             { path: 'pass-reset/:id', component: PasswordResetComponent },
-            { path: '', component: TryComponent},
+            // { path: '', component: TryComponent},
             { path: '**', component: TryComponent}
         ]
     },
