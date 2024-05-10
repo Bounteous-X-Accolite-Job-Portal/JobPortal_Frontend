@@ -1,5 +1,3 @@
-import { Guid } from "guid-typescript";
-
 export interface JobCategory{
     categoryId : string;
     categoryCode : string;

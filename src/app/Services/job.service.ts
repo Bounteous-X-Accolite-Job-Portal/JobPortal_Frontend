@@ -5,6 +5,8 @@ import { AllJobLocations } from '../Models/JoblocationResponse/AllJobLocations';
 import { AllJobTypes } from '../Models/JobTypeResponse/AllJobType';
 import { AllJobCategory } from '../Models/JobCategoryResponse/AllJobCategory';
 import { AllJobPosition } from '../Models/JobPositionResponse/AllJobPosition';
+import { environment } from '../../environments/environment.development';
+
 import { AllJob } from '../Models/JobResponse/AllJobs';
 import { Job } from '../Models/JobResponse/Job';
 import { Guid } from 'guid-typescript';
@@ -20,57 +22,53 @@ import { JobTypeResponse } from '../Models/JobTypeResponse/JobTypeResponse';
 import { JobLocationResponse } from '../Models/JoblocationResponse/JobLocationResponse';
 import { JobPositionResponse } from '../Models/JobPositionResponse/JobPositionResponse';
 @Injectable({
-    providedIn: 'root',
-  })
-
-  export class JobService
-  {
-    private baseURL = 'https://localhost:7283/api/';
-
-    constructor(private http: HttpClient) {}
+  providedIn: 'root',
+})
+export class JobService {
+  constructor(private http: HttpClient) {}
 
     getAllJobs():Observable<AllJob>{
-      return this.http.get<AllJob>(this.baseURL+'Job/getAllJobs');
+      return this.http.get<AllJob>(environment.baseURL+'Job/getAllJobs');
     };
 
     getAllJobLocations():Observable<AllJobLocations> {
-      return this.http.get<AllJobLocations>(this.baseURL+'JobLocation/getAllJobLocations');
+      return this.http.get<AllJobLocations>(environment.baseURL+'JobLocation/getAllJobLocations');
     };
 
     getAllJobTypes():Observable<AllJobTypes> {
-      return this.http.get<AllJobTypes>(this.baseURL+'JobType/getAllJobTypes');
+      return this.http.get<AllJobTypes>(environment.baseURL+'JobType/getAllJobTypes');
     };
     
     getAllJobCategories():Observable<AllJobCategory> {
-      return this.http.get<AllJobCategory>(this.baseURL+'JobCategory/getAllJobCategory');
+      return this.http.get<AllJobCategory>(environment.baseURL+'JobCategory/getAllJobCategory');
     };
 
     getAllJobPosition():Observable<AllJobPosition>{
-      return this.http.get<AllJobPosition>(this.baseURL+'JobPosition/getAllJobPositions');
+      return this.http.get<AllJobPosition>(environment.baseURL+'JobPosition/getAllJobPositions');
     };
 
     getJobById(Id:string):Observable<JobResponse>{
-      return this.http.get<JobResponse>(this.baseURL+'Job/getJob/'+Id);
+      return this.http.get<JobResponse>(environment.baseURL+'Job/getJob/'+Id);
     };
     
     getLocationById(locationId?:string):Observable<JobLocationResponse>{
-      return this.http.get<JobLocationResponse>(this.baseURL+'JobLocation/getJobLocation/'+locationId);
+      return this.http.get<JobLocationResponse>(environment.baseURL+'JobLocation/getJobLocation/'+locationId);
     };
 
     getJobTypeById(JobTypeId?:string):Observable<JobTypeResponse>{
-      return this.http.get<JobTypeResponse>(this.baseURL+'JobType/getJobType/'+JobTypeId);
+      return this.http.get<JobTypeResponse>(environment.baseURL+'JobType/getJobType/'+JobTypeId);
     };
 
     getDegreeById(degreeId?:string):Observable<DegreeResponse>{
-      return this.http.get<DegreeResponse>(this.baseURL+'Degree/getDegree/'+degreeId);
+      return this.http.get<DegreeResponse>(environment.baseURL+'Degree/getDegree/'+degreeId);
     };
 
     getPositionById(positionId?:string):Observable<JobPositionResponse>{
-      return this.http.get<JobPositionResponse>(this.baseURL+'JobPosition/getJobPosition/'+positionId);
+      return this.http.get<JobPositionResponse>(environment.baseURL+'JobPosition/getJobPosition/'+positionId);
     };
 
     getCategoryById(Id?:string):Observable<JobCategoryResponse>{
-      return this.http.get<JobCategoryResponse>(this.baseURL+'JobCategory/getJobCategory/'+Id);
+      return this.http.get<JobCategoryResponse>(environment.baseURL+'JobCategory/getJobCategory/'+Id);
     };
 
   }

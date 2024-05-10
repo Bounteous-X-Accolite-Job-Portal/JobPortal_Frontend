@@ -29,8 +29,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './register.component.css',
   providers: [AuthService, Router],
 })
-export class RegisterComponent implements OnInit {
-  //public RegObj: RegisClass = new RegisClass();
+export class RegisterComponent {
+  message: string = '';
+
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
@@ -51,16 +52,6 @@ export class RegisterComponent implements OnInit {
     }
   );
 
-  get passwordForm(): FormGroup {
-    return this.registerForm;
-  }
-
-  // Setter for passwordForm
-  set passwordForm(formGroup: FormGroup) {
-    this.registerForm = formGroup;
-  }
-
-  // Custom validator function
   passwordMatchValidator(formGroup: FormGroup): any {
     const passwordControl = formGroup.get('password');
     const confirmPasswordControl = formGroup.get('confirmPassword');
@@ -85,8 +76,6 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  ngOnInit(): void {}
-
   onSubmitRegister(): void {
     if (this.registerForm.valid) {
       const registerData = {
@@ -98,16 +87,19 @@ export class RegisterComponent implements OnInit {
 
       this.authService.registerUser(registerData).subscribe(
         (res) => {
-          console.log('Registration successful:', res);
-
-          this.router.navigate(['/login']);
+          console.log(res.message);
+          if (res.status == 200) {
+            this.router.navigate(['/login']);
+          } else {
+            this.message = res.message;
+          }
         },
         (error) => {
           console.error('Registration error:', error);
         }
       );
     } else {
-      // Form is invalid, handle accordingly
+      console.log("Invalid Form");
     }
   }
 }

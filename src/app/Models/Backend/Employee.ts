@@ -1,8 +1,9 @@
 export interface Employee{
-    EmpId: string;
-    FirstName: string;
-    LastName: string;
-    Email: string;
-    Phone?: string;
-    Designation: any;
+    employeeId: string;
+    empId: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone?: string;
+    designation: any;
 }

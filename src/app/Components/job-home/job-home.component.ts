@@ -14,7 +14,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   standalone: true,
   selector: 'app-job-home',
   templateUrl: './job-home.component.html',
-  imports: [CommonModule,JobCardComponent,ReactiveFormsModule,ToastrModule],
+  imports: [CommonModule, JobCardComponent, ReactiveFormsModule, ToastrModule],
   styleUrls: ['./job-home.component.css'],
   moduleId: module.id, 
 })
@@ -61,6 +61,7 @@ export class JobHomeComponent  {
   private loadJobLocations(): void {
     this.jobService.getAllJobLocations().subscribe(
       (res) => {
+        // this.locations = res.allJobLocations;
         this.locations= this.locations.concat(res.allJobLocations);
         console.log(this.locations);
       },
@@ -73,6 +74,7 @@ export class JobHomeComponent  {
   private loadJobTypes(): void {
     this.jobService.getAllJobTypes().subscribe(
       (res) => {
+        // this.jobTypes = res.allJobTypes;
         this.jobTypes = this.jobTypes.concat(res.allJobTypes);
         console.log(this.jobTypes);
       },
@@ -85,6 +87,7 @@ export class JobHomeComponent  {
   private loadJobCategories(): void {
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
+        // this.jobCategories = res.allJobCategory;
         this.jobCategories = this.jobCategories.concat(res.allJobCategory);
         console.log(this.jobCategories);
       },

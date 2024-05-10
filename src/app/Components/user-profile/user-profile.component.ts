@@ -6,11 +6,11 @@ import { UserStoreService } from '../../Services/user-store.service';
 import { AuthService } from '../../Services/auth.service';
 
 @Component({
-    selector: 'app-user-profile',
-    standalone: true,
-    templateUrl: './user-profile.component.html',
-    styleUrl: './user-profile.component.css',
-    imports: [RouterOutlet, RouterModule, CommonModule]
+  selector: 'app-user-profile',
+  standalone: true,
+  templateUrl: './user-profile.component.html',
+  styleUrl: './user-profile.component.css',
+  imports: [RouterOutlet, RouterModule, CommonModule],
 })
 export class UserProfileComponent implements OnInit {
     collapsed = false;
@@ -32,9 +32,9 @@ export class UserProfileComponent implements OnInit {
     }
 
     closeSidenav() {
-        this.collapsed=false;
+      this.collapsed = false;
     }
     toggleCollapse() {
-        this.collapsed=!this.collapsed;
+      this.collapsed = !this.collapsed;
     }
 }
