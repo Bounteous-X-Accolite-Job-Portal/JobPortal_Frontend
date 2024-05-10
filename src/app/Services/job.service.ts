@@ -8,20 +8,15 @@ import { AllJobPosition } from '../Models/JobPositionResponse/AllJobPosition';
 import { environment } from '../../environments/environment.development';
 
 import { AllJob } from '../Models/JobResponse/AllJobs';
-import { Job } from '../Models/JobResponse/Job';
-import { Guid } from 'guid-typescript';
-import { location } from '../Models/JoblocationResponse/location';
-import { JobType } from '../Models/JobTypeResponse/JobType';
-import { Degree } from '../Models/DegreeResponse/Degree';
-import { position } from '../Models/JobPositionResponse/position';
-import { JobCategory } from '../Models/JobCategoryResponse/JobCategory';
 import { JobResponse } from '../Models/JobResponse/JobResponse';
 import { DegreeResponse } from '../Models/DegreeResponse/DegreeRespose';
 import { JobCategoryResponse } from '../Models/JobCategoryResponse/JobCategoryResponse';
 import { JobTypeResponse } from '../Models/JobTypeResponse/JobTypeResponse';
 import { JobLocationResponse } from '../Models/JoblocationResponse/JobLocationResponse';
 import { JobPositionResponse } from '../Models/JobPositionResponse/JobPositionResponse';
+import { JobApplication } from '../Models/JobApplicationResponse/JobApplication';
 import { AllDegreeResponse } from '../Models/DegreeResponse/AllDegreeResponse';
+import { ApplicationResponse } from '../Models/JobApplicationResponse/ApplicationResponse';
 @Injectable({
   providedIn: 'root',
 })
@@ -51,7 +46,7 @@ export class JobService {
     getAllDegrees():Observable<AllDegreeResponse>{
       return this.http.get<AllDegreeResponse>(environment.baseURL+'Degree/getAllDegrees');
     };
-
+    
     getJobById(Id:string):Observable<JobResponse>{
       return this.http.get<JobResponse>(environment.baseURL+'Job/getJob/'+Id);
     };
@@ -76,4 +71,13 @@ export class JobService {
       return this.http.get<JobCategoryResponse>(environment.baseURL+'JobCategory/getJobCategory/'+Id);
     };
 
+    applyForJob(jobId?: any):Observable<any>{
+      return this.http.post<any>(environment.baseURL+'Application/apply',{
+        "jobId":jobId
+      });
+    };
+
+    checkCandidateApplicable(jobId?:string):Observable<ApplicationResponse>{
+        return this.http.get<ApplicationResponse>(environment.baseURL+'Application/jobApplication/isCandidateApplicable/'+jobId);
+    }
   }

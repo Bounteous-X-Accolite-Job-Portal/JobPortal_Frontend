@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, Renderer2, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JobService } from '../../Services/job.service';
 import { Job } from '../../Models/JobResponse/Job';
@@ -14,38 +14,67 @@ import { JobTypeResponse } from '../../Models/JobTypeResponse/JobTypeResponse';
 import { JobLocationResponse } from '../../Models/JoblocationResponse/JobLocationResponse';
 import { JobPositionResponse } from '../../Models/JobPositionResponse/JobPositionResponse';
 import { Router } from '@angular/router';
+import { UserStoreService } from '../../Services/user-store.service';
+import { AuthService } from '../../Services/auth.service';
+import { JobApplication } from '../../Models/JobApplicationResponse/JobApplication';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-jobdetails',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule,ToastrModule],
   templateUrl: './jobdetails.component.html',
   styleUrl: './jobdetails.component.css'
 })
 export class JobdetailsComponent {
-  route: ActivatedRoute = inject(ActivatedRoute);  
+  route: ActivatedRoute = inject(ActivatedRoute);
+  toaster = inject(ToastrService);  
   job?: Job;
   location?: location ;
   degree?: Degree;
   jobtype?: JobType;
   jobcategory?: JobCategory;
   jobPosition?: position ;
+  logginnedUserId : string = '';
+  userapplied :boolean = false;
+  stringForButton:string = '';
+  canApply:boolean = false;
 
-  constructor(private jobService : JobService , private router : Router) {}
+  constructor(
+    private jobService : JobService ,
+    private router : Router , 
+    private userStore : UserStoreService,
+    private auth : AuthService,
+    private renderer: Renderer2,
+    private elementRef: ElementRef) {}
 
-  ngOnInit():void{
+  ngOnInit():void
+  {
+    this.userapplied = false;
     this.loadJobDetails();
+    this.userStore.getIdFromStore()
+        .subscribe((val) => {
+            console.log(val);
+            let idFromToken = this.auth.getIdFromToken();
+            console.log(idFromToken);
+            this.logginnedUserId = val || idFromToken;
+            console.log("Logged User Id : ",this.logginnedUserId);
+        })
   }
   
   private loadJobDetails(): void{
     const id = String(this.route.snapshot.params['jobId']);
     this.jobService.getJobById(id).subscribe(event => {
       this.job = event.job;
+
       this.loadLocationDetails();
       this.loadPositionDetails();
       this.loadCategoryDetails();
       this.loadDegreeDetails();
       this.loadTypeDetails();
+      
+      this.loadcheckCandidateApplicable();
     });
   }
 
@@ -112,6 +141,80 @@ export class JobdetailsComponent {
 
   public applynow(jobId?:string):void
   {
-    this.router.navigate(['apply-now/',jobId]);
+    this.jobService.applyForJob(jobId).subscribe(
+      (res) =>
+        {
+          this.stringForButton = "Already Applied !";
+          this.disableApplyButton();
+          this.displayAppliedMessage();
+          console.log("Success",res);
+        },
+      (error) =>
+        {
+          this.displayNotAppliedMessage();
+          console.log("Error",error);
+        }
+    )
+  }
+
+  private loadcheckCandidateApplicable():void{
+    this.jobService.checkCandidateApplicable(this.job?.jobId).subscribe(
+      (res) =>{
+        console.log(res);
+        var status = res.status;
+        console.log("rece : ",status);
+          if(status=="400")
+          {
+            this.stringForButton = "Employee Logged In !!";
+            this.disableApplyButton();
+          }
+          else if(status=="401")
+          {
+            this.stringForButton = "Not Logged In !!";
+            this.disableApplyButton();
+          }
+          else if(status=="403")
+          {
+            this.stringForButton = "Already Applied !";
+            this.disableApplyButton();
+          }
+          else if(status=="200")
+          {
+            this.stringForButton = "Apply Now";
+            this.enableApplyButton();
+          }
+
+          console.log(">>>button : ",this.stringForButton);
+      },
+      (error) =>
+        {
+          console.log(error);
+        }
+    )
+  }
+
+  private disableApplyButton():void
+  {
+    this.renderer.setProperty(this.elementRef.nativeElement.querySelector('button'), 'disabled', true);
+  }
+  
+  private enableApplyButton():void
+  {
+    this.renderer.setProperty(this.elementRef.nativeElement.querySelector('button'), 'disabled', false);
+  }
+
+  private displayAppliedMessage(): void
+  {
+    this.toaster.success("Successfully Applied !!");
+  }
+  
+  private displayNotAppliedMessage(): void
+  {
+    this.toaster.success("Error in Application !!");
+  }
+
+  public getName(val:boolean):string
+  {
+    return val?"Already Applied":"Apply Now";
   }
 }

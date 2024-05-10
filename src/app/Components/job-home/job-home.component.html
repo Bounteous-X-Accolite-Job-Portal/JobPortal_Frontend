@@ -34,6 +34,14 @@
                     </option>
                 </select>
             </div>
+            <div>      
+                <p>Degree</p>
+                <select formControlName="degree" [(ngModel)]="degreeIndex">
+                    <option *ngFor="let deg of degrees; let i=index"[value]="i">
+                        {{deg.degreeName}}
+                    </option>
+                </select>
+            </div>
             <div>
                 <button (click)=onSubmit()>Search</button>
                 <button (click)=resetFilters()> Reset </button>
