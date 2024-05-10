@@ -14,11 +14,11 @@ export const sideBarData = [
     icon: 'fa-solid fa-users',
     label: 'Interview Feedback',
   },
-  // {
-  //     routeLink: 'resume',
-  //     icon: 'fal fa-file',
-  //     label: 'Resume'
-  // },
+  {
+      routeLink: 'settings',
+      icon: 'fal fa-cog',
+      label: 'Settings'
+  },
   // {
   //     routeLink: 'sml',
   //     icon: 'fal fa-camera',

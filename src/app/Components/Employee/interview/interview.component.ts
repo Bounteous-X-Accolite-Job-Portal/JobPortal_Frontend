@@ -1,46 +1,59 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormsModule,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { environment } from '../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
+import { Employee } from '../../../Models/Backend/Employee';
+import { AllEmployee } from '../../../Models/Backend/AllEmployee';
+import { FilterPipe } from '../../../Models/filter.pipe';
+import { Interview } from '../../../Models/Interview';
+import { time } from 'console';
+import { ActivatedRoute } from '@angular/router';
+import { interviewResponse } from '../../../Models/InterviewResponse/InterviewResponse';
 
 @Component({
   selector: 'app-interview',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, FilterPipe, ReactiveFormsModule],
   templateUrl: './interview.component.html',
   styleUrl: './interview.component.css',
 })
 export class InterviewComponent {
-  constructor(private http: HttpClient) {}
+
+
+  AddInterviewForm!: FormGroup;
+
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
   searchText = '';
-  // characters = [
-  //   'Ant-Man',
-  //   'Aquaman',
-  //   'Asterix',
-  //   'The Atom',
-  //   'The Avengers',
-  //   'Batgirl',
-  //   'Batman',
-  //   'Batwoman',
-  // ];
-  employee: any[] = [];
-  filteredEmployees: string[] = [];
+  interview: Interview[] = [];
+  employee: Employee[] = [];
+  filteredEmployees: any[] = [];
 
   ngOnInit() {
-    // Initially, display all characters
-    this.fetchEmployee();
+    this.AddInterviewForm = new FormGroup({
+      interviewDate: new FormControl(''),
+      interviewTime: new FormControl(''),
+      interviewerId: new FormControl(''),
+      link: new FormControl(''),
+    });
   }
 
-  fetchEmployee() {
-    // Make an API call to fetch all characters
+  fetchEmployee(searchText: string) {
+    if (!searchText) return;
+
     this.http
-      .get<any>(environment.baseURL + 'EmployeeAccount/getAllEmployees')
+      .get<AllEmployee>(environment.baseURL + 'EmployeeAccount/getAllEmployees')
       .subscribe(
-        (data) => {
+        (data: AllEmployee) => {
           console.log(data);
-          this.employee = data; // Assuming API returns an array of objects
-          // this.filterItems(); // Apply initial filtering
+          this.employee = data.employees;
+          this.filterItems(searchText);
         },
         (error) => {
           console.error('Error fetching employees:', error);
@@ -48,16 +61,47 @@ export class InterviewComponent {
       );
   }
 
-  filterItems() {
-    // If search text is empty, display all characters
-    if (!this.searchText.trim()) {
+  filterItems(searchText: string) {
+    if (!searchText.trim()) {
       this.filteredEmployees = this.employee.slice();
       return;
     }
 
-    // Filter characters based on search text
-    this.filteredEmployees = this.employee.filter((item) =>
-      item.toLowerCase().includes(this.searchText.toLowerCase())
-    );
+    this.filteredEmployees = this.employee.filter((item) => {
+      const firstnameMatch = item.firstName.toLowerCase().includes(searchText);
+      const lastnameMatch = item.lastName.toLowerCase().includes(searchText);
+      const emailMatch = item.email.toLowerCase().includes(searchText);
+      const idMatch = item.empId.toString().includes(searchText);
+      return firstnameMatch || lastnameMatch || emailMatch || idMatch;
+    });
+  }
+
+  getEmployeeId(employeeId: string) {
+    this.searchText = employeeId;
+  }
+
+  onSubmit() {
+    const applicationId = String(this.route.snapshot.params['applicationId']);
+    // this.AddInterviewForm = {
+    //   interviewDate: this.AddInterviewForm.value.interviewDate,
+    //   interviewTime: this.AddInterviewForm.value.interviewTime,
+    //   interviewerId: this.AddInterviewForm.value.interviewerId,
+    //   link: this.AddInterviewForm.value.link,
+    // };
+
+    if (this.AddInterviewForm.valid) {
+      this.http.post(environment.baseURL + 'Interview/AddInterview', this.AddInterviewForm.value)
+        .subscribe(
+          (response) => {
+            console.log('POST request successful:', response);
+            this.AddInterviewForm.reset();
+          },
+          (error) => {
+            console.error('Error sending POST request:', error);
+          }
+        );
+    } else {
+      this.AddInterviewForm.markAllAsTouched();
+    }
   }
 }

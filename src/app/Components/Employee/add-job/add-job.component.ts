@@ -135,7 +135,7 @@ export class AddJobComponent implements OnInit {
   }
 
   onSubmit() {
-    // if (this.jobForm.valid) {
+   
     console.log(this.locations[this.locationindex]);
     
     console.log(this.jobForm.controls['']);
@@ -151,7 +151,7 @@ export class AddJobComponent implements OnInit {
       experience: this.jobForm.value.experience,
       lastDate: this.jobForm.value.lastDate,
     };
-    console.log(this.jobData.jobCategory + this.jobData.lastDate);
+    console.log(this.jobData.categoryId + this.jobData.lastDate);
     this.addJobService.addJobs(this.jobData).subscribe(
       (res) => {
         console.log('success ' + res);

@@ -28,6 +28,7 @@ import { loggedInGuard } from './Guards/logged-in.guard';
 import { EmployeeDashboardComponent } from './Components/Employee/employee-dashboard/employee-dashboard.component';
 import { InterviewHubComponent } from './Components/Employee/interview-hub/interview-hub.component';
 import { InterviewComponent } from './Components/Employee/interview/interview.component';
+import { SettingsComponent } from './Components/Employee/settings/settings.component';
 export const routes: Routes = [
     {
         path: '',
@@ -69,6 +70,7 @@ export const routes: Routes = [
         { path: 'add-job', component: AddJobComponent },
         { path: 'interview', component: InterviewComponent },
         { path: 'interview-hub', component: InterviewHubComponent },
+        { path: 'settings', component: SettingsComponent}
       ],
     },
     {

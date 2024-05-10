@@ -1,28 +1,48 @@
-<div class="container">
-  <h1>Find your interviewer</h1>
-  <label for="search-text">Search</label>
-  <input
-    type="text"
-    [(ngModel)]="searchText"
-    class="form-control"
-    id="search-text"
-    aria-describedby="search-text"
-    placeholder="Enter text to search Interviewer"
-    autofocus
-  />
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let c of employee">
-      {{ c }}
-    </li>
-  </ul>
-</div>
+<div class="container mw-80 ">
+  <div class="card bg-glass p-5 mt-3">
 
-<!-- <div class="search-container">
-    <input type="text" [(ngModel)]="searchText" (input)="filterItems()" placeholder="Search...">
+      <h1>Schedule Interview</h1>
+      <form [formGroup]="AddInterviewForm" (ngSubmit)="onSubmit()">
+        <div class="mb-4 col">
+          <label class="form-label">Interview Date</label>
+          <input type="date" formControlName="interviewDate" class="form-control" />
+        </div>
+        <div class="mb-4 col">
+          <label class="form-label">Interview Time</label>
+          <input type="time" formControlName="interviewTime" class="form-control" />
+        </div>
+        <div class="mb-4 col">
+          <label for="search-text">Search for the interviewer</label>
+          <input
+            type="text"
+            [(ngModel)]="searchText"
+            [ngModelOptions]="{ standalone: true }"
+            class="form-control"
+            id="search-text"
+            aria-describedby="search-text"
+            (input)="fetchEmployee(searchText)"
+            placeholder="Enter name to search Interviewer"
+            autofocus
+          />
+          <ul class="list-group list-group-flush">
+            <li
+              class="list-group-item"
+              *ngFor="let e of filteredEmployees"
+              (click)="getEmployeeId(e.employeeId)"
+            >
+              {{ e.firstName }} {{ e.lastName }} ({{ e.empId }}) 
+            </li>
+          </ul>
+        </div>
+        <div class="mb-4 col">
+          <label class="form-label">Link</label>
+          <input type="text" formControlName="link" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-primary">
+            Save
+          </button>
+        </div>
+      </form>
   </div>
-  
-  <ul>
-    <li *ngFor="let character of filteredCharacters">
-      {{ character }}
-    </li>
-  </ul> -->
+</div>
