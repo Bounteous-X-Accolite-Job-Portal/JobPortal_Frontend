@@ -1,7 +1,7 @@
 import { Guid } from "guid-typescript";
 
 export interface Skills{
-    skillsId: Guid,
+    skillsId: string,
     candidateSkills: string,
-    candidateId: Guid
+    candidateId: string
 }

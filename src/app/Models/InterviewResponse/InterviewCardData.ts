@@ -2,8 +2,8 @@ import { Candidate } from "../Backend/Candidate";
 import { ClosedJob } from "../ClosedJob";
 import { Experience } from "../Experience";
 import { Job } from "../JobResponse/Job";
-import { Resume } from "../Resume";
-import { Skills } from "../Skills";
+import { Resume } from "../ResumeResponse/Resume";
+import { Skills } from "../SkillsResponse/Skills";
 
 export interface interviewCardData{
     interviewDate: Date,

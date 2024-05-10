@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { resume } from '../../../Models/resume';
+import { Resume } from '../../../Models/ResumeResponse/Resume';
 
 @Component({
   selector: 'app-resume',
@@ -11,7 +11,7 @@ import { resume } from '../../../Models/resume';
   styleUrl: './resume.component.css'
 })
 export class ResumeComponent {
-resumeArr: resume[]= [];
+resumeArr: Resume[]= [];
 resumeExists: boolean = true;
 onDel() {
   this.resumeArr.pop();

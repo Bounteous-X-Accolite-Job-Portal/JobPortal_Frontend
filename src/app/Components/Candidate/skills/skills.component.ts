@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { skills } from '../../../Models/skills';
 import { RouterLink } from '@angular/router';
+import { Skills } from '../../../Models/SkillsResponse/Skills';
 
 @Component({
   selector: 'app-skills',
@@ -18,7 +18,7 @@ onDel() {
 // throw new Error('Method not implemented.');
   this.skillArr.pop();
 }
-  skillArr: skills[]=[];
+  skillArr: Skills[]=[];
   constructor(){
     this.skillArr.push({skillsId:"SkillsID", candidateId: "canID", candidateSkills:"C++"});
     this.skillArr.push({skillsId:"SkillsID", candidateId: "canID", candidateSkills:"C++"});
