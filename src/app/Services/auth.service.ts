@@ -2,16 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import {CookieService} from 'ngx-cookie-service';
-import { Login } from '../Models/loginUser';
+import { LoginResponse } from '../Models/loginResponse';
 import { Router } from '@angular/router';
 
 import { jwtDecode } from "jwt-decode";
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseURL = 'https://localhost:7283/api/';
   private userPayload : any;
 
   // emits event on login
@@ -26,11 +26,12 @@ export class AuthService {
   }
 
   registerUser(registerData: any): Observable<any> {
-    return this.http.post<any>(this.baseURL +'CandidateAccount/register', registerData);
+    // Assuming you are making an HTTP POST request to the backend API
+    return this.http.post<any>(environment.baseURL +'CandidateAccount/register', registerData);
   }
 
   loginUser(loginData: any): Observable<any> {
-    return this.http.post<Login>(this.baseURL + 'Account/login', loginData);
+    return this.http.post<LoginResponse>(environment.baseURL + 'Account/login', loginData);
   }
 
   logout()
@@ -40,9 +41,8 @@ export class AuthService {
     this.router.navigate(['login']);
   }
 
-  getResumes(id: any): Observable<any>
-  {
-    return this.http.get(this.baseURL + "Resume/resume/" + id);
+  getResumes(id: any): Observable<any>{
+    return this.http.get(environment.baseURL + "Resume/resume/" + id);
   }
 
   storeToken(tokenValue: string)
