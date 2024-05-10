@@ -28,11 +28,13 @@
         <p>{{job.jobDescription}}</p>
     </div>
 
-    <div>
+    <div class="details">
         <div class="option">{{jobtype?.typeName}}</div>
         <div class="option">{{jobcategory?.categoryName}}</div>
         <div class="option">{{jobPosition?.positionName}}</div>
     </div>
 
-    <h5 id="details"><a [routerLink]="['/job-details',job.jobId]" >Click Here for Details..</a></h5>
+    <div class="footer">
+        <button class="btn btn-outline-primary" [routerLink]="['/job-details',job.jobId]" >Click Here for Details..</button>
+    </div>
 </section> 
