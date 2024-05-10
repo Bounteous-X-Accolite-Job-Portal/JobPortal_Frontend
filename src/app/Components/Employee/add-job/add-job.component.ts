@@ -57,7 +57,7 @@ export class AddJobComponent implements OnInit {
         locationId: new FormControl(''),
         typeId: new FormControl(''),
         experience: new FormControl(''),
-        lastDate: new FormControl(new Date(), Validators.required),
+        lastDate: new FormControl(Date, Validators.required),
       }
       // {
       //   validators: this.lastDateValidator,

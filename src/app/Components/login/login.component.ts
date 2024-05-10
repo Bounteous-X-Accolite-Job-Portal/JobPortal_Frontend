@@ -22,12 +22,6 @@ import { UserStoreService } from '../../Services/user-store.service';
 export class LoginComponent {
   message: string = '';
 
-  SignInForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-    rememberMe: new FormControl(false),
-  });
-
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -38,7 +32,7 @@ export class LoginComponent {
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    rememberMe: [''],
+    rememberMe: [true],
   });
 
   get f() {
@@ -52,7 +46,6 @@ export class LoginComponent {
         Password: this.loginForm.value.password,
         RememberMe: this.loginForm.controls['rememberMe'].value,
       };
-      console.log(this.SignInForm);
       console.log(loginData);
 
       this.authService.loginUser(this.loginForm.value).subscribe(
@@ -77,10 +70,10 @@ export class LoginComponent {
             this.authService.AuthEvent.emit(true);
 
             console.log('CheckIsEmployee', tokenPayload['IsEmployee']);
-            if (!tokenPayload['IsEmployee']) {
-              this.router.navigate(['/profile']);
+            if (tokenPayload['IsEmployee']) {
+              this.router.navigate(['/employee-dashboard']);
             } else {
-              // this.router.navigate(['/employee-dashboard']);
+              this.router.navigate(['/profile']);
             }
           } else {
             this.message = data.message;

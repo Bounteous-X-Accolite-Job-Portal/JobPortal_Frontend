@@ -22,7 +22,7 @@
                   id="email"
                   class="form-control bg-light text-dark"
                   formControlName="email"
-                  />
+                />
                 <small
                   *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)"
                   class="block p-error"
@@ -76,7 +76,6 @@
                 </label>
               </div>
 
-              <!-- Submit button -->
               <div class="d-flex justify-content-center w-70px">
                 <button
                   type="submit"
@@ -88,9 +87,11 @@
                   Login
                 </button>
               </div>
-              <span class="text-center"
+              <span class="d-flex justify-content-center mt-2"
                 >Don't have an account?
-                <a routerLink="../register" style="color: #0a0150">Register</a>
+                <a routerLink="../register" style="color: #0a0150" class="ms-2"
+                  >Register</a
+                >
               </span>
             </form>
           </div>
@@ -98,11 +99,10 @@
       </div>
       <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
         <h1
-          class="my-5 display-inline fw-bold ls-tight"
-          style="color: hsl(218, 81%, 95%)"
+          class="my-5 fw-bold ls-tight d-flex justify-content-center"
+          style="color: hsl(218, 81%, 75%)"
         >
           Login<br />
-          <span style="color: hsl(218, 81%, 75%)">for Candidates</span>
         </h1>
         <p
           class="mb-4 opacity-70 text-justify"
