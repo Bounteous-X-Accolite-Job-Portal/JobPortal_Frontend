@@ -113,7 +113,7 @@ export const routes: Routes = [
             { path: 'resume/:id', component: ResumeComponent },
             { path: 'sml/:id', component: SocialProfilesComponent },
             { path: 'pass-reset/:id', component: PasswordResetComponent },
-            // { path: '', component: TryComponent},
+            { path: 'applyjobs/:id', component: JobHomeComponent},
             { path: '**', component: TryComponent}
         ]
     },
