@@ -15,6 +15,7 @@ import { AddJobService } from '../../../Services/add-job.service';
 import { position } from '../../../Models/JobPositionResponse/position';
 import { Job } from '../../../Models/Job';
 import { Degree } from '../../../Models/DegreeResponse/Degree';
+
 @Component({
   selector: 'app-add-job',
   standalone: true,

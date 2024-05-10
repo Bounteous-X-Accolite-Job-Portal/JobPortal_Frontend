@@ -1,8 +1,6 @@
 import { Guid } from "guid-typescript"
 
-export interface interviewResponse{
-    status: number,
-    message: string,
+export interface Interview{
     applicationId: Guid,
     closedApplicationId: Guid,
     interviewDate: Date,
