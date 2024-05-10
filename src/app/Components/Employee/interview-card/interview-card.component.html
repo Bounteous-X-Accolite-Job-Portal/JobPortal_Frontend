@@ -1,10 +1,82 @@
-<div class="card">
+<div class="card my-4" >
     <div class="card-header">
-      Interview with 
+      <span *ngIf="doneInterview">
+        Interview with <b>{{interview.Candidate.firstName}} {{interview.Candidate.lastName}} ({{interview.Candidate.email}}) </b>
+      </span>
+      <span class="showCard" *ngIf="!doneInterview"  style="cursor: pointer;" (click)="ShowDetails(interview.Candidate.candidateId)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Interview with <b>{{interview.Candidate.firstName}} {{interview.Candidate.lastName}} ({{interview.Candidate.email}}) </b>
+      </span>
+      <span *ngIf="!doneInterview && interview.Resume != null && interview.Resume != undefined" style="float:right">
+        <a href='{{interview.Resume.resumeUrl}}' target="_blank">
+        <button type="button" class="btn btn-secondary btn-sm">
+          View Resume
+        </button>
+        </a>
+      </span>
     </div>
     <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <div *ngIf="interview.Job != null">
+        <p class="card-title">Position - {{interview.Job.jobTitle}} ({{interview.Job.jobCode}})</p>
+        <p class="card-title">Experience for Job - {{interview.Job.experience}}</p>
+        <p class="card-title">Job description - {{interview.Job.jobDescription}}</p>
+      </div>
+      <div *ngIf="interview.ClosedJob != null">
+        <p class="card-title">Position - {{interview.ClosedJob.jobTitle}} ({{interview.ClosedJob.jobCode}})</p>
+        <p class="card-title">Experience for Job - {{interview.ClosedJob.experience}}</p>
+        <p class="card-title">Job description - {{interview.ClosedJob.jobDescription}}</p>
+      </div>
+      <div>
+        <span style="float:left">
+          Join on : {{interview.interviewDate}} , {{interview.interviewTime}} (24-hrs clock)
+        </span>
+        <span *ngIf="!doneInterview" style="float:right">
+          <a href='{{interview.link}}' target="_blank">
+          <button type="button" class="btn btn-secondary btn-sm">
+            Join Meeting
+          </button>
+          </a>
+        </span>
+        <span *ngIf="doneInterview" style="float:right">
+          <button type="button" class="btn btn-secondary btn-sm">
+            Feedback
+          </button>
+        </span>
+      </div>
     </div>
+</div>
+
+ <!-- popup -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+          <div class="modal-header">
+              <p class="modal-title" id="exampleModalLabel">
+                  <span style="font-size: 25px; font-weight: 700;">{{interview.Candidate.firstName}} {{interview.Candidate.lastName}}</span> Details
+              </p>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p><span style="font-size: 20px; font-weight: 500;">Skills </span> - {{skills?.candidateSkills}}</p>
+              <p style="font-size: 20px; font-weight: 500;">Experiences - </p>
+              <div>
+                <div *ngIf="experience.length == 0">No Experience to show</div>
+                <div *ngFor="let item of experience">
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div>
+                        <span class="card-title"><b>{{item.experienceTitle}}</b></span>
+                        <!-- <span style="float:right">Company</span> -->
+                        <span style="float:right"><a href='{{item.Company.baseUrl}}' target="_blank">{{item.Company.companyName}}</a></span>
+                      </div>
+                      <p style="font-size: 13px;">{{item.startDate}} - {{item.isCurrentlyWorking ? "currently working" : item.endDate}}</p>
+                      <p class="card-text">{{item.description}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+      </div>
+  </div>
 </div>
