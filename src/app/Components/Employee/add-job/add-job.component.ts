@@ -13,7 +13,7 @@ import { location } from '../../../Models/JoblocationResponse/location';
 import { JobType } from '../../../Models/JobTypeResponse/JobType';
 import { AddJobService } from '../../../Services/add-job.service';
 import { position } from '../../../Models/JobPositionResponse/position';
-import { Job } from '../../../Models/Job';
+import { Job } from '../../../Models/JobResponse/Job';
 @Component({
   selector: 'app-add-job',
   standalone: true,

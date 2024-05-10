@@ -1,11 +1,14 @@
+import { Guid } from "guid-typescript";
+
 export interface Candidate{
-    FirstName: string;
-    LastName: string;
-    Email: string;
-    Phone?: string;
-    AddressLine1?: string;
-    City?: string;
-    State?: string;
-    Country?: string;
-    ZipCode?: string;
+    candidateId: Guid,
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone?: string;
+    addressLine1?: string;
+    city?: string;
+    state?: string;
+    country?: string;
+    zipCode?: string;
 }
