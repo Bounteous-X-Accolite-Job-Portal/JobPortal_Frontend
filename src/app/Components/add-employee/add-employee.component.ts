@@ -8,8 +8,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../Services/auth.service';
-import { error } from 'console';
 import { AddEmployeeService } from '../../Services/AddEmployee/add-employee.service';
 
 @Component({
@@ -32,7 +30,9 @@ export class AddEmployeeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private addEmployeeService: AddEmployeeService
-  ) {}
+  ) {
+
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
