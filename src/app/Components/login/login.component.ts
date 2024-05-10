@@ -1,9 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { LoginResponse } from '../../Models/loginResponse';
+import { UserStoreService } from '../../Services/user-store.service';
 
 @Component({
   selector: 'app-login',
@@ -12,27 +19,20 @@ import { LoginResponse } from '../../Models/loginResponse';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent  {
-  message: string = "";
-  checkBoxValue: any = false;
-  checkCheckBoxvalue(): boolean {
-    if (this.checkBoxValue == true) {
-      this.checkBoxValue = false;
-    } else {
-      this.checkBoxValue = true;
-    }
-    return this.checkBoxValue;
-  }
+export class LoginComponent {
+  message: string = '';
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private userStore: UserStoreService
   ) {}
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    rememberMe: [''],
+    rememberMe: [true],
   });
 
   get f() {
@@ -42,28 +42,42 @@ export class LoginComponent  {
   onSubmit() {
     if (this.loginForm.valid) {
       const loginData = {
-        Email: this.loginForm.value.email,
+        Email: this.f['email'].value,
         Password: this.loginForm.value.password,
-        RememberMe: this.checkCheckBoxvalue(),
+        RememberMe: this.loginForm.controls['rememberMe'].value,
       };
-      
+      console.log(loginData);
 
-     console.log(loginData);
-
-      this.authService.loginUser(loginData).subscribe(
+      this.authService.loginUser(this.loginForm.value).subscribe(
         (data: LoginResponse) => {
           console.log(data);
-          console.log('Status', data.status, "data message", data.message);
-          if(data.status == 200){
-                console.log(data.token);
-              // this.authService.storeToken(data.token ? data.token : "");
-              // console.log(this.authService.getToken());
-              console.log("vishal", data.token);
-              this.router.navigate(['/user-profile']);
-          }
-          else{
+          console.log('Status', data.status, 'data message', data.message);
+
+          if (data.status == 200) {
+            console.log(data.token);
+            this.authService.storeToken(data.token ? data.token : '');
+
+            // setting up user store
+            const tokenPayload: any = this.authService.decodedToken();
+            console.log('Token payload in login line 67 ', tokenPayload);
+
+            this.userStore.setEmailForStore(tokenPayload['Email']);
+            this.userStore.setNameForStore(tokenPayload['Name']);
+            this.userStore.setIsEmployeeForStore(tokenPayload['IsEmployee']);
+            this.userStore.setRoleForStore(tokenPayload['Role']);
+            this.userStore.setIdForStore(tokenPayload['Id']);
+
+            this.authService.AuthEvent.emit(true);
+
+            console.log('CheckIsEmployee', tokenPayload['IsEmployee']);
+            if (tokenPayload['IsEmployee']) {
+              this.router.navigate(['/employee-dashboard']);
+            } else {
+              this.router.navigate(['/profile']);
+            }
+          } else {
             this.message = data.message;
-          } 
+          }
         },
         (error: any) => {
           console.log(error);

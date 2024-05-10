@@ -20,7 +20,7 @@
                 <input
                   type="email"
                   id="email"
-                  class="form-control"
+                  class="form-control bg-light text-dark"
                   formControlName="email"
                 />
                 <small
@@ -42,7 +42,7 @@
                 <input
                   type="password"
                   id="password"
-                  class="form-control"
+                  class="form-control bg-light text-dark"
                   formControlName="password"
                 />
                 <small
@@ -67,7 +67,6 @@
                 <input
                   class="form-check-input me-2"
                   type="checkbox"
-                  value=""
                   name="rememberMe"
                   id="rememberMe"
                   formControlName="rememberMe"
@@ -77,34 +76,33 @@
                 </label>
               </div>
 
-              <!-- Submit button -->
               <div class="d-flex justify-content-center w-70px">
                 <button
                   type="submit"
                   data-mdb-button-init
                   data-mdb-ripple-init
                   class="btn btn-primary btn-block"
+                  (click)="onSubmit()"
                 >
                   Login
                 </button>
               </div>
-              <span
+              <span class="d-flex justify-content-center mt-2"
                 >Don't have an account?
-                <a routerLink="../register" style="color: #0a0150"
+                <a routerLink="../register" style="color: #0a0150" class="ms-2"
                   >Register</a
-                ></span
-              >
+                >
+              </span>
             </form>
           </div>
         </div>
       </div>
       <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
         <h1
-          class="my-5 display-inline fw-bold ls-tight"
-          style="color: hsl(218, 81%, 95%)"
+          class="my-5 fw-bold ls-tight d-flex justify-content-center"
+          style="color: hsl(218, 81%, 75%)"
         >
           Login<br />
-          <span style="color: hsl(218, 81%, 75%)">for Candidates</span>
         </h1>
         <p
           class="mb-4 opacity-70 text-justify"

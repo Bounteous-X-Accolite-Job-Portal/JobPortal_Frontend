@@ -2,7 +2,9 @@ import { Routes } from '@angular/router';
 import { LandingComponent } from './Components/landing/landing.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
-import { JobsComponent } from './Components/jobs/jobs.component';
+import { AddEmployeeComponent } from './Components/add-employee/add-employee.component';
+import { AddJobComponent } from './Components/Employee/add-job/add-job.component';
+import { JobHomeComponent } from './Components/job-home/job-home.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 import { TryComponent } from './Components/try/try.component';
 import { ExperienceComponent } from './Components/Candidate/experience/experience.component';
@@ -16,6 +18,16 @@ import { UpdateEducationComponent } from './Components/Candidate/update-educatio
 import { AddExperienceComponent } from './Components/Candidate/add-experience/add-experience.component';
 import { UpdateExperienceComponent } from './Components/Candidate/update-experience/update-experience.component';
 import { CandidateEducationComponent } from './Components/Candidate/candidate-education/candidate-education.component';
+import { authGuard } from './Guards/auth.guard';
+import { childAuthGuard } from './Guards/child-auth.guard';
+import { loggedInGuard } from './Guards/logged-in.guard';
+
+import { EmployeeDashboardComponent } from './Components/Employee/employee-dashboard/employee-dashboard.component';
+import { InterviewHubComponent } from './Components/Employee/interview-hub/interview-hub.component';
+import { InterviewComponent } from './Components/Employee/interview/interview.component';
+import { SettingsComponent } from './Components/Employee/settings/settings.component';
+import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
+import { JobApplicatonComponent } from './Components/job-applicaton/job-applicaton.component';
 export const routes: Routes = [
     {
         path: '',
@@ -32,16 +44,34 @@ export const routes: Routes = [
     },
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [loggedInGuard]
     },
     {
         path: 'register',
-        component: RegisterComponent
+        component: RegisterComponent,
+        canActivate: [loggedInGuard]
+    },
+    {
+      path: 'add-employee',
+      component: AddEmployeeComponent,
     },
     {
         path: 'jobs',
-        component: JobsComponent
+        component: JobHomeComponent,
     },
+    {
+      path: 'job-details/:jobId',
+      component: JobdetailsComponent,
+    },
+    {
+      path: 'apply-now/:jobId',
+      component:JobApplicatonComponent,
+    }, 
+    {
+      path: 'user-profile',
+      component: UserProfileComponent,
+    }, 
     {
         path: 'try',
         component: TryComponent
@@ -51,9 +81,22 @@ export const routes: Routes = [
         component: UpdateEducationComponent
     },
     {
+      path: 'employee-dashboard',
+      component: EmployeeDashboardComponent,
+      canActivate: [authGuard],
+      canActivateChild: [childAuthGuard],
+      children: [
+        { path: 'add-job', component: AddJobComponent },
+        { path: 'interview', component: InterviewComponent },
+        { path: 'interview-hub', component: InterviewHubComponent },
+        { path: 'settings', component: SettingsComponent}
+      ],
+    },
+    {
         path: 'profile',
         component: UserProfileComponent,
-        // canActivate: [authGuard],
+        canActivate: [authGuard],
+        canActivateChild: [childAuthGuard],
         children: [
             { path: 'edu/:id', component: CandidateEducationComponent },
             { path: 'edu/:id', children:[
@@ -74,17 +117,7 @@ export const routes: Routes = [
             { path: '**', component: TryComponent}
         ]
     },
-    {
-        path: '',
-        redirectTo: 'landing',
-        pathMatch: 'full'
-    },
-    {
-        path: '**',
-        component: LandingComponent
-    }
 
 ];
 
-
-  
+export default routes;
