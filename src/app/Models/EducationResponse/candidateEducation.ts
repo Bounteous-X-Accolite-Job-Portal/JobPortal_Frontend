@@ -1,12 +1,12 @@
 export interface candidateEducation {
-    educationId?: number;
+    educationId?: string;
     institutionOrSchoolName?: string;
     startYear: number;
     endYear: number;
-    grade: number;
+    grade: string;
     educationalInstitution?: string;
     degree: string;
-    degreeId?: number;
+    degreeId?: string;
     candidate?: string;
-    candidateId?: number;
+    candidateId?: string;
 }

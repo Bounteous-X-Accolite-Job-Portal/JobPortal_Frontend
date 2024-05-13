@@ -1,6 +1,6 @@
 import { Candidate } from "../Backend/Candidate";
-import { ClosedJob } from "../ClosedJob";
-import { Experience } from "../Experience";
+import { ClosedJob } from "../ClosedJobResponse/ClosedJob";
+import { Experience } from "../ExperienceResponse/Experience";
 import { Job } from "../JobResponse/Job";
 import { Resume } from "../ResumeResponse/Resume";
 import { Skills } from "../SkillsResponse/Skills";

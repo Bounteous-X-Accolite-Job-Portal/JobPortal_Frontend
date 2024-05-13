@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { JobCategory } from '../../../Models/JobCategoryResponse/JobCategory';
-import { JobService } from '../../../Services/job.service';
+import { JobService } from '../../../Services/Job/job.service';
 import { location } from '../../../Models/JoblocationResponse/location';
 import { JobType } from '../../../Models/JobTypeResponse/JobType';
 import { AddJobService } from '../../../Services/add-job.service';

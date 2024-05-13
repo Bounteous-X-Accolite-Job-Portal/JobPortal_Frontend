@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { LandingComponent } from './Components/landing/landing.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
-import { AddEmployeeComponent } from './Components/add-employee/add-employee.component';
+import { AddEmployeeComponent } from './Components/Candidate/add-employee/add-employee.component';
 import { AddJobComponent } from './Components/Employee/add-job/add-job.component';
 import { JobHomeComponent } from './Components/job-home/job-home.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';

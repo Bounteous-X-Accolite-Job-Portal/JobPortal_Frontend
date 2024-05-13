@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { candidateEducation } from '../../../Models/candidateEducation';
-import { CandidateServicesService } from '../../../Services/candidate-services.service';
+import { candidateEducation } from '../../../Models/EducationResponse/candidateEducation';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
-import { AllCandidateEducation } from '../../../Models/AllCandidateEducation';
+import { AllCandidateEducation } from '../../../Models/EducationResponse/AllCandidateEducation';
+import { CandidateService } from '../../../Services/CandidateService/candidate.service';
 
 
 @Component({
@@ -16,7 +16,7 @@ import { AllCandidateEducation } from '../../../Models/AllCandidateEducation';
 export class CandidateEducationComponent {
   route:ActivatedRoute=inject(ActivatedRoute);
   eduList : candidateEducation[] = [];
-  httpService=inject(CandidateServicesService);
+  httpService=inject(CandidateService);
 
   userId=String(this.route.snapshot.params['id']);
   constructor(){
@@ -36,7 +36,7 @@ export class CandidateEducationComponent {
 
   addE() {
     // this.pageRender=!this.pageRender;
-    this.eduList.push({grade:1 ,institutionOrSchoolName:'abcd',startYear:2018,endYear:2025,degree:'chal'});
+    this.eduList.push({grade:"A" ,institutionOrSchoolName:'abcd',startYear:2018,endYear:2025,degree:'chal'});
   }
   onDel() {
     this.eduList.pop();

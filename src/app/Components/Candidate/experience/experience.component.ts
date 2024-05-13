@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { candidateExperience } from '../../../Models/candidateExperience';
+import { candidateExperience } from '../../../Models/ExperienceResponse/candidateExperience';
 
 @Component({
   selector: 'app-experience',

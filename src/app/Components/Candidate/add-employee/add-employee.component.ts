@@ -8,9 +8,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../Services/auth.service';
+import { AuthService } from '../../../Services/auth.service';
 import { error } from 'console';
-import { AddEmployeeService } from '../../Services/AddEmployee/add-employee.service';
+import { AddEmployeeService } from '../../../Services/AddEmployee/add-employee.service';
 
 @Component({
   selector: 'app-add-employee',
