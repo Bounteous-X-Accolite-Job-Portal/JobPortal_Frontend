@@ -8,6 +8,7 @@ import { Degree } from '../../Models/DegreeResponse/Degree';
 import { JobType } from '../../Models/JobTypeResponse/JobType';
 import { JobCategory } from '../../Models/JobCategoryResponse/JobCategory';
 import { position } from '../../Models/JobPositionResponse/position';
+import { AllJobPosition } from '../../Models/JobPositionResponse/AllJobPosition';
 import { DegreeResponse } from '../../Models/DegreeResponse/DegreeRespose';
 import { JobCategoryResponse } from '../../Models/JobCategoryResponse/JobCategoryResponse';
 import { JobTypeResponse } from '../../Models/JobTypeResponse/JobTypeResponse';

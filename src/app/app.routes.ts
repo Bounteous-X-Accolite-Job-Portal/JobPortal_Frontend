@@ -28,96 +28,110 @@ import { InterviewComponent } from './Components/Employee/interview/interview.co
 import { SettingsComponent } from './Components/Employee/settings/settings.component';
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
 import { JobApplicatonComponent } from './Components/job-applicaton/job-applicaton.component';
+import { CrudJobDataComponent } from './Components/Employee/crud-job-data/crud-job-data.component';
 export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'landing',
-        pathMatch: 'full'
-    },
-    {
-        path: 'landing',
-        component: LandingComponent
-    },
-    {
-        path: 'about',
-        component: AddEducationComponent
-    },
-    {
-        path: 'login',
-        component: LoginComponent,
-        canActivate: [loggedInGuard]
-    },
-    {
-        path: 'register',
-        component: RegisterComponent,
-        canActivate: [loggedInGuard]
-    },
-    {
-      path: 'add-employee',
-      component: AddEmployeeComponent,
-    },
-    {
-        path: 'jobs',
-        component: JobHomeComponent,
-    },
-    {
-      path: 'job-details/:jobId',
-      component: JobdetailsComponent,
-    },
-    {
-      path: 'apply-now/:jobId',
-      component:JobApplicatonComponent,
-    }, 
-    {
-      path: 'user-profile',
-      component: UserProfileComponent,
-    }, 
-    {
-        path: 'try',
-        component: TryComponent
-    },
-    {
-        path: 'update',
-        component: UpdateEducationComponent
-    },
-    {
-      path: 'employee-dashboard',
-      component: EmployeeDashboardComponent,
-      canActivate: [authGuard],
-      canActivateChild: [childAuthGuard],
-      children: [
-        { path: 'add-job', component: AddJobComponent },
-        { path: 'interview', component: InterviewComponent },
-        { path: 'interview-hub', component: InterviewHubComponent },
-        { path: 'settings', component: SettingsComponent}
-      ],
-    },
-    {
-        path: 'profile',
-        component: UserProfileComponent,
-        // canActivate: [authGuard],
-        // canActivateChild: [childAuthGuard],
+  {
+    path: '',
+    redirectTo: 'landing',
+    pathMatch: 'full',
+  },
+  {
+    path: 'landing',
+    component: LandingComponent,
+  },
+  {
+    path: 'about',
+    component: AddEducationComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [loggedInGuard],
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [loggedInGuard],
+  },
+  {
+    path: 'add-employee',
+    component: AddEmployeeComponent,
+  },
+  {
+    path: 'jobs',
+    component: JobHomeComponent,
+  },
+  {
+    path: 'job-details/:jobId',
+    component: JobdetailsComponent,
+  },
+  {
+    path: 'apply-now/:jobId',
+    component: JobApplicatonComponent,
+  },
+  {
+    path: 'user-profile',
+    component: UserProfileComponent,
+  },
+  {
+    path: 'try',
+    component: TryComponent,
+  },
+  {
+    path: 'update',
+    component: UpdateEducationComponent,
+  },
+  {
+    path: 'crud-job-data',
+    component: CrudJobDataComponent,
+  },
+  {
+    path: 'employee-dashboard',
+    component: EmployeeDashboardComponent,
+    canActivate: [authGuard],
+    canActivateChild: [childAuthGuard],
+    children: [
+      { path: 'add-job', component: AddJobComponent },
+      { path: 'interview', component: InterviewComponent },
+      { path: 'interview-hub', component: InterviewHubComponent },
+      { path: 'settings', component: SettingsComponent },
+      {
+        path: 'settings',
+        children: [{ path: 'crud-job-data', component: CrudJobDataComponent }],
+      },
+    ],
+  },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
+    // canActivate: [authGuard],
+    // canActivateChild: [childAuthGuard],
+    children: [
+      { path: 'edu/:id', component: CandidateEducationComponent },
+      {
+        path: 'edu/:id',
         children: [
-            { path: 'edu/:id', component: CandidateEducationComponent },
-            { path: 'edu/:id', children:[
-                { path: 'add-edu' , component: AddEducationComponent},
-                { path: 'update-edu' , component: UpdateEducationComponent},
-            ] },
-            { path: 'exp/:id', component: ExperienceComponent },
-            { path: 'exp/:id', children:[
-                { path: 'add-exp' , component: AddExperienceComponent},
-                { path: 'update-exp' , component: UpdateExperienceComponent},
-            ] },
-            { path: 'per-info/:id', component: PersonalInfoComponent },
-            { path: 'skills/::id', component: SkillsComponent },
-            { path: 'resume/:id', component: ResumeComponent },
-            { path: 'sml/:id', component: SocialProfilesComponent },
-            { path: 'pass-reset/:id', component: PasswordResetComponent },
-            // { path: '', component: TryComponent},
-            { path: '**', component: TryComponent}
-        ]
-    },
-
+          { path: 'add-edu', component: AddEducationComponent },
+          { path: 'update-edu', component: UpdateEducationComponent },
+        ],
+      },
+      { path: 'exp/:id', component: ExperienceComponent },
+      {
+        path: 'exp/:id',
+        children: [
+          { path: 'add-exp', component: AddExperienceComponent },
+          { path: 'update-exp', component: UpdateExperienceComponent },
+        ],
+      },
+      { path: 'per-info/:id', component: PersonalInfoComponent },
+      { path: 'skills/::id', component: SkillsComponent },
+      { path: 'resume/:id', component: ResumeComponent },
+      { path: 'sml/:id', component: SocialProfilesComponent },
+      { path: 'pass-reset/:id', component: PasswordResetComponent },
+      // { path: '', component: TryComponent},
+      { path: '**', component: TryComponent },
+    ],
+  },
 ];
 
 export default routes;

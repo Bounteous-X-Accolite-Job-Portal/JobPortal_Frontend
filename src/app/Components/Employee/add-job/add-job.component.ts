@@ -63,7 +63,6 @@ export class AddJobComponent implements OnInit {
     });
 
     this.spinnerService.showSpinner();
-
     
     this.loadJobLocations();
     this.loadJobTypes();
@@ -71,9 +70,8 @@ export class AddJobComponent implements OnInit {
     this.loadJobPositions();
     this.loadDegrees();
 
-
-    console.log('hide spinner');
     this.spinnerService.hideSpinner();
+ 
   }
 
   ngOnInit(): void {
