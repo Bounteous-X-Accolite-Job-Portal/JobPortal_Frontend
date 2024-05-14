@@ -11,7 +11,11 @@ import { PersonalInfoComponent } from './Components/personal-info/personal-info.
 import { SkillsComponent } from './Components/skills/skills.component';
 import { ResumeComponent } from './Components/resume/resume.component';
 import { SocialProfilesComponent } from './Components/social-profiles/social-profiles.component';
-import { PasswordResetComponent } from './Components/password-reset/password-reset.component';
+import { ForgetPasswordComponentComponent } from './forget-password-component/forget-password-component.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { EmailComponentChangePasswordComponent } from './email-component-change-password/email-component-change-password.component';
+
+
 
 // export const childRoutes: Routes = [
 //     { path: 'child1', component: LoginComponent },
@@ -20,6 +24,7 @@ import { PasswordResetComponent } from './Components/password-reset/password-res
 
 
 import { authGuard } from './Guards/auth.guard';
+
 export const routes: Routes = [
     {
         path: '',
@@ -47,6 +52,14 @@ export const routes: Routes = [
         component: TryComponent
     },
     {
+        path:'reset',
+    component:ForgetPasswordComponentComponent},
+    {
+        path:'changePasswordEmail',
+        component:EmailComponentChangePasswordComponent
+
+    },
+        {
         path: 'profile',
         component: UserProfileComponent,
         // canActivate: [authGuard],
@@ -57,9 +70,9 @@ export const routes: Routes = [
             { path: 'skills', component: SkillsComponent },
             { path: 'resume', component: ResumeComponent },
             { path: 'sml', component: SocialProfilesComponent },
-            { path: 'pass-reset', component: PasswordResetComponent },
-            { path: '', component: TryComponent},
-            { path: '**', component: TryComponent}
+            { path: 'changePassword', component: ChangePasswordComponent},
+            { path: '**', component: TryComponent},
+     
         ]
     },
     {
