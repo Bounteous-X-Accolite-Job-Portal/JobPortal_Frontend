@@ -2,17 +2,17 @@
 <div style="display: flex; flex-direction: row;" >
   <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : 'sidenav' ">
     <div class="logo-container">
-      <button class="logo" (click)="toggleCollapse()">A</button>
-      <div class="logo-text" *ngIf="collapsed">Candidate</div>
+      <button class="logo" (click)="toggleCollapse()">{{this.name ? this.name.charAt(0) : 'U'}}</button>
+      <div class="logo-text" *ngIf="collapsed">{{this.name}}</div>
       <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()" >
         <i class="fal fa-times close-icon"></i>
       </button>
     </div>
     <ul class="sidenav-nav">
-      <li class="sidenav-nav-item" *ngFor="let data of navData">
-        <a [routerLink]="['/profile/'+data.routeLink]" class="sidenav-nav-link" routerLinkActive="active" >
-          <i class="sidenav-link-icon " [class]="data.icon"></i>
-          <span class="sidenav-link-text" *ngIf="collapsed">{{data.label}}</span>
+      <li class="sidenav-nav-item  float:left" *ngFor="let data of navData">
+        <a [routerLink]="[data.routeLink, id]" class="sidenav-nav-link w-100 px-3" routerLinkActive="active" >
+          <i class="sidenav-link-icon ml-5" [class]="data.icon"></i>
+          <span class="sidenav-link-text " *ngIf="collapsed">{{data.label}}</span>
         </a>
       </li>
     </ul>

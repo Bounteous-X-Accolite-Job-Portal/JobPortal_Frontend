@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
 import { Router, RouterModule } from '@angular/router';
-import { Login } from '../../Models/loginUser';
 import { LoginResponse } from '../../Models/loginResponse';
 import { ForgetPasswordService } from '../../forget-password.service';
 import { error } from 'console';
@@ -44,7 +43,7 @@ export class LoginComponent  {
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    rememberMe: [''],
+    rememberMe: [true],
   });
 
 
@@ -62,9 +61,9 @@ export class LoginComponent  {
   onSubmit() {
     if (this.loginForm.valid) {
       const loginData = {
-        Email: this.loginForm.value.email,
+        Email: this.f['email'].value,
         Password: this.loginForm.value.password,
-        RememberMe: this.checkCheckBoxvalue(),
+        RememberMe: this.loginForm.controls['rememberMe'].value,
       };
 
       
@@ -84,7 +83,7 @@ export class LoginComponent  {
           }
           else{
             this.message = data.message;
-          } 
+          }
         },
         (error: any) => {
           console.log(error);

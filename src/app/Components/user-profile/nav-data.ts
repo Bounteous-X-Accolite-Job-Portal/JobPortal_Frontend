@@ -2,7 +2,7 @@ export const navbarData = [
     {
         routeLink: 'per-info',
         icon: 'fal fa-id-card',
-        label: 'Personal Information'
+        label: 'Personal Info'
     },
     {
         routeLink: 'edu',
@@ -34,4 +34,9 @@ export const navbarData = [
         icon: 'fal fa-cog',
         label: 'Change Passwod'
     },
+    {
+        routeLink: 'applyjobs',
+        icon: 'fal fa-briefcase',
+        label: 'Apply For Jobs'
+    }
 ];

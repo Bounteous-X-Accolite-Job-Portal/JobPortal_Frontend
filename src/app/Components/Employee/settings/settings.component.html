@@ -1,0 +1,598 @@
+<div
+  class="d-flex gradient-custom-2 justify-content-center flex-wrap"
+  style="padding: 20vh"
+>
+  <div class="w-75 bg-white rounded p-5" style="height: auto">
+    <h2>Update the Job Data</h2>
+    <hr />
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Add</th>
+          <th>View</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Job Categories</td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                id="forgot"
+                data-bs-toggle="modal"
+                data-bs-target="#addCategory"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fas fa-add"></i
+              ></a>
+            </div>
+            <div
+              class="modal fade"
+              id="addCategory"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      Add Job Category
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="addCategoryForm">
+                      <div class="mb-3">
+                        <label for="categoryCode" class="form-label"
+                          >Category Code</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="categoryCode"
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="categoryName" class="form-label"
+                          >Category Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="categoryName"
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="description" class="form-label"
+                          >Description</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="description"
+                          placeholder=""
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="addCategory()"
+                    >
+                      Add Category
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                id="forgot"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fa fa-eye"></i
+              ></a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Job Positions</td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                id="forgot"
+                data-bs-toggle="modal"
+                data-bs-target="#addPosition"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fas fa-add"></i
+              ></a>
+            </div>
+            <div
+              class="modal fade"
+              id="addPosition"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      Add Job Positions
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="addPositionForm">
+                      <div class="mb-3">
+                        <label for="positionCode" class="form-label"
+                          >Position Code</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="positionCode"
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="positionName" class="form-label"
+                          >Position Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="positionName"
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="description" class="form-label"
+                          >Description</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="description"
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="categoryId"
+                          >Job Category</label
+                        ><br />
+                        <select
+                          formControlName="categoryId"
+                          [(ngModel)]="categoryIndex"
+                        >
+                          <option
+                            *ngFor="let cat of jobCategories"
+                            [value]="cat.categoryId"
+                          >
+                            {{ cat.categoryName }} ({{ cat.categoryCode }})
+                          </option>
+                        </select>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="addPosition()"
+                    >
+                      Add Position
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                [routerLink]="['crud-job-data']"
+                id="forgot"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fa fa-eye"></i
+              ></a>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Job Locations</td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                id="forgot"
+                data-bs-toggle="modal"
+                data-bs-target="#addLocation"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fas fa-add"></i
+              ></a>
+            </div>
+            <div
+              class="modal fade"
+              id="addLocation"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      Add Job Location
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="addLocationForm">
+                      <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="address"
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="city" class="form-label">City</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="city"
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="state" class="form-label">State</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="state"
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="country" class="form-label">Country</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="country"
+                          placeholder=""
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="addLocation()"
+                    >
+                      Add Location
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                id="forgot"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fa fa-eye"></i
+              ></a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Job Types</td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                id="forgot"
+                data-bs-toggle="modal"
+                data-bs-target="#addTypes"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fa fa-add"></i
+              ></a>
+            </div>
+            <div
+              class="modal fade"
+              id="addTypes"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      Add Job Type
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="addTypeForm">
+                      <div class="mb-3">
+                        <label for="typeName" class="form-label"
+                          >Type Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="typeName"
+                          placeholder=""
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="addType()"
+                    >
+                      Add JobType
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                id="forgot"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fa fa-eye"></i
+              ></a>
+            </div>
+          </td>
+        <tr>
+          <td>Degrees</td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                id="forgot"
+                data-bs-toggle="modal"
+                data-bs-target="#addDegree"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fas fa-add"></i
+              ></a>
+            </div>
+            <div
+              class="modal fade"
+              id="addDegree"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      Add Degree
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="addDegreeForm">
+                      <div class="mb-3">
+                        <label for="categoryCode" class="form-label"
+                          >Degree Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="degreeName"
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="durationInYears" class="form-label"
+                          >Duration In Years</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="durationInYears"
+                          placeholder=""
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="addDegree()"
+                    >
+                      Add Category
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                [routerLink]="['crud-job-data']"
+                id="forgot"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fa fa-eye"></i
+              ></a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Institutions</td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                id="forgot"
+                data-bs-toggle="modal"
+                data-bs-target="#addInstitution"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fas fa-add"></i
+              ></a>
+            </div>
+            <div
+              class="modal fade"
+              id="addInstitution"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      Add Institution
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="addInstitutionForm">
+                      <div class="mb-3">
+                        <label for="institutionOrSchool" class="form-label"
+                          >Institution or School Name </label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="institutionOrSchool"
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="universityOrBoard" class="form-label"
+                          >University Or Board Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="universityOrBoard"
+                          placeholder=""
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="addInstitution()"
+                    >
+                      Add Institution
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                [routerLink]="['crud-job-data']"
+                id="forgot"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fa fa-eye"></i
+              ></a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="Jobhunt">
+    <div class="Filters">
+        <h3>Filters</h3>
+        <form [formGroup]="filtersForm">
+            <div>
+                <p>Job Position</p>
+                <select formControlName="jobPosition" [(ngModel)]="positionIndex">
+                    <option *ngFor="let pos of jobPositions; let i=index "[value]="i">
+                        {{pos.positionName}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <p>Job Category</p>
+                <select formControlName="jobCategory" [(ngModel)]="categoryIndex">
+                    <option *ngFor="let cat of jobCategories; let i=index "[value]="i">
+                        {{cat.categoryName}} {{cat.categoryCode}} {{cat.description}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <p>Job Location</p>
+                <select formControlName="location" [(ngModel)]="locationIndex">
+                    <option *ngFor="let loc of locations; let i=index"[value]="i">
+                        {{loc.address}} {{loc.city}} {{loc.state}} {{loc.country}}
+                    </option>
+                </select>
+            </div>
+            <div>      
+                <p>Job Type</p>
+                <select formControlName="jobType" [(ngModel)]="typeIndex">
+                    <option *ngFor="let typ of jobTypes; let i=index"[value]="i">
+                        {{typ.typeName}}
+                    </option>
+                </select>
+            </div>
+            <div>      
+                <p>Degree</p>
+                <select formControlName="degree" [(ngModel)]="degreeIndex">
+                    <option *ngFor="let deg of degrees; let i=index"[value]="i">
+                        {{deg.degreeName}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <button (click)=onSubmit()>Search</button>
+                <button (click)=resetFilters()> Reset </button>
+            </div>
+        </form>
+    </div>
+    <div class="jobListing">
+        <app-job-card *ngFor="let job of Filterjobs" [job]="job"></app-job-card>
+    </div>
+</div>

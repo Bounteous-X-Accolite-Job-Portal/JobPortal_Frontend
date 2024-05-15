@@ -1,0 +1,162 @@
+<div class="card my-4" >
+    <div class="card-header">
+      <span *ngIf="doneInterview">
+        Interview with <b>{{interview.Candidate.firstName}} {{interview.Candidate.lastName}} ({{interview.Candidate.email}}) </b>
+      </span>
+      <span class="showCard" *ngIf="!doneInterview"  style="cursor: pointer;" (click)="ShowDetails(interview.Candidate.candidateId)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Interview with <b>{{interview.Candidate.firstName}} {{interview.Candidate.lastName}} ({{interview.Candidate.email}}) </b>
+      </span>
+      <span *ngIf="!doneInterview && interview.Resume != null && interview.Resume != undefined" style="float:right">
+        <a href='{{interview.Resume.resumeUrl}}' target="_blank">
+        <button type="button" class="btn btn-secondary btn-sm">
+          View Resume
+        </button>
+        </a>
+      </span>
+    </div>
+    <div class="card-body">
+      <div *ngIf="interview.Job != null">
+        <p class="card-title">Position - {{interview.Job.jobTitle}} ({{interview.Job.jobCode}})</p>
+        <p class="card-title">Experience for Job - {{interview.Job.experience}}</p>
+        <p class="card-title">Job description - {{interview.Job.jobDescription}}</p>
+      </div>
+      <div *ngIf="interview.ClosedJob != null">
+        <p class="card-title">Position - {{interview.ClosedJob.jobTitle}} ({{interview.ClosedJob.jobCode}})</p>
+        <p class="card-title">Experience for Job - {{interview.ClosedJob.experience}}</p>
+        <p class="card-title">Job description - {{interview.ClosedJob.jobDescription}}</p>
+      </div>
+      <div>
+        <span style="float:left">
+          Join on : {{interview.interviewDate}} , {{interview.interviewTime}} (24-hrs clock)
+        </span>
+        <span *ngIf="!doneInterview" style="float:right">
+          <a href='{{interview.link}}' target="_blank">
+          <button type="button" class="btn btn-secondary btn-sm">
+            Join Meeting
+          </button>
+          </a>
+        </span>
+        <span *ngIf="doneInterview && interview.feedbackId == null" style="float:right">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#feedback" (click)="newFeedback()">
+            Feedback
+          </button>
+        </span>
+      </div>
+    </div>
+</div>
+
+ <!-- popup for skills and experience -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+          <div class="modal-header">
+              <p class="modal-title" id="exampleModalLabel">
+                  <span style="font-size: 25px; font-weight: 700;">{{interview.Candidate.firstName}} {{interview.Candidate.lastName}}</span> Details
+              </p>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p><span style="font-size: 20px; font-weight: 500;">Skills </span> - {{skills?.candidateSkills}}</p>
+              <p style="font-size: 20px; font-weight: 500;">Experiences - </p>
+              <div>
+                <div *ngIf="experience.length == 0">No Experience to show</div>
+                <div *ngFor="let item of experience">
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div>
+                        <span class="card-title"><b>{{item.experienceTitle}}</b></span>
+                        <!-- <span style="float:right">Company</span> -->
+                        <span style="float:right"><a href='{{item.Company.baseUrl}}' target="_blank">{{item.Company.companyName}}</a></span>
+                      </div>
+                      <p style="font-size: 13px;">{{item.startDate}} - {{item.isCurrentlyWorking ? "currently working" : item.endDate}}</p>
+                      <p class="card-text">{{item.description}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- popup for feedback -->
+<div class="modal fade" id="feedback" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                  <span>Feedback for <b>{{interview.Candidate.firstName}} {{interview.Candidate.lastName}}</b></span>
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+          </div>
+          <div class="modal-body">
+              <form [formGroup]="form">
+                <div class="mb-3 row">
+                    <div >
+                        <label class="form-label">Rating (Out of 10)</label>
+                        <input
+                            type="number"
+                            formControlName="rating"
+                            class="form-control"
+                        />
+                        <small
+                          *ngIf="f['rating'].invalid && (f['rating'].dirty || f['rating'].touched)"
+                          class="block p-error"
+                          style="color: red;"
+                        >
+                          <div *ngIf="f['rating'].errors?.['required']">
+                            Rating is required
+                          </div>
+                        </small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label class="form-label">Feedback about candidate:</label>
+                        <textarea
+                            formControlName="feedback"
+                            class="form-control"
+                            placeholder="Write about candidate interview here"
+                        >
+                        </textarea>
+                        <small
+                          *ngIf="f['feedback'].invalid && (f['feedback'].dirty || f['feedback'].touched)"
+                          class="block p-error"
+                          style="color: red;"
+                        >
+                          <div *ngIf="f['feedback'].errors?.['required']">
+                            Feedback is required
+                          </div>
+                          <div *ngIf="f['feedback'].errors?.['minlength']">
+                            Feedback should be minimum 50 length
+                          </div>
+                        </small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label class="form-label">Additional Link (Like source code)</label>
+                        <input
+                            type="text"
+                            formControlName="additionalLink"
+                            class="form-control"
+                        />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button [disabled]="submitted || form.invalid"  type="submit" class="btn btn-secondary btn-sm" (click)="submitFeedback()">
+                    <span
+                      *ngIf="submitting"
+                      class="spinner-border spinner-border-sm me-1"
+                    ></span>
+                    Submit Feedback
+                  </button>
+                </div>
+            </form>
+          </div>
+          
+      </div>
+  </div>
+</div>

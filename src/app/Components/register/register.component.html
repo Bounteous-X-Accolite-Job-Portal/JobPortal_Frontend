@@ -37,25 +37,24 @@
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
             <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
-              <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
                     <input
                       type="text"
                       id="FirstName"
-                      class="form-control"
+                      class="form-control bg-light text-dark"
                       formControlName="firstName"
                     />
                     <label class="form-label" for="FirstName">First name</label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                  <div data-mdb-input-init class="form-outline">
+                  <div class="form-outline">
                     <input
                       type="text"
                       id="LastName"
-                      class="form-control"
+                      class="form-control bg-light text-dark"
                       formControlName="lastName"
                     />
 
@@ -65,11 +64,11 @@
               </div>
 
               <!-- Email input -->
-              <div data-mdb-input-init class="form-outline mb-4">
+              <div class="form-outline mb-4">
                 <input
                   type="email"
                   id="Email"
-                  class="form-control"
+                  class="form-control bg-light text-dark"
                   formControlName="email"
                 />
                 <small
@@ -90,11 +89,11 @@
               </div>
 
               <!-- Password input -->
-              <div data-mdb-input-init class="form-outline mb-4">
+              <div class="form-outline mb-4">
                 <input
                   type="password"
                   id="Password"
-                  class="form-control"
+                  class="form-control bg-light text-dark"
                   formControlName="password"
                 />
                 <small
@@ -114,7 +113,7 @@
                 <label class="form-label" for="Password">Password</label>
               </div>
 
-              <div data-mdb-input-init class="form-outline mb-4">
+              <div class="form-outline mb-4">
                 <input
                   type="password"
                   id="ConfirmPassword"
@@ -141,20 +140,22 @@
                   >Confirm Password</label
                 >
               </div>
+              <div class="p-error">{{ message }}</div>
 
-              <!-- Submit button -->
-              <div class="d-flex justify-content-center">
+              <div class="d-flex justify-content-center w-70px">
                 <button
                   (click)="onSubmitRegister()"
                   type="submit"
-                  class="btn btn-primary mb-2 px-3"
+                  class="btn btn-primary btn-block"
                 >
                   Sign up
                 </button>
               </div>
-              <span class="d-flex justify-content-center"
+              <span class="d-flex justify-content-center mt-2"
                 >Already have an account?
-                <a routerLink="../login" style="color: #0a0150">Login</a></span
+                <a routerLink="../login" style="color: #0a0150" class="ms-2"
+                  >Login</a
+                ></span
               >
             </form>
           </div>
