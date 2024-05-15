@@ -15,7 +15,6 @@ import { JobPositionResponse } from '../../Models/JobPositionResponse/JobPositio
 import { Router } from '@angular/router';
 import { UserStoreService } from '../../Services/user-store.service';
 import { AuthService } from '../../Services/auth.service';
-import { JobApplication } from '../../Models/JobApplicationResponse/JobApplication';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { JobService } from '../../Services/Job/job.service';

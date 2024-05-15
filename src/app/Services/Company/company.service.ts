@@ -12,7 +12,7 @@ export class CompanyService {
 
   constructor(private http: HttpClient) { }
 
-  getCompanyById(companyId : string): Observable<CompanyResponse> {
+  getCompanyById(companyId? : string): Observable<CompanyResponse> {
     return this.http.get<CompanyResponse>(
       environment.baseURL + 'Company/getCompany/' + companyId
     );

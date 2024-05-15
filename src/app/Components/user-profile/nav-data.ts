@@ -35,8 +35,8 @@ export const navbarData = [
         label: 'Password Reset'
     },
     {
-        routeLink: 'applyjobs',
-        icon: 'fal fa-briefcase',
-        label: 'Apply For Jobs'
-    }
+        routeLink: 'applied-jobs',
+        icon: 'fal fa-envelope',
+        label: 'Jobs Applied'
+    },
 ];

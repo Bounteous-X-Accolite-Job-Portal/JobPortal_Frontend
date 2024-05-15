@@ -4,7 +4,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { AllCandidateEducation } from '../../../Models/EducationResponse/AllCandidateEducation';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
-
+import { UserStoreService } from '../../../Services/user-store.service';
+import { AuthService } from '../../../Services/auth.service';
+import { Degree } from '../../../Models/DegreeResponse/Degree';
+import { EducationInstitution } from '../../../Models/InstitutionResponse/EducationInstitution';
+import { forkJoin } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-candidate-education',
@@ -16,31 +21,94 @@ import { CandidateService } from '../../../Services/CandidateService/candidate.s
 export class CandidateEducationComponent {
   route:ActivatedRoute=inject(ActivatedRoute);
   eduList : candidateEducation[] = [];
+  degrees: Degree[] = [];
+  institutions : EducationInstitution[] = [];
   httpService=inject(CandidateService);
 
-  userId=String(this.route.snapshot.params['id']);
-  constructor(){
+  userId: string = "";
+  constructor(
+    private userStore : UserStoreService,
+    private auth : AuthService,
+    private toastr : ToastrService
+  )
+  {}
 
+  ngOnInit():void{
+    this.loadCandidateEducations();
+  }
+  
+  private loadCandidateEducations() :void
+  {
+    this.userStore.getIdFromStore()
+    .subscribe((val) => {
+      console.log(val);
+      let idFromToken = this.auth.getIdFromToken();
+      console.log(idFromToken);
+      this.userId = val || idFromToken;
+      console.log("Logged User Id : ",this.userId);
+    })
+    
     this.httpService.getAllcandidateEducation(this.userId).subscribe(
       (res : AllCandidateEducation ) =>{
-      //  console.log(res);
+        console.log("response",res);
         this.eduList = res.candidateEducation;
-        console.log(this.eduList);
+        console.log("eulist",this.eduList);
+        this.storedata();
       },
       (error) => {
         console.log(error);
       }
     );
+
+    console.log("degrees",this.degrees);
+    console.log("institutions",this.institutions);
   }
 
-
-  addE() {
-    // this.pageRender=!this.pageRender;
-    this.eduList.push({grade:"A" ,institutionOrSchoolName:'abcd',startYear:2018,endYear:2025,degree:'chal'});
+  private storedata() : void
+  {
+    for(let i=0;i<this.eduList.length;i++)
+      {
+        this.addDegree(this.eduList[i].degreeId);
+        this.addInstitution(this.eduList[i].institutionId);
+      }
   }
-  onDel() {
-    this.eduList.pop();
+
+  private addDegree(degreeId? : string): void
+  {
+    console.log("fun call",degreeId);
+    this.httpService.getDegreeById(degreeId).subscribe(
+      (res) => {
+        this.degrees.push(res.degree);
+        console.log(res);
+      },
+      (error) =>{
+        console.log(error);
+      }
+    )
+  }
+  private addInstitution(institutionId? : string): void
+  {
+    this.httpService.getInstitutionById(institutionId).subscribe(
+      (res) => {
+        this.institutions.push(res.educationInstitution);
+        console.log(res);
+      },
+     (error) =>{
+        console.log(error);
+      }
+    )
   }
 
-
+  deleteEducation(educationId? : string) {
+    this.httpService.deleteEducation(educationId).subscribe(
+      (res) =>{
+        console.log(res);
+        this.toastr.success("Education Deleted !!");
+        this.ngOnInit();
+      },
+      (error) =>{
+        console.log(error);
+      }
+    )
+  }
 }
