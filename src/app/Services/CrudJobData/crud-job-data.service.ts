@@ -87,4 +87,10 @@ export class CrudJobDataService {
     );
   }
 
+  updateDegreeByDegreeId(updatedDegree: Degree){
+    return this.http.put(
+      environment.baseURL + 'Degree/updateDegree/', updatedDegree
+    );
+  }
+
 }
