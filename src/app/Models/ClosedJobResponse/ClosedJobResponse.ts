@@ -1,4 +1,4 @@
-import { ClosedJob } from "../ClosedJob";
+import { ClosedJob } from "./ClosedJob";
 
 export interface ClosedJobResponse{
     status: number;

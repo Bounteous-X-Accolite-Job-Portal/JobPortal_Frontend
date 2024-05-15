@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { position } from '../../../Models/JobPositionResponse/position';
-import { JobService } from '../../../Services/job.service';
+
 import { CrudJobDataService } from '../../../Services/CrudJobData/crud-job-data.service';
 import { CommonModule } from '@angular/common';
+import { JobService } from '../../../Services/Job/job.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-crud-position-job-data',
   standalone: true,
-  imports: [ CommonModule ],
+  imports: [ CommonModule ,RouterLink ],
   templateUrl: './crud-position-job-data.component.html',
   styleUrl: './crud-position-job-data.component.css'
 })
@@ -15,7 +17,7 @@ export class CrudPositionJobDataComponent {
 
   jobPositions: position[] = [];
 
-  constructor(private jobService: JobService, private crudJobDataService: CrudJobDataService){}
+  constructor(private crudJobDataService: CrudJobDataService,private jobService : JobService){}
   ngOnInit(){
     this.loadJobPositions();
   }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { JobType } from '../../../Models/JobTypeResponse/JobType';
-import { JobService } from '../../../Services/job.service';
+import { JobService } from '../../../Services/Job/job.service';
 import { CrudJobDataService } from '../../../Services/CrudJobData/crud-job-data.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';

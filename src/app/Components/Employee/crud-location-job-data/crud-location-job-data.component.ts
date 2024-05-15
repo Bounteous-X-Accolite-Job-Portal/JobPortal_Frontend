@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { location } from '../../../Models/JoblocationResponse/location';
 import { CrudJobDataService } from '../../../Services/CrudJobData/crud-job-data.service';
-import { JobService } from '../../../Services/job.service';
+
 import { RouterLink } from '@angular/router';
+import { JobService } from '../../../Services/Job/job.service';
 
 @Component({
   selector: 'app-crud-location-job-data',

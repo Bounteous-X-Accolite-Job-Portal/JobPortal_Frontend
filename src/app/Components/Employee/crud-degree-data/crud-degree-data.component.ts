@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Degree } from '../../../Models/DegreeResponse/Degree';
 import { CommonModule } from '@angular/common';
-import { JobService } from '../../../Services/job.service';
+
 import { CrudJobDataService } from '../../../Services/CrudJobData/crud-job-data.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { JobService } from '../../../Services/Job/job.service';
 
 @Component({
   selector: 'app-crud-degree-data',
