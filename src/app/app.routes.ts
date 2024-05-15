@@ -126,7 +126,6 @@ export const routes: Routes = [
       { path: 'skills/::id', component: SkillsComponent },
       { path: 'resume/:id', component: ResumeComponent },
       { path: 'sml/:id', component: SocialProfilesComponent },
-      { path: 'pass-reset/:id', component: PasswordResetComponent },
       // { path: '', component: TryComponent},
       { path: '**', component: TryComponent },
     ],
