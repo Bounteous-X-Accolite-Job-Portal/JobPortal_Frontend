@@ -32,7 +32,9 @@ export class AddEmployeeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private addEmployeeService: AddEmployeeService
-  ) {}
+  ) {
+
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];

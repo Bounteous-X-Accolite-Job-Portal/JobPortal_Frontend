@@ -15,11 +15,13 @@ import { AddJobService } from '../../../Services/add-job.service';
 import { position } from '../../../Models/JobPositionResponse/position';
 import { Degree } from '../../../Models/DegreeResponse/Degree';
 import { Job } from '../../../Models/JobResponse/Job';
+import { SpinnerComponent } from '../../spinner/spinner.component';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-add-job',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, SpinnerComponent],
   templateUrl: './add-job.component.html',
   styleUrl: './add-job.component.css',
 })
@@ -43,17 +45,33 @@ export class AddJobComponent implements OnInit {
   locationIndex: number = 0;
   categoryIndex: number = 0;
   degreeIndex: number = 0;
+  showSpinner = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private jobService: JobService,
-    private addJobService: AddJobService
+    private addJobService: AddJobService,
+    private spinnerService: SpinnerService
   ) {
+
+
+    this.spinnerService.spinner$.subscribe((data: boolean) => {
+      setTimeout(() => {
+        this.showSpinner = data ? data : false;
+      });
+      console.log(this.showSpinner);
+    });
+
+    this.spinnerService.showSpinner();
+    
     this.loadJobLocations();
     this.loadJobTypes();
     this.loadJobCategories();
     this.loadJobPositions();
     this.loadDegrees();
+
+    this.spinnerService.hideSpinner();
+ 
   }
 
   ngOnInit(): void {
