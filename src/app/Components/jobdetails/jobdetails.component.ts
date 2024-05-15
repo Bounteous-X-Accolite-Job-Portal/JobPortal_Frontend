@@ -147,6 +147,7 @@ export class JobdetailsComponent {
           this.disableApplyButton();
           this.displayAppliedMessage();
           console.log("Success",res);
+          this.router.navigate(['jobs']);
         },
       (error) =>
         {

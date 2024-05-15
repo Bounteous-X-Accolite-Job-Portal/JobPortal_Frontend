@@ -13,7 +13,7 @@ import { CandidateService } from '../../../Services/CandidateService/candidate.s
 import { CommonModule } from '@angular/common';
 import { Degree } from '../../../Models/DegreeResponse/Degree';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { RouterLink } from '@angular/router';
+import { Route, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-add-education',
@@ -28,6 +28,8 @@ export class AddEducationComponent {
   httpService = inject(CandidateService);
   Institutions: EducationInstitution[] = [];
   toastr = inject(ToastrService);
+
+constructor(private router:Router) {}
 
   ngOnInit(): void {
     this.Institutions.push({
@@ -86,6 +88,7 @@ export class AddEducationComponent {
         (res) => {
           console.log(res);
           this.toastr.success("CONGO Education Added !!");
+          this.router.navigate(['profile','edu']);
         },
         (error) => {
           console.log(error);

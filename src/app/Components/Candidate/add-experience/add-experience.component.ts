@@ -11,6 +11,7 @@ import { Company } from '../../../Models/CompanyResponse/Company';
 import { CompanyService } from '../../../Services/Company/company.service';
 import { CommonModule } from '@angular/common';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-Experience',
@@ -37,7 +38,7 @@ export class AddExperienceComponent {
   candidateService = inject(CandidateService);
   Experience: candidateExperience[] = [];
 
-  constructor(private toastr : ToastrService) {}
+  constructor(private toastr : ToastrService , private router:Router) {}
 
   ngOnInit(): void {
     this.companies.push({
@@ -73,6 +74,7 @@ export class AddExperienceComponent {
         (res) => {
           console.log("exp response : ",res);
           this.toastr.success("Experience Added Successfully!!");
+          this.router.navigate(['profile','exp']);
         },
         (error) => {
           console.log(error);
