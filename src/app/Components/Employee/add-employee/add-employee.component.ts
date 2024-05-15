@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AddEmployeeService } from '../../Services/AddEmployee/add-employee.service';
+import { AddEmployeeService } from '../../../Services/AddEmployee/add-employee.service';
 
 @Component({
   selector: 'app-add-employee',
@@ -30,14 +30,11 @@ export class AddEmployeeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private addEmployeeService: AddEmployeeService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
 
-    // form with validation rules
     this.form = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -46,11 +43,8 @@ export class AddEmployeeComponent implements OnInit {
       empId: ['', Validators.required],
       designation: [''],
     });
-
-    // this.title = 'Add Employee';
   }
 
-  // convenience getter for easy access to form fields
   get f() {
     return this.form.controls;
   }
@@ -70,20 +64,14 @@ export class AddEmployeeComponent implements OnInit {
         Designation: this.form.value.designation,
       };
 
-      this.addEmployeeService.addEmployee(empData).subscribe(
-        // {
-      //   next: (v) => console.log(v),
-      //   error: (e) => console.error(e),
-      // });
-        (data: any) => {
-          console.log('Status', data.status, 'data message', data.message);
-          if (data.status == 200) {
-            this.router.navigate(['/user-profile']);
-          } else {
-            console.log('error');
-          }
+      this.addEmployeeService.addEmployee(empData).subscribe((data: any) => {
+        console.log('Status', data.status, 'data message', data.message);
+        if (data.status == 200) {
+          this.router.navigate(['/user-profile']);
+        } else {
+          console.log('error');
         }
-      );
+      });
       this.submitting = true;
     }
   }

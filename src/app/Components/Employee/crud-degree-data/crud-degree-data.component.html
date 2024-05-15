@@ -1,0 +1,94 @@
+<div class="d-flex gradient-custom-2 justify-content-center flex-wrap" style="padding: 20vh;">
+    <div class="w-90 bg-white rounded p-5" style="height: auto;">
+      <div><a routerLink=".."><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</a></div>
+      <h2>Delete Degrees</h2>
+      <hr>
+      <div class="table-responsive-lg">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Degree Name</th>
+                    <th>Duration in years</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let degree of degrees">
+                    <td>{{ degree.degreeName }}</td>
+                    <td>{{ degree.durationInYears }}</td>
+                    <td>
+                        <a id="delete" class="font-weight-bold btn bg-danger text-style-add me-2" (click)="deleteDegreeById(degree.degreeId)"><i class="fa fa-trash"></i></a> 
+                        <!-- <a id="update" class="font-weight-bold btn btn-primary text-style-add"><i class="fas fa-edit"></i></a>  -->
+                        <!-- <div
+              class="modal fade"
+              id="updateDegree"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      Update Degree
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="updateDegreeForm">
+                      <div class="mb-3">
+                        <label for="categoryCode" class="form-label"
+                          >Degree Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="degreeName"
+                          
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="durationInYears" class="form-label"
+                          >Duration In Years</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="durationInYears"
+                          placeholder=""
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="updateDegreeById(degree.degreeId)"
+                    >
+                      Update Degree
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+                    </td>
+             </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+</div>

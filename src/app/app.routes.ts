@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { LandingComponent } from './Components/landing/landing.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
-import { AddEmployeeComponent } from './Components/add-employee/add-employee.component';
+import { AddEmployeeComponent } from './Components/Employee/add-employee/add-employee.component';
 import { AddJobComponent } from './Components/Employee/add-job/add-job.component';
 import { JobHomeComponent } from './Components/job-home/job-home.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
@@ -28,7 +28,12 @@ import { InterviewComponent } from './Components/Employee/interview/interview.co
 import { SettingsComponent } from './Components/Employee/settings/settings.component';
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
 import { JobApplicatonComponent } from './Components/job-applicaton/job-applicaton.component';
-import { CrudJobDataComponent } from './Components/Employee/crud-job-data/crud-job-data.component';
+import { CrudCategoryJobDataComponent } from './Components/Employee/crud-category-job-data/crud-category-job-data.component';
+import { CrudPositionJobDataComponent } from './Components/Employee/crud-position-job-data/crud-position-job-data.component';
+import { CrudTypesJobDataComponent } from './Components/Employee/crud-types-job-data/crud-types-job-data.component';
+import { CrudLocationJobDataComponent } from './Components/Employee/crud-location-job-data/crud-location-job-data.component';
+import { CrudDegreeDataComponent } from './Components/Employee/crud-degree-data/crud-degree-data.component';
+import { CrudInstitutionDataComponent } from './Components/Employee/crud-institution-data/crud-institution-data.component';
 export const routes: Routes = [
   {
     path: '',
@@ -83,7 +88,7 @@ export const routes: Routes = [
   },
   {
     path: 'crud-job-data',
-    component: CrudJobDataComponent,
+    component: CrudCategoryJobDataComponent,
   },
   {
     path: 'employee-dashboard',
@@ -97,7 +102,26 @@ export const routes: Routes = [
       { path: 'settings', component: SettingsComponent },
       {
         path: 'settings',
-        children: [{ path: 'crud-job-data', component: CrudJobDataComponent }],
+        children: [
+          {
+            path: 'crud-category-job-data',
+            component: CrudCategoryJobDataComponent,
+          },
+          {
+            path: 'crud-position-job-data',
+            component: CrudPositionJobDataComponent,
+          },
+          { path: 'crud-types-job-data', component: CrudTypesJobDataComponent },
+          {
+            path: 'crud-location-job-data',
+            component: CrudLocationJobDataComponent,
+          },
+          { path: 'crud-degree-data', component: CrudDegreeDataComponent },
+          {
+            path: 'crud-institution-data',
+            component: CrudInstitutionDataComponent,
+          },
+        ],
       },
     ],
   },
