@@ -95,7 +95,7 @@ export class SettingsComponent implements OnInit {
 
   addPosition() {
     console.log(this.addPositionForm.value);
-    this.crudJobService.addCategory(this.addPositionForm.value).subscribe(
+    this.crudJobService.addPosition(this.addPositionForm.value).subscribe(
       (response) => {
         console.log('success : ', response);
         this.addPositionForm.reset();
@@ -107,7 +107,7 @@ export class SettingsComponent implements OnInit {
   }
 
   addLocation() {
-      this.crudJobService.addLocation(this.addPositionForm.value).subscribe(
+      this.crudJobService.addLocation(this.addLocationForm.value).subscribe(
         (response) => {
           console.log('success : ', response);
           this.addLocationForm.reset();
