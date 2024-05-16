@@ -1,11 +1,37 @@
 <div class="h-100 gradient-custom-2 d-flex flex-column align-items-center">
     <div class="d-flex justify-content-center w-70 pt-5 flex-column align-items-center">
-        <button *ngIf="resumeExists" type="button" class="btn btn-primary px-5" (click)="add()" aria-expanded="false">
+        <button *ngIf="resumeExists" type="button" class="btn btn-outline-primary px-5" (click)="add()" aria-expanded="false">
             Update resume
         </button>
-        <button *ngIf="!resumeExists" type="button" class="btn btn-primary px-5" (click)="add()" aria-expanded="false">
+        <!-- Button trigger modal -->
+        <button *ngIf="!resumeExists" type="button" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="add()" aria-expanded="false">
             Click to add resume
         </button>
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between">
+              <h5 class="modal-title" id="exampleModalLabel">Update resume</h5>
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <label for="resumeLink">Enter the new url</label>  
+              <input type="url" name="resumeLink" id="resumeLink">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary-1">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
         <div *ngIf="!resumeExists" class="text-lg text-danger mt-3 text-bold fw-bold">
             ** A candidate can have only 1 resume at a time **
         </div>
@@ -16,7 +42,7 @@
               <h5 class="card-title">{{tmp.resumeUrl}}</h5>
               <hr>
               <p class="card-text">{{tmp.resumeId}}</p>
-                <a class='btn btn-primary text-style-add' [routerLink]="['update-resume']"><i class="fas fa-edit"></i></a>
+                <a class='btn btn-primary-1 text-style-add' [routerLink]="['update-resume']"><i class="fas fa-edit"></i></a>
                 <button class='btn btn-outline-primary text-style-del' (click)="onDel()"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </div>
         </div>

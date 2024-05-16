@@ -49,19 +49,19 @@ export class JobHomeComponent  {
   ngOnInit(): void {
     this.loadJobs();
 
-    this.locations.push({locationId: "null" , address: "Select Job Location :" , city: "" , state: "" , country : ""});
+    this.locations.push({locationId: "null" , address: "Select Job Location " , city: "" , state: "" , country : ""});
     this.loadJobLocations();
 
-    this.jobTypes.push({jobTypeId: "null" , typeName : " Select Job Type :"});
+    this.jobTypes.push({jobTypeId: "null" , typeName : " Select Job Type "});
     this.loadJobTypes();
 
-    this.jobCategories.push({categoryId:"null",categoryCode:"Select Job Category :",categoryName:"",description:""})
+    this.jobCategories.push({categoryId:"null",categoryCode:"Select Job Category ",categoryName:"",description:""})
     this.loadJobCategories();
     
-    this.jobPositions.push({positionId:"null",positionName:"Select Job Position :",positionCode:"",description:""});
+    this.jobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:""});
     this.loadJobPositions();
 
-    this.degrees.push({degreeId:"null",degreeName:"Select Degree :",durationInYears:0});
+    this.degrees.push({degreeId:"null",degreeName:"Select Degree ",durationInYears:0});
     this.loadDegrees();
   }
 
