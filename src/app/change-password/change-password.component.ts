@@ -4,7 +4,7 @@ import { ForgetPasswordService } from '../forget-password.service';
 import { ChangePasswordService } from '../change-password.service';
 import { resertPassword } from '../Models/resetPasswordmodel';
 import { catchError, tap, throwError } from 'rxjs';
-import { MessageService } from 'primeng/api';
+// import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ToastrModule, ToastrService } from 'ngx-toastr';

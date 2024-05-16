@@ -28,6 +28,8 @@ import { SettingsComponent } from './Components/Employee/settings/settings.compo
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
 import { JobApplicatonComponent } from './Components/job-applicaton/job-applicaton.component';
 import { CrudJobDataComponent } from './Components/Employee/crud-job-data/crud-job-data.component';
+import { ReferralServiceService } from './referral-service.service';
+import { ReferralComponent } from './referral/referral.component';
 export const routes: Routes = [
   {
     path: '',
@@ -94,6 +96,7 @@ export const routes: Routes = [
       { path: 'interview', component: InterviewComponent },
       { path: 'interview-hub', component: InterviewHubComponent },
       { path: 'settings', component: SettingsComponent },
+      {path:'referral',component:ReferralComponent},
       {
         path: 'settings',
         children: [{ path: 'crud-job-data', component: CrudJobDataComponent }],

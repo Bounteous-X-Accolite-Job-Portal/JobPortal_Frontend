@@ -32,7 +32,7 @@ export class CrudJobDataComponent implements OnInit{
   }
 
   deleteByCategoryId(categoryId : string) : void{
-    this.crudJobDataService.deleteByCategoryId(categoryId).subscribe(
+    this.crudJobDataService.deleteCategoryByCategoryId(categoryId).subscribe(
       (res) => {
         console.log("Category Deleted!");
         this.loadJobCategories();
