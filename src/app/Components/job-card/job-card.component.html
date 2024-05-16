@@ -1,40 +1,43 @@
-<section class="listing">
-    <div class="heading">
-        <div>
-            <h1 id="title">{{job.jobTitle}}</h1>
+<div class="job_comp">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="our_solution_category">
+          <div class="solution_cards_box">
+            <div class="solution_card" style="width: 100%;">
+              <div class="hover_color_bubble"></div>
+              <div class="so_top_icon">
+                <img src="../../../assets/Logos/accolite_logo.jpg" alt="job-logo">
+              </div>
+              <div class="solu_title">
+                <h3>{{job.jobTitle}}</h3>
+              </div>
+              <div class="solu_description">
+                <div class="dateId">
+                    <i class="fa fa-location-arrow d-inline" aria-hidden="true"></i>
+                    <div class="mx-3">
+                    {{location?.city}} , {{location?.state}} , {{location?.country}}
+                    </div>
+                </div>
+                <div class="dateId">
+                    <div class="block1">
+                        <i class="fa fa-address-card" aria-hidden="true"></i>
+                       <div class="mx-3">{{job.jobCode}}</div>
+                    </div>
+                    <div class="block2">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <div class="mx-3">Last Date - {{job.lastDate}}</div>
+                    </div>
+                </div>
+                <div class="details">
+                    <div class="option">{{jobtype?.typeName}}</div>
+                    <div class="option">{{jobcategory?.categoryName}}</div>
+                    <div class="option">{{jobPosition?.positionName}}</div>
+                </div>
+                <button class="btn btn-primary-1 mb-2" [routerLink]="['/job-details',job.jobId]" >Click Here for Details..</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="logo">
-            <img class="accolite" src="../../../assets/Logos/accolite_logo.jpg"/>
-        </div>
+      </div>
     </div>
-
-    <div>
-        <i class="fa fa-location-arrow" aria-hidden="true"></i>
-        {{location?.city}} , {{location?.state}} , {{location?.country}}
-    </div>
-    
-    <div class="dateId">
-        <div class="block1">
-            <i class="fa fa-address-card" aria-hidden="true"></i>
-           <p>{{job.jobCode}} </p>
-        </div>
-        <div class="block2">
-            <i class="fa fa-calendar" aria-hidden="true"></i>
-           <p>Last Date - {{job.lastDate}} </p>
-        </div>
-    </div>
-    
-    <div>
-        <p>{{job.jobDescription}}</p>
-    </div>
-
-    <div class="details">
-        <div class="option">{{jobtype?.typeName}}</div>
-        <div class="option">{{jobcategory?.categoryName}}</div>
-        <div class="option">{{jobPosition?.positionName}}</div>
-    </div>
-
-    <div class="footer">
-        <button class="btn btn-outline-primary" [routerLink]="['/job-details',job.jobId]" >Click Here for Details..</button>
-    </div>
-</section> 
+</div>

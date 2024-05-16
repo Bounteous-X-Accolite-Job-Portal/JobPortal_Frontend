@@ -27,7 +27,7 @@ import { InterviewHubComponent } from './Components/Employee/interview-hub/inter
 import { InterviewComponent } from './Components/Employee/interview/interview.component';
 import { SettingsComponent } from './Components/Employee/settings/settings.component';
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
-import { JobApplicatonComponent } from './Components/job-applicaton/job-applicaton.component';
+import { AboutComponent } from './Components/about/about.component';
 export const routes: Routes = [
     {
         path: '',
@@ -40,7 +40,7 @@ export const routes: Routes = [
     },
     {
         path: 'about',
-        component: AddEducationComponent
+        component: AboutComponent
     },
     {
         path: 'login',
@@ -63,10 +63,6 @@ export const routes: Routes = [
     {
       path: 'job-details/:jobId',
       component: JobdetailsComponent,
-    },
-    {
-      path: 'apply-now/:jobId',
-      component:JobApplicatonComponent,
     }, 
     {
       path: 'user-profile',

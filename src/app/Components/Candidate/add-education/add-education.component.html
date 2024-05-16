@@ -8,10 +8,10 @@
         <form [formGroup]="candidateEducation" (ngSubmit)="save()" >
           <div class="form-group mb-3">
               <label for="Institution">Institution Name</label>
-              <input type="text" class="form-control" id="Institution" placeholder="Institution" formControlName="institutionOrSchoolName">
+              <input required type="text" class="form-control" id="Institution" placeholder="Institution" formControlName="institutionOrSchoolName">
           </div>
           <div class="btn-group mb-3" style="width: 80%;">
-            <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn btn-primary-1 dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
             Select your Institution
             </button>
             <ul class="dropdown-menu w-100">
@@ -27,7 +27,7 @@
               <input type="text" class="form-control" id="Degree" aria-describedby="Degree" placeholder="Enter degree" formControlName="degree">
           </div>
           <div class="btn-group mb-3" style="width: 80%;">
-            <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn btn-primary-1 dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
             Select the Degree
             </button>
             <ul class="dropdown-menu w-100 text-center">
@@ -52,7 +52,7 @@
               <input type="number" class="form-control" id="EndYear" placeholder="Enter End Year" formControlName="endYear">
             </div>
           </div>
-          <button type="submit" class="btn btn-primary w-100" [disabled]="!candidateEducation.valid">ADD</button>
+          <button type="submit" class="btn btn-primary-1 w-100" [disabled]="!candidateEducation.valid">ADD</button>
       </form>
       </div>
     </div>

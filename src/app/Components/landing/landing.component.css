@@ -6,7 +6,28 @@
     display: flex;
     position: relative;
     height: 200vh; 
-    width: 100%; 
-    justify-content: center; 
+    /* width: 100%;  */
+    justify-content: start; 
     text-align: center;
+}
+
+.btn-cool-blues {
+    background: #1b7d96;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+    font-size: x-large;
+    padding: 0.7rem 4rem;
+    border-radius: 5rem;
+    border: 2px solid #eee;
+    transition: 0.3s;
+}
+
+.btn-cool-blues:hover{
+    /* transform: translate3d(1.1); */
+    padding: 0.8rem 6rem;
+    color:#143477;
+    background-color: #fff;
+    border-color: #143477;
+    border: 5px solid aliceblue;
 }
