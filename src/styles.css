@@ -69,3 +69,24 @@ body{
       --bs-btn-disabled-bg: #0d016b;
       --bs-btn-disabled-border-color: #0d016b;
     }
+
+    a{
+      color:#0d016b;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .delete-outer:hover{
+      color: red;
+      background-color: white;
+      border-radius: 28px;
+      border: 1px solid red;
+
+    }
+
+    .delete-outer{
+      border-radius: 50%;
+      color: #fff;
+      background-color: red;
+      border: 1px solid red;  
+    }

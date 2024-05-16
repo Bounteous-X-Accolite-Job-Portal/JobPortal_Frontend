@@ -1,27 +1,31 @@
-import { CommonModule, DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, DatePipe, formatDate } from '@angular/common';
+import { Component, OnInit, input } from '@angular/core';
 import {
-  FormBuilder,
+  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { JobCategory } from '../../../Models/JobCategoryResponse/JobCategory';
-import { JobService } from '../../../Services/job.service';
+import { JobService } from '../../../Services/Job/job.service';
 import { location } from '../../../Models/JoblocationResponse/location';
 import { JobType } from '../../../Models/JobTypeResponse/JobType';
 import { AddJobService } from '../../../Services/add-job.service';
 import { position } from '../../../Models/JobPositionResponse/position';
 import { Degree } from '../../../Models/DegreeResponse/Degree';
 import { Job } from '../../../Models/JobResponse/Job';
+import { SpinnerComponent } from '../../spinner/spinner.component';
+import { SpinnerService } from '../../../Services/spinner.service';
+import { timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-add-job',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, SpinnerComponent],
   templateUrl: './add-job.component.html',
   styleUrl: './add-job.component.css',
+  providers: [DatePipe]
 })
 export class AddJobComponent implements OnInit {
   jobForm!: FormGroup;
@@ -37,6 +41,7 @@ export class AddJobComponent implements OnInit {
   jobs: Job[] = [];
   // Filterjobs: Job[] = [];
   jobData: any;
+  lastDateError: boolean = true;
 
   positionIndex: number = 0;
   typeIndex: number = 0;
@@ -45,18 +50,21 @@ export class AddJobComponent implements OnInit {
   degreeIndex: number = 0;
 
   constructor(
-    private formBuilder: FormBuilder,
     private jobService: JobService,
-    private addJobService: AddJobService
+    private addJobService: AddJobService,
+    private datePipe: DatePipe
   ) {
+   
     this.loadJobLocations();
     this.loadJobTypes();
     this.loadJobCategories();
     this.loadJobPositions();
     this.loadDegrees();
+
   }
 
   ngOnInit(): void {
+    console.log(this.lastDateError);
     this.jobForm = new FormGroup(
       {
         jobCode: new FormControl('', Validators.required),
@@ -68,29 +76,35 @@ export class AddJobComponent implements OnInit {
         locationId: new FormControl(''),
         jobType: new FormControl(''),
         experience: new FormControl(''),
-        lastDate: new FormControl(Date, Validators.required),
-      }
+        lastDate: new FormControl('', Validators.required),
+      },
       // {
       //   validators: this.lastDateValidator,
       // }
     );
   }
 
-  // lastDateValidator = (): any => {
-  //   const lastDateControls = this.jobForm.controls['lastdate'];
-  //   const now = new Date();
-  //   if (lastDateControls) {
-  //     const lastDate = lastDateControls.value;
-  //     if (
-  //       lastDate.getDate() > now.getDate() ||
-  //       lastDate.getTime() > lastDate.getTime()
-  //     ) {
-  //       lastDateControls.setErrors({ lastDateError: true });
-  //       return { lastDateError: true };
-  //     }
-  //   } else {
+
+  // lastDateValidator(formGroup: AbstractControl): any {
+
+  //   const currDate = Date.now();
+  //   const inputlastdateControl = formGroup.get('lastDate');
+  //   if(currDate && inputlastdateControl){
+  //     let date1 = formatDate(currDate ,'yyyy-MM-dd','en_US');
+  //     let date2 = formatDate(inputlastdateControl.value,'yyyy-MM-dd','en_US');
+
+  //     if(date1>date2){
+  //       console.log('---date1 is greater----');
+  //       inputlastdateControl.setErrors({ lastDateError: true });
+  //       return { lastDateError : true};
+  //      }else{
+  //       console.log('---date2 is greater-----');
+  //       inputlastdateControl.setErrors(null);
+  //       return null;
+  //      }
+  //   }else{
   //     return null;
-  //   }
+  //   }    
   // };
 
   private loadJobLocations(): void {
@@ -158,9 +172,7 @@ export class AddJobComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.locations[this.locationIndex]);
-
-    console.log(this.jobForm.controls['']);
+    console.log(this.jobForm.value);
     this.jobData = {
       jobCode: this.jobForm.value.jobCode,
       jobDescription: this.jobForm.value.jobDescription,
@@ -173,11 +185,21 @@ export class AddJobComponent implements OnInit {
       experience: this.jobForm.value.experience,
       lastDate: this.jobForm.value.lastDate,
     };
+    let given = this.jobForm.value.lastDate;
+    // console.log(given.getTime(), "   : " , );
+    // let currentDate = new Date();
+      
+    // formatDate(currentDate, 'yyyy/MM/dd', 'en');
+    // console.log("formatted " ,currentDate.getTime());
+
     if (this.jobForm.valid) {
+     
+
+      console.log(this.jobForm.value.lastDate, " ", new Date());
       this.addJobService.addJobs(this.jobData).subscribe(
         (res) => {
           console.log(
-            'success ' + res.categoryId + ' ' + res.lastDate + ' ' + res.jobCode
+            'success '
           );
         },
         (error) => {
@@ -185,7 +207,7 @@ export class AddJobComponent implements OnInit {
         }
       );
     } else {
-      this.jobForm.reset();
+      // this.jobForm.reset();
       console.log('invalid form');
     }
     this.submitted = true;

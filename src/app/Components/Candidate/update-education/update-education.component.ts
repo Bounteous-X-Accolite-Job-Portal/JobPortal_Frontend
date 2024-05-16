@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { CandidateServicesService } from '../../../Services/candidate-services.service';
-import { candidateEducation } from '../../../Models/candidateEducation';
+import { candidateEducation } from '../../../Models/EducationResponse/candidateEducation';
+import { CandidateService } from '../../../Services/CandidateService/candidate.service';
 
 @Component({
   selector: 'app-update-education',
@@ -28,7 +28,7 @@ throw new Error('Method not implemented.');
   });
 
 
-  httpService = inject(CandidateServicesService);
+  httpService = inject(CandidateService);
   Education: candidateEducation[] = [];
 
   save() {

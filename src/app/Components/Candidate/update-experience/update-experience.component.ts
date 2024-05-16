@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CandidateServicesService } from '../../../Services/candidate-services.service';
-import { candidateExperience } from '../../../Models/candidateExperience';
+import { candidateExperience } from '../../../Models/ExperienceResponse/candidateExperience';
+import { CandidateService } from '../../../Services/CandidateService/candidate.service';
 
 @Component({
   selector: 'app-update-experience',
@@ -25,7 +25,7 @@ export class UpdateExperienceComponent {
   });
 
 
-  httpService = inject(CandidateServicesService);
+  httpService = inject(CandidateService);
   Experience: candidateExperience[] = [];
 
   save() {

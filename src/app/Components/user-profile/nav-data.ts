@@ -33,5 +33,10 @@ export const navbarData = [
         routeLink: 'pass-reset',
         icon: 'fal fa-cog',
         label: 'Password Reset'
-    }
+    },
+    {
+        routeLink: 'applied-jobs',
+        icon: 'fal fa-envelope',
+        label: 'Jobs Applied'
+    },
 ];

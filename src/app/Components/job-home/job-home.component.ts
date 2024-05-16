@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { JobCardComponent } from '../job-card/job-card.component';
-import { JobService } from '../../Services/job.service';
+import { JobService } from '../../Services/Job/job.service';
 import { JobType } from '../../Models/JobTypeResponse/JobType';
 import { JobCategory } from '../../Models/JobCategoryResponse/JobCategory';
 import { location } from '../../Models/JoblocationResponse/location';

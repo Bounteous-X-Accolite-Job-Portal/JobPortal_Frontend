@@ -36,8 +36,8 @@
           </button>
           </a>
         </span>
-        <span *ngIf="doneInterview" style="float:right">
-          <button type="button" class="btn btn-secondary btn-sm">
+        <span *ngIf="doneInterview && interview.feedbackId == null" style="float:right">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#feedback" (click)="newFeedback()">
             Feedback
           </button>
         </span>
@@ -45,7 +45,7 @@
     </div>
 </div>
 
- <!-- popup -->
+ <!-- popup for skills and experience -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
@@ -77,6 +77,86 @@
           </div>
           <div class="modal-footer">
           </div>
+      </div>
+  </div>
+</div>
+
+<!-- popup for feedback -->
+<div class="modal fade" id="feedback" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                  <span>Feedback for <b>{{interview.Candidate.firstName}} {{interview.Candidate.lastName}}</b></span>
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+          </div>
+          <div class="modal-body">
+              <form [formGroup]="form">
+                <div class="mb-3 row">
+                    <div >
+                        <label class="form-label">Rating (Out of 10)</label>
+                        <input
+                            type="number"
+                            formControlName="rating"
+                            class="form-control"
+                        />
+                        <small
+                          *ngIf="f['rating'].invalid && (f['rating'].dirty || f['rating'].touched)"
+                          class="block p-error"
+                          style="color: red;"
+                        >
+                          <div *ngIf="f['rating'].errors?.['required']">
+                            Rating is required
+                          </div>
+                        </small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label class="form-label">Feedback about candidate:</label>
+                        <textarea
+                            formControlName="feedback"
+                            class="form-control"
+                            placeholder="Write about candidate interview here"
+                        >
+                        </textarea>
+                        <small
+                          *ngIf="f['feedback'].invalid && (f['feedback'].dirty || f['feedback'].touched)"
+                          class="block p-error"
+                          style="color: red;"
+                        >
+                          <div *ngIf="f['feedback'].errors?.['required']">
+                            Feedback is required
+                          </div>
+                          <div *ngIf="f['feedback'].errors?.['minlength']">
+                            Feedback should be minimum 50 length
+                          </div>
+                        </small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label class="form-label">Additional Link (Like source code)</label>
+                        <input
+                            type="text"
+                            formControlName="additionalLink"
+                            class="form-control"
+                        />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button [disabled]="submitted || form.invalid"  type="submit" class="btn btn-secondary btn-sm" (click)="submitFeedback()">
+                    <span
+                      *ngIf="submitting"
+                      class="spinner-border spinner-border-sm me-1"
+                    ></span>
+                    Submit Feedback
+                  </button>
+                </div>
+            </form>
+          </div>
+          
       </div>
   </div>
 </div>

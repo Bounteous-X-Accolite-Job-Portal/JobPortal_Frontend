@@ -1,53 +1,30 @@
-<!-- Navbar -->
-<nav
-  class="navbar-collapse Collapsible navbar navbar-expand-lg navbar-light bg-body-secondary shadow-lg p-3 bg-white rounded"
->
-  <!-- Container wrapper -->
+<nav class="navbar navbar-expand-lg navbar-light bg-body-secondary shadow-lg p-3 bg-white rounded">
   <div class="container-fluid">
-    <!-- Navbar brand -->
     <a class="navbar-brand me-2" [routerLink]="['/']" target="_self">
-      <img
-        src="../../../assets/Logos/BxA_logo.webp"
-        height="36"
-        alt="BxA_Logo"
-        style="margin-top: -1px"
-        loading="eager"
-      />
+      <img src="../../../assets/Logos/BxA_logo.webp" height="36" alt="BxA_Logo" style="margin-top: -1px" loading="eager" />
     </a>
-    <!-- Collapsible wrapper -->
-    <div
-      class="navbar-collapse justify-content-between"
-      id="navbarButtonsExample"
-    >
-      <!-- Left links -->
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarButtonsExample">
       <div class="d-flex align-items-center justify-content-start">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/profile']">Profile</a>
           </li>
-        </ul>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/jobs']">Jobs</a>
           </li>
-        </ul>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/about']">About</a>
           </li>
         </ul>
       </div>
-      <!-- Left links -->
       <div class="d-flex justify-content-end">
         <div *ngIf="!isLoggedIn">
           <a [routerLink]="['/login']">
-            <button
-              type="button"
-              class="btn btn-outline-primary px-3 me-2 text-style-login"
-              style="font-weight: bold"
-            >
-              Login
-            </button>
+            <button type="button" class="btn btn-outline-primary px-3 me-2 text-style-login" style="font-weight: bold">Login</button>
           </a>
           <a [routerLink]="['/register']">
             <button
@@ -61,20 +38,12 @@
         </div>
         <div *ngIf="isLoggedIn">
           <a [routerLink]="['/login']" (click)="logout()">
-            <button
-              type="button"
-              class="btn btn-outline-primary px-3 me-2 text-style-login"
-              style="font-weight: bold"
-            >
-              Logout
-            </button>
+            <button type="button" class="btn btn-outline-primary px-3 me-2 text-style-login" style="font-weight: bold">Logout</button>
           </a>
         </div>
       </div>
     </div>
-    <!-- Collapsible wrapper -->
   </div>
-  <!-- Container wrapper -->
 </nav>
 
 <router-outlet></router-outlet>
