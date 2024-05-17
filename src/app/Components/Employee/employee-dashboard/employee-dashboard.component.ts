@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { sideBarData } from './side-bar';
 import { UserStoreService } from '../../../Services/user-store.service';
 import { AuthService } from '../../../Services/auth.service';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -16,21 +17,52 @@ export class EmployeeDashboardComponent implements OnInit {
   collapsed = false;
   sideBarData = sideBarData;
   public name : string = "Employee";
+  hasPrivilege : boolean = false;
+  hasSpecialPrivilege : boolean = false;
 
   constructor(
     private userStore : UserStoreService, 
-    private authService : AuthService
-) { }
+    private authService : AuthService,
+    private spinnerService : SpinnerService,
+  ) { }
 
   ngOnInit(): void {
     this.userStore.getNameFromStore()
     .subscribe((val) => {
-        console.log(val);
         let nameFromToken = this.authService.getNameFromToken();
-        console.log(nameFromToken);
         this.name = val || nameFromToken;
-        console.log(this.name);
     })
+
+    this.checkHasPrivilege();
+    this.checkHasSpecialPrivilege();
+  }
+
+  checkHasPrivilege(){
+    this.spinnerService.showSpinner();
+
+    this.userStore.checkHasPrivilegeFromStore()
+    .subscribe((val) => {
+        let privilege = this.authService.checkHasPrivilegeFromToken();
+        this.hasPrivilege = val || privilege;
+    })
+
+    this.spinnerService.hideSpinner();
+
+    console.log("hasPrivilege at emp dash", this.hasPrivilege);
+  }
+
+  checkHasSpecialPrivilege(){
+    this.spinnerService.showSpinner();
+
+    this.userStore.checkHasSpecialPrivilegeFromStore()
+    .subscribe((val) => {
+        let specialPrivilege = this.authService.checkHasSpecialPrivilegeFromToken();
+        this.hasSpecialPrivilege = val || specialPrivilege;
+    })
+
+    this.spinnerService.hideSpinner();
+
+    console.log("hasSpecialPrivilege at emp dash", this.hasSpecialPrivilege);
   }
 
   closeSidenav() {

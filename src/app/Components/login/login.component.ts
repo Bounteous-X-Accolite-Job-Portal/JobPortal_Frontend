@@ -65,6 +65,8 @@ export class LoginComponent {
             this.userStore.setIsEmployeeForStore(tokenPayload['IsEmployee']);
             this.userStore.setRoleForStore(tokenPayload['Role']);
             this.userStore.setIdForStore(tokenPayload['Id']);
+            this.userStore.setHasPrivilegeForStore(tokenPayload["HasPrivilege"]);
+            this.userStore.setHasSpecialPrivilegeForStore(tokenPayload["HasSpecialPrivilege"]);
 
             this.authService.AuthEvent.emit(true);
 

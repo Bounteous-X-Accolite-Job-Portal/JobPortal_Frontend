@@ -38,6 +38,9 @@ import { employeeGuardGuard } from './Guards/employee-guard.guard';
 import { childEmployeeGuardGuard } from './Guards/child-employee-guard.guard';
 import { candidateGuard } from './Guards/candidate.guard';
 import { candidateChildGuard } from './Guards/candidate-child.guard';
+import { hasPrivilegeGuard } from './Guards/has-privilege.guard';
+import { hasSpecialPrivilegeGuard } from './Guards/has-special-privilege.guard';
+import { hasSpecialPrivilegeChildGuard } from './Guards/has-special-privilege-child.guard';
 
 export const routes: Routes = [
   {
@@ -97,12 +100,17 @@ export const routes: Routes = [
     canActivate: [authGuard, employeeGuardGuard],
     canActivateChild: [childAuthGuard, childEmployeeGuardGuard],
     children: [
-      { path: 'add-job', component: AddJobComponent },
+      { path: 'add-job', 
+        component: AddJobComponent,
+        canActivate: [hasPrivilegeGuard]
+      },
       { path: 'interview', component: InterviewComponent },
       { path: 'interview-hub', component: InterviewHubComponent },
       { path: 'settings', component: SettingsComponent },
       {
         path: 'settings',
+        canActivate: [hasSpecialPrivilegeGuard],
+        canActivateChild: [hasSpecialPrivilegeChildGuard],
         children: [
           {
             path: 'crud-category-job-data',
