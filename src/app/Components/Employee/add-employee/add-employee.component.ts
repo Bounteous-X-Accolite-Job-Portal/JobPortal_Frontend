@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -18,7 +19,7 @@ import { AddEmployeeService } from '../../../Services/AddEmployee/add-employee.s
   styleUrl: './add-employee.component.css',
 })
 export class AddEmployeeComponent implements OnInit {
-  form!: FormGroup;
+  addEmployeeForm!: FormGroup;
   id?: string;
   title!: string;
   loading = false;
@@ -33,45 +34,42 @@ export class AddEmployeeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
+    // this.id = this.route.snapshot.params['id'];
 
-    this.form = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required]],
-      phone: ['', [Validators.minLength(10), Validators.maxLength(10)]],
-      empId: ['', Validators.required],
-      designation: [''],
+    this.addEmployeeForm = new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.minLength(6)),
+      empId: new FormControl('', Validators.required),
+      designationId: new FormControl('', Validators.required),
     });
   }
 
   get f() {
-    return this.form.controls;
+    return this.addEmployeeForm.controls;
   }
 
   onSubmit() {
     this.submitted = true;
 
-    if (this.form.invalid) {
+    if (this.addEmployeeForm.invalid) {
       return;
     } else {
-      const empData = {
-        FirstName: this.form.value.firstName,
-        LastName: this.form.value.lastName,
-        Email: this.form.value.email,
-        Phone: this.form.value.phone,
-        EmpId: this.form.value.empId,
-        Designation: this.form.value.designation,
-      };
+      console.log(this.addEmployeeForm.value);
 
-      this.addEmployeeService.addEmployee(empData).subscribe((data: any) => {
-        console.log('Status', data.status, 'data message', data.message);
-        if (data.status == 200) {
-          this.router.navigate(['/user-profile']);
-        } else {
-          console.log('error');
-        }
-      });
+      this.addEmployeeService
+        .addEmployee(this.addEmployeeForm.value)
+        .subscribe((data: any) => {
+          console.log('Status', data.status, 'data message', data.message);
+          if (data.status == 200) {
+            this.loading = false;
+            console.log('success adding employee');
+            
+          } else {
+            console.log('error');
+          }
+        });
       this.submitting = true;
     }
   }

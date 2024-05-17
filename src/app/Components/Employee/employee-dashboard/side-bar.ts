@@ -5,6 +5,11 @@ export const sideBarData = [
     label: 'Add New Job',
   },
   {
+    routeLink: 'add-employee',
+    icon: 'fa fa-user-plus',
+    label: 'Add New Employee',
+  },
+  {
     routeLink: 'interview',
     icon: 'fal fa-question',
     label: 'Inteview Hub',
@@ -15,9 +20,9 @@ export const sideBarData = [
     label: 'Interview Feedback',
   },
   {
-      routeLink: 'settings',
-      icon: 'fal fa-cog',
-      label: 'Settings'
+    routeLink: 'settings',
+    icon: 'fal fa-cog',
+    label: 'Settings',
   },
   // {
   //     routeLink: 'sml',

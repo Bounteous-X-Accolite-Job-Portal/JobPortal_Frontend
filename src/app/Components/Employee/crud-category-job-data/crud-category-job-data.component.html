@@ -19,8 +19,8 @@
                     <td>{{ cat.categoryName }}</td>
                     <td>{{ cat.description }}</td>
                     <td>
-                        <a id="delete" class="font-weight-bold btn btn-danger bg-danger text-style-add" (click)="deleteCategoryById(cat.categoryId)"><i class="fa fa-trash"></i></a> 
-                        <a id="edit" class="font-weight-bold btn btn-primary text-style-add"><i class="fas fa-edit"></i></a> 
+                        <button class="delete-outer"><a id="delete" (click)="deleteCategoryById(cat.categoryId)"><i class="fa fa-trash"></i></a> </button>
+                        <!-- <a id="edit" class="font-weight-bold btn btn-primary text-style-add"><i class="fas fa-edit"></i></a>  -->
 
                     </td>
                 </tr>
