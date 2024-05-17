@@ -38,4 +38,22 @@ export class PermissionService {
     this.router.navigate([''])
     return false;
   }
+
+  isEmployee() : boolean {
+    if(this.auth.checkIsEmployeeFromToken()){
+      return true;
+    }
+
+    this.router.navigate([''])
+    return false;
+  }
+
+  isCandidate() : boolean {
+    if(!this.auth.checkIsEmployeeFromToken()){
+      return true;
+    }
+
+    this.router.navigate([''])
+    return false;
+  }
 }

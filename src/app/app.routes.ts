@@ -28,6 +28,11 @@ import { InterviewComponent } from './Components/Employee/interview/interview.co
 import { SettingsComponent } from './Components/Employee/settings/settings.component';
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
 import { JobApplicatonComponent } from './Components/job-applicaton/job-applicaton.component';
+import { employeeGuardGuard } from './Guards/employee-guard.guard';
+import { childEmployeeGuardGuard } from './Guards/child-employee-guard.guard';
+import { candidateGuard } from './Guards/candidate.guard';
+import { candidateChildGuard } from './Guards/candidate-child.guard';
+
 export const routes: Routes = [
     {
         path: '',
@@ -83,8 +88,8 @@ export const routes: Routes = [
     {
       path: 'employee-dashboard',
       component: EmployeeDashboardComponent,
-      canActivate: [authGuard],
-      canActivateChild: [childAuthGuard],
+      canActivate: [authGuard, employeeGuardGuard],
+      canActivateChild: [childAuthGuard, childEmployeeGuardGuard],
       children: [
         { path: 'add-job', component: AddJobComponent },
         { path: 'interview', component: InterviewComponent },
@@ -95,8 +100,8 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: UserProfileComponent,
-        // canActivate: [authGuard],
-        // canActivateChild: [childAuthGuard],
+        canActivate: [authGuard, candidateGuard],
+        canActivateChild: [childAuthGuard, candidateChildGuard],
         children: [
             { path: 'edu/:id', component: CandidateEducationComponent },
             { path: 'edu/:id', children:[

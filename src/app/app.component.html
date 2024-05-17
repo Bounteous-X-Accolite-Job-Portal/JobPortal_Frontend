@@ -1,3 +1,6 @@
+<!-- loding popup -->
+<app-spinner *ngIf="loading"></app-spinner>
+
 <!-- Navbar -->
 <nav
   class="navbar-collapse Collapsible navbar navbar-expand-lg navbar-light bg-body-secondary shadow-lg p-3 bg-white rounded"
@@ -60,12 +63,13 @@
           </a>
         </div>
         <div *ngIf="isLoggedIn">
-          <a [routerLink]="['/login']" (click)="logout()">
+          <a (click)="logout()">
             <button
               type="button"
               class="btn btn-outline-primary px-3 me-2 text-style-login"
               style="font-weight: bold"
             >
+              <!-- <app-spinner *ngIf="loading"></app-spinner> -->
               Logout
             </button>
           </a>
