@@ -100,6 +100,20 @@ export class AuthService {
     return false;
   }
 
+  checkHasPrivilegeFromToken(){
+    if(this.userPayload)
+      return this.userPayload.HasPrivilege;
+
+    return false;
+  }
+
+  checkHasSpecialPrivilegeFromToken(){
+    if(this.userPayload)
+      return this.userPayload.HasSpecialPrivilege;
+
+    return false;
+  }
+
   getRoleFromToken(){
     if(this.userPayload)
       return this.userPayload.Role;

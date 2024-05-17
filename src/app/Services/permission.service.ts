@@ -69,4 +69,32 @@ export class PermissionService {
     this.router.navigate([''])
     return false;
   }
+
+  hasPrivilege() : boolean {
+    let bool = this.auth.checkHasPrivilegeFromToken();
+    this.store.checkHasPrivilegeFromStore().subscribe(val => {
+        bool = bool || val;
+    })
+
+    if(bool){
+      return true;
+    }
+
+    this.router.navigate(['employee-dashboard'])
+    return false;
+  }
+
+  hasSpecialPrivilege() : boolean {
+    let bool = this.auth.checkHasSpecialPrivilegeFromToken();
+    this.store.checkHasSpecialPrivilegeFromStore().subscribe(val => {
+        bool = bool || val;
+    })
+
+    if(bool){
+      return true;
+    }
+
+    this.router.navigate(['employee-dashboard'])
+    return false;
+  }
 }
