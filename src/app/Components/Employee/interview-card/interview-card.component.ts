@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { InterviewFeedbackService } from '../../../Services/InterviewFeedback/interview-feedback.service';
 import { AddInterviewFeedbackResponse } from '../../../Models/InterviewFeedback/AddInterviewFeedbackResponse';
 import { Router } from '@angular/router';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-interview-card',
@@ -37,7 +38,8 @@ export class InterviewCardComponent implements OnInit {
     private companyService: CompanyService,
     private formBuilder: FormBuilder,
     private interviewFeedbackService: InterviewFeedbackService,
-    private router : Router
+    private router : Router,
+    private spinnerService: SpinnerService,
   ){}
 
   ngOnInit() {
@@ -49,13 +51,25 @@ export class InterviewCardComponent implements OnInit {
   }
 
   newFeedback(){
+    console.log('show spinner');
+    this.spinnerService.showSpinner();
+
     this.form.reset();
     this.submitted = false;
+
+    console.log('hide spinner');
+    this.spinnerService.hideSpinner();
   }
 
   formClosed(){
+    console.log('show spinner');
+    this.spinnerService.showSpinner();
+    
     this.submitted = false;
     this.form.reset();
+
+    console.log('hide spinner');
+    this.spinnerService.hideSpinner();
   }
 
   get f(){

@@ -34,6 +34,11 @@ import { CrudDegreeDataComponent } from './Components/Employee/crud-degree-data/
 import { CrudInstitutionDataComponent } from './Components/Employee/crud-institution-data/crud-institution-data.component';
 import { AppliedJobsComponent } from './Components/Candidate/applied-jobs/applied-jobs.component';
 import { AboutComponent } from './Components/about/about.component';
+import { employeeGuardGuard } from './Guards/employee-guard.guard';
+import { childEmployeeGuardGuard } from './Guards/child-employee-guard.guard';
+import { candidateGuard } from './Guards/candidate.guard';
+import { candidateChildGuard } from './Guards/candidate-child.guard';
+
 export const routes: Routes = [
   {
     path: '',
@@ -89,8 +94,8 @@ export const routes: Routes = [
   {
     path: 'employee-dashboard',
     component: EmployeeDashboardComponent,
-    canActivate: [authGuard],
-    canActivateChild: [childAuthGuard],
+    canActivate: [authGuard, employeeGuardGuard],
+    canActivateChild: [childAuthGuard, childEmployeeGuardGuard],
     children: [
       { path: 'add-job', component: AddJobComponent },
       { path: 'interview', component: InterviewComponent },
@@ -124,8 +129,8 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: UserProfileComponent,
-    // canActivate: [authGuard],
-    // canActivateChild: [childAuthGuard],
+    canActivate: [authGuard, candidateGuard],
+    canActivateChild: [childAuthGuard, candidateChildGuard],
     children: [
       { path: 'edu', component: CandidateEducationComponent },
       {

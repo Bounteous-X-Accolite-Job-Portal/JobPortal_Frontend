@@ -96,6 +96,8 @@ export class AuthService {
   checkIsEmployeeFromToken(){
     if(this.userPayload)
       return this.userPayload.IsEmployee;
+
+    return false;
   }
 
   getRoleFromToken(){
