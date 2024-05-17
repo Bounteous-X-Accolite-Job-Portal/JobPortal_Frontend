@@ -3,7 +3,6 @@
       <h2>Experience</h2>
       <div>Candidate with user ID : </div><hr>
       <div class="d-flex justify-content-end p-1">
-        <a class="btn btn-primary px-3 text-style-add fs-5 fw-bold" (click)="addE()">Increase here</a>
         <a [routerLink]="['add-exp']" class="btn btn-primary px-3 text-style-add fs-5 fw-bold">Route to add</a>
       </div>  
       <hr>
@@ -20,18 +19,18 @@
           </tr>
         </thead>
             <tbody>
-              <tr *ngFor="let tmp of expList">
+              <tr *ngFor="let tmp of expList; let i = index">
                 <td>{{tmp.experienceTitle}}</td>
                 <td>{{tmp.description}}</td>
-                <td>{{tmp.companyId}}</td>
+                <td>{{this.companyList[i].companyName}}</td>
                 <td>{{tmp.startDate}}</td>
-                <td>{{tmp.endDate}}</td>
+                <td>{{tmp.endDate!=null?tmp.endDate:"NA"}}</td>
                 <td>{{tmp.isCurrentlyWorking}}</td>
                 <td>
-                    <a class='btn btn-primary text-style-add' [routerLink]="['update-exp']"><i class="fas fa-edit"></i>
+                    <a class='btn btn-primary-1 text-style-add' [routerLink]="['update-exp']"><i class="fas fa-edit"></i>
                     </a>
-                    <button class='btn btn-outline-primary text-style-del' (click)="onDel()"><i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>
+                    <a class='btn btn-danger' (click)="deleteExperience(tmp.experienceId)"><i class="fa fa-trash"></i>
+                    </a>
                   </td>
                 </tr>
               </tbody>

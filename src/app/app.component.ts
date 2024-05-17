@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet, Router } from '@angular/router';
 import { AuthService } from './Services/auth.service';
 import { AppModule } from './app.module';
-
 import { SpinnerService } from './Services/spinner.service';
 import { SpinnerComponent } from './Components/spinner/spinner.component';
+import { UserStoreService } from './Services/user-store.service';
 
 @Component({
   selector: 'app-root',
@@ -18,18 +18,20 @@ export class AppComponent implements OnInit {
   title = 'Job-Portal';
 
   public isLoggedIn : boolean = false;
+  public isEmployee : boolean = false;
   loading = false;
   
   constructor(
     private authService: AuthService,
     private router: Router,
     private spinnerService: SpinnerService,
+    private store : UserStoreService,
   ){
     this.spinnerService.spinner$.subscribe((data: boolean) => {
       setTimeout(() => {
         this.loading = data ? data : false;
       });
-      console.log(this.loading);
+      // console.log(this.loading);
     });
   }
 
@@ -39,6 +41,12 @@ export class AppComponent implements OnInit {
       this.authService.AuthEvent.subscribe((loggedIn) => {
         this.isLoggedIn = loggedIn;
       })
+
+    // this.store.checkIsEmployeeFromStore().subscribe(val => {
+    //     let employee = this.authService.checkIsEmployeeFromToken();
+    //     this.isEmployee = employee || val;
+    // })
+    this.checkEmployee();
   }
 
   logout(){
@@ -46,12 +54,22 @@ export class AppComponent implements OnInit {
     this.spinnerService.showSpinner();
 
     this.authService.logout();
-    
-    console.log('hide spinner');
-    this.spinnerService.hideSpinner();
 
     this.router.navigate(["/login"]);
+
+    console.log('hide spinner');
+    this.spinnerService.hideSpinner();
   }
 
+  checkEmployee(){
+    this.spinnerService.showSpinner();
+    // checking isEmployee
+    this.store.checkIsEmployeeFromStore().subscribe(val => {
+        let employee = this.authService.checkIsEmployeeFromToken();
+        this.isEmployee = employee || val;
+    })
 
+    console.log("isEmployee at profile tab", this.isEmployee);
+    this.spinnerService.hideSpinner();
+  }
 }

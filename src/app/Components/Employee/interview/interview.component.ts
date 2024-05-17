@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormsModule,
@@ -9,11 +9,10 @@ import {
 } from '@angular/forms';
 import { environment } from '../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Employee } from '../../../Models/Backend/Employee';
-import { AllEmployee } from '../../../Models/Backend/AllEmployee';
+import { Employee } from '../../../Models/Backend/Employee/Employee';
+import { AllEmployee } from '../../../Models/Backend/Employee/AllEmployee';
 import { FilterPipe } from '../../../Models/filter.pipe';
-import { Interview } from '../../../Models/Interview';
-import { time } from 'console';
+import { Interview } from '../../../Models/InterviewResponse/Interview';
 import { ActivatedRoute } from '@angular/router';
 import { interviewResponse } from '../../../Models/InterviewResponse/InterviewResponse';
 
@@ -24,7 +23,7 @@ import { interviewResponse } from '../../../Models/InterviewResponse/InterviewRe
   templateUrl: './interview.component.html',
   styleUrl: './interview.component.css',
 })
-export class InterviewComponent {
+export class InterviewComponent implements OnInit{
   AddInterviewForm!: FormGroup;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
@@ -76,6 +75,7 @@ export class InterviewComponent {
 
   getEmployeeId(employeeId: string) {
     this.searchText = employeeId;
+                                                                                                                                               
   }
 
   onSubmit() {

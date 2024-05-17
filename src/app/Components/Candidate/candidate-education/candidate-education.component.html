@@ -3,36 +3,37 @@
     <h2>Education</h2>
     <div>Candidate with user ID : {{userId}}</div><hr>
     <div class="d-flex justify-content-end p-1">
-      <a class="btn btn-primary px-3 text-style-add fs-5 fw-bold" (click)="addE()">Increase here</a>
       <a [routerLink]="['add-edu']" class="btn btn-primary px-3 text-style-add fs-5 fw-bold">Route to add</a>
     </div>  
     <hr>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Percentage</th>
-          <th>InstitutionOrSchoolName</th>
-          <th>Degree</th>
-          <th>StartYear</th>
-          <th>EndYear</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-          <tbody>
-            <tr *ngFor="let tmp of eduList">
-              <td>{{tmp.grade}}</td>
-              <td>{{tmp.institutionOrSchoolName}}</td>
-              <td>{{tmp.degree}}</td>
-              <td>{{tmp.startYear}}</td>
-              <td>{{tmp.endYear}}</td>
-              <td>
-                  <a class='btn btn-primary text-style-add' [routerLink]="['update-edu']"><i class="fas fa-edit"></i>
-                  </a>
-                  <button class='btn btn-outline-primary text-style-del' (click)="onDel()"><i class="fa fa-trash" aria-hidden="true"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-      </table>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Percentage/CGPA</th>
+            <th>InstitutionOrSchoolName</th>
+            <th>Degree</th>
+            <th>StartYear</th>
+            <th>EndYear</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+            <tbody>
+              <tr *ngFor="let tmp of eduList; let i = index">
+                <td>{{tmp.grade}}</td>
+                <td>{{this.institutions[i].institutionOrSchool}}</td>
+                <td>{{this.degrees[i].degreeName}}</td>
+                <td>{{tmp.startYear}}</td>
+                <td>{{tmp.endYear}}</td>
+                <td>
+                    <a class='btn btn-primary text-style-add' [routerLink]="['update-edu']"><i class="fas fa-edit"></i>
+                    </a>
+                    <a class='btn btn-danger' (click)="deleteEducation(tmp.educationId)"><i class="fa fa-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+        </table>
+    </div>
   </div>
 </div>

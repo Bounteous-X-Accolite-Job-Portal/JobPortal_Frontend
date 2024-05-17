@@ -1,4 +1,4 @@
-import { ClosedApplication } from "../ClosedApplication";
+import { ClosedApplication } from "./ClosedApplication";
 
 export interface ClosedApplicationResponse{
     status: number,

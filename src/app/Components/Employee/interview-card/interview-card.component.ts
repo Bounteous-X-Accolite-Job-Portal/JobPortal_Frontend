@@ -6,7 +6,7 @@ import { ExperienceWithCompany } from '../../../Models/ExperienceResponse/Experi
 import { forkJoin } from 'rxjs';
 import { SkillsServiceService } from '../../../Services/Skills/skills-service.service';
 import { ExperienceServiceService } from '../../../Services/Experience/experience-service.service';
-import { CompanyServiceService } from '../../../Services/Company/company-service.service';
+import { CompanyService } from '../../../Services/Company/company.service';
 import { Skills } from '../../../Models/SkillsResponse/Skills';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { InterviewFeedbackService } from '../../../Services/InterviewFeedback/interview-feedback.service';
@@ -35,7 +35,7 @@ export class InterviewCardComponent implements OnInit {
   constructor(
     private skillService: SkillsServiceService,
     private experienceService: ExperienceServiceService,
-    private companyService: CompanyServiceService,
+    private companyService: CompanyService,
     private formBuilder: FormBuilder,
     private interviewFeedbackService: InterviewFeedbackService,
     private router : Router,

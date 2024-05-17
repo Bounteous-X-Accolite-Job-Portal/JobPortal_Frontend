@@ -11,14 +11,14 @@ import { GetInterviewsService } from '../../../Services/InterviewService/get-int
 import { interviewResponse } from '../../../Models/InterviewResponse/InterviewResponse';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { ApplicationServiceService } from '../../../Services/ApplicationService/application-service.service';
-import { CandidateServiceService } from '../../../Services/CandidateService/candidate-service.service';
+import { CandidateService } from '../../../Services/CandidateService/candidate.service';
 import { interviewCardData } from '../../../Models/InterviewResponse/InterviewCardData';
 import { Interview } from '../../../Services/Interview';
 import { ResumeServiceService } from '../../../Services/ResumeService/resume-service.service';
 import { ClosedApplicationService } from '../../../Services/ClosedApplication/closed-application.service';
 import { forkJoin } from 'rxjs';
-import { JobServiceService } from '../../../Services/Job/job-service.service';
 import { ClosedJobServiceService } from '../../../Services/ClosedJob/closed-job-service.service';
+import { JobService } from '../../../Services/Job/job.service';
 
 @Component({
   selector: 'app-interview-hub',
@@ -42,10 +42,10 @@ export class InterviewHubComponent implements OnInit {
     private getInterviewsService: GetInterviewsService,
     private spinnerService: SpinnerService,
     private applicationService: ApplicationServiceService,
-    private candidateService: CandidateServiceService,
+    private candidateService: CandidateService,
     private resumeService: ResumeServiceService,
     private closedApplicationService: ClosedApplicationService,
-    private jobService: JobServiceService,
+    private jobService: JobService,
     private closedJobService : ClosedJobServiceService,
   ) {}
 

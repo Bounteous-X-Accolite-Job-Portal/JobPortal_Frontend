@@ -12,7 +12,7 @@ import { Degree } from '../../Models/DegreeResponse/Degree';
 import { JobType } from '../../Models/JobTypeResponse/JobType';
 import { JobCategory } from '../../Models/JobCategoryResponse/JobCategory';
 import { position } from '../../Models/JobPositionResponse/position';
-import { JobService } from '../../Services/job.service';
+import { JobService } from '../../Services/Job/job.service';
 
 @Component({
   selector: 'app-job-card',

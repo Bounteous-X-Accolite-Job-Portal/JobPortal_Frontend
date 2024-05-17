@@ -46,13 +46,7 @@ export class LoginComponent {
     this.spinnerService.showSpinner();
 
     if (this.loginForm.valid) {
-      const loginData = {
-        Email: this.f['email'].value,
-        Password: this.loginForm.value.password,
-        RememberMe: this.loginForm.controls['rememberMe'].value,
-      };
-      console.log(loginData);
-
+     
       this.authService.loginUser(this.loginForm.value).subscribe(
         (data: LoginResponse) => {
           console.log(data);

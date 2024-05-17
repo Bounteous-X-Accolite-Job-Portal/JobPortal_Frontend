@@ -69,9 +69,7 @@
           <div *ngIf="f['lastDate'].errors?.['required']">
             Last Date is required
           </div>
-          <!-- <div *ngIf="f['lastDate'].errors?.['lastDateValidator']">
-            Last Date is invalid
-          </div> -->
+          <!-- <div *ngIf="f['lastDate'].errors?.['lastDateError']">Last Date is invalid</div> -->
         </div>
       </div>
       <div class="mb-3 col">
@@ -119,7 +117,7 @@
       </div>
 
       <div class="mb-3">
-        <button [disabled]="submitting" class="btn btn-primary">
+        <button [disabled]="submitting" class="btn btn-primary-1">
           <span
             *ngIf="submitting"
             class="spinner-border spinner-border-sm me-1"

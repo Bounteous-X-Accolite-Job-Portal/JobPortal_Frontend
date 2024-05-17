@@ -1,4 +1,4 @@
-import { Company } from "../Company";
+import { Company } from "../CompanyResponse/Company";
 
 export interface ExperienceWithCompany{
     experienceTitle: string,

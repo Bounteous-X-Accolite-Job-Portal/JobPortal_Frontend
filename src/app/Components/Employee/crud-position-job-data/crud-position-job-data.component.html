@@ -1,0 +1,29 @@
+<div class="d-flex gradient-custom-2 justify-content-center flex-wrap" style="padding: 20vh;">
+    <div class="w-90 bg-white rounded p-5" style="height: auto;">
+        <div><a routerLink=".."><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</a></div>
+      <h2>Delete Positions</h2>
+      <hr>
+      <div class="table-responsive-lg">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Position Code</th>
+                    <th>Position Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pos of jobPositions">
+                    <td>{{ pos.positionCode }}</td>
+                    <td>{{ pos.positionName }}</td>
+                    <td>{{ pos.description }}</td>
+                    <td>
+                        <button class="delete-outer"><a id="delete" (click)="deleteByPositionId(pos.positionId)"><i class="fa fa-trash"></i></a></button>                    
+                    </td>
+             </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+</div>
