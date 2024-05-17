@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { JobService } from '../../../Services/job.service';
+
 import { JobCategory } from '../../../Models/JobCategoryResponse/JobCategory';
 import { CommonModule } from '@angular/common';
 import { CrudJobDataService } from '../../../Services/CrudJobData/crud-job-data.service';
 import { AddJobComponent } from '../add-job/add-job.component';
 import { RouterLink } from '@angular/router';
 import { Toast, ToastrModule, ToastrService } from 'ngx-toastr';
+import { JobService } from '../../../Services/Job/job.service';
 
 @Component({
   selector: 'app-crud-category-job-data',

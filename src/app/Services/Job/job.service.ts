@@ -1,22 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AllJobLocations } from '../Models/JoblocationResponse/AllJobLocations';
-import { AllJobTypes } from '../Models/JobTypeResponse/AllJobType';
-import { AllJobCategory } from '../Models/JobCategoryResponse/AllJobCategory';
-import { AllJobPosition } from '../Models/JobPositionResponse/AllJobPosition';
-import { environment } from '../../environments/environment.development';
+import { AllJobLocations } from '../../Models/JoblocationResponse/AllJobLocations';
+import { AllJobTypes } from '../../Models/JobTypeResponse/AllJobType';
+import { AllJobCategory } from '../../Models/JobCategoryResponse/AllJobCategory';
+import { AllJobPosition } from '../../Models/JobPositionResponse/AllJobPosition';
+import { environment } from '../../../environments/environment.development';
 
-import { AllJob } from '../Models/JobResponse/AllJobs';
-import { JobResponse } from '../Models/JobResponse/JobResponse';
-import { DegreeResponse } from '../Models/DegreeResponse/DegreeRespose';
-import { JobCategoryResponse } from '../Models/JobCategoryResponse/JobCategoryResponse';
-import { JobTypeResponse } from '../Models/JobTypeResponse/JobTypeResponse';
-import { JobLocationResponse } from '../Models/JoblocationResponse/JobLocationResponse';
-import { JobPositionResponse } from '../Models/JobPositionResponse/JobPositionResponse';
-import { JobApplication } from '../Models/JobApplicationResponse/JobApplication';
-import { AllDegreeResponse } from '../Models/DegreeResponse/AllDegreeResponse';
-import { ApplicationResponse } from '../Models/JobApplicationResponse/ApplicationResponse';
+import { AllJob } from '../../Models/JobResponse/AllJobs';
+import { JobResponse } from '../../Models/JobResponse/JobResponse';
+import { DegreeResponse } from '../../Models/DegreeResponse/DegreeRespose';
+import { JobCategoryResponse } from '../../Models/JobCategoryResponse/JobCategoryResponse';
+import { JobTypeResponse } from '../../Models/JobTypeResponse/JobTypeResponse';
+import { JobLocationResponse } from '../../Models/JoblocationResponse/JobLocationResponse';
+import { JobPositionResponse } from '../../Models/JobPositionResponse/JobPositionResponse';
+import { JobApplication } from '../../Models/JobApplicationResponse/JobApplication';
+import { AllDegreeResponse } from '../../Models/DegreeResponse/AllDegreeResponse';
+import { ApplicationResponse } from '../../Models/JobApplicationResponse/ApplicationResponse';
 @Injectable({
   providedIn: 'root',
 })
@@ -79,5 +79,5 @@ export class JobService {
 
     checkCandidateApplicable(jobId?:string):Observable<ApplicationResponse>{
         return this.http.get<ApplicationResponse>(environment.baseURL+'Application/jobApplication/isCandidateApplicable/'+jobId);
-    }
+    };
   }

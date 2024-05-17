@@ -1,41 +1,78 @@
-<div class="d-flex gradient-custom-2 justify-content-center" style="padding: 20vh;">
-    <div class="w-75 bg-white rounded p-5" style="height: auto;">
-      <div class="row w-full my-5 d-flex justify-content-center">
-        <div class="d-flex justify-content-center mb-3">
-          <h2>Add Experience</h2>
+<div
+  class="d-flex gradient-custom-2 justify-content-center"
+  style="padding: 20vh"
+>
+  <div class="w-75 bg-white rounded p-5" style="height: auto">
+    <div class="row w-full my-5 d-flex justify-content-center">
+      <div class="d-flex justify-content-center mb-3">
+        <h2>Add Experience</h2>
+      </div>
+      <hr />
+      <form [formGroup]="candidateExperience" (ngSubmit)="displayinfo()">
+        <div class="form-group mb-3">
+          <label for="experienceTitle">Job Title : </label>
+          <input
+            type="text"
+            class="form-control"
+            id="experienceTitle"
+            placeholder="Add Title"
+            formControlName="experienceTitle"
+          />
         </div>
-        <hr>
-        <form [formGroup]="candidateExperience" (ngSubmit)="save()" >
-          <div class="form-group mb-3">
-              <label for="experienceTitle">Title</label>
-              <input type="text" class="form-control" id="experienceTitle" placeholder="Add Title" formControlName="experienceTitle">
+
+        <div class="form-group mb-3">
+          <label>Company Name : </label>
+          <select formControlName="companyId">
+            <option *ngFor="let cmp of companies" [value]="cmp.companyId">
+              {{ cmp.companyName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="description">Description</label>
+          <textarea placeholder="Enter Job Description: " formControlName="description"></textarea>
+        </div>
+
+        <div class="row">
+          <div class="col form-group mb-3">
+            <label for="startDate">Start Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="startDate"
+              placeholder="Enter Start Date"
+              formControlName="startDate"
+            />
           </div>
-          <div class="form-group mb-3">
-              <label for="description">Description</label>
-              <input type="text" class="form-control" id="description" aria-describedby="description" placeholder="Enter description" formControlName="description">
-          </div>
-          <div class="form-group mb-3">
-              <label for="companyId">Company</label>
-              <input type="text" class="form-control" id="companyId" placeholder="Enter Company" formControlName="companyId">
-          </div>
-          <div class="row">
-            <div class="col form-group mb-3">
-              <label for="startDate">Start Date</label>
-              <input type="date" class="form-control" id="startDate" placeholder="Enter Start Date" formControlName="startDate">
-            </div>
-            <div class="col form-group mb-3">
-              <label for="endYear">End Date</label>
-              <input type="date" class="form-control" id="endDate" placeholder="Enter End Date" formControlName="endDate">
-            </div>
-          </div>
+
           <div class="form-group mb-3">
             <label for="isCurrentlyWorking" class="me-3">Currently Working</label>
-            <input type="checkbox" class="form-check-input" id="isCurrentlyWorking" formControlName="isCurrentlyWorking">
-            </div>
-          <button type="submit" class="btn btn-primary w-100" [disabled]="!candidateExperience.valid">ADD</button>
+            <input
+              [(ngModel)]="isWorking"
+              type="checkbox"
+              class="form-check-input"
+              formControlName="isCurrentlyWorking"
+            />
+          </div>
+
+          <div class="col form-group mb-3" *ngIf = "!isWorking">
+            <label for="endYear">End Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="endDate"
+              placeholder="Enter End Date"
+              formControlName="endDate"
+            />
+          </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary w-100">
+          Add Experience
+        </button>
       </form>
-      </div>
     </div>
+  </div>
 </div>
-
-

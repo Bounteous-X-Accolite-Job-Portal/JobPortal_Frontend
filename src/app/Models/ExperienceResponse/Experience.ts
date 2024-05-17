@@ -1,12 +1,9 @@
-import { Guid } from "guid-typescript";
-
 export interface Experience{
-    experienceId: Guid,
+    experienceId: string,
     experienceTitle: string,
     startDate: Date,
     endDate: Date,
     isCurrentlyWorking: boolean,
     description: string,
-    companyId: Guid,
-    candidateId: Guid
+    companyId: string
 }

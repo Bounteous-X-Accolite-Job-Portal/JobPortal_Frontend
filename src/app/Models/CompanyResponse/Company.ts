@@ -1,9 +1,8 @@
-import { Guid } from "guid-typescript";
 
 export interface Company{
-    companyId: Guid,
+    companyId?: string,
     companyName: string,
     baseUrl: string,
     companyDescription: string,
-    empId: Guid
+    empId?: string;
 }

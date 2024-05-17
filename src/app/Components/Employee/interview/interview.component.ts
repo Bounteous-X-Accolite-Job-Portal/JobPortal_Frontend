@@ -9,10 +9,10 @@ import {
 } from '@angular/forms';
 import { environment } from '../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Employee } from '../../../Models/Backend/Employee';
-import { AllEmployee } from '../../../Models/Backend/AllEmployee';
+import { Employee } from '../../../Models/Backend/Employee/Employee';
+import { AllEmployee } from '../../../Models/Backend/Employee/AllEmployee';
 import { FilterPipe } from '../../../Models/filter.pipe';
-import { Interview } from '../../../Models/Interview';
+import { Interview } from '../../../Models/InterviewResponse/Interview';
 import { ActivatedRoute } from '@angular/router';
 import { interviewResponse } from '../../../Models/InterviewResponse/InterviewResponse';
 

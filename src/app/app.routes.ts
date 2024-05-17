@@ -32,6 +32,8 @@ import { CrudLocationJobDataComponent } from './Components/Employee/crud-locatio
 import { CrudDegreeDataComponent } from './Components/Employee/crud-degree-data/crud-degree-data.component';
 import { CrudInstitutionDataComponent } from './Components/Employee/crud-institution-data/crud-institution-data.component';
 import { AddEmployeeComponent } from './Components/Employee/add-employee/add-employee.component';
+import { AppliedJobsComponent } from './Components/Candidate/applied-jobs/applied-jobs.component';
+import { AboutComponent } from './Components/about/about.component';
 export const routes: Routes = [
   {
     path: '',
@@ -44,7 +46,7 @@ export const routes: Routes = [
   },
   {
     path: 'about',
-    component: AddEducationComponent,
+    component: AboutComponent,
   },
   {
     path: 'login',
@@ -122,28 +124,28 @@ export const routes: Routes = [
     canActivate: [authGuard],
     canActivateChild: [childAuthGuard],
     children: [
-      { path: 'edu/:id', component: CandidateEducationComponent },
+      { path: 'edu', component: CandidateEducationComponent },
       {
-        path: 'edu/:id',
+        path: 'edu',
         children: [
           { path: 'add-edu', component: AddEducationComponent },
           { path: 'update-edu', component: UpdateEducationComponent },
         ],
       },
-      { path: 'exp/:id', component: ExperienceComponent },
+      { path: 'exp', component: ExperienceComponent },
       {
-        path: 'exp/:id',
+        path: 'exp',
         children: [
           { path: 'add-exp', component: AddExperienceComponent },
           { path: 'update-exp', component: UpdateExperienceComponent },
         ],
       },
-      { path: 'per-info/:id', component: PersonalInfoComponent },
-      { path: 'skills/::id', component: SkillsComponent },
-      { path: 'resume/:id', component: ResumeComponent },
-      { path: 'sml/:id', component: SocialProfilesComponent },
-      { path: 'pass-reset/:id', component: PasswordResetComponent },
-      // { path: '', component: TryComponent},
+      { path: 'per-info', component: PersonalInfoComponent },
+      { path: 'skills', component: SkillsComponent },
+      { path: 'resume', component: ResumeComponent },
+      { path: 'sml', component: SocialProfilesComponent },
+      { path: 'pass-reset', component: PasswordResetComponent },
+      { path: 'applied-jobs', component: AppliedJobsComponent},
       { path: '**', component: TryComponent },
     ],
   },

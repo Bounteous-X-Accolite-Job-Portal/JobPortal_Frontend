@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { JobService } from '../../../Services/job.service';
+import { JobService } from '../../../Services/Job/job.service';
 import { JobCategory } from '../../../Models/JobCategoryResponse/JobCategory';
 import { RouterLink } from '@angular/router';
 import { CrudJobDataService } from '../../../Services/CrudJobData/crud-job-data.service';

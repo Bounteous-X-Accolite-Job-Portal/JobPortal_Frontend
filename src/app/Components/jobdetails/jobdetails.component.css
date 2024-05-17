@@ -1,10 +1,53 @@
-.details
-{
-    height: 100vh;
-    width: 60%;
-    margin: 0% 20% 5% 20%;
-    padding: 10px 5px 10px 5px;
-    text-align: center;
-    background-color: rgb(91, 214, 214);
+:root {
+    font-size: 20px;
+  }
+  
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+  
+  p {
+    margin: 0;
+  }
+  
+  p:not(:last-child) {
+    margin-bottom: 1.5em;
+  }
+  
+.cont{
+    font: 1em/1.618 Inter, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 3rem 0;
+    color: #224;
+    background: url(../../../assets/Images/bgcolor1.jpg) center/cover no-repeat fixed;
+  }
+  
+  .card {
+    min-width: 80%;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 30px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 20px;
-}
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+  }
+
+  .card-body{
+    font-size: 1rem;
+    padding: 0;
+    margin: 0.7rem;
+  }
+  
+  .card-footer {
+    font-size: 1rem;
+  }
+  
