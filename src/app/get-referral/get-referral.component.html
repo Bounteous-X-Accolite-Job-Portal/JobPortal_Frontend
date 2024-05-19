@@ -1,0 +1,4 @@
+<p>get-referral works!</p>
+<div *ngIf="activeInterviews.length != 0">
+    <app-interview-card *ngFor="let interview of activeInterviews" [interview]="interview"></app-interview-card>
+  </div>

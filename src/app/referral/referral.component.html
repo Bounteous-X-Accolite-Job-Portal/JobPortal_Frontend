@@ -1,33 +1,63 @@
-<p>referral works!</p>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Information Form</title>
-</head>
-<body>
-    <h2>User Information</h2>
-    <form>
-        <div>
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName" required>
-        </div>
-        <div>
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" required>
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" [(ngModel)]="user.email" required>
-        </div>
-        <div>
-            <label for="jobId">Job ID:</label>
-            <input type="text" id="jobId" name="jobId" [(ngModel)]="user.jobId" required>
-        </div>
-        <div>
-            <button type="submit" (click)="submitForm()">Submit</button>
-        </div>
-    </form>
-</body>
-</html>
+
+<div class="d-flex gradient-custom-2 justify-content-center flex-wrap" style="padding: 20vh;">
+  <div class="w-75 bg-white rounded p-5" style="height: auto;">
+    <h2>referral </h2>
+
+    <!-- <div class="d-flex justify-content-end p-1">
+      <a [routerLink]="['add-edu']" class="btn btn-primary px-3 text-style-add fs-5 fw-bold">Route to add</a>
+    </div>   -->
+    <hr>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Job Code</th>
+            <th>Job Title</th>
+            <th>Last Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let job of jobs; let i = index">
+            <td>{{job.jobCode}}</td>
+            <td>{{job.jobTitle}}</td>
+            <td>{{job.lastDate}}</td>
+            <td>
+              <div class="btn btn-primary px-3 text-style-add fs-5 fw-bold"> <a id="referral"
+                  data-bs-target="#exampleModal" class="font-weight-bold" (click)=addrefrral(job.jobId)>Refer</a>
+              </div>
+            </td>
+            
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- <div class="jobListing">
+  <app-job-card *ngFor="let job of candidateJobs" [job]="job"></app-job-card>
+</div> -->
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+<div>
+  <ul>
+    <li *ngFor="let job of jobs">{{job.jobTitle}}</li>
+  </ul>
+</div> -->

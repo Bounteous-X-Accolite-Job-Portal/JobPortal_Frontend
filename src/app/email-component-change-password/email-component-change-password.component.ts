@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { resertPassword } from '../Models/resetPasswordmodel';
 import { ChangePasswordService } from '../change-password.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { catchError, tap, throwError } from 'rxjs';
 
@@ -29,7 +28,7 @@ export class EmailComponentChangePasswordComponent {
     private resetPasswordService: ChangePasswordService,
     private route: ActivatedRoute,
     private router: Router,
-    private messageService:MessageService
+  //  private messageService:MessageService
   
   ){}
   ngOnInit()
@@ -58,20 +57,20 @@ export class EmailComponentChangePasswordComponent {
         
         tap((response) => {
           console.log('Reset password response:', response);
-          this.messageService.add
-          ({severity:'success', 
-          summary:'Service Message', 
-          detail:'Via MessageService'});
+          // this.messageService.add
+          // ({severity:'success', 
+          // summary:'Service Message', 
+          // detail:'Via MessageService'});
 
           
           this.router.navigate(['login']);
         }),
         catchError((error) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Invalid Reset Link',
-          });
+          // this.messageService.add({
+          //   severity: 'error',
+          //   summary: 'Error',
+          //   detail: 'Invalid Reset Link',
+          // });
           
           return throwError(() => error);
         })

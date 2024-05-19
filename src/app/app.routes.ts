@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { LandingComponent } from './Components/landing/landing.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
-import { AddEmployeeComponent } from './Components/add-employee/add-employee.component';
+import { AddEmployeeComponent } from './Components/Employee/add-employee/add-employee.component';
 import { AddJobComponent } from './Components/Employee/add-job/add-job.component';
 import { JobHomeComponent } from './Components/job-home/job-home.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
@@ -20,16 +20,21 @@ import { CandidateEducationComponent } from './Components/Candidate/candidate-ed
 import { authGuard } from './Guards/auth.guard';
 import { childAuthGuard } from './Guards/child-auth.guard';
 import { loggedInGuard } from './Guards/logged-in.guard';
-
 import { EmployeeDashboardComponent } from './Components/Employee/employee-dashboard/employee-dashboard.component';
 import { InterviewHubComponent } from './Components/Employee/interview-hub/interview-hub.component';
 import { InterviewComponent } from './Components/Employee/interview/interview.component';
 import { SettingsComponent } from './Components/Employee/settings/settings.component';
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
-import { JobApplicatonComponent } from './Components/job-applicaton/job-applicaton.component';
-import { CrudJobDataComponent } from './Components/Employee/crud-job-data/crud-job-data.component';
 import { ReferralServiceService } from './referral-service.service';
 import { ReferralComponent } from './referral/referral.component';
+import { CrudCategoryJobDataComponent } from './Components/Employee/crud-category-job-data/crud-category-job-data.component';
+import { CrudPositionJobDataComponent } from './Components/Employee/crud-position-job-data/crud-position-job-data.component';
+import { CrudTypesJobDataComponent } from './Components/Employee/crud-types-job-data/crud-types-job-data.component';
+import { CrudLocationJobDataComponent } from './Components/Employee/crud-location-job-data/crud-location-job-data.component';
+import { CrudDegreeDataComponent } from './Components/Employee/crud-degree-data/crud-degree-data.component';
+import { CrudInstitutionDataComponent } from './Components/Employee/crud-institution-data/crud-institution-data.component';
+import { AppliedJobsComponent } from './Components/Candidate/applied-jobs/applied-jobs.component';
+import { AddReferralComponent } from './add-referral/add-referral.component';
 export const routes: Routes = [
   {
     path: '',
@@ -40,6 +45,7 @@ export const routes: Routes = [
     path: 'landing',
     component: LandingComponent,
   },
+  {path:'referral',component:ReferralComponent},
   {
     path: 'about',
     component: AddEducationComponent,
@@ -67,10 +73,6 @@ export const routes: Routes = [
     component: JobdetailsComponent,
   },
   {
-    path: 'apply-now/:jobId',
-    component: JobApplicatonComponent,
-  },
-  {
     path: 'user-profile',
     component: UserProfileComponent,
   },
@@ -84,7 +86,7 @@ export const routes: Routes = [
   },
   {
     path: 'crud-job-data',
-    component: CrudJobDataComponent,
+    component: CrudCategoryJobDataComponent,
   },
   {
     path: 'employee-dashboard',
@@ -97,9 +99,30 @@ export const routes: Routes = [
       { path: 'interview-hub', component: InterviewHubComponent },
       { path: 'settings', component: SettingsComponent },
       {path:'referral',component:ReferralComponent},
+      {path:'addReferral',component:AddReferralComponent},
+      
       {
         path: 'settings',
-        children: [{ path: 'crud-job-data', component: CrudJobDataComponent }],
+        children: [
+          {
+            path: 'crud-category-job-data',
+            component: CrudCategoryJobDataComponent,
+          },
+          {
+            path: 'crud-position-job-data',
+            component: CrudPositionJobDataComponent,
+          },
+          { path: 'crud-types-job-data', component: CrudTypesJobDataComponent },
+          {
+            path: 'crud-location-job-data',
+            component: CrudLocationJobDataComponent,
+          },
+          { path: 'crud-degree-data', component: CrudDegreeDataComponent },
+          {
+            path: 'crud-institution-data',
+            component: CrudInstitutionDataComponent,
+          },
+        ],
       },
     ],
   },
@@ -109,28 +132,34 @@ export const routes: Routes = [
     // canActivate: [authGuard],
     // canActivateChild: [childAuthGuard],
     children: [
-      { path: 'edu/:id', component: CandidateEducationComponent },
+      { path: 'edu', component: CandidateEducationComponent },
       {
-        path: 'edu/:id',
+        path: 'edu',
         children: [
           { path: 'add-edu', component: AddEducationComponent },
           { path: 'update-edu', component: UpdateEducationComponent },
         ],
       },
-      { path: 'exp/:id', component: ExperienceComponent },
+      { path: 'exp', component: ExperienceComponent },
       {
-        path: 'exp/:id',
+        path: 'exp',
         children: [
           { path: 'add-exp', component: AddExperienceComponent },
           { path: 'update-exp', component: UpdateExperienceComponent },
         ],
       },
+      { path: 'per-info', component: PersonalInfoComponent },
+      { path: 'skills', component: SkillsComponent },
+      { path: 'resume', component: ResumeComponent },
+      { path: 'sml', component: SocialProfilesComponent },
+      { path: 'applied-jobs', component: AppliedJobsComponent},
       { path: 'per-info/:id', component: PersonalInfoComponent },
       { path: 'skills/::id', component: SkillsComponent },
       { path: 'resume/:id', component: ResumeComponent },
       { path: 'sml/:id', component: SocialProfilesComponent },
       // { path: '', component: TryComponent},
       { path: '**', component: TryComponent },
+      
     ],
   },
 ];

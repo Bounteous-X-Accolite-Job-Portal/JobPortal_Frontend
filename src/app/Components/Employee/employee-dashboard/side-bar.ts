@@ -19,6 +19,11 @@ export const sideBarData = [
       icon: 'fal fa-cog',
       label: 'Settings'
   },
+  {
+    routeLink: 'referral',
+    icon: 'fal fa-solid fa-handshake',
+    label: 'Referal'
+},
   // {
   //     routeLink: 'sml',
   //     icon: 'fal fa-camera',

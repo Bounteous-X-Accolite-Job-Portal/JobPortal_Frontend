@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Renderer2, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { JobService } from '../../Services/job.service';
 import { Job } from '../../Models/JobResponse/Job';
 import { location } from '../../Models/JoblocationResponse/location';
 import { Degree } from '../../Models/DegreeResponse/Degree';
@@ -17,9 +16,9 @@ import { JobPositionResponse } from '../../Models/JobPositionResponse/JobPositio
 import { Router } from '@angular/router';
 import { UserStoreService } from '../../Services/user-store.service';
 import { AuthService } from '../../Services/auth.service';
-import { JobApplication } from '../../Models/JobApplicationResponse/JobApplication';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { JobService } from '../../Services/Job/job.service';
 
 @Component({
   selector: 'app-jobdetails',
@@ -43,7 +42,7 @@ export class JobdetailsComponent {
   canApply:boolean = false;
 
   constructor(
-    private jobService : JobService ,
+    private jobService : JobService,
     private router : Router , 
     private userStore : UserStoreService,
     private auth : AuthService,
@@ -149,6 +148,7 @@ export class JobdetailsComponent {
           this.disableApplyButton();
           this.displayAppliedMessage();
           console.log("Success",res);
+          this.router.navigate(['jobs']);
         },
       (error) =>
         {

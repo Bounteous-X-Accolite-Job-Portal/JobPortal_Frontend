@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { JobService } from '../../../Services/job.service';
+import { JobService } from '../../../Services/Job/job.service';
 import { JobCategory } from '../../../Models/JobCategoryResponse/JobCategory';
 import { RouterLink } from '@angular/router';
 import { CrudJobDataService } from '../../../Services/CrudJobData/crud-job-data.service';
@@ -95,7 +95,7 @@ export class SettingsComponent implements OnInit {
 
   addPosition() {
     console.log(this.addPositionForm.value);
-    this.crudJobService.addCategory(this.addPositionForm.value).subscribe(
+    this.crudJobService.addPosition(this.addPositionForm.value).subscribe(
       (response) => {
         console.log('success : ', response);
         this.addPositionForm.reset();
@@ -107,7 +107,7 @@ export class SettingsComponent implements OnInit {
   }
 
   addLocation() {
-      this.crudJobService.addLocation(this.addPositionForm.value).subscribe(
+      this.crudJobService.addLocation(this.addLocationForm.value).subscribe(
         (response) => {
           console.log('success : ', response);
           this.addLocationForm.reset();

@@ -60,17 +60,8 @@ export class LoginComponent  {
   
   onSubmit() {
     if (this.loginForm.valid) {
-      const loginData = {
-        Email: this.f['email'].value,
-        Password: this.loginForm.value.password,
-        RememberMe: this.loginForm.controls['rememberMe'].value,
-      };
-
-      
-    
-     console.log(loginData);
-
-      this.authService.loginUser(loginData).subscribe(
+     
+      this.authService.loginUser(this.loginForm.value).subscribe(
         (data: LoginResponse) => {
           console.log(data);
           console.log('Status', data.status, "data message", data.message);

@@ -1,5 +1,5 @@
 import { Candidate } from "./Backend/Candidate";
-import { Employee } from "./Backend/Employee";
+import { Employee } from "./Backend/Employee/Employee";
 
 export interface LoginResponse{
     status: number;
