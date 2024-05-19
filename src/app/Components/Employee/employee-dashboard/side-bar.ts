@@ -27,6 +27,13 @@ export const sideBarData = [
       requiredPrivilege: true,
       requiredSpecialPrivilege: true,
   },
+  {
+    routeLink: 'your-jobs',
+    icon: 'fa-solid fa-briefcase',
+    label: 'Your Jobs',
+    requiredPrivilege: false,
+    requiredSpecialPrivilege: false,
+  },
   // {
   //     routeLink: 'sml',
   //     icon: 'fal fa-camera',
