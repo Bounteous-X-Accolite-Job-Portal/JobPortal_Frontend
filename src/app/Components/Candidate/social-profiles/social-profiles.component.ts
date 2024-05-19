@@ -25,7 +25,7 @@ export class SocialProfilesComponent {
     private candidService: CandidateService,
     private userStore: UserStoreService,
     private auth: AuthService,
-    private toastr:ToastrService
+    private toastr: ToastrService
   ) {}
 
   mediaForm!: FormGroup;
@@ -38,8 +38,7 @@ export class SocialProfilesComponent {
   enableAddButton: boolean = false;
   enableEditButton: boolean = false;
 
-  ngOnInit(): void 
-  {
+  ngOnInit(): void {
     this.userStore.getIdFromStore().subscribe((val) => {
       console.log(val);
       let idFromToken = this.auth.getIdFromToken();
@@ -51,7 +50,6 @@ export class SocialProfilesComponent {
     this.loadSocialMediaDetails();
     this.addSocialMedia = false;
     this.updateSocialMedia = false;
-    this.isAccessible = false;
     this.enableAddButton = false;
     this.enableEditButton = false;
   }
@@ -83,7 +81,7 @@ export class SocialProfilesComponent {
     );
   }
 
-  private checkSocialMedia() {
+  private checkSocialMedia(){
     if (this.socialMedia == null) {
       this.socialMedia = { link1: '', link2: '', link3: '' };
       this.enableAddButton = true;
@@ -104,24 +102,24 @@ export class SocialProfilesComponent {
         this.socialMedia.link2 = this.mediaForm.value.link2;
         this.socialMedia.link3 = this.mediaForm.value.link3;
         this.ngOnInit();
-        this.toastr.success("Socail Media Profiles Added!!");
+        this.toastr.success('Socail Media Profiles Added!!');
       },
       (error) => {
         console.log(error);
       }
     );
   }
-  
+
   public funupdateSocialMedia(): void {
     this.socialMedia.link1 = this.mediaForm.value.link1;
     this.socialMedia.link2 = this.mediaForm.value.link2;
     this.socialMedia.link3 = this.mediaForm.value.link3;
-    
+
     this.candidService.updateSocialMedia(this.socialMedia).subscribe(
       (res) => {
         console.log(res);
         this.ngOnInit();
-        this.toastr.success("Socail Media Profiles Updated!!");
+        this.toastr.success('Socail Media Profiles Updated!!');
       },
       (error) => {
         console.log(error);
@@ -132,24 +130,24 @@ export class SocialProfilesComponent {
   public activeAddSocialMedia(): void {
     this.addSocialMedia = true;
     this.updateSocialMedia = false;
-    this.isAccessible = true;
     this.enablefields();
   }
 
   public activeEditSocialMedia(): void {
     this.addSocialMedia = false;
     this.updateSocialMedia = true;
-    this.isAccessible = true;
     this.enablefields();
   }
 
   public disablefields(): void {
+    this.isAccessible = false;
     this.mediaForm.controls['link1'].disable();
     this.mediaForm.controls['link2'].disable();
     this.mediaForm.controls['link3'].disable();
   }
 
   public enablefields(): void {
+    this.isAccessible = true;
     this.mediaForm.controls['link1'].enable();
     this.mediaForm.controls['link2'].enable();
     this.mediaForm.controls['link3'].enable();

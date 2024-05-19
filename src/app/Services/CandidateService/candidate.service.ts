@@ -17,6 +17,8 @@ import { AllJobApplicationResponse } from '../../Models/JobApplicationResponse/A
 import { AllJob } from '../../Models/JobResponse/AllJobs';
 import { SocialMedia } from '../../Models/SocialMediaResponse/SocialMedia';
 import { SocailMediaResponse } from '../../Models/SocialMediaResponse/SocialMediaResponse';
+import { SkillsResponse } from '../../Models/SkillsResponse/SkillsResponse';
+import { Skills } from '../../Models/SkillsResponse/Skills';
 
 @Injectable({
   providedIn: 'root'
@@ -96,4 +98,16 @@ export class CandidateService {
   updateSocialMedia(socialMedia?:any | undefined){
     return this.http.put<any>(environment.baseURL+'SocialMedia/updateSocialMediaDetails',socialMedia);
   };
+
+  getSkillsOfCandidate(id:string):Observable<SkillsResponse>{
+    return this.http.get<SkillsResponse>(environment.baseURL+'Skills/getSkills/'+id);
+  }
+
+  addSkilsOfCandidate(userskills:string){
+    return this.http.post<string>(environment.baseURL+'Skills/addSkills/',{"candidateSkills":userskills});
+  }
+
+  updateSkillsOfCandidate(userskills:Skills){
+    return this.http.put<Skills>(environment.baseURL+'Skills/updateSkills',userskills);
+  }
 }

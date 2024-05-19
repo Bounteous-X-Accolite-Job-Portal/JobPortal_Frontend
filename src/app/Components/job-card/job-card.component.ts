@@ -23,6 +23,7 @@ import { JobService } from '../../Services/Job/job.service';
 })
 export class JobCardComponent {
   @Input() job !: Job;
+  @Input() flag!: boolean;
   location?: location ;
   degree?: Degree;
   jobtype?: JobType;
