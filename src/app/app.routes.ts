@@ -41,6 +41,8 @@ import { candidateChildGuard } from './Guards/candidate-child.guard';
 import { hasPrivilegeGuard } from './Guards/has-privilege.guard';
 import { hasSpecialPrivilegeGuard } from './Guards/has-special-privilege.guard';
 import { hasSpecialPrivilegeChildGuard } from './Guards/has-special-privilege-child.guard';
+import { JobApplicantComponent } from './Components/JobApplication/job-applicant/job-applicant.component';
+import { YourJobsComponent } from './Components/Employee/your-jobs/your-jobs.component';
 
 export const routes: Routes = [
   {
@@ -73,6 +75,10 @@ export const routes: Routes = [
   {
     path: 'jobs',
     component: JobHomeComponent,
+  },
+  {
+    path: 'jobs/:jobId/applicants',
+    component: JobApplicantComponent,
   },
   {
     path: 'job-details/:jobId',
@@ -132,6 +138,7 @@ export const routes: Routes = [
           },
         ],
       },
+      { path: 'your-jobs', component: YourJobsComponent },
     ],
   },
   {

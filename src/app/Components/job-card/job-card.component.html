@@ -34,6 +34,7 @@
                     <div class="option">{{jobPosition?.positionName}}</div>
                 </div>
                 <button class="btn btn-primary-1 mb-2" [routerLink]="['/job-details',job.jobId]" >Click Here for Details..</button>
+                <button class="btn btn-primary-1 mb-2" [routerLink]="['/jobs', job.jobId, 'applicants']">View Applicants</button>
               </div>
             </div>
           </div>
