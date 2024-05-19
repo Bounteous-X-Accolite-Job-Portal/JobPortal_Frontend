@@ -65,7 +65,7 @@ export class CrudJobDataService {
 
   deleteLocationByLocationId(locationId: string){
     return this.http.delete(
-      environment.baseURL + 'JobLocation/DeleteJobLocation/' + locationId
+      environment.baseURL + 'JobLocation/DeleteLocation/' + locationId
     );
   }
 

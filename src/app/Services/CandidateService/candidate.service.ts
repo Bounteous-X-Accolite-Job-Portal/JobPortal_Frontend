@@ -15,6 +15,8 @@ import { candidateEducationResponse } from '../../Models/EducationResponse/candi
 import { candidateExperienceResponse } from '../../Models/ExperienceResponse/candidateExperienceResponse';
 import { AllJobApplicationResponse } from '../../Models/JobApplicationResponse/AllJobApplicationResponse';
 import { AllJob } from '../../Models/JobResponse/AllJobs';
+import { SocialMedia } from '../../Models/SocialMediaResponse/SocialMedia';
+import { SocailMediaResponse } from '../../Models/SocialMediaResponse/SocialMediaResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -81,5 +83,17 @@ export class CandidateService {
   
   getAllAppliedJobsByCandidate(id:string):Observable<AllJob>{
     return this.http.get<AllJob>(environment.baseURL+'Application/CandidateAppliedJobs/'+id);
+  };
+
+  addSocialMedia(socialMedia?:any | undefined){
+    return this.http.post<any>(environment.baseURL+'SocialMedia/addSocialMediaDetails',socialMedia)
+  };
+
+  getSocialMediaDetails(id:string):Observable<SocailMediaResponse>{
+    return this.http.get<SocailMediaResponse>(environment.baseURL+'SocialMedia/getSocialMediaDetails/'+id);
+  };
+
+  updateSocialMedia(socialMedia?:any | undefined){
+    return this.http.put<any>(environment.baseURL+'SocialMedia/updateSocialMediaDetails',socialMedia);
   };
 }
