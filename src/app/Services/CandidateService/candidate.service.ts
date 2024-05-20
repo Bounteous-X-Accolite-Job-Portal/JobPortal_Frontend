@@ -19,6 +19,7 @@ import { SocialMedia } from '../../Models/SocialMediaResponse/SocialMedia';
 import { SocailMediaResponse } from '../../Models/SocialMediaResponse/SocialMediaResponse';
 import { SkillsResponse } from '../../Models/SkillsResponse/SkillsResponse';
 import { Skills } from '../../Models/SkillsResponse/Skills';
+import { candidateExperience } from '../../Models/ExperienceResponse/candidateExperience';
 
 @Injectable({
   providedIn: 'root'
@@ -109,5 +110,21 @@ export class CandidateService {
 
   updateSkillsOfCandidate(userskills:Skills){
     return this.http.put<Skills>(environment.baseURL+'Skills/updateSkills',userskills);
+  }
+
+  getCandidateEducation(educationId:string):Observable<candidateEducationResponse>{
+    return this.http.get<candidateEducationResponse>(environment.baseURL+'CandidateEducation/getDetails/'+educationId);
+  }
+  
+  updateCandiateEducation(education:candidateEducation){
+    return this.http.put<candidateEducation>(environment.baseURL+'CandidateEducation/updateEducation',education);
+  }
+
+  getCandidateExperience(experienceId:string):Observable<candidateExperienceResponse>{
+    return this.http.get<candidateExperienceResponse>(environment.baseURL+'CandidateExperience/getExperience/'+experienceId);
+  }
+
+  updateCandidateExperience(experience:candidateExperience){
+    return this.http.put<candidateExperience>(environment.baseURL+'CandidateExperience/updateExperience',experience);
   }
 }

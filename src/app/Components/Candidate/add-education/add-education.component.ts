@@ -87,7 +87,7 @@ constructor(private router:Router) {}
       this.httpService.addCandidateEducation(this.addCandidateEducation.value).subscribe(
         (res) => {
           console.log(res);
-          this.toastr.success("CONGO Education Added !!");
+          this.toastr.success("Education Added Successfully!!");
           this.router.navigate(['profile','edu']);
         },
         (error) => {

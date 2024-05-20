@@ -6,34 +6,36 @@
         <a [routerLink]="['add-exp']" class="btn btn-primary px-3 text-style-add fs-5 fw-bold">Add Experience</a>
       </div>  
       <hr>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Company</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Currently Working</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-            <tbody>
-              <tr *ngFor="let tmp of expList; let i = index">
-                <td>{{tmp.experienceTitle}}</td>
-                <td>{{tmp.description}}</td>
-                <td>{{this.companyList[i].companyName}}</td>
-                <td>{{tmp.startDate}}</td>
-                <td>{{tmp.endDate!=null?tmp.endDate:"NA"}}</td>
-                <td>{{tmp.isCurrentlyWorking}}</td>
-                <td>
-                    <a class='btn btn-primary text-style-add' [routerLink]="['update-exp']"><i class="fas fa-edit"></i>
-                    </a>
-                    <a class='btn btn-danger' (click)="deleteExperience(tmp.experienceId)"><i class="fa fa-trash"></i>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-        </table>
+   <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Company</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Currently Working</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+          <tbody>
+            <tr *ngFor="let tmp of expList; let i = index">
+              <td>{{tmp.experienceTitle}}</td>
+              <td>{{tmp.description}}</td>
+              <td>{{this.companyList[i].companyName}}</td>
+              <td>{{tmp.startDate}}</td>
+              <td>{{tmp.endDate!=null?tmp.endDate:"NA"}}</td>
+              <td>{{tmp.isCurrentlyWorking}}</td>
+              <td>
+                  <a class='btn btn-primary text-style-add' [routerLink]="['update-exp',tmp.experienceId]"><i class="fas fa-edit"></i>
+                  </a>
+                  <a class='btn btn-danger' (click)="deleteExperience(tmp.experienceId)"><i class="fa fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+      </table>
+   </div>
     </div>
   </div>
