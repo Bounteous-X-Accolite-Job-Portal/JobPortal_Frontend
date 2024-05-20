@@ -25,7 +25,8 @@ export class SocialProfilesComponent {
     private candidService: CandidateService,
     private userStore: UserStoreService,
     private auth: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private fb : FormBuilder
   ) {}
 
   mediaForm!: FormGroup;
@@ -47,6 +48,12 @@ export class SocialProfilesComponent {
       console.log('Logged User Id : ', this.userId);
     });
 
+    this.mediaForm = this.fb.group({
+      link1:[''],
+      link2:[''],
+      link3:['']
+    });
+
     this.loadSocialMediaDetails();
     this.addSocialMedia = false;
     this.updateSocialMedia = false;
@@ -61,17 +68,21 @@ export class SocialProfilesComponent {
         this.socialMedia = res.socialMedia;
         this.checkSocialMedia();
 
-        console.log('result : ', this.socialMedia);
-        console.log('l1 : ', this.socialMedia.link1);
-        console.log('l2 : ', this.socialMedia.link2);
-        console.log('l3 : ', this.socialMedia.link3);
-        console.log('id : ', this.socialMedia.socialMediaId);
+        // console.log('result : ', this.socialMedia);
+        // console.log('l1 : ', this.socialMedia.link1);
+        // console.log('l2 : ', this.socialMedia.link2);
+        // console.log('l3 : ', this.socialMedia.link3);
+        // console.log('id : ', this.socialMedia.socialMediaId);
 
-        this.mediaForm = new FormGroup({
-          link1: new FormControl('' || this.socialMedia.link1),
-          link2: new FormControl('' || this.socialMedia.link2),
-          link3: new FormControl('' || this.socialMedia.link3),
-        });
+        // this.mediaForm = new FormGroup({
+        //   link1: new FormControl('' || this.socialMedia.link1),
+        //   link2: new FormControl('' || this.socialMedia.link2),
+        //   link3: new FormControl('' || this.socialMedia.link3),
+        // });
+
+        this.mediaForm.get('link1')?.setValue(this.socialMedia.link1 || '');
+        this.mediaForm.get('link2')?.setValue(this.socialMedia.link2 || '');
+        this.mediaForm.get('link3')?.setValue(this.socialMedia.link3 || '');
 
         this.disablefields();
       },

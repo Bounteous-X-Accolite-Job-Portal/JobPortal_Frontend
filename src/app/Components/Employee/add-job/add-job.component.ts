@@ -11,7 +11,7 @@ import { JobCategory } from '../../../Models/JobCategoryResponse/JobCategory';
 import { JobService } from '../../../Services/Job/job.service';
 import { location } from '../../../Models/JoblocationResponse/location';
 import { JobType } from '../../../Models/JobTypeResponse/JobType';
-import { AddJobService } from '../../../Services/add-job.service';
+import { AddJobService } from '../../../Services/Job/add-job.service';
 import { position } from '../../../Models/JobPositionResponse/position';
 import { Degree } from '../../../Models/DegreeResponse/Degree';
 import { Job } from '../../../Models/JobResponse/Job';

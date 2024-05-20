@@ -3,7 +3,7 @@
     <h2>Education</h2>
     <div>Candidate with user ID : {{userId}}</div><hr>
     <div class="d-flex justify-content-end p-1">
-      <a [routerLink]="['add-edu']" class="btn btn-primary px-3 text-style-add fs-5 fw-bold">Route to add</a>
+      <a [routerLink]="['add-edu']" class="btn btn-primary px-3 text-style-add fs-5 fw-bold">Add Education</a>
     </div>  
     <hr>
     <div class="table-responsive">
@@ -26,7 +26,7 @@
                 <td>{{tmp.startYear}}</td>
                 <td>{{tmp.endYear}}</td>
                 <td>
-                    <a class='btn btn-primary text-style-add' [routerLink]="['update-edu']"><i class="fas fa-edit"></i>
+                    <a class='btn btn-primary text-style-add' [routerLink]="['update-edu',tmp.educationId]"><i class="fas fa-edit"></i>
                     </a>
                     <a class='btn btn-danger' (click)="deleteEducation(tmp.educationId)"><i class="fa fa-trash"></i>
                     </a>

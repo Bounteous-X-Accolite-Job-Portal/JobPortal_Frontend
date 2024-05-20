@@ -131,7 +131,7 @@ export const routes: Routes = [
         path: 'edu',
         children: [
           { path: 'add-edu', component: AddEducationComponent },
-          { path: 'update-edu', component: UpdateEducationComponent },
+          { path: 'update-edu/:id', component: UpdateEducationComponent },
         ],
       },
       { path: 'exp', component: ExperienceComponent },
@@ -139,7 +139,7 @@ export const routes: Routes = [
         path: 'exp',
         children: [
           { path: 'add-exp', component: AddExperienceComponent },
-          { path: 'update-exp', component: UpdateExperienceComponent },
+          { path: 'update-exp/:id', component: UpdateExperienceComponent },
         ],
       },
       { path: 'per-info', component: PersonalInfoComponent },
