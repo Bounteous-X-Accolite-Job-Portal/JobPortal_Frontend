@@ -5,8 +5,8 @@
     (click)="toggleCollapse()"
   >
     <div class="logo-container">
-      <button class="logo">E</button>
-      <div class="logo-text" *ngIf="collapsed"></div>
+      <button class="logo" (click)="toggleCollapse()">{{this.name ? this.name.charAt(0) : 'U'}}</button>
+      <div class="logo-text" *ngIf="collapsed">{{this.name}}</div>
       <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
         <i class="fal fa-times close-icon"></i>
       </button>
@@ -14,6 +14,7 @@
     <ul class="sidenav-nav">
       <li class="sidenav-nav-item float:left py-2" *ngFor="let data of sideBarData">
         <a
+          *ngIf="(!data.requiredPrivilege || (!data.requiredSpecialPrivilege && (data.requiredPrivilege === hasPrivilege)) || ((data.requiredSpecialPrivilege == hasSpecialPrivilege) && (data.requiredPrivilege === hasPrivilege)))"
           [routerLink]="['/employee-dashboard/' + data.routeLink]"
           class="sidenav-nav-link w-100 px-3"
           routerLinkActive="active"

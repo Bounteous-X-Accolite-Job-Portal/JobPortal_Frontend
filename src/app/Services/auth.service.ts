@@ -96,6 +96,22 @@ export class AuthService {
   checkIsEmployeeFromToken(){
     if(this.userPayload)
       return this.userPayload.IsEmployee;
+
+    return false;
+  }
+
+  checkHasPrivilegeFromToken(){
+    if(this.userPayload)
+      return this.userPayload.HasPrivilege;
+
+    return false;
+  }
+
+  checkHasSpecialPrivilegeFromToken(){
+    if(this.userPayload)
+      return this.userPayload.HasSpecialPrivilege;
+
+    return false;
   }
 
   getRoleFromToken(){

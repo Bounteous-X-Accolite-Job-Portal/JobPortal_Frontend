@@ -11,6 +11,7 @@ import { AuthService } from '../../Services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { LoginResponse } from '../../Models/loginResponse';
 import { UserStoreService } from '../../Services/user-store.service';
+import { SpinnerService } from '../../Services/spinner.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private userStore: UserStoreService
+    private userStore: UserStoreService,
+    private spinnerService: SpinnerService,
   ) {}
 
   loginForm = this.fb.group({
@@ -40,6 +42,9 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    console.log('show spinner');
+    this.spinnerService.showSpinner();
+
     if (this.loginForm.valid) {
      
       this.authService.loginUser(this.loginForm.value).subscribe(
@@ -60,20 +65,29 @@ export class LoginComponent {
             this.userStore.setIsEmployeeForStore(tokenPayload['IsEmployee']);
             this.userStore.setRoleForStore(tokenPayload['Role']);
             this.userStore.setIdForStore(tokenPayload['Id']);
+            this.userStore.setHasPrivilegeForStore(tokenPayload["HasPrivilege"]);
+            this.userStore.setHasSpecialPrivilegeForStore(tokenPayload["HasSpecialPrivilege"]);
 
             this.authService.AuthEvent.emit(true);
 
             console.log('CheckIsEmployee', tokenPayload['IsEmployee']);
+
             if (tokenPayload['IsEmployee']) {
               this.router.navigate(['/employee-dashboard']);
             } else {
-              this.router.navigate(['/profile']);
+              this.router.navigate(['/jobs']);
             }
           } else {
             this.message = data.message;
           }
+
+          console.log('hide spinner');
+          this.spinnerService.hideSpinner();
         },
         (error: any) => {
+          console.log('hide spinner');
+          this.spinnerService.hideSpinner();
+
           console.log(error);
         }
       );

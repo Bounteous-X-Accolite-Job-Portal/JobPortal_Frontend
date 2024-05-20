@@ -10,7 +10,6 @@ import { CommonModule, Time } from '@angular/common';
 import { GetInterviewsService } from '../../../Services/InterviewService/get-interviews.service';
 import { interviewResponse } from '../../../Models/InterviewResponse/InterviewResponse';
 import { SpinnerService } from '../../../Services/spinner.service';
-import { SpinnerComponent } from '../../spinner/spinner.component';
 import { ApplicationServiceService } from '../../../Services/ApplicationService/application-service.service';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
 import { interviewCardData } from '../../../Models/InterviewResponse/InterviewCardData';
@@ -28,13 +27,11 @@ import { JobService } from '../../../Services/Job/job.service';
     ReactiveFormsModule,
     InterviewCardComponent,
     CommonModule,
-    SpinnerComponent,
   ],
   templateUrl: './interview-hub.component.html',
   styleUrl: './interview-hub.component.css',
 })
 export class InterviewHubComponent implements OnInit {
-  showSpinner = false;
 
   public ActiveInterviewToggle: boolean = true;
   interviews: interviewResponse[] = [];
@@ -50,14 +47,7 @@ export class InterviewHubComponent implements OnInit {
     private closedApplicationService: ClosedApplicationService,
     private jobService: JobService,
     private closedJobService : ClosedJobServiceService,
-  ) {
-    this.spinnerService.spinner$.subscribe((data: boolean) => {
-      setTimeout(() => {
-        this.showSpinner = data ? data : false;
-      });
-      console.log(this.showSpinner);
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.loadInterviews();

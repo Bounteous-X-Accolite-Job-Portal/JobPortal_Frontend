@@ -1,5 +1,4 @@
-import { CanActivateFn } from '@angular/router';
-import { inject, Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { PermissionService } from '../Services/permission.service';
 import { CanActivateChildFn } from '@angular/router';
 
