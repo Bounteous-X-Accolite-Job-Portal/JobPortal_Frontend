@@ -7,7 +7,14 @@ export const sideBarData = [
     requiredSpecialPrivilege: false,
   },
   {
-    routeLink: 'interview',
+    routeLink: 'add-employee',
+    icon: 'fa fa-user-plus',
+    label: 'Add New Employee',
+    requiredPrivilege: true,
+    requiredSpecialPrivilege: false,
+  },
+  {
+    routeLink: 'interview/:applicationId',
     icon: 'fal fa-question',
     label: 'Inteview Hub',
     requiredPrivilege: false,
@@ -34,14 +41,12 @@ export const sideBarData = [
     requiredPrivilege: false,
     requiredSpecialPrivilege: false,
   },
-  // {
-  //     routeLink: 'sml',
-  //     icon: 'fal fa-camera',
-  //     label: 'Social Profiles'
-  // },
-  // {
-  //     routeLink: 'pass-reset',
-  //     icon: 'fal fa-cog',
-  //     label: 'Password Reset'
-  // },
+  {
+      routeLink: 'disable-employee-privilege',
+      icon: 'fal fa-cog',
+      label: 'Disable Employee Account',
+      // requiredPrivilege: true,
+      // requiredSpecialPrivilege: false,
+  },
+
 ];

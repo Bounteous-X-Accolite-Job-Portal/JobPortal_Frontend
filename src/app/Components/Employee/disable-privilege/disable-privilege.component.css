@@ -1,0 +1,14 @@
+.logo{
+    background-color: #0D016B;
+    width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: 10px;
+  color: white;
+  border:none;  
+}

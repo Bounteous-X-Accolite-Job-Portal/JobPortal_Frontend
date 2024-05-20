@@ -59,13 +59,12 @@ export class CrudJobDataService {
 
   deletePositionByPositionId(positionId: string){
     return this.http.delete(
-      environment.baseURL + 'JobPosition/DeleteJobPosition/' + positionId
-    );
+      environment.baseURL + 'JobPosition/DeleteJobPosition/' + positionId);
   }
 
   deleteLocationByLocationId(locationId: string){
     return this.http.delete(
-      environment.baseURL + 'JobLocation/DeleteJobLocation/' + locationId
+      environment.baseURL + 'JobLocation/DeleteLocation/' + locationId
     );
   }
 
@@ -85,6 +84,10 @@ export class CrudJobDataService {
     return this.http.delete(
       environment.baseURL + 'EducationInstitution/removeInstitution/' + institutionId
     );
+  }
+
+  deleteCompanyByCompanyId(companyId?: string){
+    return this.http.delete(environment.baseURL+ 'Company/removeCompany/' + companyId);
   }
 
   updateDegreeByDegreeId(updatedDegree: Degree){

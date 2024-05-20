@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { LandingComponent } from './Components/landing/landing.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
-import { AddEmployeeComponent } from './Components/Employee/add-employee/add-employee.component';
 import { AddJobComponent } from './Components/Employee/add-job/add-job.component';
 import { JobHomeComponent } from './Components/job-home/job-home.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
@@ -32,8 +31,10 @@ import { CrudTypesJobDataComponent } from './Components/Employee/crud-types-job-
 import { CrudLocationJobDataComponent } from './Components/Employee/crud-location-job-data/crud-location-job-data.component';
 import { CrudDegreeDataComponent } from './Components/Employee/crud-degree-data/crud-degree-data.component';
 import { CrudInstitutionDataComponent } from './Components/Employee/crud-institution-data/crud-institution-data.component';
+import { AddEmployeeComponent } from './Components/Employee/add-employee/add-employee.component';
 import { AppliedJobsComponent } from './Components/Candidate/applied-jobs/applied-jobs.component';
 import { AboutComponent } from './Components/about/about.component';
+import { CrudCompanyDataComponent } from './Components/Employee/crud-company-data/crud-company-data.component';
 import { employeeGuardGuard } from './Guards/employee-guard.guard';
 import { childEmployeeGuardGuard } from './Guards/child-employee-guard.guard';
 import { candidateGuard } from './Guards/candidate.guard';
@@ -43,6 +44,7 @@ import { hasSpecialPrivilegeGuard } from './Guards/has-special-privilege.guard';
 import { hasSpecialPrivilegeChildGuard } from './Guards/has-special-privilege-child.guard';
 import { JobApplicantComponent } from './Components/JobApplication/job-applicant/job-applicant.component';
 import { YourJobsComponent } from './Components/Employee/your-jobs/your-jobs.component';
+import { DisablePrivilegeComponent } from './Components/Employee/disable-privilege/disable-privilege.component';
 
 export const routes: Routes = [
   {
@@ -67,10 +69,6 @@ export const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     canActivate: [loggedInGuard],
-  },
-  {
-    path: 'add-employee',
-    component: AddEmployeeComponent,
   },
   {
     path: 'jobs',
@@ -110,13 +108,20 @@ export const routes: Routes = [
     canActivate: [authGuard, employeeGuardGuard],
     canActivateChild: [childAuthGuard, childEmployeeGuardGuard],
     children: [
-      { path: 'add-job', 
+      {
+        path: 'add-job',
         component: AddJobComponent,
-        canActivate: [hasPrivilegeGuard]
+        canActivate: [hasPrivilegeGuard],
       },
       { path: 'interview', component: InterviewComponent },
       { path: 'interview-hub', component: InterviewHubComponent },
       { path: 'settings', component: SettingsComponent },
+      {
+        path: 'disable-employee-privilege',
+        component: DisablePrivilegeComponent,
+        
+      },
+      { path: 'add-employee', component: AddEmployeeComponent },
       {
         path: 'settings',
         canActivate: [hasSpecialPrivilegeGuard],
@@ -140,6 +145,7 @@ export const routes: Routes = [
             path: 'crud-institution-data',
             component: CrudInstitutionDataComponent,
           },
+          { path: 'crud-company-data', component: CrudCompanyDataComponent },
         ],
       },
       { path: 'your-jobs', component: YourJobsComponent },
@@ -172,7 +178,7 @@ export const routes: Routes = [
       { path: 'resume', component: ResumeComponent },
       { path: 'sml', component: SocialProfilesComponent },
       { path: 'pass-reset', component: PasswordResetComponent },
-      { path: 'applied-jobs', component: AppliedJobsComponent},
+      { path: 'applied-jobs', component: AppliedJobsComponent },
       { path: '**', component: TryComponent },
     ],
   },
