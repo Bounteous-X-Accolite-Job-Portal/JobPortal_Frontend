@@ -40,12 +40,11 @@ div{
 }
 
 select{
-    width: 20rem;
+    width: 10rem;
     height: 2rem;
     border-radius: 1rem;
     font-size: 14px;
     font-variant: unset;
-    /* font-family: Verdana; */
     margin-bottom: 1rem;
 }
 
@@ -70,7 +69,7 @@ p{
     font-weight: bolder;
 }
 
-button {
+/* button {
     position: relative;
     background: #ffffff;
     color: #0d016b;
@@ -143,7 +142,7 @@ button {
     width: 15px;
     left: 80%;
     animation: move 3s infinite;
-  }
+  } */
   
   @keyframes move {
     0% {

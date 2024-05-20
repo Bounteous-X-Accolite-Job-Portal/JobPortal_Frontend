@@ -55,10 +55,10 @@ export class AppComponent implements OnInit {
 
     this.authService.logout();
 
-    this.router.navigate(["/login"]);
-
     console.log('hide spinner');
     this.spinnerService.hideSpinner();
+
+    this.router.navigate(["/login"]);
   }
 
   checkEmployee(){

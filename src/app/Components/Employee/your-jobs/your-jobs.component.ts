@@ -8,6 +8,9 @@ import { AuthService } from '../../../Services/auth.service';
 import { JobCardComponent } from '../../job-card/job-card.component';
 import { CommonModule } from '@angular/common';
 import { Job } from '../../../Models/JobResponse/Job';
+import { ClosedJob } from '../../../Models/ClosedJobResponse/ClosedJob';
+import { ClosedJobServiceService } from '../../../Services/ClosedJob/closed-job-service.service';
+import { AllClosedJobsResponse } from '../../../Models/ClosedJobResponse/AllClosedJobsResponse';
 
 @Component({
   selector: 'app-your-jobs',
@@ -17,14 +20,18 @@ import { Job } from '../../../Models/JobResponse/Job';
   styleUrl: './your-jobs.component.css'
 })
 export class YourJobsComponent implements OnInit{
+  public ActiveJobToggle: boolean = true;
+
   employeeId !: Guid;
   jobs : Job[] = [];
+  closedJobs : ClosedJob[] = [];
 
   constructor(
     private spinnerService: SpinnerService,
     private jobService: JobService,
     private store: UserStoreService,
     private authService: AuthService,
+    private closedJobService: ClosedJobServiceService,
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +42,15 @@ export class YourJobsComponent implements OnInit{
     })
 
     this.loadJobs();
+    this.loadClosedJobs();
+  }
+
+  ActiveJobs() {
+    this.ActiveJobToggle = true;
+  }
+
+  ClosedJobs() {
+    this.ActiveJobToggle = false;
   }
 
   loadJobs(){
@@ -42,9 +58,27 @@ export class YourJobsComponent implements OnInit{
 
     this.jobService.getAllJobsAddedByLoggedInEmployee(this.employeeId).subscribe(
       (res : AllJob) => {
-        console.log(res);
+        console.log("active jobs", res);
 
         this.jobs = res.allJobs;
+
+        this.spinnerService.hideSpinner();
+      },
+      (error) => {
+        console.log(error);
+        this.spinnerService.hideSpinner();
+      }
+    )
+  }
+
+  loadClosedJobs(){
+    this.spinnerService.showSpinner();
+
+    this.closedJobService.getAllJobsAddedByLoggedInEmployee(this.employeeId).subscribe(
+      (res : AllClosedJobsResponse) => {
+        console.log("closed Jobs", res);
+
+        this.closedJobs = res.closedJobs;
 
         this.spinnerService.hideSpinner();
       },
