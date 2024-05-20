@@ -79,6 +79,10 @@ export const routes: Routes = [
     component: JobApplicantComponent,
   },
   {
+    path: 'closedJobs/:closedJobId/applicants',
+    component: JobApplicantComponent,
+  },
+  {
     path: 'job-details/:jobId',
     component: JobdetailsComponent,
   },
