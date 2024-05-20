@@ -1,0 +1,359 @@
+<div class="card my-4">
+  <div class="card-header text-white bg-primary">
+    <span
+      class="showCard"
+      style="cursor: pointer"
+      data-bs-toggle="modal"
+      [attr.data-bs-target]="'#profileModal'+ applicant.applicationId"
+    >
+      {{ applicant.candidate.firstName }} {{ applicant.candidate.lastName }} (
+      {{ applicant.candidate.email }} )
+    </span>
+    <span
+      *ngIf="
+        applicant != null &&
+        applicant.resume != null &&
+        applicant.resume != undefined
+      "
+      style="float: right"
+    >
+      <a href="{{ applicant.resume.resumeUrl }}" target="_blank">
+        <button type="button" class="btn btn-secondary btn-sm">
+          View Resume
+        </button>
+      </a>
+    </span>
+  </div>
+  <div class="card-header">
+    <span style="float: left">
+      Status Of Application :
+      <span class="p-1 bg-info text-dark">{{
+        applicant.status.statusName
+      }}</span>
+    </span>
+    <span style="float: right">
+      <button
+        type="button"
+        class="btn btn-secondary btn-sm"
+        data-bs-toggle="modal"
+        [attr.data-bs-target]="'#statusChange'+ applicant.applicationId"
+      >
+        Change Status
+      </button>
+    </span>
+  </div>
+  <div class="card-body">
+    <div class="mb-3">
+      <div class="card-text">
+        Skills -
+        {{
+          applicant.skills != null
+            ? applicant.skills.candidateSkills
+            : "No skills to show."
+        }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card text-center">
+          <div class="card-header">Experiences</div>
+          <div class="card-body">
+            <span *ngIf="applicant.experience.length === 0"
+              >No Experience to show</span
+            >
+            <ul *ngFor="let item of applicant.experience">
+              <div> 
+                {{ item.experience.experienceTitle }}  &#64;  {{ item.company.companyName }}
+                ( {{ item.experience.startDate }} : {{ item.experience.isCurrentlyWorking ? "present" : item.experience.endDate }} )
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card text-center">
+          <div class="card-header">Education</div>
+          <div class="card-body">
+            <span *ngIf="applicant.education.length === 0"
+              >No Education to show</span
+            >
+            <ul *ngFor="let item of applicant.education">
+              <div>
+                {{ item.degree.degreeName }} (
+                {{
+                  item.institution.institutionOrSchool.toLowerCase() === "others"
+                    ? item.education.institutionOrSchoolName
+                    : item.institution.institutionOrSchool
+                }}
+                )
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-header">
+    <div>
+      <span style="float: left">Interviews - 
+        <a
+          class="btn-secondary btn-sm"
+          style="cursor: pointer;"
+          data-bs-toggle="modal"
+          [attr.data-bs-target]="'#interviewModal'+ applicant.applicationId"
+          (click)="GetAllApplicantInterview(applicant.applicationId)"
+        >
+          Click to view All Interviews
+        </a>
+      </span>
+      <span style="float: right">
+        <a href="" target="_blank">
+          <button type="button" class="btn btn-secondary btn-sm">
+            Schedule Interview
+          </button>
+        </a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- popup for education and experience -->
+<div
+  class="modal fade"
+  [attr.id]="'profileModal' + applicant.applicationId"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel">
+          <span style="font-size: 25px; font-weight: 700"
+            >{{ applicant.candidate.firstName }}
+            {{ applicant.candidate.lastName }}</span
+          >
+          Details
+        </p>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <p style="font-size: 20px; font-weight: 500">Experiences -</p>
+          <div>
+            <div *ngIf="applicant.experience.length === 0">
+              No Experience to show
+            </div>
+            <div *ngFor="let item of applicant.experience">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div>
+                    <span class="card-title"
+                      ><b>{{ item.experience.experienceTitle }}</b></span
+                    >
+                    <span style="float: right"
+                      ><a href="{{ item.company.baseUrl }}" target="_blank">{{
+                        item.company.companyName
+                      }}</a></span
+                    >
+                  </div>
+                  <p style="font-size: 13px">
+                    {{ item.experience.startDate }} -
+                    {{
+                      item.experience.isCurrentlyWorking
+                        ? "currently working"
+                        : item.experience.endDate
+                    }}
+                  </p>
+                  <p class="card-text">{{ item.experience.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <p style="font-size: 20px; font-weight: 500">Education -</p>
+          <div>
+            <div *ngIf="applicant.education.length === 0">
+              No Education to show
+            </div>
+            <div *ngFor="let item of applicant.education">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div>
+                    <span class="card-title"
+                      ><b>{{ item.degree.degreeName }}</b></span
+                    >
+                    <span style="float: right">{{
+                      item.institution.institutionOrSchool.toLowerCase() === "others"
+                        ? item.education.institutionOrSchoolName
+                        : item.institution.institutionOrSchool
+                    }}</span>
+                  </div>
+                  <p style="font-size: 13px">
+                    {{ item.education.startYear }} - {{ item.education.endYear }}
+                  </p>
+                  <p class="card-text">{{ item.education.grade }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
+
+<!-- popup for all interviews -->
+<div
+  class="modal fade"
+  [attr.id]="'interviewModal' + applicant.applicationId"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel">
+          <span style="font-size: 25px; font-weight: 700">
+            {{ applicant.candidate.firstName }}
+            {{ applicant.candidate.lastName }}
+          </span>
+          Interview Details
+        </p>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <p style="font-size: 20px; font-weight: 500">Interviews -</p>
+          <div>
+            <div *ngIf="allInterviews.length === 0">
+              No Interviews to show
+            </div>
+            <div *ngFor="let item of allInterviews">
+              <div class="card mb-3">
+                <div class="card-header">
+                  <span>
+                    Interview with <b>{{ item.interviewer.firstName }} {{ item.interviewer.lastName }}</b> ( {{item.interviewer.empId}} )
+                  </span>
+                  <span *ngIf="isActiveInterview(item.interview)" class="my-1" style="float: right">
+                    <span class="text-success">Scheduled</span>
+                  </span>
+                </div>
+                <div class="card-body">
+                    <p *ngIf="isActiveInterview(item.interview)" class="card-subtitle mb-2 text-muted">
+                      <span>
+                        Scheduled on {{ item.interview.interviewDate }} at {{item.interview.interviewTime}}
+                      </span>
+                      <span style="float: right;">
+                        <a href='{{item.interview.link}}' target="_blank">
+                          <button type="button" class="btn btn-secondary btn-sm">
+                            Join Meeting
+                          </button>
+                        </a>
+                      </span>
+                    </p>
+                  <div *ngIf="!isActiveInterview(item.interview)" class="card-text">
+                    <div class="card-text mb-3">
+                      <div>Feedback - </div>
+                      {{ item.feedback ? item.feedback.feedback : "No feedback available" }}
+                    </div>
+                    <div class="card-text">
+                      <span>Additional Link - </span>
+                      <a *ngIf="(item.feedback && item.feedback.additionalLink)" href='{{item.feedback.additionalLink}}' target="_blank">Go to link</a>
+                      <div *ngIf="!(item.feedback && item.feedback.additionalLink)">No additional link available</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
+
+<!-- change Status -->
+<div
+  class="modal fade"
+  [attr.id]="'statusChange' + applicant.applicationId"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <span
+            >Application status for
+            <b
+              >{{ applicant.candidate.firstName }}
+              {{ applicant.candidate.lastName }}</b
+            ></span
+          >
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="closePopUp"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="group-gap">
+            <div class="d-block my-3">
+              <div class="mb-3">
+                <select
+                  class="custom-select"
+                  formControlName="status"
+                  [(ngModel)]="statusId"
+                >
+                  <option
+                    *ngFor="let status of allStatus; let idx = index"
+                    [ngValue]="idx"
+                  >
+                    {{ status.statusName }}
+                  </option>
+                </select>
+
+                <!-- error block -->
+                <div
+                  class="invalid-feedback"
+                  *ngIf="isSubmitted && status?.errors?.['required']"
+                >
+                  <sup>*</sup>Please select status
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="submit"
+              class="btn btn-secondary btn-sm"
+              (click)="submitStatus()"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

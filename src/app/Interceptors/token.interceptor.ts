@@ -2,6 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from '../Services/auth.service';
 import { Router } from '@angular/router';
+import { catchError, EMPTY, throwError } from 'rxjs';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
@@ -15,16 +16,18 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
     headers: req.headers.set('Authorization', `Bearer ${userToken}`),
   });
 
-  return next(modifiedReq);
-  // return next(modifiedReq).pipe(
-  //   catchError((err : any) => {
-  //     console.log(err);
-  //     if (err.status === 401) {
-  //       console.log('authInterceptor 401');
-  //       authService.
-  //       router.navigate(['/auth/signout']);
-  //     }
-  //     return throwError(() => new Error('Unauthorized Exception'));
-  //   })
-  // );
+  return next(modifiedReq).pipe(
+    catchError((err : any) => {
+      // console.log("error in interceptor", err);
+      if(err.status === 401){
+        console.log('authInterceptor 401');
+        authService.logout();
+        router.navigate(["/login"]);
+      }
+      else if(err.status === 0){
+        return EMPTY;
+      }
+      return throwError(() => new Error('Unauthorized Exception'));
+    })
+  )
 };

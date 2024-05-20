@@ -34,6 +34,16 @@ import { CrudDegreeDataComponent } from './Components/Employee/crud-degree-data/
 import { CrudInstitutionDataComponent } from './Components/Employee/crud-institution-data/crud-institution-data.component';
 import { AppliedJobsComponent } from './Components/Candidate/applied-jobs/applied-jobs.component';
 import { AboutComponent } from './Components/about/about.component';
+import { employeeGuardGuard } from './Guards/employee-guard.guard';
+import { childEmployeeGuardGuard } from './Guards/child-employee-guard.guard';
+import { candidateGuard } from './Guards/candidate.guard';
+import { candidateChildGuard } from './Guards/candidate-child.guard';
+import { hasPrivilegeGuard } from './Guards/has-privilege.guard';
+import { hasSpecialPrivilegeGuard } from './Guards/has-special-privilege.guard';
+import { hasSpecialPrivilegeChildGuard } from './Guards/has-special-privilege-child.guard';
+import { JobApplicantComponent } from './Components/JobApplication/job-applicant/job-applicant.component';
+import { YourJobsComponent } from './Components/Employee/your-jobs/your-jobs.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -67,6 +77,10 @@ export const routes: Routes = [
     component: JobHomeComponent,
   },
   {
+    path: 'jobs/:jobId/applicants',
+    component: JobApplicantComponent,
+  },
+  {
     path: 'job-details/:jobId',
     component: JobdetailsComponent,
   },
@@ -89,15 +103,20 @@ export const routes: Routes = [
   {
     path: 'employee-dashboard',
     component: EmployeeDashboardComponent,
-    canActivate: [authGuard],
-    canActivateChild: [childAuthGuard],
+    canActivate: [authGuard, employeeGuardGuard],
+    canActivateChild: [childAuthGuard, childEmployeeGuardGuard],
     children: [
-      { path: 'add-job', component: AddJobComponent },
+      { path: 'add-job', 
+        component: AddJobComponent,
+        canActivate: [hasPrivilegeGuard]
+      },
       { path: 'interview', component: InterviewComponent },
       { path: 'interview-hub', component: InterviewHubComponent },
       { path: 'settings', component: SettingsComponent },
       {
         path: 'settings',
+        canActivate: [hasSpecialPrivilegeGuard],
+        canActivateChild: [hasSpecialPrivilegeChildGuard],
         children: [
           {
             path: 'crud-category-job-data',
@@ -119,13 +138,14 @@ export const routes: Routes = [
           },
         ],
       },
+      { path: 'your-jobs', component: YourJobsComponent },
     ],
   },
   {
     path: 'profile',
     component: UserProfileComponent,
-    // canActivate: [authGuard],
-    // canActivateChild: [childAuthGuard],
+    canActivate: [authGuard, candidateGuard],
+    canActivateChild: [childAuthGuard, candidateChildGuard],
     children: [
       { path: 'edu', component: CandidateEducationComponent },
       {

@@ -10,6 +10,8 @@ export class UserStoreService {
   private role$ = new BehaviorSubject<string>("");
   private id$ = new BehaviorSubject<string>("");
   private name$ = new BehaviorSubject<string>("");
+  private hasPrivilege$ = new BehaviorSubject<boolean>(false);
+  private hasSpecialPrivilege$ = new BehaviorSubject<boolean>(false);
 
   constructor() { }
   
@@ -35,6 +37,22 @@ export class UserStoreService {
   
   public setIsEmployeeForStore(isEmployee : boolean){
     this.isEmployee$.next(isEmployee);
+  }
+
+  public checkHasPrivilegeFromStore(){
+    return this.hasPrivilege$.asObservable();
+  }
+  
+  public setHasPrivilegeForStore(hasPrivilege : boolean){
+    this.hasPrivilege$.next(hasPrivilege);
+  }
+
+  public checkHasSpecialPrivilegeFromStore(){
+    return this.hasSpecialPrivilege$.asObservable();
+  }
+  
+  public setHasSpecialPrivilegeForStore(hasSpecialPrivilege : boolean){
+    this.hasSpecialPrivilege$.next(hasSpecialPrivilege);
   }
   
   public getRoleFromStore(){
