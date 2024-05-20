@@ -40,6 +40,7 @@ export class JobdetailsComponent {
   userapplied :boolean = false;
   stringForButton:string = '';
   canApply:boolean = false;
+  isEmployee:boolean=false;
 
   constructor(
     private jobService : JobService,
@@ -167,7 +168,8 @@ export class JobdetailsComponent {
           if(status=="400")
           {
             this.stringForButton = "Employee Logged In !!";
-            this.disableApplyButton();
+            this.isEmployee=true;
+            //this.disableApplyButton();
           }
           else if(status=="401")
           {
@@ -217,5 +219,11 @@ export class JobdetailsComponent {
   public getName(val:boolean):string
   {
     return val?"Already Applied":"Apply Now";
+  }
+
+  public referCandidate(jobId?:string):void
+  {
+    console.log("refer to job : ",jobId);
+    
   }
 }

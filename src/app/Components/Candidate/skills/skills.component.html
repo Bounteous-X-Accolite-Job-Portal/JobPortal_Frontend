@@ -9,7 +9,7 @@
             </button>
             <div *ngIf="displayFields">
               <label>Enter Skills in Comma Separated Value Format[CSV] :</label>
-              <textarea formControlName="candidateSkills"></textarea>
+              <textarea formControlName="candidateSkills" class="w-100"></textarea>
               <button
                 class="btn btn-success w-100"
                 (click)="skillExist ? updateskills() : addskills()"

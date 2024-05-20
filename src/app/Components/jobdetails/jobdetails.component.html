@@ -22,5 +22,6 @@
     <h4>Job Category Code : {{jobcategory?.categoryCode}}</h4>
     <h4>Job Category Name : {{jobcategory?.categoryName | uppercase}}</h4>
 
-    <button [disabled]="canApply" (click)="applynow(job?.jobId)">{{this.stringForButton}}</button>
+    <button class="btn btn-outline-primary" *ngIf=!isEmployee (click)="applynow(job?.jobId)">{{this.stringForButton}}</button>
+    <button class="btn btn-outline-primary" *ngIf=isEmployee (click)="referCandidate(job?.jobId)">REFER</button>
 </section>
