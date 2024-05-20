@@ -10,7 +10,7 @@ export const sideBarData = [
     label: 'Add New Employee',
   },
   {
-    routeLink: 'interview',
+    routeLink: 'interview/:applicationId',
     icon: 'fal fa-question',
     label: 'Inteview Hub',
   },
@@ -24,11 +24,7 @@ export const sideBarData = [
     icon: 'fal fa-cog',
     label: 'Settings',
   },
-  // {
-  //     routeLink: 'sml',
-  //     icon: 'fal fa-camera',
-  //     label: 'Social Profiles'
-  // },
+
   // {
   //     routeLink: 'pass-reset',
   //     icon: 'fal fa-cog',

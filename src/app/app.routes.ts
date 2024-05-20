@@ -34,6 +34,7 @@ import { CrudInstitutionDataComponent } from './Components/Employee/crud-institu
 import { AddEmployeeComponent } from './Components/Employee/add-employee/add-employee.component';
 import { AppliedJobsComponent } from './Components/Candidate/applied-jobs/applied-jobs.component';
 import { AboutComponent } from './Components/about/about.component';
+import { CrudCompanyDataComponent } from './Components/Employee/crud-company-data/crud-company-data.component';
 export const routes: Routes = [
   {
     path: '',
@@ -90,30 +91,19 @@ export const routes: Routes = [
     children: [
       { path: 'add-employee', component: AddEmployeeComponent },
       { path: 'add-job', component: AddJobComponent },
-      { path: 'interview', component: InterviewComponent },
+      { path: 'interview/:applicationId', component: InterviewComponent },
       { path: 'interview-hub', component: InterviewHubComponent },
       { path: 'settings', component: SettingsComponent },
       {
         path: 'settings',
         children: [
-          {
-            path: 'crud-category-job-data',
-            component: CrudCategoryJobDataComponent,
-          },
-          {
-            path: 'crud-position-job-data',
-            component: CrudPositionJobDataComponent,
-          },
+          { path: 'crud-category-job-data', component: CrudCategoryJobDataComponent },
+          { path: 'crud-position-job-data', component: CrudPositionJobDataComponent },
           { path: 'crud-types-job-data', component: CrudTypesJobDataComponent },
-          {
-            path: 'crud-location-job-data',
-            component: CrudLocationJobDataComponent,
-          },
+          { path: 'crud-location-job-data', component: CrudLocationJobDataComponent },
           { path: 'crud-degree-data', component: CrudDegreeDataComponent },
-          {
-            path: 'crud-institution-data',
-            component: CrudInstitutionDataComponent,
-          },
+          { path: 'crud-institution-data', component: CrudInstitutionDataComponent },
+          { path: 'crud-company-data', component: CrudCompanyDataComponent}
         ],
       },
     ],

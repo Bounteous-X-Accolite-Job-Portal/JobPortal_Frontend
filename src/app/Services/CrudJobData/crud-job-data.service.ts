@@ -86,6 +86,10 @@ export class CrudJobDataService {
     );
   }
 
+  deleteCompanyByCompanyId(companyId?: string){
+    return this.http.delete(environment.baseURL+ 'Company/removeCompany/' + companyId);
+  }
+
   updateDegreeByDegreeId(updatedDegree: Degree){
     return this.http.put(
       environment.baseURL + 'Degree/updateDegree/', updatedDegree

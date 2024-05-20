@@ -82,4 +82,16 @@ export class CandidateService {
   getAllAppliedJobsByCandidate(id:string):Observable<AllJob>{
     return this.http.get<AllJob>(environment.baseURL+'Application/CandidateAppliedJobs/'+id);
   };
+
+  addInstitution(institution: any ):Observable<any>{
+    return this.http.post(environment.baseURL + 'EducationInstitution/addInstitution',institution);
+  }
+
+  addCompany(company: any):Observable<any>{
+    return this.http.post(environment.baseURL + 'Company/addCompany', company);
+  }
+
+  getAllCompanies():Observable<AllCompanyResponse>{
+    return this.http.get<AllCompanyResponse>(environment.baseURL+'Company/getAllCompanies');
+  }
 }

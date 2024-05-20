@@ -2,7 +2,7 @@
   <div class="card bg-glass p-5 mt-3">
 
       <h1>Schedule Interview</h1>
-      <form [formGroup]="AddInterviewForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="addInterviewForm" (ngSubmit)="onSubmit()">
         <div class="mb-4 col">
           <label class="form-label">Interview Date</label>
           <input type="date" formControlName="interviewDate" class="form-control" />
@@ -24,7 +24,7 @@
             placeholder="Enter name to search Interviewer"
             autofocus
           />
-          <ul class="list-group list-group-flush">
+          <ul class="list-group list-group-flush" *ngIf="isListVisible">
             <li
               class="list-group-item"
               *ngFor="let e of filteredEmployees"
