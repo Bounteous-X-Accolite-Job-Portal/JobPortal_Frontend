@@ -18,34 +18,37 @@ div{
 .jobListing
 {
     display: flex;
-    width: 70%;
-    min-height: 87vh;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
     flex-wrap: wrap;
     overflow-y: scroll;
     margin: 0;
-    padding: 0;
+    padding-top: 2.5rem;
+    background-color: #dccff0;
 }
 
 .Filters
 {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 25%;
     background-color: #0d016b;
     align-items: center;
     padding-top: 1rem;
-    position: static;
+    /* position: static; */
     color: antiquewhite;
     margin: 0;
 }
 
+
 select{
-    width: 20rem;
+    width: 90%;
     height: 2rem;
     border-radius: 1rem;
     font-size: 14px;
-    font-variant: unset;
-    /* font-family: Verdana; */
+    font-family: Verdana;
     margin-bottom: 1rem;
 }
 
@@ -54,27 +57,11 @@ p{
     font-weight: bolder;
 }
 
-.search{
-    color: #0d016b;
-    border-radius: 25px;
-    padding-left: 5rem;
-    padding-right: 5rem;
-    font-weight: bolder;
-}
-
-.reset{
-    color: #0d016b;
-    border-radius: 25px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    font-weight: bolder;
-}
 
 button {
     position: relative;
     background: #ffffff;
     color: #0d016b;
-    text-decoration: none;
     text-transform: uppercase;
     border: none;
     letter-spacing: 0.1rem;
@@ -86,7 +73,7 @@ button {
   
   button:hover {
     letter-spacing: 0.2rem;
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.6rem;
     background: var(--clr);
     color: var(--clr);
     animation: box 3s infinite;
@@ -143,6 +130,23 @@ button {
     width: 15px;
     left: 80%;
     animation: move 3s infinite;
+  }
+
+  @media (max-width: 768px) {
+    .Jobhunt{
+      flex-direction: column;
+      height: auto;
+    }
+    .Filters{
+      width: 100%;
+    }
+    .jobListing{
+      overflow-y: hidden;
+      width: 100%;
+    }
+    form{
+      flex-direction: row;
+    }
   }
   
   @keyframes move {
