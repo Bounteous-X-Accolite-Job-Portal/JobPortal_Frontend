@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Renderer2, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Job } from '../../Models/JobResponse/Job';
 import { location } from '../../Models/JoblocationResponse/location';
 import { Degree } from '../../Models/DegreeResponse/Degree';
@@ -23,7 +23,7 @@ import { JobService } from '../../Services/Job/job.service';
 @Component({
   selector: 'app-jobdetails',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,ToastrModule],
+  imports: [CommonModule,ReactiveFormsModule,ToastrModule,RouterModule],
   templateUrl: './jobdetails.component.html',
   styleUrl: './jobdetails.component.css'
 })
@@ -226,4 +226,6 @@ export class JobdetailsComponent {
     console.log("refer to job : ",jobId);
     
   }
+
+  
 }

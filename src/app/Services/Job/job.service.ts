@@ -17,6 +17,7 @@ import { JobPositionResponse } from '../../Models/JobPositionResponse/JobPositio
 import { JobApplication } from '../../Models/JobApplicationResponse/JobApplication';
 import { AllDegreeResponse } from '../../Models/DegreeResponse/AllDegreeResponse';
 import { ApplicationResponse } from '../../Models/JobApplicationResponse/ApplicationResponse';
+import { Job } from '../../Models/JobResponse/Job';
 @Injectable({
   providedIn: 'root',
 })
@@ -80,4 +81,8 @@ export class JobService {
     checkCandidateApplicable(jobId?:string):Observable<ApplicationResponse>{
         return this.http.get<ApplicationResponse>(environment.baseURL+'Application/jobApplication/isCandidateApplicable/'+jobId);
     };
+
+    updateJob(job:Job):Observable<JobResponse>{
+      return this.http.put<JobResponse>(environment.baseURL+'Job/UpdateJob',job);
+    }
   }

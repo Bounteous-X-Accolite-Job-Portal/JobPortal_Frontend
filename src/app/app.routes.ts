@@ -33,6 +33,7 @@ import { CrudLocationJobDataComponent } from './Components/Employee/crud-locatio
 import { CrudDegreeDataComponent } from './Components/Employee/crud-degree-data/crud-degree-data.component';
 import { CrudInstitutionDataComponent } from './Components/Employee/crud-institution-data/crud-institution-data.component';
 import { AppliedJobsComponent } from './Components/Candidate/applied-jobs/applied-jobs.component';
+import { EditJobComponent } from './Components/Employee/edit-job/edit-job.component';
 export const routes: Routes = [
   {
     path: '',
@@ -84,6 +85,10 @@ export const routes: Routes = [
   {
     path: 'crud-job-data',
     component: CrudCategoryJobDataComponent,
+  },
+  {
+    path: 'edit-job/:id',
+    component: EditJobComponent,
   },
   {
     path: 'employee-dashboard',
