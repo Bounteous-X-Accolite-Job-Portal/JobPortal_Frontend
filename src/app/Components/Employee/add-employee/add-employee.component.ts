@@ -9,7 +9,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AddEmployeeService } from '../../../Services/AddEmployee/add-employee.service';
+import { EmployeeService } from '../../../Services/AddEmployee/employee.service';
+import { Designation } from '../../../Models/DesignationResponse/Designation';
 
 @Component({
   selector: 'app-add-employee',
@@ -19,6 +20,7 @@ import { AddEmployeeService } from '../../../Services/AddEmployee/add-employee.s
   styleUrl: './add-employee.component.css',
 })
 export class AddEmployeeComponent implements OnInit {
+  designation!: Designation;
   addEmployeeForm!: FormGroup;
   id?: string;
   title!: string;
@@ -30,7 +32,7 @@ export class AddEmployeeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private addEmployeeService: AddEmployeeService
+    private addEmployeeService: EmployeeService
   ) {}
 
   ngOnInit() {
@@ -65,7 +67,6 @@ export class AddEmployeeComponent implements OnInit {
           if (data.status == 200) {
             this.loading = false;
             console.log('success adding employee');
-            
           } else {
             console.log('error');
           }

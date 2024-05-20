@@ -44,6 +44,7 @@ import { hasSpecialPrivilegeGuard } from './Guards/has-special-privilege.guard';
 import { hasSpecialPrivilegeChildGuard } from './Guards/has-special-privilege-child.guard';
 import { JobApplicantComponent } from './Components/JobApplication/job-applicant/job-applicant.component';
 import { YourJobsComponent } from './Components/Employee/your-jobs/your-jobs.component';
+import { DisablePrivilegeComponent } from './Components/Employee/disable-privilege/disable-privilege.component';
 
 export const routes: Routes = [
   {
@@ -102,27 +103,45 @@ export const routes: Routes = [
     component: EmployeeDashboardComponent,
     canActivate: [authGuard, employeeGuardGuard],
     canActivateChild: [childAuthGuard, childEmployeeGuardGuard],
-    children: [ 
-      { path: 'add-employee', component: AddEmployeeComponent },
-      { path: 'add-job', 
+    children: [
+      {
+        path: 'add-job',
         component: AddJobComponent,
-        canActivate: [hasPrivilegeGuard]
+        canActivate: [hasPrivilegeGuard],
       },
       { path: 'interview', component: InterviewComponent },
       { path: 'interview-hub', component: InterviewHubComponent },
       { path: 'settings', component: SettingsComponent },
       {
+        path: 'disable-employee-privilege',
+        component: DisablePrivilegeComponent,
+        
+      },
+      { path: 'add-employee', component: AddEmployeeComponent },
+      {
         path: 'settings',
         canActivate: [hasSpecialPrivilegeGuard],
         canActivateChild: [hasSpecialPrivilegeChildGuard],
         children: [
-          { path: 'crud-category-job-data', component: CrudCategoryJobDataComponent },
-          { path: 'crud-position-job-data', component: CrudPositionJobDataComponent },
+          {
+            path: 'crud-category-job-data',
+            component: CrudCategoryJobDataComponent,
+          },
+          {
+            path: 'crud-position-job-data',
+            component: CrudPositionJobDataComponent,
+          },
           { path: 'crud-types-job-data', component: CrudTypesJobDataComponent },
-          { path: 'crud-location-job-data', component: CrudLocationJobDataComponent },
+          {
+            path: 'crud-location-job-data',
+            component: CrudLocationJobDataComponent,
+          },
           { path: 'crud-degree-data', component: CrudDegreeDataComponent },
-          { path: 'crud-institution-data', component: CrudInstitutionDataComponent },
-          { path: 'crud-company-data', component: CrudCompanyDataComponent}
+          {
+            path: 'crud-institution-data',
+            component: CrudInstitutionDataComponent,
+          },
+          { path: 'crud-company-data', component: CrudCompanyDataComponent },
         ],
       },
       { path: 'your-jobs', component: YourJobsComponent },
@@ -155,7 +174,7 @@ export const routes: Routes = [
       { path: 'resume', component: ResumeComponent },
       { path: 'sml', component: SocialProfilesComponent },
       { path: 'pass-reset', component: PasswordResetComponent },
-      { path: 'applied-jobs', component: AppliedJobsComponent},
+      { path: 'applied-jobs', component: AppliedJobsComponent },
       { path: '**', component: TryComponent },
     ],
   },

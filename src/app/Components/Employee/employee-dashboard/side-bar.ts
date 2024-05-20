@@ -10,6 +10,8 @@ export const sideBarData = [
     routeLink: 'add-employee',
     icon: 'fa fa-user-plus',
     label: 'Add New Employee',
+    requiredPrivilege: true,
+    requiredSpecialPrivilege: false,
   },
   {
     routeLink: 'interview/:applicationId',
@@ -39,10 +41,12 @@ export const sideBarData = [
     requiredPrivilege: false,
     requiredSpecialPrivilege: false,
   },
+  {
+      routeLink: 'disable-employee-privilege',
+      icon: 'fal fa-cog',
+      label: 'Disable Employee Account',
+      // requiredPrivilege: true,
+      // requiredSpecialPrivilege: false,
+  },
 
-  // {
-  //     routeLink: 'pass-reset',
-  //     icon: 'fal fa-cog',
-  //     label: 'Password Reset'
-  // },
 ];

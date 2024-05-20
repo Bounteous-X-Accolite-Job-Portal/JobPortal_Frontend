@@ -4,11 +4,12 @@ import { Observable } from 'rxjs/internal/Observable';
 import { environment } from '../../../environments/environment.development';
 import { Designation } from '../../Models/DesignationResponse/Designation';
 import { AllEmployee } from '../../Models/Backend/Employee/AllEmployee';
+import { DesignationResponse } from '../../Models/DesignationResponse/DesignationResponse';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AddEmployeeService {
+export class EmployeeService {
   constructor(private http: HttpClient) {}
 
   addEmployee(empData: any): Observable<any> {
@@ -24,9 +25,18 @@ export class AddEmployeeService {
     );
   }
 
-  // getAllDesignation(): Observable<Designation>{
-  //   return this.http.get<>(
-  //     environment.baseURL.
-  //   )
-  // }
+  getDesignationByDesignationId(
+    designationId: number
+  ): Observable<DesignationResponse> {
+    return this.http.get<DesignationResponse>(
+      environment.baseURL + 'Designation/designation/' + designationId
+    );
+  }
+
+  disableEmployee(employeeId: any): Observable<any>{
+    return this.http.put<any>(
+      environment.baseURL+'EmployeeAccount/disableAccount/'+ employeeId,
+      employeeId
+    )
+  }
 }
