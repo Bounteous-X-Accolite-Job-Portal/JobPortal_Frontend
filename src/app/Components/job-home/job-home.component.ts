@@ -144,6 +144,7 @@ export class JobHomeComponent  {
         console.log("closed jobs", data);
 
         this.closedJobs = data.closedJobs; 
+        this.filteredClosedJobs = data.closedJobs;
 
         this.spinnerService.hideSpinner();
       },
@@ -396,6 +397,8 @@ export class JobHomeComponent  {
   public resetFilters():void
   {
     this.Filterjobs = this.jobs;
+    this.filteredClosedJobs = this.closedJobs;
+
     this.categoryIndex =0;
     this.positionIndex =0;
     this.locationIndex =0;

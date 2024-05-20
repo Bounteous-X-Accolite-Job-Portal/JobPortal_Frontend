@@ -62,7 +62,8 @@ export class JobCardComponent {
 
     this.rectifyDate();
 
-    console.log("job card ", this.job);
+    console.log("job card - active job", this.job);
+    console.log("job card - closed job ", this.closedJob);
 
     this.spinnerService.hideSpinner();
   }
