@@ -11,7 +11,7 @@ import { JobCategory } from '../../../Models/JobCategoryResponse/JobCategory';
 import { JobService } from '../../../Services/Job/job.service';
 import { location } from '../../../Models/JoblocationResponse/location';
 import { JobType } from '../../../Models/JobTypeResponse/JobType';
-import { AddJobService } from '../../../Services/add-job.service';
+import { AddJobService } from '../../../Services/Job/add-job.service';
 import { position } from '../../../Models/JobPositionResponse/position';
 import { Degree } from '../../../Models/DegreeResponse/Degree';
 import { Job } from '../../../Models/JobResponse/Job';
@@ -39,7 +39,6 @@ export class AddJobComponent implements OnInit {
   jobPositions: position[] = [];
   degrees: Degree[] = [];
   jobs: Job[] = [];
-  // Filterjobs: Job[] = [];
   jobData: any;
   lastDateError: boolean = true;
 
@@ -78,34 +77,9 @@ export class AddJobComponent implements OnInit {
         experience: new FormControl(''),
         lastDate: new FormControl('', Validators.required),
       },
-      // {
-      //   validators: this.lastDateValidator,
-      // }
     );
   }
 
-
-  // lastDateValidator(formGroup: AbstractControl): any {
-
-  //   const currDate = Date.now();
-  //   const inputlastdateControl = formGroup.get('lastDate');
-  //   if(currDate && inputlastdateControl){
-  //     let date1 = formatDate(currDate ,'yyyy-MM-dd','en_US');
-  //     let date2 = formatDate(inputlastdateControl.value,'yyyy-MM-dd','en_US');
-
-  //     if(date1>date2){
-  //       console.log('---date1 is greater----');
-  //       inputlastdateControl.setErrors({ lastDateError: true });
-  //       return { lastDateError : true};
-  //      }else{
-  //       console.log('---date2 is greater-----');
-  //       inputlastdateControl.setErrors(null);
-  //       return null;
-  //      }
-  //   }else{
-  //     return null;
-  //   }    
-  // };
 
   private loadJobLocations(): void {
     this.jobService.getAllJobLocations().subscribe(
@@ -186,12 +160,6 @@ export class AddJobComponent implements OnInit {
       lastDate: this.jobForm.value.lastDate,
     };
     let given = this.jobForm.value.lastDate;
-    // console.log(given.getTime(), "   : " , );
-    // let currentDate = new Date();
-      
-    // formatDate(currentDate, 'yyyy/MM/dd', 'en');
-    // console.log("formatted " ,currentDate.getTime());
-
     if (this.jobForm.valid) {
      
 
@@ -207,7 +175,6 @@ export class AddJobComponent implements OnInit {
         }
       );
     } else {
-      // this.jobForm.reset();
       console.log('invalid form');
     }
     this.submitted = true;

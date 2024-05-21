@@ -17,6 +17,9 @@ import { AllJobApplicationResponse } from '../../Models/JobApplicationResponse/A
 import { AllJob } from '../../Models/JobResponse/AllJobs';
 import { SocialMedia } from '../../Models/SocialMediaResponse/SocialMedia';
 import { SocailMediaResponse } from '../../Models/SocialMediaResponse/SocialMediaResponse';
+import { SkillsResponse } from '../../Models/SkillsResponse/SkillsResponse';
+import { Skills } from '../../Models/SkillsResponse/Skills';
+import { candidateExperience } from '../../Models/ExperienceResponse/candidateExperience';
 
 @Injectable({
   providedIn: 'root'
@@ -96,4 +99,32 @@ export class CandidateService {
   updateSocialMedia(socialMedia?:any | undefined){
     return this.http.put<any>(environment.baseURL+'SocialMedia/updateSocialMediaDetails',socialMedia);
   };
+
+  getSkillsOfCandidate(id:string):Observable<SkillsResponse>{
+    return this.http.get<SkillsResponse>(environment.baseURL+'Skills/getSkills/'+id);
+  }
+
+  addSkilsOfCandidate(userskills:string){
+    return this.http.post<string>(environment.baseURL+'Skills/addSkills/',{"candidateSkills":userskills});
+  }
+
+  updateSkillsOfCandidate(userskills:Skills){
+    return this.http.put<Skills>(environment.baseURL+'Skills/updateSkills',userskills);
+  }
+
+  getCandidateEducation(educationId:string):Observable<candidateEducationResponse>{
+    return this.http.get<candidateEducationResponse>(environment.baseURL+'CandidateEducation/getDetails/'+educationId);
+  }
+  
+  updateCandiateEducation(education:candidateEducation){
+    return this.http.put<candidateEducation>(environment.baseURL+'CandidateEducation/updateEducation',education);
+  }
+
+  getCandidateExperience(experienceId:string):Observable<candidateExperienceResponse>{
+    return this.http.get<candidateExperienceResponse>(environment.baseURL+'CandidateExperience/getExperience/'+experienceId);
+  }
+
+  updateCandidateExperience(experience:candidateExperience){
+    return this.http.put<candidateExperience>(environment.baseURL+'CandidateExperience/updateExperience',experience);
+  }
 }

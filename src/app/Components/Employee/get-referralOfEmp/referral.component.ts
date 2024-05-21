@@ -1,24 +1,24 @@
 import { Component, inject } from '@angular/core';
-import { ReferralServiceService } from '../referral-service.service';
-import { Referral } from '../referral';
-import { JobService } from '../Services/Job/job.service';
-import { Job } from '../Models/JobResponse/Job';
+import { ReferralServiceService } from '../../../referral-service.service';
+import { Referral } from '../../../referral';
+import { JobService } from '../../../Services/Job/job.service';
+import { Job } from '../../../Models/JobResponse/Job';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserStoreService } from '../Services/user-store.service';
-import { AuthService } from '../Services/auth.service';
-import { GetReferral } from '../get-referral';
-import { Referralresponse } from '../referralresponse';
-import { CandidateService } from '../Services/CandidateService/candidate.service';
+import { UserStoreService } from '../../../Services/user-store.service';
+import { AuthService } from '../../../Services/auth.service';
+import { GetReferral } from '../../../get-referral';
+import { Referralresponse } from '../../../referralresponse';
+import { CandidateService } from '../../../Services/CandidateService/candidate.service';
 import { Guid } from 'guid-typescript';
-import { CandidateResponse } from '../Models/CandidateAccountResponse/CandidateResponse';
-import { JobResponse } from '../Models/JobResponse/JobResponse';
-import { ReferralResponse } from '../Models/ReferralResponse/ReferralResponse';
+import { CandidateResponse } from '../../../Models/CandidateAccountResponse/CandidateResponse';
+import { JobResponse } from '../../../Models/JobResponse/JobResponse';
+import { ReferralResponse } from '../../../Models/ReferralResponse/ReferralResponse';
 import { forkJoin } from 'rxjs';
 import { Application } from 'express';
-import { ApplicationServiceService } from '../Services/ApplicationService/application-service.service';
-import { StatusServiceService } from '../status-service.service';
+import { ApplicationServiceService } from '../../../Services/ApplicationService/application-service.service';
+import { StatusServiceService } from '../../../status-service.service';
 
 
 

@@ -25,7 +25,8 @@ export class SocialProfilesComponent {
     private candidService: CandidateService,
     private userStore: UserStoreService,
     private auth: AuthService,
-    private toastr:ToastrService
+    private toastr: ToastrService,
+    private fb : FormBuilder
   ) {}
 
   mediaForm!: FormGroup;
@@ -38,8 +39,7 @@ export class SocialProfilesComponent {
   enableAddButton: boolean = false;
   enableEditButton: boolean = false;
 
-  ngOnInit(): void 
-  {
+  ngOnInit(): void {
     this.userStore.getIdFromStore().subscribe((val) => {
       console.log(val);
       let idFromToken = this.auth.getIdFromToken();
@@ -48,10 +48,15 @@ export class SocialProfilesComponent {
       console.log('Logged User Id : ', this.userId);
     });
 
+    this.mediaForm = this.fb.group({
+      link1:[''],
+      link2:[''],
+      link3:['']
+    });
+
     this.loadSocialMediaDetails();
     this.addSocialMedia = false;
     this.updateSocialMedia = false;
-    this.isAccessible = false;
     this.enableAddButton = false;
     this.enableEditButton = false;
   }
@@ -63,17 +68,21 @@ export class SocialProfilesComponent {
         this.socialMedia = res.socialMedia;
         this.checkSocialMedia();
 
-        console.log('result : ', this.socialMedia);
-        console.log('l1 : ', this.socialMedia.link1);
-        console.log('l2 : ', this.socialMedia.link2);
-        console.log('l3 : ', this.socialMedia.link3);
-        console.log('id : ', this.socialMedia.socialMediaId);
+        // console.log('result : ', this.socialMedia);
+        // console.log('l1 : ', this.socialMedia.link1);
+        // console.log('l2 : ', this.socialMedia.link2);
+        // console.log('l3 : ', this.socialMedia.link3);
+        // console.log('id : ', this.socialMedia.socialMediaId);
 
-        this.mediaForm = new FormGroup({
-          link1: new FormControl('' || this.socialMedia.link1),
-          link2: new FormControl('' || this.socialMedia.link2),
-          link3: new FormControl('' || this.socialMedia.link3),
-        });
+        // this.mediaForm = new FormGroup({
+        //   link1: new FormControl('' || this.socialMedia.link1),
+        //   link2: new FormControl('' || this.socialMedia.link2),
+        //   link3: new FormControl('' || this.socialMedia.link3),
+        // });
+
+        this.mediaForm.get('link1')?.setValue(this.socialMedia.link1 || '');
+        this.mediaForm.get('link2')?.setValue(this.socialMedia.link2 || '');
+        this.mediaForm.get('link3')?.setValue(this.socialMedia.link3 || '');
 
         this.disablefields();
       },
@@ -83,7 +92,7 @@ export class SocialProfilesComponent {
     );
   }
 
-  private checkSocialMedia() {
+  private checkSocialMedia(){
     if (this.socialMedia == null) {
       this.socialMedia = { link1: '', link2: '', link3: '' };
       this.enableAddButton = true;
@@ -104,24 +113,24 @@ export class SocialProfilesComponent {
         this.socialMedia.link2 = this.mediaForm.value.link2;
         this.socialMedia.link3 = this.mediaForm.value.link3;
         this.ngOnInit();
-        this.toastr.success("Socail Media Profiles Added!!");
+        this.toastr.success('Socail Media Profiles Added!!');
       },
       (error) => {
         console.log(error);
       }
     );
   }
-  
+
   public funupdateSocialMedia(): void {
     this.socialMedia.link1 = this.mediaForm.value.link1;
     this.socialMedia.link2 = this.mediaForm.value.link2;
     this.socialMedia.link3 = this.mediaForm.value.link3;
-    
+
     this.candidService.updateSocialMedia(this.socialMedia).subscribe(
       (res) => {
         console.log(res);
         this.ngOnInit();
-        this.toastr.success("Socail Media Profiles Updated!!");
+        this.toastr.success('Socail Media Profiles Updated!!');
       },
       (error) => {
         console.log(error);
@@ -132,24 +141,24 @@ export class SocialProfilesComponent {
   public activeAddSocialMedia(): void {
     this.addSocialMedia = true;
     this.updateSocialMedia = false;
-    this.isAccessible = true;
     this.enablefields();
   }
 
   public activeEditSocialMedia(): void {
     this.addSocialMedia = false;
     this.updateSocialMedia = true;
-    this.isAccessible = true;
     this.enablefields();
   }
 
   public disablefields(): void {
+    this.isAccessible = false;
     this.mediaForm.controls['link1'].disable();
     this.mediaForm.controls['link2'].disable();
     this.mediaForm.controls['link3'].disable();
   }
 
   public enablefields(): void {
+    this.isAccessible = true;
     this.mediaForm.controls['link1'].enable();
     this.mediaForm.controls['link2'].enable();
     this.mediaForm.controls['link3'].enable();

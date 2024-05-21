@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Renderer2, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Job } from '../../Models/JobResponse/Job';
 import { location } from '../../Models/JoblocationResponse/location';
 import { Degree } from '../../Models/DegreeResponse/Degree';
@@ -23,7 +23,7 @@ import { JobService } from '../../Services/Job/job.service';
 @Component({
   selector: 'app-jobdetails',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,ToastrModule],
+  imports: [CommonModule,ReactiveFormsModule,ToastrModule,RouterModule],
   templateUrl: './jobdetails.component.html',
   styleUrl: './jobdetails.component.css'
 })
@@ -40,6 +40,7 @@ export class JobdetailsComponent {
   userapplied :boolean = false;
   stringForButton:string = '';
   canApply:boolean = false;
+  isEmployee:boolean=false;
 
   constructor(
     private jobService : JobService,
@@ -167,7 +168,8 @@ export class JobdetailsComponent {
           if(status=="400")
           {
             this.stringForButton = "Employee Logged In !!";
-            this.disableApplyButton();
+            this.isEmployee=true;
+            //this.disableApplyButton();
           }
           else if(status=="401")
           {
@@ -218,4 +220,16 @@ export class JobdetailsComponent {
   {
     return val?"Already Applied":"Apply Now";
   }
+
+  public referCandidate(jobId?:string):void
+  {
+    console.log("refer to job : ",jobId);
+
+    console.log("passed jobId ; ",jobId);
+    console.log("serice job ; ",this.jobService.jobId);
+   this.router.navigate(['employee-dashboard','addReferral']);
+  
+  }
+
+  
 }

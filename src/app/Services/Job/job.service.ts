@@ -82,4 +82,8 @@ export class JobService {
     checkCandidateApplicable(jobId?:string):Observable<ApplicationResponse>{
         return this.http.get<ApplicationResponse>(environment.baseURL+'Application/jobApplication/isCandidateApplicable/'+jobId);
     };
+
+    updateJob(job:Job):Observable<JobResponse>{
+      return this.http.put<JobResponse>(environment.baseURL+'Job/UpdateJob',job);
+    }
   }

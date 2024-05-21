@@ -26,7 +26,7 @@ import { InterviewComponent } from './Components/Employee/interview/interview.co
 import { SettingsComponent } from './Components/Employee/settings/settings.component';
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
 import { ReferralServiceService } from './referral-service.service';
-import { ReferralComponent } from './referral/referral.component';
+import { ReferralComponent } from './Components/Employee/get-referralOfEmp/referral.component';
 import { CrudCategoryJobDataComponent } from './Components/Employee/crud-category-job-data/crud-category-job-data.component';
 import { CrudPositionJobDataComponent } from './Components/Employee/crud-position-job-data/crud-position-job-data.component';
 import { CrudTypesJobDataComponent } from './Components/Employee/crud-types-job-data/crud-types-job-data.component';
@@ -34,7 +34,8 @@ import { CrudLocationJobDataComponent } from './Components/Employee/crud-locatio
 import { CrudDegreeDataComponent } from './Components/Employee/crud-degree-data/crud-degree-data.component';
 import { CrudInstitutionDataComponent } from './Components/Employee/crud-institution-data/crud-institution-data.component';
 import { AppliedJobsComponent } from './Components/Candidate/applied-jobs/applied-jobs.component';
-import { AddReferralComponent } from './add-referral/add-referral.component';
+import { EditJobComponent } from './Components/Employee/edit-job/edit-job.component';
+import { AddReferralComponent } from './Components/Employee/add-referral/add-referral.component';
 export const routes: Routes = [
   {
     path: '',
@@ -89,6 +90,10 @@ export const routes: Routes = [
     component: CrudCategoryJobDataComponent,
   },
   {
+    path: 'edit-job/:id',
+    component: EditJobComponent,
+  },
+  {
     path: 'employee-dashboard',
     component: EmployeeDashboardComponent,
     canActivate: [authGuard],
@@ -137,7 +142,7 @@ export const routes: Routes = [
         path: 'edu',
         children: [
           { path: 'add-edu', component: AddEducationComponent },
-          { path: 'update-edu', component: UpdateEducationComponent },
+          { path: 'update-edu/:id', component: UpdateEducationComponent },
         ],
       },
       { path: 'exp', component: ExperienceComponent },
@@ -145,7 +150,7 @@ export const routes: Routes = [
         path: 'exp',
         children: [
           { path: 'add-exp', component: AddExperienceComponent },
-          { path: 'update-exp', component: UpdateExperienceComponent },
+          { path: 'update-exp/:id', component: UpdateExperienceComponent },
         ],
       },
       { path: 'per-info', component: PersonalInfoComponent },
