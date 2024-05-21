@@ -166,9 +166,7 @@ export class AddJobComponent implements OnInit {
       console.log(this.jobForm.value.lastDate, " ", new Date());
       this.addJobService.addJobs(this.jobData).subscribe(
         (res) => {
-          console.log(
-            'success '
-          );
+          console.log('success ', res);
         },
         (error) => {
           console.error('Error submission:', error);

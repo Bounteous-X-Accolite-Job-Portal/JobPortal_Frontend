@@ -5,19 +5,20 @@ import { CommonModule } from '@angular/common';
 import { CrudJobDataService } from '../../../Services/CrudJobData/crud-job-data.service';
 import { AddJobComponent } from '../add-job/add-job.component';
 import { RouterLink } from '@angular/router';
+import { Toast, ToastrModule, ToastrService } from 'ngx-toastr';
 import { JobService } from '../../../Services/Job/job.service';
 
 @Component({
   selector: 'app-crud-category-job-data',
   standalone: true,
-  imports: [ CommonModule, AddJobComponent, RouterLink ],
+  imports: [ CommonModule, AddJobComponent, RouterLink, ToastrModule ],
   templateUrl: './crud-category-job-data.component.html',
   styleUrl: './crud-category-job-data.component.css'
 })
 export class CrudCategoryJobDataComponent implements OnInit{
   jobCategories: JobCategory[] = [];
 
-  constructor(private jobService: JobService, private crudJobDataService: CrudJobDataService){}
+  constructor(private jobService: JobService, private crudJobDataService: CrudJobDataService, private toastr: ToastrService){}
   ngOnInit(){
     this.loadJobCategories();
   }
@@ -38,6 +39,7 @@ export class CrudCategoryJobDataComponent implements OnInit{
     this.crudJobDataService.deleteCategoryByCategoryId(categoryId).subscribe(
       (res) => {
         console.log("Category Deleted!");
+        this.toastr.success("Category Deleted Successfully!");
         this.loadJobCategories();
       },
       (error) => {

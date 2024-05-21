@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { jwtDecode } from "jwt-decode";
 import { environment } from '../../environments/environment.development';
 
+import { SpinnerService } from './spinner.service';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -21,6 +23,7 @@ export class AuthService {
     private http: HttpClient,
     private cookieService: CookieService,
     private router: Router,
+    private spinnerService: SpinnerService,
   ) {
     this.userPayload = this.decodedToken();
   }
@@ -36,9 +39,12 @@ export class AuthService {
 
   logout()
   {
+    this.spinnerService.showSpinner();
+
     this.removeToken();
     this.AuthEvent.emit(false);
-    this.router.navigate(['login']);
+
+    this.spinnerService.hideSpinner();
   }
 
   getResumes(id: any): Observable<any>{
@@ -57,7 +63,9 @@ export class AuthService {
 
   removeToken()
   {
+    this.spinnerService.showSpinner();
     this.cookieService.delete("token");
+    this.spinnerService.hideSpinner();
   }
 
   isLoggedIn(): boolean
@@ -96,6 +104,22 @@ export class AuthService {
   checkIsEmployeeFromToken(){
     if(this.userPayload)
       return this.userPayload.IsEmployee;
+
+    return false;
+  }
+
+  checkHasPrivilegeFromToken(){
+    if(this.userPayload)
+      return this.userPayload.HasPrivilege;
+
+    return false;
+  }
+
+  checkHasSpecialPrivilegeFromToken(){
+    if(this.userPayload)
+      return this.userPayload.HasSpecialPrivilege;
+
+    return false;
   }
 
   getRoleFromToken(){

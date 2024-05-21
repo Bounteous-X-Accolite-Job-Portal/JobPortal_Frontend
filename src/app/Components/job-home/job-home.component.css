@@ -1,40 +1,175 @@
+div{
+    padding: 0;
+    margin:0;
+}
+
 .Jobhunt
 {
     display: flex;
     flex-direction: row;
-    overflow: hidden;
-    height: 100vh;
+    height: 87vh;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    font-family: Roboto, sans-serif;
+    width: 100vw;
 }
 
 .jobListing
 {
     display: flex;
-    width: 100%;
-    height: 100vh;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-direction: row;
     justify-content: center;
-    overflow-y:auto;
+    align-items: center;
+    width: 75%;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    margin: 0;
+    padding-top: 2.5rem;
+    background-color: #dccff0;
 }
 
 .Filters
 {
     display: flex;
     flex-direction: column;
-    width: 40%;
-    height: 100%;
-    border-radius: 10px;
-    background-color: #5452d6;
+    width: 25%;
+    background-color: #0d016b;
     align-items: center;
-    justify-content: center;
-    
+    padding-top: 1rem;
+    /* position: static; */
+    color: antiquewhite;
+    margin: 0;
 }
 
+
 select{
-    width: 20rem;
+    width: 90%;
     height: 2rem;
     border-radius: 1rem;
     font-size: 14px;
-    font-variant: unset;
-    font-family: Verdana;;
+    font-family: Verdana;
+    margin-bottom: 1rem;
 }
+
+p{
+    margin-bottom: 0.3rem;
+    font-weight: bolder;
+}
+
+
+button {
+    position: relative;
+    background: #ffffff;
+    color: #0d016b;
+    text-transform: uppercase;
+    border: none;
+    letter-spacing: 0.1rem;
+    font-size: 0.8rem;
+    padding: 0.7rem 1.5rem;
+    transition: 0.2s;
+    font-weight: bolder;
+  }
+  
+  button:hover {
+    letter-spacing: 0.2rem;
+    padding: 0.8rem 1.6rem;
+    background: var(--clr);
+    color: var(--clr);
+    animation: box 3s infinite;
+  }
+  
+  button::before {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    background: #ffffff;
+  }
+  
+  button span {
+    position: relative;
+    z-index: 1;
+  }
+  button i {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+  
+  button i::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    left: 80%;
+    top: -2px;
+    border: 2px solid var(--clr);
+    background: #272822;
+    transition: 0.2s;
+  }
+  
+  button:hover i::before {
+    width: 15px;
+    left: 20%;
+    animation: move 3s infinite;
+  }
+  
+  button i::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    left: 20%;
+    bottom: -2px;
+    border: 2px solid var(--clr);
+    background: #272822;
+    transition: 0.2s;
+  }
+  
+  button:hover i::after {
+    width: 15px;
+    left: 80%;
+    animation: move 3s infinite;
+  }
+
+  @media (max-width: 768px) {
+    .Jobhunt{
+      flex-direction: column;
+      height: auto;
+    }
+    .Filters{
+      width: 100%;
+    }
+    .jobListing{
+      overflow-y: hidden;
+      width: 100%;
+    }
+    form{
+      flex-direction: row;
+    }
+  }
+  
+  @keyframes move {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes box {
+    0% {
+      box-shadow: #27272c;
+    }
+    50% {
+      box-shadow: 0 0 25px var(--clr);
+    }
+    100% {
+      box-shadow: #27272c;
+    }
+  }
+  

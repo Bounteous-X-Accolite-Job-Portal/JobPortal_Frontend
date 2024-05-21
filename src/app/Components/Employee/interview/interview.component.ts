@@ -15,6 +15,7 @@ import { FilterPipe } from '../../../Models/filter.pipe';
 import { Interview } from '../../../Models/InterviewResponse/Interview';
 import { ActivatedRoute } from '@angular/router';
 import { interviewResponse } from '../../../Models/InterviewResponse/InterviewResponse';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-interview',
@@ -23,18 +24,19 @@ import { interviewResponse } from '../../../Models/InterviewResponse/InterviewRe
   templateUrl: './interview.component.html',
   styleUrl: './interview.component.css',
 })
-export class InterviewComponent implements OnInit{
-  AddInterviewForm!: FormGroup;
+export class InterviewComponent implements OnInit {
+  addInterviewForm!: FormGroup;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
   searchText = '';
+  isListVisible = false;
   interview: Interview[] = [];
   employee: Employee[] = [];
   filteredEmployees: any[] = [];
 
   ngOnInit() {
-    this.AddInterviewForm = new FormGroup({
-      interviewDate: new FormControl(''),
+    this.addInterviewForm = new FormGroup({
+      interviewDate: new FormControl(Date),
       interviewTime: new FormControl(''),
       interviewerId: new FormControl(''),
       link: new FormControl(''),
@@ -43,7 +45,7 @@ export class InterviewComponent implements OnInit{
 
   fetchEmployee(searchText: string) {
     if (!searchText) return;
-
+    this.isListVisible = true;
     this.http
       .get<AllEmployee>(environment.baseURL + 'EmployeeAccount/getAllEmployees')
       .subscribe(
@@ -75,35 +77,35 @@ export class InterviewComponent implements OnInit{
 
   getEmployeeId(employeeId: string) {
     this.searchText = employeeId;
-                                                                                                                                               
+    this.isListVisible = false;
   }
 
   onSubmit() {
-    const applicationId = String(this.route.snapshot.params['applicationId']);
-    // this.AddInterviewForm = {
-    //   interviewDate: this.AddInterviewForm.value.interviewDate,
-    //   interviewTime: this.AddInterviewForm.value.interviewTime,
-    //   interviewerId: this.AddInterviewForm.value.interviewerId,
-    //   link: this.AddInterviewForm.value.link,
-    // };
 
-    if (this.AddInterviewForm.valid) {
+    const data = {
+      applicationId: String(this.route.snapshot.params['applicationId']),
+      interviewDate: this.addInterviewForm.value.interviewDate,
+      interviewTime: this.addInterviewForm.value.interviewTime + ':00',
+      interviewerId: this.searchText,
+      link: this.addInterviewForm.value.link,
+    };
+
+    console.log(data);
+
+    if (this.addInterviewForm.valid) {
       this.http
-        .post(
-          environment.baseURL + 'Interview/AddInterview',
-          this.AddInterviewForm.value
-        )
+        .post(environment.baseURL + 'Interview/AddInterview', data)
         .subscribe(
           (response) => {
             console.log('success : ', response);
-            this.AddInterviewForm.reset();
+            this.addInterviewForm.reset();
           },
           (error) => {
             console.error('Error sending POST request:', error);
           }
         );
     } else {
-      this.AddInterviewForm.markAllAsTouched();
+      this.addInterviewForm.markAllAsTouched();
     }
   }
 }

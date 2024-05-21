@@ -1,0 +1,9 @@
+<div class="m-3">
+    <h3>Applicants -: </h3>
+    <div *ngIf="applicantsLength === 0">
+        <p>Till now, no candidates applied on this job posting !</p>
+    </div>
+    <div *ngIf="applicantsLength !== 0">
+        <app-applicant-card *ngFor="let item of applicants" [applicant]="item"></app-applicant-card>
+    </div>
+</div>

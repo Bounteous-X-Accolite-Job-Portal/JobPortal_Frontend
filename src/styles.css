@@ -11,8 +11,6 @@ body{
     padding: 0;
 }
 
-
-
 .gradient-custom-2 {
     /* fallback for old browsers */
     background: #2b2980;
@@ -34,7 +32,7 @@ body{
       background-color: #fff;
     }
     
-    .btn-primary {
+    .btn-primary-1 {
       --bs-btn-border-radius: 25px;
       --bs-btn-bg: #0d016b;
       --bs-btn-border-color: #0d016b;
@@ -53,12 +51,13 @@ body{
     }
     
     .btn-outline-primary {
+      font-weight: bolder;
       --bs-btn-border-radius: 25px;
       --bs-btn-bg: #fff;
       --bs-btn-border-color: #0d016b;
       --bs-btn-hover-color: #fff;
       --bs-btn-hover-bg: #0b015b;
-      --bs-btn-hover-border-color: #0a0156;
+      --bs-btn-hover-border-color: #130969;
       --bs-btn-focus-shadow-rgb: 49, 39, 129;
       --bs-btn-active-color: #fff;
       --bs-btn-active-bg: #0a0156;
