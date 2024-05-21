@@ -19,19 +19,19 @@ export class GetReferralComponent implements OnInit {
   }
   referrals:Referralresponse[]=[];
 
-private getreferals():void{
-  this.referalService.getreferral(this.empId).subscribe(
-    (res)=>{
-      this.referrals=res.allreferrals;
-      this.referrals.forEach((referral)=>
-      {
-        if(referral.referraId!==null)
-          {
-            this.
-          }
-      })
-    }
-  )
+// private getreferals():void{
+//   this.referalService.getreferral(this.empId).subscribe(
+//     (res)=>{
+//       this.referrals=res.allreferrals;
+//       this.referrals.forEach((referral)=>
+//       {
+//         if(referral.referraId!==null)
+//           {
+//             this.
+//           }
+//       })
+//     }
+//   )
 }
-}
+
 

@@ -6,6 +6,6 @@ import { Referralresponse } from "./referralresponse";
 export interface GetReferral {
     status: string;
     message: string;
-    allreferrals:Referralresponse [] ;  
+    referrals:Referralresponse [] ;  
 
 }

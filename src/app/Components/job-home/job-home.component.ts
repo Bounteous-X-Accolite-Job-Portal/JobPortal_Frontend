@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Degree } from '../../Models/DegreeResponse/Degree';
+import { Route, Router, RouterConfigOptions } from '@angular/router';
 @Component({
   standalone: true,
   selector: 'app-job-home',
@@ -36,7 +37,7 @@ export class JobHomeComponent  {
   categoryIndex: number = 0;
   degreeIndex :number = 0;
     
-  constructor(private jobService: JobService , private fb : FormBuilder ) {}
+  constructor(private jobService: JobService , private fb : FormBuilder ,private router:Router) {}
   filtersForm = this.fb.group({
     location: [''],
     jobType: [''],
@@ -91,6 +92,7 @@ export class JobHomeComponent  {
     );
   }
 
+
   private loadJobCategories(): void {
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
@@ -127,6 +129,13 @@ export class JobHomeComponent  {
         console.error('Error loading Jobs',error);
       }
     );
+  }
+  
+  addrefrral(jobId:string) {
+    console.log("passed jobId ; ",jobId);
+    this.jobService.jobId =jobId;
+    console.log("serice job ; ",this.jobService.jobId);
+   this.router.navigate(['employee-dashboard','addReferral']);
   }
 
   private loadDegrees(): void{
