@@ -1,4 +1,4 @@
-export interface Status{
+export interface StatusModel{
     statusId: number,
     statusName: string
 }

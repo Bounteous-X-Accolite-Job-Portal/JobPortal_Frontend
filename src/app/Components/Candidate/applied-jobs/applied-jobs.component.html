@@ -2,9 +2,6 @@
     <div class="w-75 bg-white rounded p-5" style="height: auto;">
       <h2>Applied Jobs :- </h2>
       <div>Candidate with user ID : {{userId}}</div><hr>
-      <!-- <div class="d-flex justify-content-end p-1">
-        <a [routerLink]="['add-edu']" class="btn btn-primary px-3 text-style-add fs-5 fw-bold">Route to add</a>
-      </div>   -->
       <hr>
       <div class="table-responsive">
         <table class="table">
@@ -14,21 +11,14 @@
               <th>Job Title</th>
               <th>Last Date</th>
               <th>Status</th>
-              <th>Action</th>
             </tr>
           </thead>
               <tbody>
                 <tr *ngFor="let job of candidateJobs; let i = index">
                   <td>{{job.jobCode}}</td>
                   <td>{{job.jobTitle}}</td>
-                  <td>{{job.lastDate}}</td>
-                  <td>TBD</td>
-                  <td>
-                      <!-- <a class='btn btn-primary text-style-add' [routerLink]="['update-edu']"><i class="fas fa-edit"></i>
-                      </a>
-                      <a class='btn btn-danger' (click)="deleteEducation(tmp.educationId)"><i class="fa fa-trash"></i>
-                      </a> -->
-                    </td>
+                  <td>{{candidateApplications[i].appliedOn}}</td>
+                  <td>{{applicationStatus[i].statusName}}</td>
                   </tr>
                 </tbody>
           </table>
