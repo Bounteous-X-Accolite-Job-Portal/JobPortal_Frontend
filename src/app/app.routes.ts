@@ -48,6 +48,7 @@ import { JobApplicantComponent } from './Components/JobApplication/job-applicant
 import { YourJobsComponent } from './Components/Employee/your-jobs/your-jobs.component';
 import { DisablePrivilegeComponent } from './Components/Employee/disable-privilege/disable-privilege.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ForgetPasswordComponentComponent } from './forget-password-component/forget-password-component.component';
 
 export const routes: Routes = [
   {
@@ -68,6 +69,11 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [loggedInGuard],
+  },
+  {
+    path:'reset',
+    component:ForgetPasswordComponentComponent
+  
   },
   {
     path: 'register',
@@ -123,8 +129,10 @@ export const routes: Routes = [
       },
       { path: 'interview', component: InterviewComponent },
       { path: 'interview-hub', component: InterviewHubComponent },
+      
       {path:'referral',component:ReferralComponent},
       {path:'addReferral',component:AddReferralComponent},
+      
       
       {
         path: 'disable-employee-privilege',

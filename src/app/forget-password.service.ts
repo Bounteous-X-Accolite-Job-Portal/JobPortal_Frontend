@@ -6,7 +6,7 @@ import { resertPassword } from './Models/resetPasswordmodel';
   providedIn: 'root'
 })
 export class ForgetPasswordService {
-  apiEndpoint="http://localhost:5234/api/Email"
+  apiEndpoint="https://localhost:7283/api/Email"
 
   constructor(private http:HttpClient) { }
   sendForgetPasswordLink(email:string)

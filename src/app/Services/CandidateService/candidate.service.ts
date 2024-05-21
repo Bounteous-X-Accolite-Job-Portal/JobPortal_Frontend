@@ -104,6 +104,14 @@ export class CandidateService {
   getAllCompanies():Observable<AllCompanyResponse>{
     return this.http.get<AllCompanyResponse>(environment.baseURL+'Company/getAllCompanies');
   }
+  addInstitution(institution: any ):Observable<any>{
+    return this.http.post(environment.baseURL + 'EducationInstitution/addInstitution',institution);
+  }
+
+  addCompany(company: any):Observable<any>{
+    return this.http.post(environment.baseURL + 'Company/addCompany', company);
+  }
+
 }
 
 

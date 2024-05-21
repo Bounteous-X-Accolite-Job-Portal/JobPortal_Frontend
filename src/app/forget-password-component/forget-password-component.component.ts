@@ -5,7 +5,6 @@ import { ForgetPasswordService } from '../forget-password.service';
 import { ActivatedRoute } from '@angular/router';
 import { resertPassword } from '../Models/resetPasswordmodel';
 import { FormsModule } from '@angular/forms';
-import {MessageService} from 'primeng/api';
 
 
 @Component({
@@ -28,7 +27,7 @@ export class ForgetPasswordComponentComponent implements OnInit {
     private resetPasswordService: ForgetPasswordService,
     private route: ActivatedRoute,
     private router: Router,
-    private messageService:MessageService
+   
   
   ){}
 
@@ -57,20 +56,12 @@ export class ForgetPasswordComponentComponent implements OnInit {
           
           tap((response) => {
             console.log('Reset password response:', response);
-            this.messageService.add
-            ({severity:'success', 
-            summary:'Service Message', 
-            detail:'Via MessageService'});
-
+            
             
             this.router.navigate(['login']);
           }),
           catchError((error) => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: 'Invalid Reset Link',
-            });
+            
             
             return throwError(() => error);
           })
