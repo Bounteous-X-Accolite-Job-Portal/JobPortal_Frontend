@@ -28,15 +28,33 @@ export const sideBarData = [
     requiredSpecialPrivilege: false,
   },
   {
-      routeLink: 'settings',
-      icon: 'fal fa-cog',
-      label: 'Settings'
+    routeLink: 'settings',
+    icon: 'fal fa-cog',
+    label: 'Settings',
+    requiredPrivilege: true,
+    requiredSpecialPrivilege: false,
   },
   {
     routeLink: 'referral',
     icon: 'fal fa-solid fa-handshake',
-    label: 'Referal'
-},
+    label: 'Referal',
+    requiredPrivilege: false,
+    requiredSpecialPrivilege: false,
+  },
+  {
+    routeLink: 'your-jobs',
+    icon: 'fa-solid fa-briefcase',
+    label: 'Your Jobs',
+    requiredPrivilege: false,
+    requiredSpecialPrivilege: false,
+  },
+  {
+    routeLink: 'designation',
+    icon: 'fa-solid fa-ranking-star',
+    label: 'Designation',
+    requiredPrivilege: true,
+    requiredSpecialPrivilege: false,
+  },
   // {
   //     routeLink: 'sml',
   //     icon: 'fal fa-camera',

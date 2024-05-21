@@ -1,7 +1,7 @@
 import { Designation } from "./Designation";
 
-export interface DesignationResponse{
+export interface AllDesignationResponse{
     status: number,
     message: string,
-    designation: Designation
+    allDesignations: Designation[]
 }

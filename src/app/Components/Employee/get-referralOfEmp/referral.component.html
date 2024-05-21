@@ -3,13 +3,13 @@
 <div *ngFor="let referral of referralData">
   <div class="card">
     <div class="card-header">
-      <h5 class="card-title">Candidate Email: {{ referral.candidate?.email }}</h5>
+      <h5 class="card-title">Candidate Email: {{ referral.candidate.email }}</h5>
     </div>
     <div class="card-body">
-      <p class="card-text">Candidate Name {{referral.candidate?.firstName}} {{referral.candidate?.lastName}}</p>
-      <p class="card-text">Job Code: {{referral.job?.jobCode}}</p>
-      <p class="card-text">Job Title: {{referral.job?.jobTitle}}</p>
-      <p class="card-text">Status {{referral.statusData?.statusName}}</p>
+      <p class="card-text">Candidate Name {{referral.candidate.firstName}} {{referral.candidate.lastName}}</p>
+      <p class="card-text">Job Code: {{referral.job.jobCode}}</p>
+      <p class="card-text">Job Title: {{referral.job.jobTitle}}</p>
+      <p class="card-text">Status {{referral.statusData.statusName}}</p>
       
     </div>
   </div>

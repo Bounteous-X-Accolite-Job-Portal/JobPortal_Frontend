@@ -1,0 +1,71 @@
+<div class="container mt-5">
+    <div class="mb-5">
+        <span>
+            <h2 style="display: inline;">Designations</h2>
+        </span>
+        <span *ngIf="hasSpecialPrivilege" style="float: right;">
+            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#addDesignationModal" (click)="clickOnAddDesignationButton()">Add Designation</button>
+        </span>
+    </div>
+    <div *ngFor="let element of allDesignations" class="card mb-3">
+        <div class="card-body">
+            <span>
+                <span class="logo">
+                    <span class="logo-text">
+                        {{ (element.designation.designationName).charAt(0).toUpperCase() }}
+                    </span>
+                </span>
+                <span class="ms-3" style="font-size: large; font-weight: 500;">
+                    {{element.designation.designationName}}
+                </span>
+            </span>
+            <span *ngIf="hasSpecialPrivilege" style="float: right;">
+                <span>
+                    <button *ngIf="!(element.privilege !== null && element.privilege !== undefined)" class="mx-2 btn btn-outline-secondary" (click)="providePrivilege(element.designation.designationId)" data-bs-toggle="tooltip" data-bs-placement="right" title="This group of users don't have privilege. Click to add privilege."><i class="fa-solid fa-user-lock"></i></button>
+                    <button *ngIf="element.privilege !== null && element.privilege !== undefined" class="mx-2 btn btn-outline-secondary" (click)="removePrivilege(element.privilege.privilegeId)" data-bs-toggle="tooltip" data-bs-placement="right" title="This group of users has privilege. Click to remove privilege."><i class="fa-solid fa-unlock"></i></button>
+                </span>
+                <span class="ms-5">
+                    <button class="btn btn-outline-secondary" (click)="deleteDesignation(element.designation.designationId)" data-bs-toggle="tooltip" data-bs-placement="right" title="Click to remove designation."><i class="fa-solid fa-trash"></i></button>
+                </span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for add designation -->
+<div class="modal fade" id="addDesignationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Designation to Company</h5>
+          <button type="button" class="btn-close" id="closeButton" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-body">
+                <form [formGroup]="form">
+                  <div class="row">
+                      <div class="mb-3 col">
+                          <input
+                              formControlName="newDesignation"
+                              class="form-control"
+                              placeholder="New Designation..."
+                          />
+                      </div>
+                  </div>
+                  <div style="float: right;">
+                    <button [disabled]="form.invalid"  type="submit" class="btn btn-secondary btn-sm" (click)="addDesignation()">
+                      <span
+                        *ngIf="submitting"
+                        class="spinner-border spinner-border-sm me-1"
+                      ></span>
+                      Add Designation
+                    </button>
+                  </div>
+              </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+</div>

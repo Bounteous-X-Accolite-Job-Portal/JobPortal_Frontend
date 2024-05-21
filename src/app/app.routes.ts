@@ -49,6 +49,8 @@ import { YourJobsComponent } from './Components/Employee/your-jobs/your-jobs.com
 import { DisablePrivilegeComponent } from './Components/Employee/disable-privilege/disable-privilege.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ForgetPasswordComponentComponent } from './forget-password-component/forget-password-component.component';
+import { DesignationComponent } from './Components/Employee/designation/designation.component';
+import { SettingsComponent } from './Components/Employee/settings/settings.component';
 
 export const routes: Routes = [
   {
@@ -140,6 +142,7 @@ export const routes: Routes = [
         
       },
       { path: 'add-employee', component: AddEmployeeComponent },
+      { path: 'settings', component: SettingsComponent },
       {
         path: 'settings',
         canActivate: [hasSpecialPrivilegeGuard],
@@ -167,6 +170,7 @@ export const routes: Routes = [
         ],
       },
       { path: 'your-jobs', component: YourJobsComponent },
+      { path: 'designation', component: DesignationComponent },
     ],
   },
   {
