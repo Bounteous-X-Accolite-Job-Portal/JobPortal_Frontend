@@ -479,6 +479,7 @@
                       type="button"
                       class="btn btn-secondary"
                       data-bs-dismiss="modal"
+                      id="closeDegreeModal"
                     >
                       Close
                     </button>
@@ -588,6 +589,107 @@
             <div class="form-inline fr">
               <a
                 [routerLink]="['crud-institution-data']"
+                id="forgot"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fa fa-eye"></i
+              ></a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Company</td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                id="forgot"
+                data-bs-toggle="modal"
+                data-bs-target="#addCompany"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fas fa-add"></i
+              ></a>
+            </div>
+            <div
+              class="modal fade"
+              id="addCompany"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      Add Company
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="addCompanyForm">
+                      <div class="mb-3">
+                        <label for="companyName" class="form-label"
+                          >Company Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="companyName"
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="baseUrl" class="form-label"
+                          >Base URL</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="baseUrl"
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="companyDescription" class="form-label"
+                          >Company Description</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="companyDescription"
+                          placeholder=""
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="addCompany()"
+                    >
+                      Add Company
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                [routerLink]="['crud-company-data']"
                 id="forgot"
                 class="font-weight-bold btn btn-primary text-style-add"
                 ><i class="fa fa-eye"></i

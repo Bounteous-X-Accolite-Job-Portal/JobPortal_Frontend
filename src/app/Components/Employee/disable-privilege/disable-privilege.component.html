@@ -1,0 +1,29 @@
+<h2>Employees</h2>
+
+<div *ngFor="let emp of Employees; let i = index">
+  <div class="card m-3">
+    <div class="card-body">
+      <div class="align d-flex" style="align-items: center; justify-content: space-between;">
+        <div class="d-flex" style="flex-direction: row;">
+          <button class="logo">
+            {{ emp.firstName ? emp.firstName.charAt(0).toUpperCase() : "U" }}{{ emp.lastName ? emp.lastName.charAt(0).toUpperCase() : "U" }}
+          </button>
+
+          <div class="d-flex" style="flex-direction: column; margin-left: 10px;">
+            <span class="card-title">
+              <b>{{ emp.firstName }} {{ emp.lastName }} - ({{emp.empId}})</b>
+            </span>
+            <span>
+              <p style="font-size: 13px;">{{ Designations[i].designationName }}</p>
+            </span>
+          </div>
+        </div>
+        <span>{{ emp.email }}</span>
+      </div>
+
+      <div class="align d-flex" style="align-items: center; justify-content: flex-end;">
+        <button class="btn btn-danger" (click)="disableEmployee(emp.employeeId)">Disable</button>
+      </div>
+    </div>
+  </div>
+</div>

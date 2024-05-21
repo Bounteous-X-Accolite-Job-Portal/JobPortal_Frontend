@@ -1,37 +1,78 @@
-<div class="d-flex gradient-custom-2 justify-content-center" style="padding: 20vh;">
-    <div class="w-75 bg-white rounded p-5" style="height: auto;">
-      <div class="row w-full my-5 d-flex justify-content-center">
-        <div class="d-flex justify-content-center mb-3">
-          <h2>Update Education</h2>
-        </div>
-        <hr>
-        <form [formGroup]="updateExperience" (ngSubmit)="save()" >
-          <div class="form-group mb-3">
-              <label for="Institution">Institution Name</label>
-              <input type="text" class="form-control" id="Institution" placeholder="Institution" formControlName="institutionOrSchoolName">
-          </div>
-          <div class="form-group mb-3">
-              <label for="Degree">Degree</label>
-              <input type="text" class="form-control" id="Degree" aria-describedby="Degree" placeholder="Enter degree" formControlName="degree">
-          </div>
-          <div class="form-group mb-3">
-              <label for="Grade">Grade</label>
-              <input type="number" class="form-control" id="Grade" placeholder="Enter Grade" formControlName="grade">
-          </div>
-          <div class="row">
-            <div class="col form-group mb-3">
-              <label for="StartYear">Start Year</label>
-              <input type="number" class="form-control" id="StartYear" placeholder="Enter Start Year" formControlName="startYear">
-            </div>
-            <div class="col form-group mb-3">
-              <label for="EndYear">End Year</label>
-              <input type="number" class="form-control" id="EndYear" placeholder="Enter End Year" formControlName="endYear">
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary-1 w-100" [disabled]="!updateExperience.valid">UPDATE</button>
-      </form>
+<div
+  class="d-flex gradient-custom-2 justify-content-center"
+  style="padding: 20vh"
+>
+  <div class="w-75 bg-white rounded p-5" style="height: auto">
+    <div class="row w-full my-5 d-flex justify-content-center">
+      <div class="d-flex justify-content-center mb-3">
+        <h2>Update Experience</h2>
       </div>
+      <hr />
+      <form [formGroup]="updatecandidateExperience" (ngSubmit)="updateExperience()">
+        <div class="form-group mb-3">
+          <label for="experienceTitle">Job Title : </label>
+          <input
+            type="text"
+            class="form-control"
+            id="experienceTitle"
+            placeholder="Add Title"
+            formControlName="experienceTitle"
+          />
+        </div>
+
+        <div class="form-group mb-3">
+          <label>Company Name : </label>
+          <select formControlName="companyId">
+            <option *ngFor="let cmp of companies" [value]="cmp.companyId">
+              {{ cmp.companyName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="description">Description</label>
+          <textarea placeholder="Enter Job Description: " formControlName="description"></textarea>
+        </div>
+
+        <div class="row">
+          <div class="col form-group mb-3">
+            <label for="startDate">Start Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="startDate"
+              placeholder="Enter Start Date"
+              formControlName="startDate"
+            />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="isCurrentlyWorking" class="me-3">Currently Working</label>
+            <input
+              [(ngModel)]="isWorking"
+              type="checkbox"
+              class="form-check-input"
+              formControlName="isCurrentlyWorking"
+            />
+          </div>
+
+          <div class="col form-group mb-3" *ngIf = "!isWorking">
+            <label for="endYear">End Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="endDate"
+              placeholder="Enter End Date"
+              formControlName="endDate"
+            />
+          </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary w-100">
+          Update Experience
+        </button>
+      </form>
     </div>
+  </div>
 </div>
-
-

@@ -25,6 +25,7 @@ export class CrudLocationJobDataComponent {
   deleteByLocationId(locationId: string) : void{
     this.crudJobDataService.deleteLocationByLocationId(locationId).subscribe(
       (res) => {
+        console.log(res);
         console.log("Location Deleted!");
         this.loadJobLocations();
       },

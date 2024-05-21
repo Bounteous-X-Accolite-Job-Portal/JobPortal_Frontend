@@ -13,7 +13,7 @@ export class GetInterviewsService {
 
   getAllInterviewsOfLoggedInEmployee(): Observable<AllInterviewsResponse> {
     return this.http.get<AllInterviewsResponse>(
-      environment.baseURL + 'Interview/GetAllInterviewsForInterviewer'
+      environment.baseURL + 'Interview/GetAllInterviewsForInterviewer/'
     );
   }
 }

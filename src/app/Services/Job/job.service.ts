@@ -17,11 +17,13 @@ import { JobPositionResponse } from '../../Models/JobPositionResponse/JobPositio
 import { JobApplication } from '../../Models/JobApplicationResponse/JobApplication';
 import { AllDegreeResponse } from '../../Models/DegreeResponse/AllDegreeResponse';
 import { ApplicationResponse } from '../../Models/JobApplicationResponse/ApplicationResponse';
+import { Job } from '../../Models/JobResponse/Job';
 import { Guid } from 'guid-typescript';
 @Injectable({
   providedIn: 'root',
 })
 export class JobService {
+  public jobId!:string;
   constructor(private http: HttpClient) {}
 
     getAllJobs():Observable<AllJob>{
@@ -82,6 +84,9 @@ export class JobService {
         return this.http.get<ApplicationResponse>(environment.baseURL+'Application/jobApplication/isCandidateApplicable/'+jobId);
     };
 
+    updateJob(job:Job):Observable<JobResponse>{
+      return this.http.put<JobResponse>(environment.baseURL+'Job/UpdateJob',job);
+    }
     getAllJobsAddedByLoggedInEmployee(employeeId : Guid) : Observable<AllJob>{
       return this.http.get<AllJob>(environment.baseURL + "Job/getAllJobsByEmployee/" + employeeId);
     }
