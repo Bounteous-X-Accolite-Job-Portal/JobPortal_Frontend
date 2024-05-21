@@ -20,6 +20,7 @@ import { SocailMediaResponse } from '../../Models/SocialMediaResponse/SocialMedi
 import { SkillsResponse } from '../../Models/SkillsResponse/SkillsResponse';
 import { Skills } from '../../Models/SkillsResponse/Skills';
 import { candidateExperience } from '../../Models/ExperienceResponse/candidateExperience';
+import { Status } from '../../Models/StatusResponse/Status';
 
 @Injectable({
   providedIn: 'root'
@@ -126,5 +127,10 @@ export class CandidateService {
 
   updateCandidateExperience(experience:candidateExperience){
     return this.http.put<candidateExperience>(environment.baseURL+'CandidateExperience/updateExperience',experience);
+  }
+
+  getstatus(statusId:number):Observable<Status>
+  {
+    return this.http.get<Status>(environment.baseURL+'JobStatus/'+statusId)
   }
 }

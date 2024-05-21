@@ -157,6 +157,7 @@ f: any;
   }
   
   onSubmit() : void{
+    this.isLoading=true;
     console.log("job form :",this.jobForm.value);
     
     this.job.jobCode =  this.jobForm.get('jobCode')?.value || '';
@@ -188,6 +189,8 @@ f: any;
         console.log(error);
       }
     )
+    this.isLoading=false;
   }
+  
 
 }
