@@ -11,7 +11,6 @@ import { PersonalInfoComponent } from './Components/Candidate/personal-info/pers
 import { SkillsComponent } from './Components/Candidate/skills/skills.component';
 import { ResumeComponent } from './Components/Candidate/resume/resume.component';
 import { SocialProfilesComponent } from './Components/Candidate/social-profiles/social-profiles.component';
-import { PasswordResetComponent } from './Components/Candidate/password-reset/password-reset.component';
 import { AddEducationComponent } from './Components/Candidate/add-education/add-education.component';
 import { UpdateEducationComponent } from './Components/Candidate/update-education/update-education.component';
 import { AddExperienceComponent } from './Components/Candidate/add-experience/add-experience.component';
@@ -23,8 +22,9 @@ import { loggedInGuard } from './Guards/logged-in.guard';
 import { EmployeeDashboardComponent } from './Components/Employee/employee-dashboard/employee-dashboard.component';
 import { InterviewHubComponent } from './Components/Employee/interview-hub/interview-hub.component';
 import { InterviewComponent } from './Components/Employee/interview/interview.component';
-import { SettingsComponent } from './Components/Employee/settings/settings.component';
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
+import { ReferralServiceService } from './referral-service.service';
+import { ReferralComponent } from './Components/Employee/get-referralOfEmp/referral.component';
 import { CrudCategoryJobDataComponent } from './Components/Employee/crud-category-job-data/crud-category-job-data.component';
 import { CrudPositionJobDataComponent } from './Components/Employee/crud-position-job-data/crud-position-job-data.component';
 import { CrudTypesJobDataComponent } from './Components/Employee/crud-types-job-data/crud-types-job-data.component';
@@ -33,6 +33,8 @@ import { CrudDegreeDataComponent } from './Components/Employee/crud-degree-data/
 import { CrudInstitutionDataComponent } from './Components/Employee/crud-institution-data/crud-institution-data.component';
 import { AddEmployeeComponent } from './Components/Employee/add-employee/add-employee.component';
 import { AppliedJobsComponent } from './Components/Candidate/applied-jobs/applied-jobs.component';
+import { EditJobComponent } from './Components/Employee/edit-job/edit-job.component';
+import { AddReferralComponent } from './Components/Employee/add-referral/add-referral.component';
 import { AboutComponent } from './Components/about/about.component';
 import { CrudCompanyDataComponent } from './Components/Employee/crud-company-data/crud-company-data.component';
 import { employeeGuardGuard } from './Guards/employee-guard.guard';
@@ -45,6 +47,8 @@ import { hasSpecialPrivilegeChildGuard } from './Guards/has-special-privilege-ch
 import { JobApplicantComponent } from './Components/JobApplication/job-applicant/job-applicant.component';
 import { YourJobsComponent } from './Components/Employee/your-jobs/your-jobs.component';
 import { DisablePrivilegeComponent } from './Components/Employee/disable-privilege/disable-privilege.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ForgetPasswordComponentComponent } from './forget-password-component/forget-password-component.component';
 
 export const routes: Routes = [
   {
@@ -56,6 +60,7 @@ export const routes: Routes = [
     path: 'landing',
     component: LandingComponent,
   },
+  {path:'referral',component:ReferralComponent},
   {
     path: 'about',
     component: AboutComponent,
@@ -64,6 +69,11 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [loggedInGuard],
+  },
+  {
+    path:'reset',
+    component:ForgetPasswordComponentComponent
+  
   },
   {
     path: 'register',
@@ -103,6 +113,10 @@ export const routes: Routes = [
     component: CrudCategoryJobDataComponent,
   },
   {
+    path: 'edit-job/:id',
+    component: EditJobComponent,
+  },
+  {
     path: 'employee-dashboard',
     component: EmployeeDashboardComponent,
     canActivate: [authGuard, employeeGuardGuard],
@@ -115,7 +129,11 @@ export const routes: Routes = [
       },
       { path: 'interview', component: InterviewComponent },
       { path: 'interview-hub', component: InterviewHubComponent },
-      { path: 'settings', component: SettingsComponent },
+      
+      {path:'referral',component:ReferralComponent},
+      {path:'addReferral',component:AddReferralComponent},
+      
+      
       {
         path: 'disable-employee-privilege',
         component: DisablePrivilegeComponent,
@@ -162,7 +180,7 @@ export const routes: Routes = [
         path: 'edu',
         children: [
           { path: 'add-edu', component: AddEducationComponent },
-          { path: 'update-edu', component: UpdateEducationComponent },
+          { path: 'update-edu/:id', component: UpdateEducationComponent },
         ],
       },
       { path: 'exp', component: ExperienceComponent },
@@ -170,16 +188,22 @@ export const routes: Routes = [
         path: 'exp',
         children: [
           { path: 'add-exp', component: AddExperienceComponent },
-          { path: 'update-exp', component: UpdateExperienceComponent },
+          { path: 'update-exp/:id', component: UpdateExperienceComponent },
         ],
       },
       { path: 'per-info', component: PersonalInfoComponent },
       { path: 'skills', component: SkillsComponent },
       { path: 'resume', component: ResumeComponent },
       { path: 'sml', component: SocialProfilesComponent },
-      { path: 'pass-reset', component: PasswordResetComponent },
+      { path: 'applied-jobs', component: AppliedJobsComponent},
+      { path: 'per-info/:id', component: PersonalInfoComponent },
+      { path: 'skills/::id', component: SkillsComponent },
+      { path: 'resume/:id', component: ResumeComponent },
+      { path: 'sml/:id', component: SocialProfilesComponent },
+      // { path: '', component: TryComponent},
       { path: 'applied-jobs', component: AppliedJobsComponent },
       { path: '**', component: TryComponent },
+      
     ],
   },
 ];

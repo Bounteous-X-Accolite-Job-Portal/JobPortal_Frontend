@@ -181,6 +181,7 @@ export class JobHomeComponent  {
     );
   }
 
+
   private loadJobCategories(): void {
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
@@ -217,6 +218,13 @@ export class JobHomeComponent  {
         console.error('Error loading Jobs',error);
       }
     );
+  }
+  
+  addrefrral(jobId:string) {
+    console.log("passed jobId ; ",jobId);
+  //   this.jobService.jobId =jobId;
+  //   console.log("serice job ; ",this.jobService.jobId);
+  //  this.router.navigate(['employee-dashboard','addReferral']);
   }
 
   private loadDegrees(): void{

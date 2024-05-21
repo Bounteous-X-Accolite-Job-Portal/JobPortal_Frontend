@@ -30,23 +30,21 @@ export const sideBarData = [
   {
       routeLink: 'settings',
       icon: 'fal fa-cog',
-      label: 'Settings',
-      requiredPrivilege: true,
-      requiredSpecialPrivilege: true,
+      label: 'Settings'
   },
   {
-    routeLink: 'your-jobs',
-    icon: 'fa-solid fa-briefcase',
-    label: 'Your Jobs',
-    requiredPrivilege: false,
-    requiredSpecialPrivilege: false,
-  },
-  {
-      routeLink: 'disable-employee-privilege',
-      icon: 'fal fa-cog',
-      label: 'Disable Employee Account',
-      // requiredPrivilege: true,
-      // requiredSpecialPrivilege: false,
-  },
-
+    routeLink: 'referral',
+    icon: 'fal fa-solid fa-handshake',
+    label: 'Referal'
+},
+  // {
+  //     routeLink: 'sml',
+  //     icon: 'fal fa-camera',
+  //     label: 'Social Profiles'
+  // },
+  // {
+  //     routeLink: 'pass-reset',
+  //     icon: 'fal fa-cog',
+  //     label: 'Password Reset'
+  // },
 ];

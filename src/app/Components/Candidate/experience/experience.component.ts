@@ -23,7 +23,7 @@ constructor(private candidService : CandidateService,
             private userStore : UserStoreService,
             private auth : AuthService,
             private cmpService : CompanyService,
-          private toastr : ToastrService) {}
+            private toastr : ToastrService) {}
 
 expList: candidateExperience[]=[];
 companyList: Company[] = [];
