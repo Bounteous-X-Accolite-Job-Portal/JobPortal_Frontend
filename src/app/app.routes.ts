@@ -43,6 +43,7 @@ import { hasSpecialPrivilegeGuard } from './Guards/has-special-privilege.guard';
 import { hasSpecialPrivilegeChildGuard } from './Guards/has-special-privilege-child.guard';
 import { JobApplicantComponent } from './Components/JobApplication/job-applicant/job-applicant.component';
 import { YourJobsComponent } from './Components/Employee/your-jobs/your-jobs.component';
+import { DesignationComponent } from './Components/Employee/designation/designation.component';
 
 export const routes: Routes = [
   {
@@ -143,6 +144,7 @@ export const routes: Routes = [
         ],
       },
       { path: 'your-jobs', component: YourJobsComponent },
+      { path: 'designation', component: DesignationComponent },
     ],
   },
   {

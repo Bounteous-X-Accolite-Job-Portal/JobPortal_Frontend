@@ -34,6 +34,13 @@ export const sideBarData = [
     requiredPrivilege: false,
     requiredSpecialPrivilege: false,
   },
+  {
+    routeLink: 'designation',
+    icon: 'fa-solid fa-ranking-star',
+    label: 'Designation',
+    requiredPrivilege: true,
+    requiredSpecialPrivilege: false,
+  },
   // {
   //     routeLink: 'sml',
   //     icon: 'fal fa-camera',
