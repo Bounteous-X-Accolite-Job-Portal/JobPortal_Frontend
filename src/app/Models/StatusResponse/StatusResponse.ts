@@ -1,7 +1,7 @@
-import { Status } from "./Status";
+import { Status } from "../Status";
 
 export interface StatusResponse{
-    status:string;
-    message:string;
-    statusViewModel:Status;
+    status: number,
+    message: string,
+    allStatus: Status[]
 }

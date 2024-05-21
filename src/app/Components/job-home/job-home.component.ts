@@ -11,6 +11,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Degree } from '../../Models/DegreeResponse/Degree';
+import { ClosedJob } from '../../Models/ClosedJobResponse/ClosedJob';
+import { ClosedJobServiceService } from '../../Services/ClosedJob/closed-job-service.service';
+import { SpinnerService } from '../../Services/spinner.service';
+import { AllClosedJobsResponse } from '../../Models/ClosedJobResponse/AllClosedJobsResponse';
+import { UserStoreService } from '../../Services/user-store.service';
+import { AuthService } from '../../Services/auth.service';
+
 @Component({
   standalone: true,
   selector: 'app-job-home',
@@ -22,6 +29,8 @@ import { Degree } from '../../Models/DegreeResponse/Degree';
 export class JobHomeComponent  {
   toaster = inject(ToastrService);
 
+  public ActiveJobToggle: boolean = true;
+
   locations: location[] = [];
   jobTypes: JobType[] = [];
   jobCategories: JobCategory[] = [];
@@ -30,13 +39,31 @@ export class JobHomeComponent  {
   jobs: Job[] = [];
   Filterjobs: Job[] = [];
 
+  closedJobs : ClosedJob[] = [];
+  filteredClosedJobs : ClosedJob[] = [];
+
   positionIndex: number = 0;
   typeIndex: number = 0;
   locationIndex: number = 0;
   categoryIndex: number = 0;
   degreeIndex :number = 0;
+
+  isEmployee : boolean = false;
+  hasPrivilege : boolean = false;
+  isLoggedIn : boolean = false;
     
-  constructor(private jobService: JobService , private fb : FormBuilder ) {}
+  constructor(
+    private jobService: JobService , 
+    private fb : FormBuilder,
+    private closedJobService: ClosedJobServiceService,
+    private spinnerService : SpinnerService,
+    private store : UserStoreService,
+    private authService : AuthService
+  ) {
+    this.checkUser();
+    this.checkHasPrivilege();
+  }
+
   filtersForm = this.fb.group({
     location: [''],
     jobType: [''],
@@ -47,22 +74,85 @@ export class JobHomeComponent  {
 
 
   ngOnInit(): void {
-    this.loadJobs();
+    this.isEmployee = false;
+    this.hasPrivilege = false;
+    this.isLoggedIn = false;
 
-    this.locations.push({locationId: "null" , address: "Select Job Location :" , city: "" , state: "" , country : ""});
+    this.isLoggedIn = this.authService.isLoggedIn();
+
+    if(this.isLoggedIn){
+      this.checkUser();
+      this.checkHasPrivilege();
+    }
+
+    this.loadJobs();
+    this.loadClosedJobs();
+
+    this.locations.push({locationId: "null" , address: "Select Job Location " , city: "" , state: "" , country : ""});
     this.loadJobLocations();
 
-    this.jobTypes.push({jobTypeId: "null" , typeName : " Select Job Type :"});
+    this.jobTypes.push({jobTypeId: "null" , typeName : " Select Job Type "});
     this.loadJobTypes();
 
-    this.jobCategories.push({categoryId:"null",categoryCode:"Select Job Category :",categoryName:"",description:""})
+    this.jobCategories.push({categoryId:"null",categoryCode:"Select Job Category ",categoryName:"",description:""})
     this.loadJobCategories();
     
-    this.jobPositions.push({positionId:"null",positionName:"Select Job Position :",positionCode:"",description:""});
+    this.jobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:""});
     this.loadJobPositions();
 
-    this.degrees.push({degreeId:"null",degreeName:"Select Degree :",durationInYears:0});
+    this.degrees.push({degreeId:"null",degreeName:"Select Degree ",durationInYears:0});
     this.loadDegrees();
+  }
+
+  checkUser(){
+    this.spinnerService.showSpinner();
+
+    this.store.checkIsEmployeeFromStore()
+    .subscribe((val) => {
+        let emp = this.authService.checkIsEmployeeFromToken();
+        this.isEmployee = val || emp;
+
+        this.spinnerService.hideSpinner();
+    })
+  }
+
+  checkHasPrivilege(){
+    this.spinnerService.showSpinner();
+
+    this.store.checkHasPrivilegeFromStore()
+    .subscribe((val) => {
+        let privilege = this.authService.checkHasPrivilegeFromToken();
+        this.hasPrivilege = val || privilege;
+
+        this.spinnerService.hideSpinner();
+    })
+  }
+
+  ActiveJobs() {
+    this.ActiveJobToggle = true;
+  }
+
+  ClosedJobs() {
+    this.ActiveJobToggle = false;
+  }
+
+  loadClosedJobs(){
+    this.spinnerService.showSpinner();
+
+    this.closedJobService.getAllClosedJobs().subscribe(
+      (data : AllClosedJobsResponse) => {
+        console.log("closed jobs", data);
+
+        this.closedJobs = data.closedJobs; 
+        this.filteredClosedJobs = data.closedJobs;
+
+        this.spinnerService.hideSpinner();
+      },
+      (error) => {
+        console.log(error);
+        this.spinnerService.hideSpinner();
+      }
+    )
   }
 
   private loadJobLocations(): void {
@@ -90,6 +180,7 @@ export class JobHomeComponent  {
       }
     );
   }
+
 
   private loadJobCategories(): void {
     this.jobService.getAllJobCategories().subscribe(
@@ -128,6 +219,13 @@ export class JobHomeComponent  {
       }
     );
   }
+  
+  addrefrral(jobId:string) {
+    console.log("passed jobId ; ",jobId);
+  //   this.jobService.jobId =jobId;
+  //   console.log("serice job ; ",this.jobService.jobId);
+  //  this.router.navigate(['employee-dashboard','addReferral']);
+  }
 
   private loadDegrees(): void{
     this.jobService.getAllDegrees().subscribe(
@@ -154,6 +252,88 @@ export class JobHomeComponent  {
     console.log(this.degrees[this.degreeIndex]);
     
     this.filterJobs(this.jobPositions[this.positionIndex].positionId,this.locations[this.locationIndex].locationId,this.jobTypes[this.typeIndex].jobTypeId,this.jobCategories[this.categoryIndex].categoryId,this.degrees[this.degreeIndex].degreeId); 
+  }
+
+  public onSubmitForClosedJobs() : void{
+    if(this.categoryIndex==0 && this.locationIndex==0 && this.positionIndex==0 && this.typeIndex==0 && this.degreeIndex==0)
+    {
+      this.displayFilterEmptyToast();
+      return;
+    }
+
+    console.log(this.jobPositions[this.positionIndex]);
+    console.log(this.jobCategories[this.categoryIndex]);
+    console.log(this.jobTypes[this.typeIndex]);
+    console.log(this.locations[this.locationIndex]);
+    console.log(this.degrees[this.degreeIndex]);
+    
+    this.filterClosedJobs(this.jobPositions[this.positionIndex].positionId,this.locations[this.locationIndex].locationId,this.jobTypes[this.typeIndex].jobTypeId,this.jobCategories[this.categoryIndex].categoryId,this.degrees[this.degreeIndex].degreeId); 
+  }
+
+  private filterClosedJobs(positionId: string , locationId : string , typeId : string , categoryId : string , degreeId : string) : void
+  {
+    this.filteredClosedJobs = [];
+    let typecheck: boolean = false;
+    let positioncheck: boolean = false;
+    let locationcheck: boolean = false;
+    let categorycheck: boolean = false;
+    let degreecheck: boolean = false;
+
+    if(positionId!="null")
+        positioncheck = true;
+    if(locationId!="null")
+        locationcheck = true;
+    if(categoryId!="null")
+        categorycheck = true;
+    if(typeId!="null")
+        typecheck = true;
+    if(degreeId!="null")
+        degreecheck = true;
+
+    this.closedJobs.forEach((job) =>
+      {      
+        let flg:boolean  = true;
+        if(positioncheck)
+        {
+          if(job.positionId.toString() != positionId)
+              flg = false;
+        }
+        if(locationcheck)
+        {
+          if(job.locationId.toString() != locationId)
+              flg = false;
+        }
+        if(typecheck)
+        {
+          if(job.jobTypeId.toString() != typeId)
+              flg = false;
+        }
+        if(categorycheck)
+        {
+          if(job.categoryId.toString() != categoryId)
+            flg = false;
+        }
+        if(degreecheck)
+        {
+          if(job.degreeId.toString() != degreeId)
+            flg = false;
+        }
+        
+        
+        if(flg)
+        {
+          this.filteredClosedJobs.push(job);
+        }
+      }
+
+    );
+    if(this.filteredClosedJobs.length>0)
+      this.displayJobsToast();
+    else
+    {
+      this.displayEmptyJobsToast();
+      this.resetFilters();
+    }
   }
 
   private filterJobs(positionId: string , locationId : string , typeId : string , categoryId : string , degreeId : string) : void
@@ -225,6 +405,8 @@ export class JobHomeComponent  {
   public resetFilters():void
   {
     this.Filterjobs = this.jobs;
+    this.filteredClosedJobs = this.closedJobs;
+
     this.categoryIndex =0;
     this.positionIndex =0;
     this.locationIndex =0;

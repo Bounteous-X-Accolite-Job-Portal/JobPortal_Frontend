@@ -9,8 +9,8 @@
       </button>
     </div>
     <ul class="sidenav-nav">
-      <li class="sidenav-nav-item  float:left" *ngFor="let data of navData">
-        <a [routerLink]="[data.routeLink]" class="sidenav-nav-link w-100 px-3" routerLinkActive="active" >
+      <li class="sidenav-nav-item  float:left pb-1" *ngFor="let data of navData">
+        <a [routerLink]="[data.routeLink, id]" class="sidenav-nav-link w-100 px-3" routerLinkActive="active" >
           <i class="sidenav-link-icon ml-5" [class]="data.icon"></i>
           <span class="sidenav-link-text " *ngIf="collapsed">{{data.label}}</span>
         </a>
@@ -21,3 +21,83 @@
     <router-outlet></router-outlet>
   </div>
 </div>
+
+
+<!-- Test nav -->
+
+
+<!-- 
+
+
+  <div class="main" style="display: flex; height: 87vh; width: 100%;">
+    <div class=" bg-danger" style="width: 20%; height: 100vh;">
+
+
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar">
+      <div class="position-sticky">
+        <div class="list-group">
+          <a
+            [routerLink]="['/dashboard/child1']"
+            class="list-group-item list-group-item-action py-4 active"
+            aria-current="true"
+            >
+            <span>Main dashboard</span>
+          </a>
+          <a
+            [routerLink]="['/dashboard/child1']"
+            class="list-group-item list-group-item-action py-4 active"
+            >
+            <span>View Jobs</span>
+          </a>
+          <a [routerLink]="['/dashboard/child1']" class="list-group-item list-group-item-action py-4 active"
+          ><span>Job Application Status</span></a
+          >
+          <a [routerLink]="['/dashboard/child1']" class="list-group-item list-group-item-action py-4 active"
+          ><span>View Resume</span></a
+          >
+          <a
+            [routerLink]="['/dashboard/child1']"
+            class="list-group-item list-group-item-action py-4 active"
+          >
+            <span>Contact List</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+
+  </div>
+  <div class="content col bg-success" style="width: 80%;">
+    <router-outlet></router-outlet>
+  </div>
+</div> -->
+
+
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                  <span style="font-size: 25px; font-weight: 700;">Forget your password?</span>
+                  <br>
+                  <small>Enter Your E-Mail to get the reset password Link</small>
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group pt-3">
+                  <div class="input-group">
+                      <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                      <input [ngModel] ="resetPasswordEmail" (ngModelChange)="checkValidEmail($event)" type="email" class="form-control" placeholder="Email">
+                  </div>
+              </div>
+              <small *ngIf="isRequired" class="text-danger">*Email is required*</small>
+              <small *ngIf="!isValidEmail && !resetPasswordEmail" class="text-danger">*Email is invalid*</small>
+          </div>
+          <div class="modal-footer">
+              <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" (click)="confirmToSend()" class="btn btn-primary">Send</button>
+          </div>
+      </div>
+  </div>
+</div> -->

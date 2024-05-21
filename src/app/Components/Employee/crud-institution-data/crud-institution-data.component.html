@@ -1,1 +1,29 @@
-<p>crud-institution-data works!</p>
+<div class="d-flex gradient-custom-2 justify-content-center flex-wrap" style="padding: 20vh;">
+    <div class="w-90 bg-white rounded p-5" style="height: auto;">
+        <div><a routerLink=".."><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</a></div>
+      <h2> Delete Institution</h2>
+      <hr>
+      <div class="table-responsive-lg">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Institution/ School</th>
+                    <th>University/ Board</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let institution of institutions">
+                    <td>{{ institution.institutionOrSchool }}</td>
+                    <td>{{ institution.universityOrBoard }}</td>
+                    <td>
+                        <button class="delete-outer"><a id="delete" (click)="deleteByInstitutionId(institution.institutionId)"><i class="fa fa-trash"></i></a> </button>
+                        <!-- <a id="edit" class="font-weight-bold btn btn-primary text-style-add"><i class="fas fa-edit"></i></a>  -->
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+</div>

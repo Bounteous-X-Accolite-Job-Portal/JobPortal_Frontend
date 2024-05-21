@@ -1,5 +1,5 @@
 
-  .btn-primary {
+  .btn-primary-1 {
     --bs-btn-border-radius: 25px;
     --bs-btn-bg: #0d016b;
     --bs-btn-border-color: #0d016b;
@@ -16,3 +16,10 @@
     --bs-btn-disabled-border-color: #0d016b;
     transition: all .3s;
   }
+
+  .bg-glass {
+    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    backdrop-filter: saturate(200%) blur(25px);
+  }
+  
+  
