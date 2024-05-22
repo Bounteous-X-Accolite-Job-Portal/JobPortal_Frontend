@@ -178,7 +178,7 @@ f: any;
         if(res.status==200)
           {
             this.toastr.success("Job Updated Successfully !!");
-            this.router.navigate(['jobs']);
+            this.router.navigate(['employee-dashboard','your-jobs']);
           }
           else if(res.status==403)
           {

@@ -2,7 +2,7 @@
   <div style="padding-left: 15px; padding-right: 15px; font-size: 27px; margin-bottom: 0rem;">
       Filters
   </div>
-  <div>
+  <div class="options">
       <form [formGroup]="filtersForm">
           <div>
               <p>Job Position</p>
@@ -38,7 +38,7 @@
           </div>
           
           <div class="d-flex justify-content-between">
-              <button style="--clr:#8A2BE2" (click)=onSubmit()><span>Search</span><i></i></button>
+              <button style="--clr:#8A2BE2" (click)=ActiveJobToggle?onSubmit():onSubmitForClosedJobs()><span>Search</span><i></i></button>
               <button style="--clr:#8A2BE2" (click)=resetFilters()><span>Reset</span><i></i></button>
           </div>
       </form>
@@ -58,13 +58,13 @@
         </li>
     </ul>
     <div>
-        <div *ngIf="ActiveJobToggle">
+        <div *ngIf="ActiveJobToggle" (click)="activeJobTab()">
           <div *ngIf="jobs.length == 0">You don't have any active job.</div>
           <div *ngIf="jobs.length != 0">
             <app-job-card *ngFor="let job of Filterjobs" [job]="job" [canEdit]="true"></app-job-card>
           </div>
         </div>
-        <div *ngIf="!ActiveJobToggle">
+        <div *ngIf="!ActiveJobToggle" (click)="closedJobTab()">
           <div *ngIf="closedJobs.length == 0">You don't have any closed job.</div>
           <div *ngIf="closedJobs.length != 0">
             <app-job-card *ngFor="let closedJob of FilterClosedJobs" [closedJob]="closedJob"></app-job-card>

@@ -55,14 +55,4 @@ export const sideBarData = [
     requiredPrivilege: true,
     requiredSpecialPrivilege: false,
   },
-  // {
-  //     routeLink: 'sml',
-  //     icon: 'fal fa-camera',
-  //     label: 'Social Profiles'
-  // },
-  // {
-  //     routeLink: 'pass-reset',
-  //     icon: 'fal fa-cog',
-  //     label: 'Password Reset'
-  // },
 ];

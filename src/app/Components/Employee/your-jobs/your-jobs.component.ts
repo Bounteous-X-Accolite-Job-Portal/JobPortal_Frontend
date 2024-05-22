@@ -34,6 +34,7 @@ export class YourJobsComponent implements OnInit{
   jobCategories: JobCategory[] = [];
   jobPositions: position[] =[];
 
+  isActiveSection:boolean= true;
   Filterjobs: Job[] = [];
   jobs : Job[] = [];
 
@@ -354,4 +355,11 @@ export class YourJobsComponent implements OnInit{
     this.toastr.error("NO Filter Selected !!");
   }
 
+  public activeJobTab():void{
+      this.isActiveSection = true;
+  }
+  
+  public closedJobTab():void{
+      this.isActiveSection = true;
+  }
 }
