@@ -15,6 +15,7 @@ import { candidateEducationResponse } from '../../Models/EducationResponse/candi
 import { candidateExperienceResponse } from '../../Models/ExperienceResponse/candidateExperienceResponse';
 import { AllJobApplicationResponse } from '../../Models/JobApplicationResponse/AllJobApplicationResponse';
 import { AllJob } from '../../Models/JobResponse/AllJobs';
+import { ResumeResponse } from '../../Models/ResumeResponse/ResumeResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -82,4 +83,5 @@ export class CandidateService {
   getAllAppliedJobsByCandidate(id:string):Observable<AllJob>{
     return this.http.get<AllJob>(environment.baseURL+'Application/CandidateAppliedJobs/'+id);
   };
+
 }

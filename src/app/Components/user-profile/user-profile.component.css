@@ -7,7 +7,7 @@
     width: 5rem;
     /* width: 16.5625rem; */
     box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
-    height: 200vh;
+    /* height: 200vh; */
     /* justify-content: start; */
 }
 
@@ -70,7 +70,7 @@
 
 .sidenav-nav .sidenav-nav-item {
     width: 100%;
-    margin-bottom: 0.625rem;
+    /* margin-bottom: 0.625rem; */
 }
 
 .sidenav-nav .sidenav-nav-item .sidenav-nav-link {
