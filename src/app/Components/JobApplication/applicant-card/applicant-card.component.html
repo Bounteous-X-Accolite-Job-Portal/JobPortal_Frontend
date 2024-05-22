@@ -4,7 +4,7 @@
       class="showCard"
       style="cursor: pointer"
       data-bs-toggle="modal"
-      [attr.data-bs-target]="'#profileModal'+ applicant.applicationId"
+      [attr.data-bs-target]="'#profileModal' + applicant.applicationId"
     >
       {{ applicant.candidate.firstName }} {{ applicant.candidate.lastName }} (
       {{ applicant.candidate.email }} )
@@ -36,7 +36,7 @@
         type="button"
         class="btn btn-secondary btn-sm"
         data-bs-toggle="modal"
-        [attr.data-bs-target]="'#statusChange'+ applicant.applicationId"
+        [attr.data-bs-target]="'#statusChange' + applicant.applicationId"
       >
         Change Status
       </button>
@@ -62,9 +62,16 @@
               >No Experience to show</span
             >
             <ul *ngFor="let item of applicant.experience">
-              <div> 
-                {{ item.experience.experienceTitle }}  &#64;  {{ item.company.companyName }}
-                ( {{ item.experience.startDate }} : {{ item.experience.isCurrentlyWorking ? "present" : item.experience.endDate }} )
+              <div>
+                {{ item.experience.experienceTitle }} &#64;
+                {{ item.company.companyName }} (
+                {{ item.experience.startDate }} :
+                {{
+                  item.experience.isCurrentlyWorking
+                    ? "present"
+                    : item.experience.endDate
+                }}
+                )
               </div>
             </ul>
           </div>
@@ -81,7 +88,8 @@
               <div>
                 {{ item.degree.degreeName }} (
                 {{
-                  item.institution.institutionOrSchool.toLowerCase() === "others"
+                  item.institution.institutionOrSchool.toLowerCase() ===
+                  "others"
                     ? item.education.institutionOrSchoolName
                     : item.institution.institutionOrSchool
                 }}
@@ -95,12 +103,13 @@
   </div>
   <div class="card-header">
     <div>
-      <span style="float: left">Interviews - 
+      <span style="float: left"
+        >Interviews -
         <a
           class="btn-secondary btn-sm"
-          style="cursor: pointer;"
+          style="cursor: pointer"
           data-bs-toggle="modal"
-          [attr.data-bs-target]="'#interviewModal'+ applicant.applicationId"
+          [attr.data-bs-target]="'#interviewModal' + applicant.applicationId"
           (click)="GetAllApplicantInterview(applicant.applicationId)"
         >
           Click to view All Interviews
@@ -190,13 +199,15 @@
                       ><b>{{ item.degree.degreeName }}</b></span
                     >
                     <span style="float: right">{{
-                      item.institution.institutionOrSchool.toLowerCase() === "others"
+                      item.institution.institutionOrSchool.toLowerCase() ===
+                      "others"
                         ? item.education.institutionOrSchoolName
                         : item.institution.institutionOrSchool
                     }}</span>
                   </div>
                   <p style="font-size: 13px">
-                    {{ item.education.startYear }} - {{ item.education.endYear }}
+                    {{ item.education.startYear }} -
+                    {{ item.education.endYear }}
                   </p>
                   <p class="card-text">{{ item.education.grade }}</p>
                 </div>
@@ -239,41 +250,68 @@
         <div class="modal-body">
           <p style="font-size: 20px; font-weight: 500">Interviews -</p>
           <div>
-            <div *ngIf="allInterviews.length === 0">
-              No Interviews to show
-            </div>
+            <div *ngIf="allInterviews.length === 0">No Interviews to show</div>
             <div *ngFor="let item of allInterviews">
               <div class="card mb-3">
                 <div class="card-header">
                   <span>
-                    Interview with <b>{{ item.interviewer.firstName }} {{ item.interviewer.lastName }}</b> ( {{item.interviewer.empId}} )
+                    Interview with
+                    <b
+                      >{{ item.interviewer.firstName }}
+                      {{ item.interviewer.lastName }}</b
+                    >
+                    ( {{ item.interviewer.empId }} )
                   </span>
-                  <span *ngIf="isActiveInterview(item.interview)" class="my-1" style="float: right">
+                  <span
+                    *ngIf="isActiveInterview(item.interview)"
+                    class="my-1"
+                    style="float: right"
+                  >
                     <span class="text-success">Scheduled</span>
                   </span>
                 </div>
                 <div class="card-body">
-                    <p *ngIf="isActiveInterview(item.interview)" class="card-subtitle mb-2 text-muted">
-                      <span>
-                        Scheduled on {{ item.interview.interviewDate }} at {{item.interview.interviewTime}}
-                      </span>
-                      <span style="float: right;">
-                        <a href='{{item.interview.link}}' target="_blank">
-                          <button type="button" class="btn btn-secondary btn-sm">
-                            Join Meeting
-                          </button>
-                        </a>
-                      </span>
-                    </p>
-                  <div *ngIf="!isActiveInterview(item.interview)" class="card-text">
+                  <p
+                    *ngIf="isActiveInterview(item.interview)"
+                    class="card-subtitle mb-2 text-muted"
+                  >
+                    <span>
+                      Scheduled on {{ item.interview.interviewDate }} at
+                      {{ item.interview.interviewTime }}
+                    </span>
+                    <span style="float: right">
+                      <a href="{{ item.interview.link }}" target="_blank">
+                        <button type="button" class="btn btn-secondary btn-sm">
+                          Join Meeting
+                        </button>
+                      </a>
+                    </span>
+                  </p>
+                  <div
+                    *ngIf="!isActiveInterview(item.interview)"
+                    class="card-text"
+                  >
                     <div class="card-text mb-3">
-                      <div>Feedback - </div>
-                      {{ item.feedback ? item.feedback.feedback : "No feedback available" }}
+                      <div>Feedback -</div>
+                      {{
+                        item.feedback
+                          ? item.feedback.feedback
+                          : "No feedback available"
+                      }}
                     </div>
                     <div class="card-text">
                       <span>Additional Link - </span>
-                      <a *ngIf="(item.feedback && item.feedback.additionalLink)" href='{{item.feedback.additionalLink}}' target="_blank">Go to link</a>
-                      <div *ngIf="!(item.feedback && item.feedback.additionalLink)">No additional link available</div>
+                      <a
+                        *ngIf="item.feedback && item.feedback.additionalLink"
+                        href="{{ item.feedback.additionalLink }}"
+                        target="_blank"
+                        >Go to link</a
+                      >
+                      <div
+                        *ngIf="!(item.feedback && item.feedback.additionalLink)"
+                      >
+                        No additional link available
+                      </div>
                     </div>
                   </div>
                 </div>

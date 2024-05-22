@@ -58,7 +58,6 @@ export class ApplicantCardComponent implements OnInit {
     
     this.statusService.getAllStatus().subscribe(
       (res) => {
-        // console.log(res);
 
         this.allStatus = res.allStatus;
         
@@ -72,7 +71,6 @@ export class ApplicantCardComponent implements OnInit {
     )
   }
 
-  // Getter method to access formcontrols
   get status() {
     return this.form.get('status');
   }
