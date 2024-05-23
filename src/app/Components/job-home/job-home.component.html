@@ -1,58 +1,198 @@
-<div class="Jobhunt">
-    <div class="Filters ">
-        <div style="padding-left: 15px; padding-right: 15px; font-size: 27px; margin-bottom: 0rem;">
-            Filters
-        </div>
+<div>
+    <div *ngIf="isEmployee && hasPrivilege" class="container mt-3">
+        <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+            <li class="nav-item mx-2" role="presentation">
+            <a (click)="ActiveJobs()" [class.active]="ActiveJobToggle" class="nav-link" id="tab-login" data-mdb-pill-init role="tab" aria-controls="pills-login" aria-selected="true">
+                Active Jobs
+            </a>
+            </li>
+            <li class="nav-item mx-2" role="presentation">
+            <a (click)="ClosedJobs()" [class.active]="!ActiveJobToggle" class="nav-link" id="tab-register" data-mdb-pill-init role="tab" aria-controls="pills-register" aria-selected="false">
+                Closed Jobs
+            </a>
+            </li>
+        </ul>
         <div>
-            <form [formGroup]="filtersForm" style="display: flex; flex-direction: column; padding-left: 10%; padding-right: 10%;">
-                <div>
-                    <p>Job Position</p>
-                    <select formControlName="jobPosition" [(ngModel)]="positionIndex">
-                        <option *ngFor="let pos of jobPositions; let i=index "[value]="i">
-                            {{pos.positionName}}
-                        </option>
-                    </select>
+            <div *ngIf="ActiveJobToggle">
+            <div *ngIf="jobs.length == 0">You don't have any active job.</div>
+            <div *ngIf="jobs.length != 0">
+                <div class="Filters">
+                    <div style="padding-left: 15px; padding-right: 15px; font-size: 27px; margin-bottom: 0rem;">
+                        Filters
+                    </div>
+                    <div>
+                        <form [formGroup]="filtersForm">
+                            <div>
+                                <p>Job Category</p>
+                                <select formControlName="jobCategory" [(ngModel)]="categoryIndex" (change)="loadJobPositionsByCategoryId()">
+                                    <option *ngFor="let cat of jobCategories; let i=index "[value]="i">
+                                        {{cat.categoryName}} {{cat.categoryCode}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <p>Job Position</p>
+                                <select formControlName="jobPosition" [(ngModel)]="positionIndex">
+                                    <option *ngFor="let pos of categoryjobPositions; let i=index "[value]="i">
+                                        {{pos.positionName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <p>Job Location</p>
+                                <select formControlName="location" [(ngModel)]="locationIndex">
+                                    <option *ngFor="let loc of locations; let i=index"[value]="i">
+                                        {{loc.address}} {{loc.city}} {{loc.state}} {{loc.country}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div>      
+                                <p>Job Type</p>
+                                <select formControlName="jobType" [(ngModel)]="typeIndex">
+                                    <option *ngFor="let typ of jobTypes; let i=index"[value]="i">
+                                        {{typ.typeName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div>      
+                                <p>Degree</p>
+                                <select formControlName="degree" [(ngModel)]="degreeIndex">
+                                    <option *ngFor="let deg of degrees; let i=index"[value]="i">
+                                        {{deg.degreeName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button style="--clr:#8A2BE2" (click)=onSubmit()><span>Search</span><i></i></button>
+                                <button style="--clr:#8A2BE2" (click)=resetFilters()><span>Reset</span><i></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div>
-                    <p>Job Category</p>
-                    <select formControlName="jobCategory" [(ngModel)]="categoryIndex">
-                        <option *ngFor="let cat of jobCategories; let i=index "[value]="i">
-                            {{cat.categoryName}} {{cat.categoryCode}} {{cat.description}}
-                        </option>
-                    </select>
+                <div class="jobListing">
+                    <app-job-card *ngFor="let job of Filterjobs" [job]="job"></app-job-card>
                 </div>
-                <div>
-                    <p>Job Location</p>
-                    <select formControlName="location" [(ngModel)]="locationIndex">
-                        <option *ngFor="let loc of locations; let i=index"[value]="i">
-                            {{loc.address}} {{loc.city}} {{loc.state}} {{loc.country}}
-                        </option>
-                    </select>
+            </div>
+            </div>
+            <div *ngIf="!ActiveJobToggle">
+            <div *ngIf="closedJobs.length == 0">You don't have any closed job.</div>
+            <div *ngIf="closedJobs.length != 0">
+                <div class="Filters">
+                    <div style="padding-left: 15px; padding-right: 15px; font-size: 27px; margin-bottom: 0rem;">
+                        Filters
+                    </div>
+                    <div>
+                        <form [formGroup]="filtersForm">
+                            <div>
+                                <p>Job Position</p>
+                                <select formControlName="jobPosition" [(ngModel)]="positionIndex">
+                                    <option *ngFor="let pos of jobPositions; let i=index "[value]="i">
+                                        {{pos.positionName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <p>Job Category</p>
+                                <select formControlName="jobCategory" [(ngModel)]="categoryIndex">
+                                    <option *ngFor="let cat of jobCategories; let i=index "[value]="i">
+                                        {{cat.categoryName}} {{cat.categoryCode}} {{cat.description}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <p>Job Location</p>
+                                <select formControlName="location" [(ngModel)]="locationIndex">
+                                    <option *ngFor="let loc of locations; let i=index"[value]="i">
+                                        {{loc.address}} {{loc.city}} {{loc.state}} {{loc.country}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div>      
+                                <p>Job Type</p>
+                                <select formControlName="jobType" [(ngModel)]="typeIndex">
+                                    <option *ngFor="let typ of jobTypes; let i=index"[value]="i">
+                                        {{typ.typeName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div>      
+                                <p>Degree</p>
+                                <select formControlName="degree" [(ngModel)]="degreeIndex">
+                                    <option *ngFor="let deg of degrees; let i=index"[value]="i">
+                                        {{deg.degreeName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button style="--clr:#8A2BE2" (click)=onSubmitForClosedJobs()><span>Search</span><i></i></button>
+                                <button style="--clr:#8A2BE2" (click)=resetFilters()><span>Reset</span><i></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div>      
-                    <p>Job Type</p>
-                    <select formControlName="jobType" [(ngModel)]="typeIndex">
-                        <option *ngFor="let typ of jobTypes; let i=index"[value]="i">
-                            {{typ.typeName}}
-                        </option>
-                    </select>
+                <div class="jobListing">
+                    <app-job-card *ngFor="let closedJob of filteredClosedJobs" [closedJob]="closedJob"></app-job-card>
                 </div>
-                <div>      
-                    <p>Degree</p>
-                    <select formControlName="degree" [(ngModel)]="degreeIndex">
-                        <option *ngFor="let deg of degrees; let i=index"[value]="i">
-                            {{deg.degreeName}}
-                        </option>
-                    </select>
-                </div>
-                <div class="d-flex justify-content-around">
-                    <button style="--clr:#8A2BE2" (click)=onSubmit()><span>Search</span><i></i></button>
-                    <button style="--clr:#8A2BE2" (click)=resetFilters()><span>Reset</span><i></i></button>
-                </div>
-            </form>
+            </div>
+            </div>
         </div>
     </div>
-    <div class="jobListing">
-        <app-job-card *ngFor="let job of Filterjobs" [job]="job" style="width: 100%;"></app-job-card>
+    <div  *ngIf="!(isEmployee && hasPrivilege)" class="JobHunt">
+        <div class="Filters">
+            <div style="padding-left: 15px; padding-right: 15px; font-size: 27px; margin-bottom: 0rem;">
+                Filters
+            </div>
+            <div>
+                <form [formGroup]="filtersForm">
+                    <div>
+                        <p>Job Position</p>
+                        <select formControlName="jobPosition" [(ngModel)]="positionIndex">
+                            <option *ngFor="let pos of jobPositions; let i=index "[value]="i">
+                                {{pos.positionName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Job Category</p>
+                        <select formControlName="jobCategory" [(ngModel)]="categoryIndex">
+                            <option *ngFor="let cat of jobCategories; let i=index "[value]="i">
+                                {{cat.categoryName}} {{cat.categoryCode}} {{cat.description}}
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Job Location</p>
+                        <select formControlName="location" [(ngModel)]="locationIndex">
+                            <option *ngFor="let loc of locations; let i=index"[value]="i">
+                                {{loc.address}} {{loc.city}} {{loc.state}} {{loc.country}}
+                            </option>
+                        </select>
+                    </div>
+                    <div>      
+                        <p>Job Type</p>
+                        <select formControlName="jobType" [(ngModel)]="typeIndex">
+                            <option *ngFor="let typ of jobTypes; let i=index"[value]="i">
+                                {{typ.typeName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div>      
+                        <p>Degree</p>
+                        <select formControlName="degree" [(ngModel)]="degreeIndex">
+                            <option *ngFor="let deg of degrees; let i=index"[value]="i">
+                                {{deg.degreeName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button style="--clr:#8A2BE2" (click)=onSubmit()><span>Search</span><i></i></button>
+                        <button style="--clr:#8A2BE2" (click)=resetFilters()><span>Reset</span><i></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="jobListing">
+            <app-job-card *ngFor="let job of Filterjobs" [job]="job"></app-job-card>
+        </div>
     </div>
 </div>

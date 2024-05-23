@@ -5,5 +5,5 @@ export interface Employee{
     lastName: string;
     email: string;
     phone?: string;
-    designation: any;
+    designationId: number;
 }

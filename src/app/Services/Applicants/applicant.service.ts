@@ -15,4 +15,8 @@ export class ApplicantService {
   getApplicantsByJobId(jobId: string): Observable<ApplicantResponse> {
     return this.http.get<ApplicantResponse>(environment.baseURL + 'Application/applicants/' + jobId);
   }
+
+  getApplicantsByClosedJobId(closedJobId: string): Observable<ApplicantResponse> {
+    return this.http.get<ApplicantResponse>(environment.baseURL + 'Application/applicants/closedJob/' + closedJobId);
+  }
 }

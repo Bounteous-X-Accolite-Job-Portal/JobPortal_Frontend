@@ -30,9 +30,9 @@ export const navbarData = [
         label: 'Social Profiles'
     },
     {
-        routeLink: 'pass-reset',
+        routeLink: 'changePassword',
         icon: 'fal fa-cog',
-        label: 'Password Reset'
+        label: 'Change Password'
     },
     {
         routeLink: 'applied-jobs',

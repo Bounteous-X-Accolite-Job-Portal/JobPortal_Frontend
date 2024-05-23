@@ -58,6 +58,8 @@ export class EmployeeDashboardComponent implements OnInit {
     .subscribe((val) => {
         let specialPrivilege = this.authService.checkHasSpecialPrivilegeFromToken();
         this.hasSpecialPrivilege = val || specialPrivilege;
+        this.hasPrivilege  = false;
+        this.hasSpecialPrivilege  = false;
     })
 
     this.spinnerService.hideSpinner();

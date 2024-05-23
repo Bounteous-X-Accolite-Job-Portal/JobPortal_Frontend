@@ -49,8 +49,8 @@ constructor(private router:Router) {}
 
     this.addCandidateEducation = new FormGroup({
       institutionOrSchoolName:new FormControl(""),
-      startYear:new FormControl("2012"),
-      endYear:new FormControl("20222"),
+      startYear:new FormControl("2020"),
+      endYear:new FormControl("2022"),
       grade:new FormControl(""),
       institutionId:new FormControl("mps"),
       degreeId:new FormControl(""),
@@ -87,7 +87,7 @@ constructor(private router:Router) {}
       this.httpService.addCandidateEducation(this.addCandidateEducation.value).subscribe(
         (res) => {
           console.log(res);
-          this.toastr.success("CONGO Education Added !!");
+          this.toastr.success("Education Added Successfully!!");
           this.router.navigate(['profile','edu']);
         },
         (error) => {
