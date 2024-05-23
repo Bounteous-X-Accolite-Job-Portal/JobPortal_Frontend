@@ -51,6 +51,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { ForgetPasswordComponentComponent } from './forget-password-component/forget-password-component.component';
 import { DesignationComponent } from './Components/Employee/designation/designation.component';
 import { SettingsComponent } from './Components/Employee/settings/settings.component';
+import { CrudStatusJobDataComponent } from './Components/Employee/crud-status-job-data/crud-status-job-data.component';
 
 export const routes: Routes = [
   {
@@ -167,6 +168,7 @@ export const routes: Routes = [
             component: CrudInstitutionDataComponent,
           },
           { path: 'crud-company-data', component: CrudCompanyDataComponent },
+          {path : 'crud-status-job-data', component:CrudStatusJobDataComponent}
         ],
       },
       { path: 'your-jobs', component: YourJobsComponent },

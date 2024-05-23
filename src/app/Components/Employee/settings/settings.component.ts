@@ -24,6 +24,7 @@ export class SettingsComponent implements OnInit {
   addDegreeForm!: FormGroup;
   addInstitutionForm!: FormGroup;
   addCompanyForm!: FormGroup;
+  addStatusForm!:FormGroup;
   categoryIndex = 0;
 
   jobCategories: JobCategory[] = [];
@@ -60,6 +61,10 @@ export class SettingsComponent implements OnInit {
 
     this.addTypeForm = new FormGroup({
       typeName: new FormControl('',Validators.required),
+    });
+
+    this.addStatusForm = new FormGroup({
+      statusName: new FormControl('',Validators.required),
     });
 
     this.addDegreeForm = new FormGroup({
@@ -191,5 +196,21 @@ export class SettingsComponent implements OnInit {
           this.toastr.error('Error adding Company!');
         }
       );
+  }
+
+  addStatus(){
+    this.crudJobService.addJobApplicationStatus(this.addStatusForm.value)
+    .subscribe(
+      (res) =>{
+        console.log(res);
+        this.addStatusForm.reset();
+        this.toastr.success('Status Added successfully!');
+      },
+      (error)=>{
+        console.log(error);
+        this.toastr.error("Error Adding Status !");
+      }
+
+    )
   }
 }
