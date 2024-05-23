@@ -169,7 +169,7 @@ export const routes: Routes = [
       { path: 'sml', component: SocialProfilesComponent },
       { path: 'pass-reset', component: PasswordResetComponent },
       { path: 'applied-jobs', component: AppliedJobsComponent},
-      { path: '**', component: TryComponent },
+      { path: '**', component: PersonalInfoComponent },
     ],
   },
 ];

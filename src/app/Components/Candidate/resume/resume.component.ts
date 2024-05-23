@@ -90,10 +90,12 @@ add() {
   this.resumeService.addResumeByCandidateId(this.resumeForm.get('resumeUrl')?.value).subscribe(
     (res) => {
       console.log(res);
+      this.toastr.success("Resume link added");
       this.ngOnInit();
     },
     (error)=>{
       console.log("Error in adding resume link", error);
+      this.toastr.error("Could not add resume");
     }
   );
 }

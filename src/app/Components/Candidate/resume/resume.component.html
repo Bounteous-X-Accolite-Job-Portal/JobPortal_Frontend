@@ -1,26 +1,30 @@
 <!-- Resume exists -->
  <div *ngIf="resumeExists==true" class="cont">
-  <div class="text">
-    Resume : {{urlSafe}}
-  </div>
+    <div class="col-lg-8">
+      <div class="feature-item rounded text-center p-4">
+          <i class="fa fa-3x fa-pen-to-square mb-4 feature-icon"></i>
+          <h5 class="mb-3">Update resume link from below</h5>
+          <button type="button" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="false">
+            Update link
+          </button>
+          <p class="my-5 fw-bold">View your resume <a [href]="urlSafe" target="_blank"><i class="fa fa-arrow-up-right-from-square mx-2 feature-icon"></i></a> </p>
+      </div>
+    </div>
 
-  <div class="text my-3">
-    Update resume link from below
-  </div>
-
-  <button type="button" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="false">
-    Update Resume
-  </button>
-
-  <div class="d-flex justify-content-center mt-5" style="background-color: aliceblue; width: 60%; height: 75%;">
-    <!-- <embed
+  <!-- <div class="d-flex justify-content-center mt-5" style="background-color: aliceblue; width: 60%; height: 75%;">
+    <embed
       [src]="urlSafe"
       [type]=""
       width="100%"
       height="100%"
-    /> -->
+    />
     <iframe [src]="urlSafe" style="width:100%; height:100%;" frameborder="0" *ngIf="urlSafe"></iframe>
-  </div>
+  </div> -->
+  <!-- <a [href]="urlSafe" target="_blank">
+    <button type="button" class="px-5" aria-expanded="false">
+      View Resume
+    </button>
+  </a> -->
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -33,9 +37,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <form [formGroup]="resumeForm">
-            <label for="resumeUrl">Enter the new url</label>  
-            <input type="url" name="resumeUrl" id="resumeUrl" formControlName="resumeUrl">
+          <form [formGroup]="resumeForm" style="display: flex; flex-direction: column; align-items: center;">
+            <label for="resumeUrl">Enter the new url</label> 
+            <br> 
+            <input type="url" name="resumeUrl" id="resumeUrl" formControlName="resumeUrl" style="width: 80%;">
           </form>
         </div>
         <div class="modal-footer">
@@ -44,38 +49,46 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
 
- </div>
 
- </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Resume does not exist -->
  <div *ngIf="resumeExists==false" class="cont">
-  <div class="text">
-    The person with id: {{this.userId}} does not have a resume added yet, please upload one or add the link to it!!
-  </div>
-  <div class="frame">
-    <div class="center">
-      <div class="title">
-        <h1>Drop file to upload</h1>
-      </div>
-  
-      <div class="dropzone">
-        <i class="fa fa-file-upload fa-2x upload-icon"></i>
-        <input type="file" class="upload-input" />
-      </div>
-  
-      <button type="button" class="btn" name="uploadbutton">Upload file</button>
-  
+  <div class="col-lg-8">
+    <div class="feature-item rounded text-center p-4">
+        <i class="fa fa-3x fa-plus mb-4 feature-icon"></i>
+        <h5 class="mb-3">Add link here</h5>
+        <button type="button" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="false">
+          Click to add resume
+        </button>
+        <p class="m-3 fw-bold">Please add the link to your resume using the above button</p>
     </div>
   </div>
-  <div class="text">
-    Add link here
-  </div>
-
-  <button type="button" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="false">
-    Click to add resume
-  </button>
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -99,5 +112,5 @@
         </div>
       </div>
     </div>
- </div>
+  </div>
 </div>
