@@ -125,6 +125,7 @@ export class SettingsComponent implements OnInit {
       (response) => {
         console.log('success : ', response);
         this.addLocationForm.reset();
+        this.toastr.success('Location added successfully!');
       },
       (error) => {
         console.error('Error adding locations:', error);
@@ -153,7 +154,6 @@ export class SettingsComponent implements OnInit {
         console.log('success : ', response);
         this.addDegreeForm.reset();
         this.toastr.success('Degree added successfully!');
-        document.getElementById('closeDegreeModal')?.click();
       },
       (error) => {
         console.error('Error adding degree:', error);

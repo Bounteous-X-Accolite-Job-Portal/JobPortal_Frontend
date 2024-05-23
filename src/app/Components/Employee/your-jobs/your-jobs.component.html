@@ -4,19 +4,19 @@
   </div>
   <div class="options">
       <form [formGroup]="filtersForm">
+        <div>
+            <p>Job Category</p>
+            <select formControlName="jobCategory" (change)="loadJobPositionsByCategoryId()">
+                <option *ngFor="let cat of jobCategories" [value]="cat.categoryId">
+                    {{cat.categoryName}} {{cat.categoryCode}}
+                </option>
+            </select>
+        </div>
           <div>
               <p>Job Position</p>
               <select formControlName="jobPosition">
-                  <option *ngFor="let pos of jobPositions;" [value]="pos.positionId">
+                  <option *ngFor="let pos of categoryjobPositions;" [value]="pos.positionId">
                       {{pos.positionName}}
-                  </option>
-              </select>
-          </div>
-          <div>
-              <p>Job Category</p>
-              <select formControlName="jobCategory">
-                  <option *ngFor="let cat of jobCategories" [value]="cat.categoryId">
-                      {{cat.categoryName}} {{cat.categoryCode}} {{cat.description}}
                   </option>
               </select>
           </div>

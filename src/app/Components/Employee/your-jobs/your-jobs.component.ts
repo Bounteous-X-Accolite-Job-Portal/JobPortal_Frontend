@@ -32,7 +32,9 @@ export class YourJobsComponent implements OnInit{
   locations: location[]= [];
   jobTypes: JobType[] = [];
   jobCategories: JobCategory[] = [];
+
   jobPositions: position[] =[];
+  categoryjobPositions: position[] = [];
 
   isActiveSection:boolean= true;
   Filterjobs: Job[] = [];
@@ -82,7 +84,7 @@ export class YourJobsComponent implements OnInit{
     this.jobCategories.push({categoryId:"null",categoryCode:"Select Job Category ",categoryName:"",description:""})
     this.loadJobCategories();
     
-    this.jobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:""});
+    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
     this.loadJobPositions();
   }
 
@@ -326,6 +328,10 @@ export class YourJobsComponent implements OnInit{
     this.Filterjobs = this.jobs;
     this.FilterClosedJobs = this.closedJobs;
 
+    this.categoryjobPositions = [];
+    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
+ 
+
     this.filtersForm = this.fb.group({
       location: [''],
       jobType: [''],
@@ -361,5 +367,17 @@ export class YourJobsComponent implements OnInit{
   
   public closedJobTab():void{
       this.isActiveSection = true;
+  }
+
+  public loadJobPositionsByCategoryId():void
+  {
+    var selectedCategoryId  = this.filtersForm.get('jobCategory')?.value;
+    this.categoryjobPositions = [];
+    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
+    
+    this.jobPositions.forEach((pos) =>{
+      if(selectedCategoryId===pos.categoryId)
+        this.categoryjobPositions.push(pos);
+    });
   }
 }

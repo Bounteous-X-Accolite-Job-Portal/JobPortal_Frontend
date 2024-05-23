@@ -1,12 +1,6 @@
 import { CommonModule, DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit, input } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { AbstractControl,FormControl,FormGroup,ReactiveFormsModule,Validators,} from '@angular/forms';
 import { JobCategory } from '../../../Models/JobCategoryResponse/JobCategory';
 import { JobService } from '../../../Services/Job/job.service';
 import { location } from '../../../Models/JoblocationResponse/location';
@@ -18,6 +12,7 @@ import { Job } from '../../../Models/JobResponse/Job';
 import { SpinnerComponent } from '../../spinner/spinner.component';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { timestamp } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-job',
@@ -36,7 +31,10 @@ export class AddJobComponent implements OnInit {
   locations: location[] = [];
   jobTypes: JobType[] = [];
   jobCategories: JobCategory[] = [];
+
   jobPositions: position[] = [];
+  categoryjobPositions: position[] = [];
+
   degrees: Degree[] = [];
   jobs: Job[] = [];
   jobData: any;
@@ -51,13 +49,22 @@ export class AddJobComponent implements OnInit {
   constructor(
     private jobService: JobService,
     private addJobService: AddJobService,
-    private datePipe: DatePipe
+    private toastr: ToastrService
   ) {
    
+    this.locations.push({locationId: "null" , address: "Select Job Location " , city: "" , state: "" , country : ""});
     this.loadJobLocations();
+
+    this.jobTypes.push({jobTypeId: "null" , typeName : " Select Job Type "});
     this.loadJobTypes();
+
+    this.jobCategories.push({categoryId:"null",categoryCode:"Select Job Category ",categoryName:"",description:""})
     this.loadJobCategories();
+
+    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
     this.loadJobPositions();
+
+    this.degrees.push({degreeId:"null",degreeName:"Select Degree ",durationInYears:0});
     this.loadDegrees();
 
   }
@@ -84,7 +91,7 @@ export class AddJobComponent implements OnInit {
   private loadJobLocations(): void {
     this.jobService.getAllJobLocations().subscribe(
       (res) => {
-        this.locations = res.allJobLocations;
+        this.locations= this.locations.concat(res.allJobLocations);
         console.log(this.locations);
       },
       (error) => {
@@ -96,7 +103,7 @@ export class AddJobComponent implements OnInit {
   private loadJobCategories(): void {
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
-        this.jobCategories = res.allJobCategory;
+        this.jobCategories = this.jobCategories.concat(res.allJobCategory);
         console.log(this.jobCategories);
         this.isLoading = false;
       },
@@ -109,7 +116,7 @@ export class AddJobComponent implements OnInit {
   private loadJobTypes(): void {
     this.jobService.getAllJobTypes().subscribe(
       (res) => {
-        this.jobTypes = res.allJobTypes;
+        this.jobTypes = this.jobTypes.concat(res.allJobTypes);
         console.log(this.jobTypes);
       },
       (error) => {
@@ -132,7 +139,7 @@ export class AddJobComponent implements OnInit {
   private loadDegrees(): void {
     this.jobService.getAllDegrees().subscribe(
       (res) => {
-        this.degrees = res.degrees;
+        this.degrees = this.degrees.concat(res.degrees);
         console.log(this.degrees);
       },
       (error) => {
@@ -167,6 +174,7 @@ export class AddJobComponent implements OnInit {
       this.addJobService.addJobs(this.jobData).subscribe(
         (res) => {
           console.log('success ', res);
+          this.toastr.success("Job Posted Successfully !!");
         },
         (error) => {
           console.error('Error submission:', error);
@@ -176,5 +184,17 @@ export class AddJobComponent implements OnInit {
       console.log('invalid form');
     }
     this.submitted = true;
+  }
+
+  public loadJobPositionsByCategoryId():void
+  {
+    var selectedCategoryId  = this.jobCategories[this.categoryIndex].categoryId;
+    this.categoryjobPositions = [];
+    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
+    
+    this.jobPositions.forEach((pos) =>{
+      if(selectedCategoryId===pos.categoryId)
+        this.categoryjobPositions.push(pos);
+    });
   }
 }

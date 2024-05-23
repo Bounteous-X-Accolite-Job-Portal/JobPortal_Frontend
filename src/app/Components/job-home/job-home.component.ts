@@ -34,7 +34,10 @@ export class JobHomeComponent  {
   locations: location[] = [];
   jobTypes: JobType[] = [];
   jobCategories: JobCategory[] = [];
+  
   jobPositions: position[] =[];
+  categoryjobPositions: position[] = [];
+
   degrees: Degree[] = [];
   jobs: Job[] = [];
   Filterjobs: Job[] = [];
@@ -97,7 +100,7 @@ export class JobHomeComponent  {
     this.jobCategories.push({categoryId:"null",categoryCode:"Select Job Category ",categoryName:"",description:""})
     this.loadJobCategories();
     
-    this.jobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:""});
+    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
     this.loadJobPositions();
 
     this.degrees.push({degreeId:"null",degreeName:"Select Degree ",durationInYears:0});
@@ -198,8 +201,8 @@ export class JobHomeComponent  {
   private loadJobPositions(): void{
     this.jobService.getAllJobPosition().subscribe(
       (res) => {
-        this.jobPositions = this.jobPositions.concat(res.allJobPositions);
-        console.log(this.jobPositions);
+        this.jobPositions = res.allJobPositions;
+        console.log("all pos : ",this.jobPositions);
       },
       (error) => {
         console.error('Error loading job Positions:',error);
@@ -406,6 +409,8 @@ export class JobHomeComponent  {
   {
     this.Filterjobs = this.jobs;
     this.filteredClosedJobs = this.closedJobs;
+    this.categoryjobPositions = [];
+    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
 
     this.categoryIndex =0;
     this.positionIndex =0;
@@ -434,5 +439,17 @@ export class JobHomeComponent  {
   private displayFilterEmptyToast(): void
   {
     this.toaster.error("NO Filter Selected !!");
+  }
+
+  public loadJobPositionsByCategoryId():void
+  {
+    var selectedCategoryId  = this.jobCategories[this.categoryIndex].categoryId;
+    this.categoryjobPositions = [];
+    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
+    
+    this.jobPositions.forEach((pos) =>{
+      if(selectedCategoryId===pos.categoryId)
+        this.categoryjobPositions.push(pos);
+    });
   }
 }

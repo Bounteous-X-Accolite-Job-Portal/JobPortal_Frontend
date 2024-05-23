@@ -30,7 +30,10 @@ export class EditJobComponent {
   locations: location[] = [];
   jobTypes: JobType[] = [];
   jobCategories: JobCategory[] = [];
+
   jobPositions: position[] = [];
+  categoryjobPositions: position[] = [];
+
   degrees: Degree[] = [];
   
   route: ActivatedRoute = inject(ActivatedRoute);
@@ -70,10 +73,19 @@ f: any;
       console.log("Logged User Id : ",this.userId);
     });
 
+    this.locations.push({locationId: "null" , address: "Select Job Location " , city: "" , state: "" , country : ""});
     this.loadJobLocations();
+
+    this.jobTypes.push({jobTypeId: "null" , typeName : " Select Job Type "});
     this.loadJobTypes();
+
+    this.jobCategories.push({categoryId:"null",categoryCode:"Select Job Category ",categoryName:"",description:""})
     this.loadJobCategories();
+
+    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
     this.loadJobPositions();
+
+    this.degrees.push({degreeId:"null",degreeName:"Select Degree ",durationInYears:0});
     this.loadDegrees();
   }
 
@@ -94,6 +106,8 @@ f: any;
         this.jobForm.get('jobType')?.setValue(this.job.jobType || ''); 
         this.jobForm.get('experience')?.setValue(this.job.experience); 
         this.jobForm.get('lastDate')?.setValue(this.job.lastDate); 
+
+        this.loadJobPositionsByCategoryId(false);
       },
       (error) =>{
         console.log(error);
@@ -104,7 +118,7 @@ f: any;
   private loadJobLocations(): void {
     this.jobService.getAllJobLocations().subscribe(
       (res) => {
-        this.locations = res.allJobLocations;
+        this.locations= this.locations.concat(res.allJobLocations);
       },
       (error) => {
         console.error('Error loading job locations:', error);
@@ -115,7 +129,7 @@ f: any;
   private loadJobCategories(): void {
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
-        this.jobCategories = res.allJobCategory;
+        this.jobCategories = this.jobCategories.concat(res.allJobCategory);
         this.isLoading = false;
       },
       (error) => {
@@ -127,7 +141,7 @@ f: any;
   private loadJobTypes(): void {
     this.jobService.getAllJobTypes().subscribe(
       (res) => {
-        this.jobTypes = res.allJobTypes;
+        this.jobTypes = this.jobTypes.concat(res.allJobTypes);
       },
       (error) => {
         console.error('Error loading job types:', error);
@@ -148,7 +162,7 @@ f: any;
   private loadDegrees(): void {
     this.jobService.getAllDegrees().subscribe(
       (res) => {
-        this.degrees = res.degrees;
+        this.degrees = this.degrees.concat(res.degrees);
       },
       (error) => {
         console.error('Error loading Degrees:', error);
@@ -192,5 +206,20 @@ f: any;
     this.isLoading=false;
   }
   
-
+  public loadJobPositionsByCategoryId(flg:Boolean):void
+  {
+    
+    if(flg)
+      var selectedCategoryId = this.jobForm.get('categoryId')?.value;
+    else
+      selectedCategoryId = this.job.categoryId;
+    
+     this.categoryjobPositions = [];
+    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
+    
+    this.jobPositions.forEach((pos) =>{
+      if(selectedCategoryId===pos.categoryId)
+        this.categoryjobPositions.push(pos);
+    });
+  }
 }

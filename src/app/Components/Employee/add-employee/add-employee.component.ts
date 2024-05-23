@@ -11,11 +11,12 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../../Services/AddEmployee/employee.service';
 import { Designation } from '../../../Models/DesignationResponse/Designation';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-employee',
   standalone: true,
-  imports: [NgIf, NgClass, ReactiveFormsModule, HttpClientModule],
+  imports: [NgIf, NgClass, ReactiveFormsModule, HttpClientModule,ToastrModule],
   templateUrl: './add-employee.component.html',
   styleUrl: './add-employee.component.css',
 })
@@ -32,7 +33,8 @@ export class AddEmployeeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private addEmployeeService: EmployeeService
+    private addEmployeeService: EmployeeService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -67,6 +69,7 @@ export class AddEmployeeComponent implements OnInit {
           if (data.status == 200) {
             this.loading = false;
             console.log('success adding employee');
+            this.toastr.success("Employee Added Successfully !! ");
           } else {
             console.log('error');
           }
