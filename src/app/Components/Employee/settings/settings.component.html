@@ -596,6 +596,87 @@
             </div>
           </td>
         </tr>
+
+        <tr>
+          <td>Status</td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                id="forgot"
+                data-bs-toggle="modal"
+                data-bs-target="#addJobApplicationStatus"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fas fa-add"></i
+              ></a>
+            </div>
+            <div
+              class="modal fade"
+              id="addJobApplicationStatus"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      Add Status
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="addStatusForm">
+                      <div class="mb-3">
+                        <label for="statusName" class="form-label"
+                          >Status Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="statusName"
+                          placeholder=""
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="addStatus()"
+                    >
+                      Add Status
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="form-inline fr">
+              <a
+                [routerLink]="['crud-status-job-data']"
+                id="forgot"
+                class="font-weight-bold btn btn-primary text-style-add"
+                ><i class="fa fa-eye"></i
+              ></a>
+            </div>
+          </td>
+        </tr>
+        
         <tr>
           <td>Company</td>
           <td>

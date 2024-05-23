@@ -24,7 +24,7 @@ export class ReferralServiceService {
   getreferral(empId:string ):Observable<GetReferral>
   {
     return this.http.get<GetReferral>(
-      environment.baseURL + 'Referral/getAllReferrals'
+      environment.baseURL + 'Referral/getAllReferrals/'
     );
   }
 

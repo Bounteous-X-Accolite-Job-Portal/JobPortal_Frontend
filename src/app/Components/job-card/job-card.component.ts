@@ -29,6 +29,7 @@ import { AuthService } from '../../Services/auth.service';
 export class JobCardComponent {
   @Input() job !: Job;
   @Input() closedJob !: ClosedJob;
+  @Input() canEdit !: boolean;
 
   isEmployee : boolean = false;
   hasPrivilege : boolean = false;

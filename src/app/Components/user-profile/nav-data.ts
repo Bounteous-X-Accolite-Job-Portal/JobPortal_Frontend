@@ -32,7 +32,7 @@ export const navbarData = [
     {
         routeLink: 'changePassword',
         icon: 'fal fa-cog',
-        label: 'Change Passwod'
+        label: 'Change Password'
     },
     {
         routeLink: 'applied-jobs',
