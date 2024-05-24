@@ -50,8 +50,8 @@
       </div>
       <div class="mb-3 col">
         <label class="form-label">Degree</label><br />
-        <select formControlName="degreeId" [(ngModel)]="degreeIndex">
-          <option *ngFor="let deg of degrees; let i = index" [value]="i">
+        <select formControlName="degreeId">
+          <option *ngFor="let deg of degrees" [value]="deg.degreeId">
             {{ deg.degreeName }}
           </option>
         </select>
@@ -84,8 +84,8 @@
 
       <div class="mb-3 col">
         <label class="form-label">Job Location</label><br />
-        <select formControlName="locationId" [(ngModel)]="locationIndex">
-          <option *ngFor="let loc of locations; let i = index" [value]="i">
+        <select formControlName="locationId">
+          <option *ngFor="let loc of locations" [value]="loc.locationId">
             {{ loc.address }} {{ loc.city }} {{ loc.state }} {{ loc.country }}
           </option>
         </select>
@@ -93,24 +93,24 @@
 
       <div class="mb-3 col">
         <label class="form-label">Job Category</label><br />
-        <select formControlName="categoryId" [(ngModel)]="categoryIndex" (change)="loadJobPositionsByCategoryId()">
-          <option *ngFor="let cat of jobCategories; let i = index" [value]="i">
+        <select formControlName="categoryId" (change)="loadJobPositionsByCategoryId()">
+          <option *ngFor="let cat of jobCategories" [value]="cat.categoryId">
             {{ cat.categoryName }} {{ cat.categoryCode }}
           </option>
         </select>
       </div>
       <div class="mb-3 col">
         <label class="form-label">Job Type</label><br />
-        <select formControlName="jobType" [(ngModel)]="typeIndex">
-          <option *ngFor="let typ of jobTypes; let i = index" [value]="i">
+        <select formControlName="jobType">
+          <option *ngFor="let typ of jobTypes;" [value]="typ.jobTypeId">
             {{ typ.typeName }}
           </option>
         </select>
       </div>
       <div class="mb-3 col">
         <label class="form-label">Job Position</label><br />
-        <select formControlName="positionId" [(ngModel)]="positionIndex" >
-          <option *ngFor="let pos of categoryjobPositions ; let i = index" [value]="i">
+        <select formControlName="positionId">
+          <option *ngFor="let pos of categoryjobPositions" [value]="pos.positionId">
             {{ pos.positionName }}
           </option>
         </select>

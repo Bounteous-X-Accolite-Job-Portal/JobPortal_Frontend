@@ -40,12 +40,6 @@ export class AddJobComponent implements OnInit {
   jobData: any;
   lastDateError: boolean = true;
 
-  positionIndex: number = 0;
-  typeIndex: number = 0;
-  locationIndex: number = 0;
-  categoryIndex: number = 0;
-  degreeIndex: number = 0;
-
   constructor(
     private jobService: JobService,
     private addJobService: AddJobService,
@@ -158,11 +152,11 @@ export class AddJobComponent implements OnInit {
       jobCode: this.jobForm.value.jobCode,
       jobDescription: this.jobForm.value.jobDescription,
       jobTitle: this.jobForm.value.jobTitle,
-      degreeId: this.degrees[this.degreeIndex].degreeId,
-      categoryId: this.jobCategories[this.categoryIndex].categoryId,
-      positionId: this.jobPositions[this.positionIndex].positionId,
-      locationId: this.locations[this.locationIndex].locationId,
-      jobType: this.jobTypes[this.typeIndex].jobTypeId,
+      degreeId: this.jobForm.value.degreeId,
+      categoryId: this.jobForm.value.categoryId,
+      positionId: this.jobForm.value.positionId,
+      locationId: this.jobForm.value.locationId,
+      jobType: this.jobForm.value.jobType,
       experience: this.jobForm.value.experience,
       lastDate: this.jobForm.value.lastDate,
     };
@@ -188,7 +182,7 @@ export class AddJobComponent implements OnInit {
 
   public loadJobPositionsByCategoryId():void
   {
-    var selectedCategoryId  = this.jobCategories[this.categoryIndex].categoryId;
+    var selectedCategoryId  = this.jobForm.value.categoryId;
     this.categoryjobPositions = [];
     this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
     
