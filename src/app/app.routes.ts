@@ -52,6 +52,7 @@ import { ForgetPasswordComponentComponent } from './forget-password-component/fo
 import { DesignationComponent } from './Components/Employee/designation/designation.component';
 import { SettingsComponent } from './Components/Employee/settings/settings.component';
 import { CrudStatusJobDataComponent } from './Components/Employee/crud-status-job-data/crud-status-job-data.component';
+import { EmailComponentChangePasswordComponent } from './email-component-change-password/email-component-change-password.component';
 
 export const routes: Routes = [
   {
@@ -206,7 +207,7 @@ export const routes: Routes = [
       { path: 'skills/::id', component: SkillsComponent },
       { path: 'resume/:id', component: ResumeComponent },
       { path: 'sml/:id', component: SocialProfilesComponent },
-      { path: 'applied-jobs', component: AppliedJobsComponent },
+      { path: 'changePassword', component: EmailComponentChangePasswordComponent },
       { path: '**', component: TryComponent },
       
     ],
