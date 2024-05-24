@@ -64,13 +64,13 @@ export class AuthService {
   removeToken()
   {
     this.spinnerService.showSpinner();
-    this.cookieService.delete("token");
+    this.cookieService.delete("token", '/');
     this.spinnerService.hideSpinner();
   }
 
   isLoggedIn(): boolean
   {
-    return !!this.cookieService.get("token");
+    return this.cookieService.check("token");
   }
 
   decodedToken()

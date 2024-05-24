@@ -20,9 +20,14 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((err : any) => {
       // console.log("error in interceptor", err);
       if(err.status === 401){
-        console.log('authInterceptor 401');
+        console.log('authInterceptor 401 : you are no longer verified');
+
         authService.logout();
+
         router.navigate(["/login"]);
+      }
+      else if(err.status == 500){
+        console.log("Some Database error");
       }
       else if(err.status === 0){
         return EMPTY;
