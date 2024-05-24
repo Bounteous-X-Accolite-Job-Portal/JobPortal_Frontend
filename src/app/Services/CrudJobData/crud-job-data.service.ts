@@ -13,6 +13,10 @@ import { Degree } from '../../Models/DegreeResponse/Degree';
 import { DegreeResponse } from '../../Models/DegreeResponse/DegreeRespose';
 import { EducationInstitution } from '../../Models/EducationInstitutionResponse/EducationInstitution';
 import { EducationInstitutionResponse } from '../../Models/EducationInstitutionResponse/EducationInstitutionResponse';
+import { Observable } from 'rxjs';
+import { AllStatusResponse } from '../../Models/StatusResponse/AllStatusResponse';
+import { StatusModel } from '../../Models/StatusResponse/StatusModel';
+import { StatusResponse } from '../../Models/StatusResponse/StatusResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -96,4 +100,15 @@ export class CrudJobDataService {
     );
   }
 
+  addJobApplicationStatus(status:StatusModel){
+    return this.http.post<StatusResponse>(environment.baseURL+'JobStatus/addJobStatus',status);
+  }
+
+  deleteJobApplicationStatus(statusId?: number){
+    return this.http.delete(environment.baseURL+'JobStatus/removeStatus/'+statusId);
+  }
+
+  getAllJobStatus():Observable<AllStatusResponse>{
+    return this.http.get<AllStatusResponse>(environment.baseURL+'JobStatus/getAllStatus');
+  }
 }

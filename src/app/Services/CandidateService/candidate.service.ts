@@ -20,6 +20,8 @@ import { SocailMediaResponse } from '../../Models/SocialMediaResponse/SocialMedi
 import { SkillsResponse } from '../../Models/SkillsResponse/SkillsResponse';
 import { Skills } from '../../Models/SkillsResponse/Skills';
 import { candidateExperience } from '../../Models/ExperienceResponse/candidateExperience';
+import { StatusResponse } from '../../Models/StatusResponse/StatusResponse';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -107,14 +109,10 @@ export class CandidateService {
   addInstitution(institution: any ):Observable<any>{
     return this.http.post(environment.baseURL + 'EducationInstitution/addInstitution',institution);
   }
-
   addCompany(company: any):Observable<any>{
     return this.http.post(environment.baseURL + 'Company/addCompany', company);
   }
-
+  getStatusByStatusId(id:number):Observable<StatusResponse>{
+    return this.http.get<StatusResponse>(environment.baseURL+'JobStatus/'+id);
+  }
 }
-
-
-
-
-

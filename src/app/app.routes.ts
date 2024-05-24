@@ -52,6 +52,8 @@ import { ForgetPasswordComponentComponent } from './forget-password-component/fo
 import { DesignationComponent } from './Components/Employee/designation/designation.component';
 import { SettingsComponent } from './Components/Employee/settings/settings.component';
 import { ProfileComponent } from './Components/Employee/profile/profile.component';
+import { CrudStatusJobDataComponent } from './Components/Employee/crud-status-job-data/crud-status-job-data.component';
+import { EmailComponentChangePasswordComponent } from './email-component-change-password/email-component-change-password.component';
 
 export const routes: Routes = [
   {
@@ -168,6 +170,7 @@ export const routes: Routes = [
             component: CrudInstitutionDataComponent,
           },
           { path: 'crud-company-data', component: CrudCompanyDataComponent },
+          {path : 'crud-status-job-data', component:CrudStatusJobDataComponent}
         ],
       },
       { path: 'your-jobs', component: YourJobsComponent },
@@ -207,8 +210,7 @@ export const routes: Routes = [
       { path: 'skills/::id', component: SkillsComponent },
       { path: 'resume/:id', component: ResumeComponent },
       { path: 'sml/:id', component: SocialProfilesComponent },
-      // { path: '', component: TryComponent},
-      { path: 'applied-jobs', component: AppliedJobsComponent },
+      { path: 'changePassword', component: EmailComponentChangePasswordComponent },
       { path: '**', component: TryComponent },
       
     ],

@@ -23,18 +23,18 @@
                     <div>
                         <form [formGroup]="filtersForm">
                             <div>
-                                <p>Job Position</p>
-                                <select formControlName="jobPosition" [(ngModel)]="positionIndex">
-                                    <option *ngFor="let pos of jobPositions; let i=index "[value]="i">
-                                        {{pos.positionName}}
+                                <p>Job Category</p>
+                                <select formControlName="jobCategory" [(ngModel)]="categoryIndex" (change)="loadJobPositionsByCategoryId()">
+                                    <option *ngFor="let cat of jobCategories; let i=index "[value]="i">
+                                        {{cat.categoryName}} {{cat.categoryCode}}
                                     </option>
                                 </select>
                             </div>
                             <div>
-                                <p>Job Category</p>
-                                <select formControlName="jobCategory" [(ngModel)]="categoryIndex">
-                                    <option *ngFor="let cat of jobCategories; let i=index "[value]="i">
-                                        {{cat.categoryName}} {{cat.categoryCode}} {{cat.description}}
+                                <p>Job Position</p>
+                                <select formControlName="jobPosition" [(ngModel)]="positionIndex">
+                                    <option *ngFor="let pos of categoryjobPositions; let i=index "[value]="i">
+                                        {{pos.positionName}}
                                     </option>
                                 </select>
                             </div>
@@ -84,18 +84,18 @@
                     <div>
                         <form [formGroup]="filtersForm">
                             <div>
-                                <p>Job Position</p>
-                                <select formControlName="jobPosition" [(ngModel)]="positionIndex">
-                                    <option *ngFor="let pos of jobPositions; let i=index "[value]="i">
-                                        {{pos.positionName}}
-                                    </option>
-                                </select>
-                            </div>
-                            <div>
                                 <p>Job Category</p>
                                 <select formControlName="jobCategory" [(ngModel)]="categoryIndex">
                                     <option *ngFor="let cat of jobCategories; let i=index "[value]="i">
                                         {{cat.categoryName}} {{cat.categoryCode}} {{cat.description}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <p>Job Position</p>
+                                <select formControlName="jobPosition" [(ngModel)]="positionIndex">
+                                    <option *ngFor="let pos of jobPositions; let i=index "[value]="i">
+                                        {{pos.positionName}}
                                     </option>
                                 </select>
                             </div>
@@ -145,18 +145,18 @@
             <div>
                 <form [formGroup]="filtersForm">
                     <div>
-                        <p>Job Position</p>
-                        <select formControlName="jobPosition" [(ngModel)]="positionIndex">
-                            <option *ngFor="let pos of jobPositions; let i=index "[value]="i">
-                                {{pos.positionName}}
-                            </option>
-                        </select>
-                    </div>
-                    <div>
                         <p>Job Category</p>
                         <select formControlName="jobCategory" [(ngModel)]="categoryIndex">
                             <option *ngFor="let cat of jobCategories; let i=index "[value]="i">
                                 {{cat.categoryName}} {{cat.categoryCode}} {{cat.description}}
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Job Position</p>
+                        <select formControlName="jobPosition" [(ngModel)]="positionIndex">
+                            <option *ngFor="let pos of jobPositions; let i=index "[value]="i">
+                                {{pos.positionName}}
                             </option>
                         </select>
                     </div>

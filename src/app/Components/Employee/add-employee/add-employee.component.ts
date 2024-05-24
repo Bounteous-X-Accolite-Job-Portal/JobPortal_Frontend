@@ -31,7 +31,7 @@ export class AddEmployeeComponent implements OnInit {
   submitted = false;
 
   constructor(
-    private addEmployeeService: EmployeeService
+    private addEmployeeService: EmployeeService,
   ) {}
 
   ngOnInit() {
@@ -73,6 +73,7 @@ export class AddEmployeeComponent implements OnInit {
 
           if (data.status == 200) {
             this.loading = false;
+            
             this.toaster.success("Successfully added employee.");
             console.log('success adding employee');
             

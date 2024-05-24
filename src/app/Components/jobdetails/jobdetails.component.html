@@ -1,39 +1,3 @@
-<!-- <div class="gradient-custom-2 d-flex align-items-center flex-column" style="height: 100vh;">
-    <div>
-        <div class="card border-primary my-5" style="width: 65vw;">
-            <div class="card-header bg-transparent border-primary fw-bold pt-3"><h3>Job Title : {{job?.jobTitle}}</h3></div>
-            <div class="d-flex flex-row  justify-content-around" style="color: #0d016b;">
-                <div class="">
-                    <div class="card-body">
-                        <h5 class="card-title">Job Code : {{job?.jobCode}}</h5>
-                        <h5 class="card-title">Post Date : {{job?.postDate}}</h5>
-                        <h5 class="card-title">Description : {{job?.jobDescription}}</h5>
-                        <h5 class="card-title">Last Date : {{job?.lastDate}}</h5>
-                        <h5 class="card-title">Experience : {{job?.experience}} Years</h5>
-                        <h5 class="card-title">Location : {{location?.address}} , {{location?.city}} , {{location?.state}} , {{location?.country}}</h5>
-                        <h5 class="card-title">Required Degree : {{degree?.degreeName}}</h5>
-                        <h5 class="card-title">Job Type : {{jobtype?.typeName}}</h5>
-                      </div>
-                </div>
-                <div class="">
-                    <div class="card-body">
-                        <h5 class="card-title" style="text-decoration: underline;">Job Position</h5>
-                        <h5 class="card-text">Job Position Name : {{jobPosition?.positionName | uppercase}}</h5>
-                        <h5 class="card-text">Job Position Code : {{jobPosition?.positionCode}}</h5>
-                        <h5 class="card-text">Job Position Description : {{jobPosition?.description}}</h5>
-                        <h5 class="card-title" style="text-decoration: underline;">Job Category</h5>
-                        <h5 class="card-title">Job Category Name : {{jobcategory?.categoryName | uppercase}}</h5>
-                        <h5 class="card-title">Job Category Code : {{jobcategory?.categoryCode}}</h5>
-                      </div>
-                </div>
-            </div>
-            <div class="card-footer bg-transparent border-primary py-3">
-            <button [disabled]="canApply" (click)="applynow(job?.jobId)" class="btn btn-primary-1">{{this.stringForButton}}</button>
-            </div>
-          </div>
-    </div>
-</div> -->
-
 <div class="cont">
     <div class="card">
         <div class="card-header bg-transparent fw-bold pt-3"><h3>Job Title : {{job?.jobTitle}}</h3></div>
@@ -52,7 +16,8 @@
             </div>
             <div class="d-flex card-footer bg-transparent py-3 justify-content-end">
                 <div>
-                    <button [disabled]="canApply" (click)="applynow(job?.jobId)" class="btn btn-primary-1">{{this.stringForButton}}</button>
+                    <button *ngIf="!isEmployee" (click)="applynow(job?.jobId)" class="btn btn-primary-1">{{this.stringForButton}}</button>
+                    <button *ngIf="isEmployee" (click)="Refer(job?.jobId)" class="btn btn-primary-1">REFER</button>
                 </div>
             </div>
         </div>
