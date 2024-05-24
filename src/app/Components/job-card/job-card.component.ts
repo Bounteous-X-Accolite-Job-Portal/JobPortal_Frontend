@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Job } from '../../Models/JobResponse/Job';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { DegreeResponse } from '../../Models/DegreeResponse/DegreeRespose';
 import { JobCategoryResponse } from '../../Models/JobCategoryResponse/JobCategoryResponse';
 import { JobTypeResponse } from '../../Models/JobTypeResponse/JobTypeResponse';
@@ -22,13 +22,14 @@ import { AuthService } from '../../Services/auth.service';
 @Component({
   selector: 'app-job-card',
   standalone: true,
-  imports: [CommonModule , RouterLink , RouterOutlet],
+  imports: [CommonModule , RouterLink , RouterOutlet ,RouterModule],
   templateUrl: './job-card.component.html',
   styleUrl: './job-card.component.css'
 })
 export class JobCardComponent {
   @Input() job !: Job;
   @Input() closedJob !: ClosedJob;
+  @Input() canEdit !: boolean;
 
   isEmployee : boolean = false;
   hasPrivilege : boolean = false;

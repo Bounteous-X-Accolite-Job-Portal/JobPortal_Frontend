@@ -1,4 +1,7 @@
+import { Guid } from "guid-typescript";
+
 export interface Designation{
     designationId: number,
-    designationName: string
+    designationName: string,
+    empId: Guid
 }

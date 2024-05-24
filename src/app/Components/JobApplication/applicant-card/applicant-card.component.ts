@@ -15,6 +15,8 @@ import { InterviewService } from '../../../Services/InterviewService/interview.s
 import { ApplicantInterviewResponse } from '../../../Models/InterviewResponse/ApplicantInterviewResponse';
 import { ApplicantInterview } from '../../../Models/InterviewResponse/ApplicantInterview';
 import { Interview } from '../../../Models/InterviewResponse/Interview';
+import { StatusModel } from '../../../Models/StatusResponse/StatusModel';
+import { AllStatusResponse } from '../../../Models/StatusResponse/AllStatusResponse';
 
 @Component({
   selector: 'app-applicant-card',
@@ -32,7 +34,7 @@ export class ApplicantCardComponent implements OnInit {
   isSubmitted = false;
   statusId : number = 0;
 
-  allStatus : Status[] = [];
+  allStatus : StatusModel[] = [];
   allInterviews : ApplicantInterview[] = [];
 
   constructor(
@@ -55,8 +57,7 @@ export class ApplicantCardComponent implements OnInit {
     this.spinnerService.showSpinner();
     
     this.statusService.getAllStatus().subscribe(
-      (res: StatusResponse) => {
-        // console.log(res);
+      (res) => {
 
         this.allStatus = res.allStatus;
         
@@ -70,7 +71,6 @@ export class ApplicantCardComponent implements OnInit {
     )
   }
 
-  // Getter method to access formcontrols
   get status() {
     return this.form.get('status');
   }

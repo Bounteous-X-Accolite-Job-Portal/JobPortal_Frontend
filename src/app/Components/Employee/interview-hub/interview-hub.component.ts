@@ -13,7 +13,7 @@ import { SpinnerService } from '../../../Services/spinner.service';
 import { ApplicationServiceService } from '../../../Services/ApplicationService/application-service.service';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
 import { interviewCardData } from '../../../Models/InterviewResponse/InterviewCardData';
-import { Interview } from '../../../Services/Interview';
+import { Interview } from '../../../Models/InstitutionResponse/Interview';
 import { ResumeServiceService } from '../../../Services/ResumeService/resume-service.service';
 import { ClosedApplicationService } from '../../../Services/ClosedApplication/closed-application.service';
 import { forkJoin } from 'rxjs';

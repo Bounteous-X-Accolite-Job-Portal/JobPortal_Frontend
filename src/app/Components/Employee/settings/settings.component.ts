@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../../environments/environment.development';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { JobService } from '../../../Services/Job/job.service';
 import { JobCategory } from '../../../Models/JobCategoryResponse/JobCategory';
@@ -25,6 +24,7 @@ export class SettingsComponent implements OnInit {
   addDegreeForm!: FormGroup;
   addInstitutionForm!: FormGroup;
   addCompanyForm!: FormGroup;
+  addStatusForm!:FormGroup;
   categoryIndex = 0;
 
   jobCategories: JobCategory[] = [];
@@ -61,6 +61,10 @@ export class SettingsComponent implements OnInit {
 
     this.addTypeForm = new FormGroup({
       typeName: new FormControl('',Validators.required),
+    });
+
+    this.addStatusForm = new FormGroup({
+      statusName: new FormControl('',Validators.required),
     });
 
     this.addDegreeForm = new FormGroup({
@@ -126,6 +130,7 @@ export class SettingsComponent implements OnInit {
       (response) => {
         console.log('success : ', response);
         this.addLocationForm.reset();
+        this.toastr.success('Location added successfully!');
       },
       (error) => {
         console.error('Error adding locations:', error);
@@ -154,7 +159,6 @@ export class SettingsComponent implements OnInit {
         console.log('success : ', response);
         this.addDegreeForm.reset();
         this.toastr.success('Degree added successfully!');
-        document.getElementById('closeDegreeModal')?.click();
       },
       (error) => {
         console.error('Error adding degree:', error);
@@ -192,5 +196,21 @@ export class SettingsComponent implements OnInit {
           this.toastr.error('Error adding Company!');
         }
       );
+  }
+
+  addStatus(){
+    this.crudJobService.addJobApplicationStatus(this.addStatusForm.value)
+    .subscribe(
+      (res) =>{
+        console.log(res);
+        this.addStatusForm.reset();
+        this.toastr.success('Status Added successfully!');
+      },
+      (error)=>{
+        console.log(error);
+        this.toastr.error("Error Adding Status !");
+      }
+
+    )
   }
 }

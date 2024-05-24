@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { RouterModule, RouterOutlet, Router } from '@angular/router';
+import { Component, NgModule } from '@angular/core';
+import { NgModel } from '@angular/forms';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from './Services/auth.service';
 import { AppModule } from './app.module';
 import { SpinnerService } from './Services/spinner.service';
@@ -14,7 +16,9 @@ import { UserStoreService } from './Services/user-store.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit {
+
+
+export class AppComponent {
   title = 'Job-Portal';
 
   public isLoggedIn : boolean = false;

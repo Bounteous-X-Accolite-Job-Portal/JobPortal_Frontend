@@ -5,6 +5,8 @@
       <div class="so_top_icon">
         <img src="../../../assets/Logos/accolite_logo.jpg" alt="job-logo">
       </div>
+        <a *ngIf="canEdit" class='btn btn-primary text-style-add' [routerLink]="['/edit-job',job.jobId]"><i class="fas fa-edit"></i>
+        </a>
       <div class="solu_title">
         <h3>{{job !== undefined ? job.jobTitle : closedJob.jobTitle}}</h3>
       </div>

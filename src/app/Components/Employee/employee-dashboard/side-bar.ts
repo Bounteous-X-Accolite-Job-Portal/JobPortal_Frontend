@@ -28,11 +28,18 @@ export const sideBarData = [
     requiredSpecialPrivilege: false,
   },
   {
-      routeLink: 'settings',
-      icon: 'fal fa-cog',
-      label: 'Settings',
-      requiredPrivilege: true,
-      requiredSpecialPrivilege: true,
+    routeLink: 'settings',
+    icon: 'fal fa-cog',
+    label: 'Settings',
+    requiredPrivilege: true,
+    requiredSpecialPrivilege: false,
+  },
+  {
+    routeLink: 'referral',
+    icon: 'fal fa-solid fa-handshake',
+    label: 'Referal',
+    requiredPrivilege: false,
+    requiredSpecialPrivilege: false,
   },
   {
     routeLink: 'your-jobs',
@@ -42,11 +49,10 @@ export const sideBarData = [
     requiredSpecialPrivilege: false,
   },
   {
-      routeLink: 'disable-employee-privilege',
-      icon: 'fal fa-cog',
-      label: 'Disable Employee Account',
-      // requiredPrivilege: true,
-      // requiredSpecialPrivilege: false,
+    routeLink: 'designation',
+    icon: 'fa-solid fa-ranking-star',
+    label: 'Designation',
+    requiredPrivilege: true,
+    requiredSpecialPrivilege: false,
   },
-
 ];

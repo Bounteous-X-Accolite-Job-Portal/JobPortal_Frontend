@@ -6,6 +6,8 @@ import { UserStoreService } from '../../../Services/user-store.service';
 import { JobCardComponent } from '../../job-card/job-card.component';
 import { Job } from '../../../Models/JobResponse/Job';
 import { CommonModule } from '@angular/common';
+import { JobApplication } from '../../../Models/JobApplicationResponse/JobApplication';
+import { Status } from '../../../Models/Status';
 
 @Component({
   selector: 'app-applied-jobs',
@@ -17,6 +19,8 @@ import { CommonModule } from '@angular/common';
 export class AppliedJobsComponent {
   userId: string = "";
   candidateJobs: Job[] = [];
+  candidateApplications: JobApplication[] = [];
+  applicationStatus: Status[] = [];
 
   constructor(
     private candidService : CandidateService,
@@ -43,7 +47,12 @@ export class AppliedJobsComponent {
   {
     this.candidService.getAllJobApplicationByCandidate(id).subscribe(
     (res) => {
-      console.log(res);
+      this.candidateApplications = res.allJobApplications;
+      console.log("fetched applications : ",this.candidateApplications);
+      for(let i = 0;i<this.candidateApplications.length;i++)
+          this.getStatusofApplication(this.candidateApplications[i].statusId);
+
+      console.log("status : ",this.applicationStatus);
     },
     (error) => {
       console.log(error);
@@ -51,6 +60,17 @@ export class AppliedJobsComponent {
     )
   }
   
+  private getStatusofApplication(id:number):void{
+    this.candidService.getStatusByStatusId(id).subscribe(
+      (res)=>{
+        this.applicationStatus.push(res.statusViewModel);
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
+  }
+
   private loadsAppliedJobs(id:string)
   {
     this.candidService.getAllAppliedJobsByCandidate(id).subscribe(

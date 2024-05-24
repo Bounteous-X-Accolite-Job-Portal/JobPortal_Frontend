@@ -1,35 +1,48 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { LoginResponse } from '../../Models/loginResponse';
 import { UserStoreService } from '../../Services/user-store.service';
 import { SpinnerService } from '../../Services/spinner.service';
+import { ForgetPasswordService } from '../../forget-password.service';
+import { error } from 'console';
+import { resertPassword } from '../../Models/resetPasswordmodel';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  message: string = '';
-
+  message: string = "";
+  public resetPasswordEmail!: string;
+  public isValidEmail!: boolean;
+  public isRequired: boolean = true;
+  value: any;
+  checkBoxValue: any = false;
+  toast: any;
+  checkCheckBoxvalue(): boolean {
+    if (this.checkBoxValue == true) {
+      this.checkBoxValue = false;
+    } else {
+      this.checkBoxValue = true;
+    }
+    return this.checkBoxValue;
+  }
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
     private userStore: UserStoreService,
     private spinnerService: SpinnerService,
-  ) {}
+    private forgetService: ForgetPasswordService,
+
+  ) { }
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -37,9 +50,17 @@ export class LoginComponent {
     rememberMe: [true],
   });
 
+
+
+
+
+
   get f() {
     return this.loginForm.controls;
   }
+
+
+
 
   onSubmit() {
     console.log('show spinner');
@@ -93,4 +114,48 @@ export class LoginComponent {
       );
     }
   }
+    
+
+  checkValidEmail(event: string) {
+    this.value = event;
+    if (this.value) {
+      this.isRequired = false;
+    }
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
+    this.isValidEmail = pattern.test(this.value);
+    console.log(this.isValidEmail);
+    return this.isValidEmail;
+  }
+
+  confirmToSend() {
+    if (this.checkValidEmail(this.value)) {
+      console.log(this.value);
+      this.forgetService.sendForgetPasswordLink(this.value).subscribe({
+        next: (res: any) => {
+
+          this.resetPasswordEmail = " ";
+          const buttonRef = document.getElementById("closeBtn");
+          buttonRef?.click();
+        },
+
+        error: (err: any) => {
+
+        },
+      });
+    }
+  }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

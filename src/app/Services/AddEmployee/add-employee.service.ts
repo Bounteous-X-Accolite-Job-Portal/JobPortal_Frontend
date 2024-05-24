@@ -13,9 +13,7 @@ export class AddEmployeeService {
 
   addEmployee(empData: any): Observable<any> {
     return this.http.post<any>(
-      environment.baseURL + 'EmployeeAccount/register',
-      empData
-    );
+      environment.baseURL + 'EmployeeAccount/register',empData);
   }
 
   getAllEmployee(): Observable<AllEmployee> {

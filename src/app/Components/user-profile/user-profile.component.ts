@@ -3,7 +3,8 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { navbarData } from './nav-data';
 import { CommonModule } from '@angular/common';
 import { UserStoreService } from '../../Services/user-store.service';
-import { AuthService } from '../../Services/auth.service';
+import { AuthService } from '../../Services/auth.service';import { ChangePasswordService } from '../../change-password.service';
+ 
 
 @Component({
   selector: 'app-user-profile',
@@ -15,6 +16,12 @@ import { AuthService } from '../../Services/auth.service';
 export class UserProfileComponent implements OnInit {
     collapsed = false;
     navData = navbarData;
+    public resetPasswordEmail!:string;
+    public isValidEmail!:boolean;
+    public isRequired :boolean = true;
+
+   
+  value: any;
     id:string = "";
     public name : string = "User";
 
