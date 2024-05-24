@@ -1,7 +1,11 @@
 <div class="container mw-80 ">
   <div class="card bg-glass p-5 mt-3">
-
-      <h1>Schedule Interview</h1>
+      <div>
+        <div style="float: right; cursor: pointer;">
+          <span (click)="backClicked()"><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</span>
+        </div>
+        <h1 class="mb-3">Schedule Interview</h1>
+      </div>
       <form [formGroup]="addInterviewForm" (ngSubmit)="onSubmit()">
         <div class="mb-4 col">
           <label class="form-label">Interview Date</label>
@@ -20,7 +24,7 @@
             class="form-control"
             id="search-text"
             aria-describedby="search-text"
-            (input)="fetchEmployee(searchText)"
+            (input)="filterItems(searchText)"
             placeholder="Enter name to search Interviewer"
             autofocus
           />
@@ -28,19 +32,19 @@
             <li
               class="list-group-item"
               *ngFor="let e of filteredEmployees"
-              (click)="getEmployeeId(e.employeeId)"
+              (click)="getEmployeeId(e)"
             >
               {{ e.firstName }} {{ e.lastName }} ({{ e.empId }}) 
             </li>
           </ul>
         </div>
         <div class="mb-4 col">
-          <label class="form-label">Link</label>
-          <input type="text" formControlName="link" class="form-control" />
+          <label class="form-label">Meeting Link</label>
+          <input type="text" formControlName="link" class="form-control" placeholder="Meeting Link for interview" />
         </div>
-        <div class="mb-3">
+        <div class="mb-3" style="float: right;">
           <button class="btn btn-primary-1">
-            Save
+            Schedule Interview
           </button>
         </div>
       </form>

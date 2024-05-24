@@ -6,6 +6,7 @@
         <label class="form-label">Job Code</label>
         <input
           type="text"
+          placeholder="Enter Job Code"
           formControlName="jobCode"
           class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f['jobCode'].errors }"
@@ -20,6 +21,7 @@
         <label class="form-label">Job Title</label>
         <input
           type="text"
+          placeholder="Enter Job Title"
           formControlName="jobTitle"
           class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f['jobTitle'].errors }"
@@ -35,6 +37,7 @@
         <label class="form-label">Job Description</label>
         <input
           type="text"
+          placeholder="Enter Job Description"
           formControlName="jobDescription"
           class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f['jobDescription'].errors }"
@@ -76,6 +79,7 @@
         <label class="form-label">Experience</label>
         <input
           type="text"
+          placeholder="Enter experience required for the Job"
           formControlName="experience"
           class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f['experience'].errors }"
@@ -117,12 +121,12 @@
       </div>
 
       <div class="mb-3">
-        <button [disabled]="submitting" class="btn btn-primary-1">
+        <button [disabled]="submitting" class="btn btn-primary" style="float: right;">
           <span
             *ngIf="submitting"
             class="spinner-border spinner-border-sm me-1"
           ></span>
-          Save
+          Add Job
         </button>
       </div>
     </form>

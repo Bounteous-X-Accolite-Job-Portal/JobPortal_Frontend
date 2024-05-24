@@ -21,7 +21,7 @@ import { childAuthGuard } from './Guards/child-auth.guard';
 import { loggedInGuard } from './Guards/logged-in.guard';
 import { EmployeeDashboardComponent } from './Components/Employee/employee-dashboard/employee-dashboard.component';
 import { InterviewHubComponent } from './Components/Employee/interview-hub/interview-hub.component';
-import { InterviewComponent } from './Components/Employee/interview/interview.component';
+import { InterviewComponent } from './Components/JobApplication/interview/interview.component';
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
 import { ReferralServiceService } from './referral-service.service';
 import { ReferralComponent } from './Components/Employee/get-referralOfEmp/referral.component';
@@ -51,6 +51,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { ForgetPasswordComponentComponent } from './forget-password-component/forget-password-component.component';
 import { DesignationComponent } from './Components/Employee/designation/designation.component';
 import { SettingsComponent } from './Components/Employee/settings/settings.component';
+import { ProfileComponent } from './Components/Employee/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -91,6 +92,10 @@ export const routes: Routes = [
     component: JobApplicantComponent,
   },
   {
+    path: 'application/:applicationId/scheduleInterview',
+    component: InterviewComponent,
+  },
+  {
     path: 'closedJobs/:closedJobId/applicants',
     component: JobApplicantComponent,
   },
@@ -124,22 +129,18 @@ export const routes: Routes = [
     canActivate: [authGuard, employeeGuardGuard],
     canActivateChild: [childAuthGuard, childEmployeeGuardGuard],
     children: [
+      { path: 'profile', component: ProfileComponent },
       {
         path: 'add-job',
         component: AddJobComponent,
         canActivate: [hasPrivilegeGuard],
       },
-      { path: 'interview', component: InterviewComponent },
       { path: 'interview-hub', component: InterviewHubComponent },
-      
       {path:'referral',component:ReferralComponent},
       {path:'addReferral',component:AddReferralComponent},
-      
-      
       {
         path: 'disable-employee-privilege',
         component: DisablePrivilegeComponent,
-        
       },
       { path: 'add-employee', component: AddEmployeeComponent },
       { path: 'settings', component: SettingsComponent },
@@ -171,6 +172,8 @@ export const routes: Routes = [
       },
       { path: 'your-jobs', component: YourJobsComponent },
       { path: 'designation', component: DesignationComponent },
+      { path: '**', component: ProfileComponent }
+
     ],
   },
   {

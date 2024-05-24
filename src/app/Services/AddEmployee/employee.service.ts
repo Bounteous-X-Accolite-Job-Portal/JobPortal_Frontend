@@ -5,6 +5,9 @@ import { environment } from '../../../environments/environment.development';
 import { Designation } from '../../Models/DesignationResponse/Designation';
 import { AllEmployee } from '../../Models/Backend/Employee/AllEmployee';
 import { DesignationResponse } from '../../Models/DesignationResponse/DesignationResponse';
+import { EmployeeResponse } from '../../Models/Backend/Employee/EmployeeResponse';
+import { EmployeeProfileData } from '../../Models/Backend/Employee/EmployeeProfileData';
+import { AddEmployee } from '../../Models/Backend/Employee/AddEmployee';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +15,7 @@ import { DesignationResponse } from '../../Models/DesignationResponse/Designatio
 export class EmployeeService {
   constructor(private http: HttpClient) {}
 
-  addEmployee(empData: any): Observable<any> {
+  addEmployee(empData: AddEmployee): Observable<any> {
     return this.http.post<any>(
       environment.baseURL + 'EmployeeAccount/register',
       empData
@@ -22,6 +25,18 @@ export class EmployeeService {
   getAllEmployee(): Observable<AllEmployee> {
     return this.http.get<AllEmployee>(
       environment.baseURL + 'EmployeeAccount/getAllEmployees'
+    );
+  }
+
+  getEmployeeById(employeeId : string): Observable<EmployeeResponse> {
+    return this.http.get<EmployeeResponse>(
+      environment.baseURL + 'EmployeeAccount/employee/' + employeeId
+    );
+  }
+
+  getEmployeeProfileData(employeeId : string): Observable<EmployeeProfileData> {
+    return this.http.get<EmployeeProfileData>(
+      environment.baseURL + 'EmployeeAccount/profileData/' + employeeId
     );
   }
 

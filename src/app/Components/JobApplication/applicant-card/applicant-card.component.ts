@@ -15,11 +15,12 @@ import { InterviewService } from '../../../Services/InterviewService/interview.s
 import { ApplicantInterviewResponse } from '../../../Models/InterviewResponse/ApplicantInterviewResponse';
 import { ApplicantInterview } from '../../../Models/InterviewResponse/ApplicantInterview';
 import { Interview } from '../../../Models/InterviewResponse/Interview';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-applicant-card',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ToastrModule],
+  imports: [CommonModule, ReactiveFormsModule, ToastrModule, RouterModule],
   templateUrl: './applicant-card.component.html',
   styleUrl: './applicant-card.component.css'
 })

@@ -14,16 +14,9 @@ export const sideBarData = [
     requiredSpecialPrivilege: false,
   },
   {
-    routeLink: 'interview/:applicationId',
-    icon: 'fal fa-question',
-    label: 'Inteview Hub',
-    requiredPrivilege: false,
-    requiredSpecialPrivilege: false,
-  },
-  {
     routeLink: 'interview-hub',
     icon: 'fa-solid fa-users',
-    label: 'Interview Feedback',
+    label: 'Interview Hub',
     requiredPrivilege: false,
     requiredSpecialPrivilege: false,
   },
