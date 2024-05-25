@@ -148,6 +148,7 @@ export class AddJobComponent implements OnInit {
         (res) => {
           console.log('success ', res);
           this.toastr.success("Job Posted Successfully !!");
+          this.jobForm.reset();
         },
         (error) => {
           console.error('Error submission:', error);

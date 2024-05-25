@@ -382,35 +382,5 @@ export class YourJobsComponent implements OnInit{
         this.categoryjobPositions.push(pos);
     });
   }
-  // isListOfJobsVisible=true;
-  fetchSearchedJobs(searchText: string) {
-    if (!searchText) return;
 
-    this.jobService.getAllJobs()
-      .subscribe(
-        (data: AllJob) => {
-          console.log(data);
-          this.searchedJobs = data.allJobs;
-          this.filterItems(searchText);
-        },
-        (error) => {
-          console.error('Error fetching jobs:', error);
-        }
-      );
-  }
-
-  filterItems(searchText: string) {
-    if (!searchText.trim()) {
-      this.searchedJobs = this.jobs.slice();
-      return;
-    }
-
-    this.searchedJobs = this.jobs.filter((item) => {
-      const firstnameMatch = item.jobTitle.toLowerCase().includes(searchText);
-      // const lastnameMatch = item..toLowerCase().includes(searchText);
-      // const emailMatch = item.email.toLowerCase().includes(searchText);
-      // const idMatch = item.empId.toString().includes(searchText);
-      return firstnameMatch;
-    });
-  }
 }

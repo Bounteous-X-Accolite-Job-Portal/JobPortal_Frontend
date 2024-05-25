@@ -102,6 +102,7 @@ export class SettingsComponent implements OnInit {
         console.log('success : ', response);
         this.toastr.success('Categories added successfully!');
         this.addCategoryForm.reset();
+        document.getElementById('categoryPopUpCloseBtn')?.click();
       },
       (error) => {
         console.error('Error adding categories:', error);
@@ -117,6 +118,7 @@ export class SettingsComponent implements OnInit {
         console.log('success : ', response);
         this.addPositionForm.reset();
         this.toastr.success('Position added successfully!');
+        document.getElementById('positionPopUpCloseBtn')?.click();
       },
       (error) => {
         console.error('Error adding positions:', error);
@@ -131,6 +133,7 @@ export class SettingsComponent implements OnInit {
         console.log('success : ', response);
         this.addLocationForm.reset();
         this.toastr.success('Location added successfully!');
+        document.getElementById('locationPopUpCloseBtn')?.click();
       },
       (error) => {
         console.error('Error adding locations:', error);
@@ -145,6 +148,7 @@ export class SettingsComponent implements OnInit {
         console.log('success : ', response);
         this.addTypeForm.reset();
         this.toastr.success('Job type added successfully!');
+        document.getElementById('jobTypePopUpCloseBtn')?.click();
       },
       (error) => {
         console.error('Error adding jobtype:', error);
@@ -159,6 +163,7 @@ export class SettingsComponent implements OnInit {
         console.log('success : ', response);
         this.addDegreeForm.reset();
         this.toastr.success('Degree added successfully!');
+        document.getElementById('degreePopUpCloseBtn')?.click();
       },
       (error) => {
         console.error('Error adding degree:', error);
@@ -174,6 +179,7 @@ export class SettingsComponent implements OnInit {
           console.log('success : ', response);
           this.addInstitutionForm.reset();
           this.toastr.success('Institution added successfully!');
+          document.getElementById('institutionPopUpCloseBtn')?.click();
         },
         (error) => {
           console.error('Error adding institutions', error);
@@ -190,6 +196,7 @@ export class SettingsComponent implements OnInit {
           console.log('success : ', response);
           this.addCompanyForm.reset();
           this.toastr.success('Company added successfully!');
+          document.getElementById('companyPopUpCloseBtn')?.click();
         },
         (error) => {
           console.error('Error adding Companys', error);
@@ -205,6 +212,7 @@ export class SettingsComponent implements OnInit {
         console.log(res);
         this.addStatusForm.reset();
         this.toastr.success('Status Added successfully!');
+        document.getElementById('statusPopUpCloseBtn')?.click();
       },
       (error)=>{
         console.log(error);
