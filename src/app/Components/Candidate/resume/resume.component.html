@@ -1,67 +1,116 @@
-<div class="h-100 gradient-custom-2 d-flex flex-column align-items-center">
-    <div class="d-flex justify-content-center w-70 pt-5 flex-column align-items-center">
-        <button *ngIf="resumeExists" type="button" class="btn btn-outline-primary px-5" (click)="add()" aria-expanded="false">
-            Update resume
-        </button>
-        <!-- Button trigger modal -->
-        <button *ngIf="!resumeExists" type="button" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="add()" aria-expanded="false">
-            Click to add resume
-        </button>
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
+<!-- Resume exists -->
+ <div *ngIf="resumeExists==true" class="cont">
+    <div class="col-lg-8">
+      <div class="feature-item rounded text-center p-4">
+          <i class="fa fa-3x fa-pen-to-square mb-4 feature-icon"></i>
+          <h5 class="mb-3">Update resume link from below</h5>
+          <button type="button" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="false">
+            Update link
+          </button>
+          <p class="my-5 fw-bold">View your resume <a [href]="urlSafe" target="_blank"><i class="fa fa-arrow-up-right-from-square mx-2 feature-icon"></i></a> </p>
+      </div>
+    </div>
+
+  <!-- <div class="d-flex justify-content-center mt-5" style="background-color: aliceblue; width: 60%; height: 75%;">
+    <embed
+      [src]="urlSafe"
+      [type]=""
+      width="100%"
+      height="100%"
+    />
+    <iframe [src]="urlSafe" style="width:100%; height:100%;" frameborder="0" *ngIf="urlSafe"></iframe>
+  </div> -->
+  <!-- <a [href]="urlSafe" target="_blank">
+    <button type="button" class="px-5" aria-expanded="false">
+      View Resume
+    </button>
+  </a> -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between">
+          <h5 class="modal-title" id="exampleModalLabel">Update resume</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header d-flex justify-content-between">
-              <h5 class="modal-title" id="exampleModalLabel">Update resume</h5>
-              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <label for="resumeLink">Enter the new url</label>  
-              <input type="url" name="resumeLink" id="resumeLink">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary-1">Save changes</button>
-            </div>
-          </div>
+        <div class="modal-body">
+          <form [formGroup]="resumeForm" style="display: flex; flex-direction: column; align-items: center;">
+            <label for="resumeUrl">Enter the new url</label> 
+            <br> 
+            <input type="url" name="resumeUrl" id="resumeUrl" formControlName="resumeUrl" style="width: 80%;">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary-1" data-bs-dismiss="modal"  (click)="update()" >Save changes</button>
         </div>
       </div>
-        <div *ngIf="!resumeExists" class="text-lg text-danger mt-3 text-bold fw-bold">
-            ** A candidate can have only 1 resume at a time **
-        </div>
     </div>
-    <div class="d-flex pt-3 flex-wrap justify-content-center">
-        <div class="card my-3 mx-3" style="width: 18rem;" *ngFor="let tmp of resumeArr" >
-            <div class="card-body">
-              <h5 class="card-title">{{tmp.resumeUrl}}</h5>
-              <hr>
-              <p class="card-text">{{tmp.resumeId}}</p>
-                <a class='btn btn-primary-1 text-style-add' [routerLink]="['update-resume']"><i class="fas fa-edit"></i></a>
-                <button class='btn btn-outline-primary text-style-del' (click)="onDel()"><i class="fa fa-trash" aria-hidden="true"></i></button>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="resumeExists" class="d-flex h-100 w-100 justify-content-center mt-5">
-        <div style="width: 60%; height: 90%;">
-            <embed
-            src="../../../../assets/files/payslip_april.pdf"
-            type="application/pdf"
-            width="100%"
-            height="100%"
-            />
-        </div>
-    </div>
-    <div *ngIf="!resumeExists" class="d-flex h-100 w-100 justify-content-center mt-5">
-        <div style="width: 60%; height: 90%;">
-            <h2 class="text-center">No resume present!!</h2>
-            <h2 class="text-center"> Please add the link by clicking the button above</h2>
-        </div>
-    </div>
+  </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Resume does not exist -->
+ <div *ngIf="resumeExists==false" class="cont">
+  <div class="col-lg-8">
+    <div class="feature-item rounded text-center p-4">
+        <i class="fa fa-3x fa-plus mb-4 feature-icon"></i>
+        <h5 class="mb-3">Add link here</h5>
+        <button type="button" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="false">
+          Click to add resume
+        </button>
+        <p class="m-3 fw-bold">Please add the link to your resume using the above button</p>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between">
+          <h5 class="modal-title" id="exampleModalLabel">Add resume</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="resumeForm">
+            <label for="resumeUrl">Enter the url for the resume</label>  
+            <input type="url" name="resumeUrl" id="resumeUrl" formControlName="resumeUrl">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary-1"  (click)="add()" data-bs-dismiss="modal">Add the link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

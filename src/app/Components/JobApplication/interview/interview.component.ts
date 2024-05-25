@@ -1,21 +1,19 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormsModule,
   FormGroup,
   FormControl,
-  Validators,
 } from '@angular/forms';
 import { environment } from '../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Employee } from '../../../Models/Backend/Employee/Employee';
 import { AllEmployee } from '../../../Models/Backend/Employee/AllEmployee';
 import { FilterPipe } from '../../../Models/filter.pipe';
-import { Interview } from '../../../Models/InterviewResponse/Interview';
 import { ActivatedRoute } from '@angular/router';
-import { interviewResponse } from '../../../Models/InterviewResponse/InterviewResponse';
-import { timeStamp } from 'console';
+import { SpinnerService } from '../../../Services/spinner.service';
+import { EmployeeService } from '../../../Services/AddEmployee/employee.service';
 
 @Component({
   selector: 'app-interview',
@@ -27,12 +25,19 @@ import { timeStamp } from 'console';
 export class InterviewComponent implements OnInit {
   addInterviewForm!: FormGroup;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  constructor(
+    private http: HttpClient, 
+    private route: ActivatedRoute,
+    private spinnerService: SpinnerService,
+    private employeeService: EmployeeService,
+    private _location: Location
+  ) {}
+
   searchText = '';
+  employeeIdOfInterviewer = "";
   isListVisible = false;
-  interview: Interview[] = [];
   employee: Employee[] = [];
-  filteredEmployees: any[] = [];
+  filteredEmployees: Employee[] = [];
 
   ngOnInit() {
     this.addInterviewForm = new FormGroup({
@@ -41,28 +46,39 @@ export class InterviewComponent implements OnInit {
       interviewerId: new FormControl(''),
       link: new FormControl(''),
     });
+
+    this.fetchAllEmployees();
   }
 
-  fetchEmployee(searchText: string) {
-    if (!searchText) return;
-    this.isListVisible = true;
-    this.http
-      .get<AllEmployee>(environment.baseURL + 'EmployeeAccount/getAllEmployees')
-      .subscribe(
-        (data: AllEmployee) => {
-          console.log(data);
-          this.employee = data.employees;
-          this.filterItems(searchText);
-        },
-        (error) => {
-          console.error('Error fetching employees:', error);
-        }
-      );
+  fetchAllEmployees(){
+    this.spinnerService.showSpinner();
+
+    this.employeeService.getAllEmployee().subscribe(
+      (result: AllEmployee) => {
+        console.log("all employees", result);
+
+        this.employee = result.employees;
+
+        this.spinnerService.hideSpinner();
+      },
+      (error) => {
+        console.log(error);
+        this.spinnerService.hideSpinner();
+      }
+    )
+
   }
 
   filterItems(searchText: string) {
+    if (!searchText) return;
+
+    this.spinnerService.showSpinner();
+
+    this.isListVisible = true;
+
     if (!searchText.trim()) {
       this.filteredEmployees = this.employee.slice();
+      this.spinnerService.hideSpinner();
       return;
     }
 
@@ -73,20 +89,28 @@ export class InterviewComponent implements OnInit {
       const idMatch = item.empId.toString().includes(searchText);
       return firstnameMatch || lastnameMatch || emailMatch || idMatch;
     });
+
+    this.spinnerService.hideSpinner();
   }
 
-  getEmployeeId(employeeId: string) {
-    this.searchText = employeeId;
+  getEmployeeId(employee : Employee) {
+    this.spinnerService.showSpinner();
+
+    this.searchText = employee.firstName + " " + employee.lastName + " (" + employee.empId + ")";
+    this.employeeIdOfInterviewer = employee.employeeId;
     this.isListVisible = false;
+
+    this.spinnerService.hideSpinner();
   }
 
   onSubmit() {
+    this.spinnerService.showSpinner();
 
     const data = {
       applicationId: String(this.route.snapshot.params['applicationId']),
       interviewDate: this.addInterviewForm.value.interviewDate,
       interviewTime: this.addInterviewForm.value.interviewTime + ':00',
-      interviewerId: this.searchText,
+      interviewerId: this.employeeIdOfInterviewer,
       link: this.addInterviewForm.value.link,
     };
 
@@ -99,13 +123,21 @@ export class InterviewComponent implements OnInit {
           (response) => {
             console.log('success : ', response);
             this.addInterviewForm.reset();
+
+            this.spinnerService.hideSpinner();
           },
           (error) => {
             console.error('Error sending POST request:', error);
+            this.spinnerService.hideSpinner();
           }
         );
     } else {
       this.addInterviewForm.markAllAsTouched();
+      this.spinnerService.hideSpinner();
     }
+  }
+
+  backClicked() {
+    this._location.back();
   }
 }

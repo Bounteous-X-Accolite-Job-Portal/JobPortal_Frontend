@@ -2,13 +2,12 @@
   <div class="solution_cards_box">
     <div class="solution_card">
       <div class="hover_color_bubble"></div>
-      <div class="so_top_icon">
-        <img src="../../../assets/Logos/accolite_logo.jpg" alt="job-logo">
-      </div>
-        <a *ngIf="canEdit" class='btn btn-primary text-style-add' [routerLink]="['/edit-job',job.jobId]"><i class="fas fa-edit"></i>
-        </a>
-      <div class="solu_title">
-        <h3>{{job !== undefined ? job.jobTitle : closedJob.jobTitle}}</h3>
+      
+      <div class="solu_title" style="display: flex; flex-direction: row; width: 100%; justify-content: space-between;">
+        <h2>{{job !== undefined ? job.jobTitle : closedJob.jobTitle}}</h2>
+        <div class="so_top_icon" style="float: right;">
+          <img src="../../../assets/Logos/accolite_logo.jpg" alt="job-logo">
+        </div>
       </div>
       <div class="solu_description">
         <div class="dateId">
@@ -32,8 +31,17 @@
             <div class="option">{{jobcategory?.categoryName}}</div>
             <div class="option">{{jobPosition?.positionName}}</div>
         </div>
-        <button class="btn btn-primary-1 mb-2" [routerLink]="['/job-details',(job !== undefined ? job.jobId : closedJob.closedJobId)]" >Click Here for Details..</button>
-        <button *ngIf="isEmployee && hasPrivilege" class="btn btn-primary-1 mb-2" [routerLink]="(job !== undefined ? ['/jobs', job.jobId , 'applicants'] : ['/closedJobs', closedJob.closedJobId , 'applicants'])">View Applicants</button>
+        <div class="row">
+          <div class="column">
+            <button class="btn btn-primary-1 mb-2" [routerLink]="['/job-details',(job !== undefined ? job.jobId : closedJob.closedJobId)]" >Click Here for Details..</button>
+          </div>
+          <div class="column">  
+            <button *ngIf="isEmployee && hasPrivilege" class="btn btn-primary-1 mb-2" [routerLink]="(job !== undefined ? ['/jobs', job.jobId , 'applicants'] : ['/closedJobs', closedJob.closedJobId , 'applicants'])">View Applicants</button>
+          </div>
+          <div class="column">
+            <a *ngIf="canEdit" class='btn btn-primary text-style-add' [routerLink]="['/edit-job',job.jobId]"><i class="fas fa-edit"></i></a>
+          </div>
+        </div>
       </div>
     </div>
 </div>

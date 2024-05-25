@@ -3,9 +3,9 @@
       <span *ngIf="doneInterview">
         Interview with <b>{{interview.Candidate.firstName}} {{interview.Candidate.lastName}} ({{interview.Candidate.email}}) </b>
       </span>
-      <!-- <span class="showCard" *ngIf="!doneInterview"  style="cursor: pointer;" (click)="ShowDetails(interview.Candidate.candidateId)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <span class="showCard" *ngIf="!doneInterview"  style="cursor: pointer;" (click)="ShowDetails(interview.Candidate.candidateId)" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Interview with <b>{{interview.Candidate.firstName}} {{interview.Candidate.lastName}} ({{interview.Candidate.email}}) </b>
-      </span> -->
+      </span>
       <span *ngIf="!doneInterview && interview.Resume != null && interview.Resume != undefined" style="float:right">
         <a href='{{interview.Resume.resumeUrl}}' target="_blank">
         <button type="button" class="btn btn-secondary btn-sm">

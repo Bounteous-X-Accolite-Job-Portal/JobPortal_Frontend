@@ -1,55 +1,46 @@
-import { CommonModule, NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../../Services/AddEmployee/employee.service';
 import { Designation } from '../../../Models/DesignationResponse/Designation';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { AddEmployee } from '../../../Models/Backend/Employee/AddEmployee';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-employee',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule,ToastrModule],
+  imports: [NgIf, NgClass, ReactiveFormsModule, HttpClientModule, ToastrModule],
   templateUrl: './add-employee.component.html',
   styleUrl: './add-employee.component.css',
 })
 export class AddEmployeeComponent implements OnInit {
+  toaster = inject(ToastrService);
+  
+  designation!: Designation;
   addEmployeeForm!: FormGroup;
   id?: string;
   title!: string;
   loading = false;
-  submitting = false;
   submitted = false;
   designations: Designation[] = [];
 
   constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
     private addEmployeeService: EmployeeService,
-    private toastr: ToastrService
-  ) {
-    this.designations.push({ designationId:0, designationName : "Select Designation", empId: "null" });
-    this.loadDesignations();
-    
-
-  }
+  ) {}
 
   ngOnInit() {
-    // this.id = this.route.snapshot.params['id'];
-
     this.addEmployeeForm = new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.minLength(6)),
+      phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
       empId: new FormControl('', Validators.required),
       designationId: new FormControl('', Validators.required),
     });
@@ -76,24 +67,38 @@ export class AddEmployeeComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
+    let employee : AddEmployee = {
+      empId : this.addEmployeeForm.value.empId,
+      firstName : this.addEmployeeForm.value.firstName,
+      lastName : this.addEmployeeForm.value.lastName,
+      email : this.addEmployeeForm.value.email,
+      phone : this.addEmployeeForm.value.phone,
+      designationId : this.addEmployeeForm.value.designationId,
+    }
+
     if (this.addEmployeeForm.invalid) {
       return;
     } else {
-      console.log(this.addEmployeeForm.value);
+      console.log(employee);
 
       this.addEmployeeService
-        .addEmployee(this.addEmployeeForm.value)
+        .addEmployee(employee)
         .subscribe((data: any) => {
           console.log('Status', data.status, 'data message', data.message);
+
           if (data.status == 200) {
             this.loading = false;
+            
+            this.toaster.success("Successfully added employee.");
             console.log('success adding employee');
-            this.toastr.success("Employee Added Successfully !! ");
+            
+            this.submitted = false;
+            this.addEmployeeForm.reset();
           } else {
+            this.toaster.error("Some error occured while registering employee, please try again.");
             console.log('error');
           }
         });
-      this.submitting = true;
     }
   }
 }

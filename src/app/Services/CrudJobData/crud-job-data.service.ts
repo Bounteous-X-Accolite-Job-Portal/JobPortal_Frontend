@@ -104,8 +104,8 @@ export class CrudJobDataService {
     return this.http.post<StatusResponse>(environment.baseURL+'JobStatus/addJobStatus',status);
   }
 
-  deleteJobApplicationStatus(statusId?: string){
-
+  deleteJobApplicationStatus(statusId?: number){
+    return this.http.delete(environment.baseURL+'JobStatus/removeStatus/'+statusId);
   }
 
   getAllJobStatus():Observable<AllStatusResponse>{

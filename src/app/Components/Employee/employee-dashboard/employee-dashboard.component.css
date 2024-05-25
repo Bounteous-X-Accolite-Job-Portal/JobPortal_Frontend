@@ -1,3 +1,18 @@
+.cont{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    height: 87vh;
+    font-family: Roboto, sans-serif;
+    width: 100vw;
+    height: 86.8vh;
+}
+
+div{
+    padding: 0;
+    margin:0;
+}
+
 .sidenav {
     background: #0a0156;
     transition: all .5s ease;
@@ -6,10 +21,20 @@
     /* top: 0.1; */
     width: 5rem;
     /* width: 16.5625rem; */
-    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
-    height: 200vh;
+    box-shadow: 0.063rem 0 1.25rem 0 #8690A3;
+    /* height: 200vh; */
+    /* height: 200vh; */
     /* justify-content: start; */
 }
+
+
+.comp{
+    overflow-y:scroll;
+    margin: 0;
+    padding: 0;
+}
+
+
 
 .logo-container {
     display: flex;
@@ -63,22 +88,19 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     height: calc(100% - 3.65rem);
-    /* cursor: pointer; */
 }
 
 .sidenav-nav .sidenav-nav-item {
     width: 100%;
-    margin-bottom: 0.625rem;
 }
 
 .sidenav-nav .sidenav-nav-item .sidenav-nav-link {
     display: flex;
     align-items: center;
     /* justify-content: center; */
-    height: 3rem;
-    color: #f3f3f3;
+    height: 2.5rem;
+    color: #F3F3F3;
     text-decoration: none;
     border-radius: 0.625rem;
     transition: all .3s ease;

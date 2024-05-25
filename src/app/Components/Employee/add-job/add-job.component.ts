@@ -13,7 +13,6 @@ import { SpinnerComponent } from '../../spinner/spinner.component';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { timestamp } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-
 @Component({
   selector: 'app-add-job',
   standalone: true,
@@ -27,48 +26,31 @@ export class AddJobComponent implements OnInit {
   isLoading: boolean = false;
   submitting = false;
   submitted = false;
-
   locations: location[] = [];
   jobTypes: JobType[] = [];
   jobCategories: JobCategory[] = [];
-
   jobPositions: position[] = [];
   categoryjobPositions: position[] = [];
-
   degrees: Degree[] = [];
   jobs: Job[] = [];
   jobData: any;
   lastDateError: boolean = true;
-
-  positionIndex: number = 0;
-  typeIndex: number = 0;
-  locationIndex: number = 0;
-  categoryIndex: number = 0;
-  degreeIndex: number = 0;
-
   constructor(
     private jobService: JobService,
     private addJobService: AddJobService,
     private toastr: ToastrService
   ) {
-   
     this.locations.push({locationId: "null" , address: "Select Job Location " , city: "" , state: "" , country : ""});
     this.loadJobLocations();
-
     this.jobTypes.push({jobTypeId: "null" , typeName : " Select Job Type "});
     this.loadJobTypes();
-
     this.jobCategories.push({categoryId:"null",categoryCode:"Select Job Category ",categoryName:"",description:""})
     this.loadJobCategories();
-
     this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
     this.loadJobPositions();
-
     this.degrees.push({degreeId:"null",degreeName:"Select Degree ",durationInYears:0});
     this.loadDegrees();
-
   }
-
   ngOnInit(): void {
     console.log(this.lastDateError);
     this.jobForm = new FormGroup(
@@ -86,8 +68,6 @@ export class AddJobComponent implements OnInit {
       },
     );
   }
-
-
   private loadJobLocations(): void {
     this.jobService.getAllJobLocations().subscribe(
       (res) => {
@@ -99,7 +79,6 @@ export class AddJobComponent implements OnInit {
       }
     );
   }
-
   private loadJobCategories(): void {
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
@@ -112,7 +91,6 @@ export class AddJobComponent implements OnInit {
       }
     );
   }
-
   private loadJobTypes(): void {
     this.jobService.getAllJobTypes().subscribe(
       (res) => {
@@ -135,7 +113,6 @@ export class AddJobComponent implements OnInit {
       }
     );
   }
-
   private loadDegrees(): void {
     this.jobService.getAllDegrees().subscribe(
       (res) => {
@@ -147,29 +124,25 @@ export class AddJobComponent implements OnInit {
       }
     );
   }
-
   get f() {
     return this.jobForm.controls;
   }
-
   onSubmit() {
     console.log(this.jobForm.value);
     this.jobData = {
       jobCode: this.jobForm.value.jobCode,
       jobDescription: this.jobForm.value.jobDescription,
       jobTitle: this.jobForm.value.jobTitle,
-      degreeId: this.degrees[this.degreeIndex].degreeId,
-      categoryId: this.jobCategories[this.categoryIndex].categoryId,
-      positionId: this.jobPositions[this.positionIndex].positionId,
-      locationId: this.locations[this.locationIndex].locationId,
-      jobType: this.jobTypes[this.typeIndex].jobTypeId,
+      degreeId: this.jobForm.value.degreeId,
+      categoryId: this.jobForm.value.categoryId,
+      positionId: this.jobForm.value.positionId,
+      locationId: this.jobForm.value.locationId,
+      jobType: this.jobForm.value.jobType,
       experience: this.jobForm.value.experience,
       lastDate: this.jobForm.value.lastDate,
     };
     let given = this.jobForm.value.lastDate;
     if (this.jobForm.valid) {
-     
-
       console.log(this.jobForm.value.lastDate, " ", new Date());
       this.addJobService.addJobs(this.jobData).subscribe(
         (res) => {
@@ -185,13 +158,11 @@ export class AddJobComponent implements OnInit {
     }
     this.submitted = true;
   }
-
   public loadJobPositionsByCategoryId():void
   {
-    var selectedCategoryId  = this.jobCategories[this.categoryIndex].categoryId;
+    var selectedCategoryId  = this.jobForm.value.categoryId;
     this.categoryjobPositions = [];
     this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
-    
     this.jobPositions.forEach((pos) =>{
       if(selectedCategoryId===pos.categoryId)
         this.categoryjobPositions.push(pos);

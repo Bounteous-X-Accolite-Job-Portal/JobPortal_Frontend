@@ -17,11 +17,12 @@ import { ApplicantInterview } from '../../../Models/InterviewResponse/ApplicantI
 import { Interview } from '../../../Models/InterviewResponse/Interview';
 import { StatusModel } from '../../../Models/StatusResponse/StatusModel';
 import { AllStatusResponse } from '../../../Models/StatusResponse/AllStatusResponse';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-applicant-card',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ToastrModule],
+  imports: [CommonModule, ReactiveFormsModule, ToastrModule, RouterModule],
   templateUrl: './applicant-card.component.html',
   styleUrl: './applicant-card.component.css'
 })

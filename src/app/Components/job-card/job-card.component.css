@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* padding-top: 2.5rem; */
   }
   .solution_cards_box .solution_card {
     background: #fff;
@@ -12,11 +11,12 @@
     0 5px 15px 0 rgba(37, 44, 97, 0.15);
     border-radius: 15px;
     margin-bottom: 2.5rem;
-    padding: 1.5rem 2.5rem;
+    padding: 1rem 2rem;
     position: relative;
     z-index: 1;
     overflow: hidden;
     transition: 0.2s;
+    font-weight: bolder;
   }
   
   .solution_cards_box .solution_card:hover {
@@ -129,17 +129,7 @@
       flex: 1;
     }
   }
-  /* @media only screen and (min-width: 1024px) {
-    .sol_card_top_3 {
-      position: relative;
-      top: -3rem;
-    }
-    .our_solution_category {
-      width: 50%;
-      margin: 0 auto;
-    }
-  } */
-
+  
 .dateId{
     width: 100%;
     display: flex;

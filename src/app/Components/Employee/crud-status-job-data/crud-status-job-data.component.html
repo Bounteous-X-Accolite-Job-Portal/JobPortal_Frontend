@@ -15,7 +15,7 @@
                 <tr *ngFor="let status of applicationStatus">
                     <td>{{ status.statusName }}</td>
                     <td>
-                       <button class="delete-outer"><a id="delete" ><i class="fa fa-trash delete-b"></i></a></button>                    
+                       <button class="delete-outer" (click)="deleteStatus(status.statusId)"><a id="delete" ><i class="fa fa-trash delete-b"></i></a></button>                    
                     </td>
              </tr>
             </tbody>

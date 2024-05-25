@@ -108,7 +108,7 @@ export class InterviewCardComponent implements OnInit {
     this.form.reset();
   }
 
-  ShowDetails(candidateId: Guid){
+  ShowDetails(candidateId: string){
     this.skills;
     this.experience = []
 
