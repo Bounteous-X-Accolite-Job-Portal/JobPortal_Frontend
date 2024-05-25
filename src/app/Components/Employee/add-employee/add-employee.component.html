@@ -7,6 +7,7 @@
           <label class="form-label">First Name</label>
           <input
             type="text"
+            placeholder="First Name"
             formControlName="firstName"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
@@ -24,6 +25,7 @@
           <label class="form-label">Last Name</label>
           <input
             type="text"
+            placeholder="Last Name"
             formControlName="lastName"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
@@ -43,6 +45,7 @@
           <label class="form-label">Email</label>
           <input
             type="text"
+            placeholder="Email"
             formControlName="email"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
@@ -54,13 +57,19 @@
         </div>
 
         <div class="mb-3 col">
-          <label class="form-label">Password</label>
+          <label class="form-label">Phone Number</label>
           <input
-            type="text"
-            formControlName="password"
+            type="tel"
+            placeholder="Phone Number"
+            formControlName="phone"
             class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+            [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }"
+            pattern="[0-9]{10}"
           />
+          <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+            <div *ngIf="f['phone'].errors?.['required']">Phone number is required</div>
+            <div *ngIf="f['phone'].errors?.['phone']">Phone number is invalid</div>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -68,6 +77,7 @@
           <label class="form-label">Employee Id</label>
           <input
             type="text"
+            placeholder="Employee Id"
             formControlName="empId"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f['empId'].errors }"
@@ -82,6 +92,7 @@
           <label class="form-label"> Designation </label>
           <input
             type="number"
+            placeholder="Designation Id"
             formControlName="designationId"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f['designationId'].errors }"
@@ -107,11 +118,9 @@
           </div> -->
       </div>
       
-      <div class="mb-3">
+      <div class="mb-3" style="float: right;">
         <button class="btn btn-primary">
-          <span
-          ></span>
-          Save
+          Add Employee
         </button>
        
       </div>

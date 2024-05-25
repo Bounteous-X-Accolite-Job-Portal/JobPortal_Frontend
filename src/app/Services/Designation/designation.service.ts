@@ -16,6 +16,10 @@ export class DesignationService {
     return this.http.get<AllDesignationResponse>(environment.baseURL + 'Designation/getAllDesignations');
   }
 
+  getDesignationById(designationId : number) : Observable<DesignationResponse> {
+    return this.http.get<DesignationResponse>(environment.baseURL + 'Designation/designation/' + designationId);
+  }
+
   addDesignation(newDesignation : string) : Observable<DesignationResponse>{
     let data = {
       designationName: newDesignation
