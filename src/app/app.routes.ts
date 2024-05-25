@@ -211,8 +211,7 @@ export const routes: Routes = [
       { path: 'resume/:id', component: ResumeComponent },
       { path: 'sml/:id', component: SocialProfilesComponent },
       { path: 'changePassword', component: EmailComponentChangePasswordComponent },
-      { path: '**', component: TryComponent },
-      
+      { path: '**', component: PersonalInfoComponent }      
     ],
   },
 ];

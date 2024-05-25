@@ -9,7 +9,6 @@ import { candidateEducation } from '../../Models/EducationResponse/candidateEduc
 import { AllDegreeResponse } from '../../Models/DegreeResponse/AllDegreeResponse';
 import { DegreeResponse } from '../../Models/DegreeResponse/DegreeRespose';
 import { InstitutionResponse } from '../../Models/InstitutionResponse/InstitutionResponse';
-import { AllCompanyResponse } from '../../Models/CompanyResponse/AllCompanyResponse';
 import { ExperienceOfACandidateResponse } from '../../Models/ExperienceResponse/ExperiencesOfACandidateResponse';
 import { candidateEducationResponse } from '../../Models/EducationResponse/candidateEducationResponse';
 import { candidateExperienceResponse } from '../../Models/ExperienceResponse/candidateExperienceResponse';
@@ -21,6 +20,7 @@ import { SkillsResponse } from '../../Models/SkillsResponse/SkillsResponse';
 import { Skills } from '../../Models/SkillsResponse/Skills';
 import { candidateExperience } from '../../Models/ExperienceResponse/candidateExperience';
 import { StatusResponse } from '../../Models/StatusResponse/StatusResponse';
+import { AllCompanyResponse } from '../../Models/CompanyResponse/AllCompanyResponse';
 
 @Injectable({
   providedIn: 'root'

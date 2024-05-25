@@ -30,6 +30,7 @@ export class JobHomeComponent  {
   toaster = inject(ToastrService);
 
   public ActiveJobToggle: boolean = true;
+  public FilterClosedJobToggle : boolean = false;
 
   locations: location[] = [];
   jobTypes: JobType[] = [];
@@ -133,10 +134,12 @@ export class JobHomeComponent  {
 
   ActiveJobs() {
     this.ActiveJobToggle = true;
+    this.FilterClosedJobToggle = false;
   }
 
   ClosedJobs() {
     this.ActiveJobToggle = false;
+    this.FilterClosedJobToggle = true;
   }
 
   loadClosedJobs(){
@@ -281,6 +284,7 @@ export class JobHomeComponent  {
     let locationcheck: boolean = false;
     let categorycheck: boolean = false;
     let degreecheck: boolean = false;
+    let filterOnClosedJob : boolean = false;
 
     if(positionId!="null")
         positioncheck = true;
