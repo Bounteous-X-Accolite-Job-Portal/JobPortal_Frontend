@@ -1,7 +1,11 @@
 <div class="container mw-80">
   <div class="card bg-glass px-5 mt-3">
     <h3 class="my-4">Add Employee</h3>
-    <form *ngIf="!loading" [formGroup]="addEmployeeForm" (ngSubmit)="onSubmit()">
+    <form
+      *ngIf="!loading"
+      [formGroup]="addEmployeeForm"
+      (ngSubmit)="onSubmit()"
+    >
       <div class="row">
         <div class="mb-3 col">
           <label class="form-label">First Name</label>
@@ -95,25 +99,25 @@
               Designation is required
             </div>
           </div>
-          
         </div>
-        <!-- <div class="mb-3 col">
-            <label class="form-label">Designation Id</label><br />
-            <select formControlName="designationId">
-              <option *ngFor="let des of designation; let i = index" [value]="">
-                {{ deg.degreeName }}
-              </option>
-            </select>
-          </div> -->
+        <div class="mb-3 col">
+          <label class="form-label">Designation Id</label><br />
+          <select formControlName="designationId">
+            <option
+              *ngFor="let des of designations"
+              [value]="des.designationName"
+            >
+              {{ des.designationName }}
+            </option>
+          </select>
+        </div>
       </div>
-      
+
       <div class="mb-3">
         <button class="btn btn-primary">
-          <span
-          ></span>
+          <span></span>
           Save
         </button>
-       
       </div>
     </form>
   </div>

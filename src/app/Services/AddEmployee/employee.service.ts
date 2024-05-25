@@ -39,4 +39,10 @@ export class EmployeeService {
       employeeId
     )
   }
+
+  getAllDesignations(): Observable<DesignationResponse>{
+    return this.http.get<DesignationResponse>(
+      environment.baseURL+ 'Designation/getAllDesignations'
+    )
+  }
 }

@@ -16,18 +16,18 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-add-employee',
   standalone: true,
-  imports: [NgIf, NgClass, ReactiveFormsModule, HttpClientModule,ToastrModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule,ToastrModule],
   templateUrl: './add-employee.component.html',
   styleUrl: './add-employee.component.css',
 })
 export class AddEmployeeComponent implements OnInit {
-  designation!: Designation;
   addEmployeeForm!: FormGroup;
   id?: string;
   title!: string;
   loading = false;
   submitting = false;
   submitted = false;
+  designations: Designation[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,7 +35,12 @@ export class AddEmployeeComponent implements OnInit {
     private router: Router,
     private addEmployeeService: EmployeeService,
     private toastr: ToastrService
-  ) {}
+  ) {
+    this.designations.push({ designationId:0, designationName : "Select Designation", empId: "null" });
+    this.loadDesignations();
+    
+
+  }
 
   ngOnInit() {
     // this.id = this.route.snapshot.params['id'];
@@ -48,10 +53,24 @@ export class AddEmployeeComponent implements OnInit {
       empId: new FormControl('', Validators.required),
       designationId: new FormControl('', Validators.required),
     });
+
+   
   }
 
   get f() {
     return this.addEmployeeForm.controls;
+  }
+  
+  loadDesignations(){
+    this.addEmployeeService.getAllDesignations().subscribe(
+      (res)=>{
+        this.designations = this.designations.concat(res.designation);
+        console.log(res + " " + res.message);
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
   }
 
   onSubmit() {

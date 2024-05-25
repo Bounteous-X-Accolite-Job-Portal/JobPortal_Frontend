@@ -90,4 +90,5 @@ export class JobService {
     getAllJobsAddedByLoggedInEmployee(employeeId : Guid) : Observable<AllJob>{
       return this.http.get<AllJob>(environment.baseURL + "Job/getAllJobsByEmployee/" + employeeId);
     }
+
   }
