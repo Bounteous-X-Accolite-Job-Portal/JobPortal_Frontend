@@ -15,35 +15,41 @@ import { JobCategory } from '../../../Models/JobCategoryResponse/JobCategory';
 import { position } from '../../../Models/JobPositionResponse/position';
 import { JobType } from '../../../Models/JobTypeResponse/JobType';
 import { location } from '../../../Models/JoblocationResponse/location';
-import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  NgModel,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-your-jobs',
   standalone: true,
-  imports: [JobCardComponent, FormsModule, CommonModule ,ReactiveFormsModule],
+  imports: [JobCardComponent, FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './your-jobs.component.html',
-  styleUrl: './your-jobs.component.css'
+  styleUrl: './your-jobs.component.css',
 })
-export class YourJobsComponent implements OnInit{
+export class YourJobsComponent implements OnInit {
   public ActiveJobToggle: boolean = true;
 
-  searchText: string ='';
-  employeeId !: Guid;
-  locations: location[]= [];
+  searchText: string = '';
+  employeeId!: Guid;
+  locations: location[] = [];
   jobTypes: JobType[] = [];
   jobCategories: JobCategory[] = [];
 
-  jobPositions: position[] =[];
+  jobPositions: position[] = [];
   categoryjobPositions: position[] = [];
 
-  isActiveSection:boolean= true;
+  isActiveSection: boolean = true;
   Filterjobs: Job[] = [];
-  jobs : Job[] = [];
+  jobs: Job[] = [];
   searchedJobs: Job[] = [];
 
-  closedJobs : ClosedJob[] = [];
-  FilterClosedJobs : ClosedJob[] = [];
+  closedJobs: ClosedJob[] = [];
+  FilterClosedJobs: ClosedJob[] = [];
 
   filtersForm!: FormGroup;
 
@@ -53,22 +59,21 @@ export class YourJobsComponent implements OnInit{
     private store: UserStoreService,
     private authService: AuthService,
     private closedJobService: ClosedJobServiceService,
-    private fb : FormBuilder,
-    private toastr:ToastrService
-  ) { }
+    private fb: FormBuilder,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.store.getIdFromStore()
-    .subscribe((val) => {
-        let id = this.authService.getIdFromToken();
-        this.employeeId = val || id;
-    })
+    this.store.getIdFromStore().subscribe((val) => {
+      let id = this.authService.getIdFromToken();
+      this.employeeId = val || id;
+    });
 
     this.filtersForm = this.fb.group({
       location: [''],
       jobType: [''],
       jobCategory: [''],
-      jobPosition:[''],
+      jobPosition: [''],
     });
 
     this.loadJobs();
@@ -77,16 +82,33 @@ export class YourJobsComponent implements OnInit{
     this.loadJobs();
     this.loadClosedJobs();
 
-    this.locations.push({locationId: "null" , address: "Select Job Location " , city: "" , state: "" , country : ""});
+    this.locations.push({
+      locationId: 'null',
+      address: 'Select Job Location ',
+      city: '',
+      state: '',
+      country: '',
+    });
     this.loadJobLocations();
 
-    this.jobTypes.push({jobTypeId: "null" , typeName : " Select Job Type "});
+    this.jobTypes.push({ jobTypeId: 'null', typeName: ' Select Job Type ' });
     this.loadJobTypes();
 
-    this.jobCategories.push({categoryId:"null",categoryCode:"Select Job Category ",categoryName:"",description:""})
+    this.jobCategories.push({
+      categoryId: 'null',
+      categoryCode: 'Select Job Category ',
+      categoryName: '',
+      description: '',
+    });
     this.loadJobCategories();
-    
-    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
+
+    this.categoryjobPositions.push({
+      positionId: 'null',
+      positionName: 'Select Job Position ',
+      positionCode: '',
+      description: '',
+      categoryId: 'null',
+    });
     this.loadJobPositions();
   }
 
@@ -98,48 +120,52 @@ export class YourJobsComponent implements OnInit{
     this.ActiveJobToggle = false;
   }
 
-  loadJobs(){
+  loadJobs() {
     this.spinnerService.showSpinner();
 
-    this.jobService.getAllJobsAddedByLoggedInEmployee(this.employeeId).subscribe(
-      (res : AllJob) => {
-        console.log("active jobs", res);
+    this.jobService
+      .getAllJobsAddedByLoggedInEmployee(this.employeeId)
+      .subscribe(
+        (res: AllJob) => {
+          console.log('active jobs', res);
 
-        this.jobs = res.allJobs;
-        this.Filterjobs = this.jobs;
-        this.spinnerService.hideSpinner();
-      },
-      (error) => {
-        console.log(error);
-        this.spinnerService.hideSpinner();
-      }
-    )
+          this.jobs = res.allJobs;
+          this.Filterjobs = this.jobs;
+          this.spinnerService.hideSpinner();
+        },
+        (error) => {
+          console.log(error);
+          this.spinnerService.hideSpinner();
+        }
+      );
   }
 
-  loadClosedJobs(){
+  loadClosedJobs() {
     this.spinnerService.showSpinner();
 
-    this.closedJobService.getAllJobsAddedByLoggedInEmployee(this.employeeId).subscribe(
-      (res : AllClosedJobsResponse) => {
-        console.log("closed Jobs", res);
+    this.closedJobService
+      .getAllJobsAddedByLoggedInEmployee(this.employeeId)
+      .subscribe(
+        (res: AllClosedJobsResponse) => {
+          console.log('closed Jobs', res);
 
-        this.closedJobs = res.closedJobs;
-        this.FilterClosedJobs = res.closedJobs;
+          this.closedJobs = res.closedJobs;
+          this.FilterClosedJobs = res.closedJobs;
 
-        this.spinnerService.hideSpinner();
-      },
-      (error) => {
-        console.log(error);
-        this.spinnerService.hideSpinner();
-      }
-    )
+          this.spinnerService.hideSpinner();
+        },
+        (error) => {
+          console.log(error);
+          this.spinnerService.hideSpinner();
+        }
+      );
   }
 
   private loadJobLocations(): void {
     this.jobService.getAllJobLocations().subscribe(
       (res) => {
         // this.locations = res.allJobLocations;
-        this.locations= this.locations.concat(res.allJobLocations);
+        this.locations = this.locations.concat(res.allJobLocations);
         console.log(this.locations);
       },
       (error) => {
@@ -161,7 +187,6 @@ export class YourJobsComponent implements OnInit{
     );
   }
 
-
   private loadJobCategories(): void {
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
@@ -175,212 +200,206 @@ export class YourJobsComponent implements OnInit{
     );
   }
 
-  private loadJobPositions(): void{
+  private loadJobPositions(): void {
     this.jobService.getAllJobPosition().subscribe(
       (res) => {
         this.jobPositions = this.jobPositions.concat(res.allJobPositions);
         console.log(this.jobPositions);
       },
       (error) => {
-        console.error('Error loading job Positions:',error);
+        console.error('Error loading job Positions:', error);
       }
     );
   }
 
-  public onSubmit() : void{
-    if(this.isEmptyId(this.filtersForm.get('location')?.value) && this.isEmptyId(this.filtersForm.get('jobPosition')?.value) && this.isEmptyId(this.filtersForm.get('jobCategory')?.value) && this.isEmptyId(this.filtersForm.get('jobType')?.value) )
-    {
+  public onSubmit(): void {
+    if (
+      this.isEmptyId(this.filtersForm.get('location')?.value) &&
+      this.isEmptyId(this.filtersForm.get('jobPosition')?.value) &&
+      this.isEmptyId(this.filtersForm.get('jobCategory')?.value) &&
+      this.isEmptyId(this.filtersForm.get('jobType')?.value)
+    ) {
       this.displayFilterEmptyToast();
       return;
     }
-    
-    this.filterJobs(this.filtersForm.get('jobPosition')?.value,this.filtersForm.get('location')?.value,this.filtersForm.get('jobType')?.value,this.filtersForm.get('jobCategory')?.value); 
+
+    this.filterJobs(
+      this.filtersForm.get('jobPosition')?.value,
+      this.filtersForm.get('location')?.value,
+      this.filtersForm.get('jobType')?.value,
+      this.filtersForm.get('jobCategory')?.value
+    );
   }
-  
-  public onSubmitForClosedJobs() : void{
-    if(this.isEmptyId(this.filtersForm.get('location')?.value) && this.isEmptyId(this.filtersForm.get('jobPosition')?.value) && this.isEmptyId(this.filtersForm.get('jobCategory')?.value) && this.isEmptyId(this.filtersForm.get('jobType')?.value) )
-    {
+
+  public onSubmitForClosedJobs(): void {
+    if (
+      this.isEmptyId(this.filtersForm.get('location')?.value) &&
+      this.isEmptyId(this.filtersForm.get('jobPosition')?.value) &&
+      this.isEmptyId(this.filtersForm.get('jobCategory')?.value) &&
+      this.isEmptyId(this.filtersForm.get('jobType')?.value)
+    ) {
       this.displayFilterEmptyToast();
       return;
     }
-    
-    this.filterClosedJobs(this.filtersForm.get('jobPosition')?.value,this.filtersForm.get('location')?.value,this.filtersForm.get('jobType')?.value,this.filtersForm.get('jobCategory')?.value); 
+
+    this.filterClosedJobs(
+      this.filtersForm.get('jobPosition')?.value,
+      this.filtersForm.get('location')?.value,
+      this.filtersForm.get('jobType')?.value,
+      this.filtersForm.get('jobCategory')?.value
+    );
   }
 
-  private isEmptyId(id:string):boolean{
-    return id==="null" || id==='';
+  private isEmptyId(id: string): boolean {
+    return id === 'null' || id === '';
   }
 
-  private filterJobs(positionId: string , locationId : string , typeId : string , categoryId : string ) : void
-  {
+  private filterJobs(
+    positionId: string,
+    locationId: string,
+    typeId: string,
+    categoryId: string
+  ): void {
     this.Filterjobs = [];
     let typecheck: boolean = false;
     let positioncheck: boolean = false;
     let locationcheck: boolean = false;
     let categorycheck: boolean = false;
 
-    if(!this.isEmptyId(positionId))
-        positioncheck = true;
-    if(!this.isEmptyId(locationId))
-        locationcheck = true;
-    if(!this.isEmptyId(categoryId))
-        categorycheck = true;
-    if(!this.isEmptyId(typeId))
-        typecheck = true;
+    if (!this.isEmptyId(positionId)) positioncheck = true;
+    if (!this.isEmptyId(locationId)) locationcheck = true;
+    if (!this.isEmptyId(categoryId)) categorycheck = true;
+    if (!this.isEmptyId(typeId)) typecheck = true;
 
-    this.jobs.forEach((job) =>
-      {      
-        let flg:boolean  = true;
-        if(positioncheck)
-        {
-          if(job.positionId != positionId)
-              flg = false;
-        }
-        if(locationcheck)
-        {
-          if(job.locationId != locationId)
-              flg = false;
-        }
-        if(typecheck)
-        {
-          if(job.jobType != typeId)
-              flg = false;
-        }
-        if(categorycheck)
-        {
-          if(job.categoryId != categoryId)
-            flg = false;
-        }
-        
-        if(flg)
-        {
-          this.Filterjobs.push(job);
-        }
+    this.jobs.forEach((job) => {
+      let flg: boolean = true;
+      if (positioncheck) {
+        if (job.positionId != positionId) flg = false;
+      }
+      if (locationcheck) {
+        if (job.locationId != locationId) flg = false;
+      }
+      if (typecheck) {
+        if (job.jobType != typeId) flg = false;
+      }
+      if (categorycheck) {
+        if (job.categoryId != categoryId) flg = false;
       }
 
-    );
-    if(this.Filterjobs.length>0)
-      this.displayJobsToast();
-    else
-    {
+      if (flg) {
+        this.Filterjobs.push(job);
+      }
+    });
+    if (this.Filterjobs.length > 0) this.displayJobsToast();
+    else {
       this.displayEmptyJobsToast();
       this.resetFilters();
     }
   }
 
-  private filterClosedJobs(positionId: string , locationId : string , typeId : string , categoryId : string ) : void
-  {
+  private filterClosedJobs(
+    positionId: string,
+    locationId: string,
+    typeId: string,
+    categoryId: string
+  ): void {
     this.FilterClosedJobs = [];
     let typecheck: boolean = false;
     let positioncheck: boolean = false;
     let locationcheck: boolean = false;
     let categorycheck: boolean = false;
 
-    if(!this.isEmptyId(positionId))
-        positioncheck = true;
-    if(!this.isEmptyId(locationId))
-        locationcheck = true;
-    if(!this.isEmptyId(categoryId))
-        categorycheck = true;
-    if(!this.isEmptyId(typeId))
-        typecheck = true;
+    if (!this.isEmptyId(positionId)) positioncheck = true;
+    if (!this.isEmptyId(locationId)) locationcheck = true;
+    if (!this.isEmptyId(categoryId)) categorycheck = true;
+    if (!this.isEmptyId(typeId)) typecheck = true;
 
-    this.closedJobs.forEach((job) =>
-      {      
-        let flg:boolean  = true;
-        if(positioncheck)
-        {
-          if(job.positionId.toString() != positionId)
-              flg = false;
-        }
-        if(locationcheck)
-        {
-          if(job.locationId.toString() != locationId)
-              flg = false;
-        }
-        if(typecheck)
-        {
-          if(job.jobTypeId.toString() != typeId)
-              flg = false;
-        }
-        if(categorycheck)
-        {
-          if(job.categoryId.toString() != categoryId)
-            flg = false;
-        }
-        
-        if(flg)
-        {
-          this.FilterClosedJobs.push(job);
-        }
+    this.closedJobs.forEach((job) => {
+      let flg: boolean = true;
+      if (positioncheck) {
+        if (job.positionId.toString() != positionId) flg = false;
+      }
+      if (locationcheck) {
+        if (job.locationId.toString() != locationId) flg = false;
+      }
+      if (typecheck) {
+        if (job.jobTypeId.toString() != typeId) flg = false;
+      }
+      if (categorycheck) {
+        if (job.categoryId.toString() != categoryId) flg = false;
       }
 
-    );
-    if(this.FilterClosedJobs.length>0)
-      this.displayJobsToast();
-    else
-    {
+      if (flg) {
+        this.FilterClosedJobs.push(job);
+      }
+    });
+    if (this.FilterClosedJobs.length > 0) this.displayJobsToast();
+    else {
       this.displayEmptyJobsToast();
       this.resetFilters();
     }
   }
 
-  public resetFilters():void
-  {
+  public resetFilters(): void {
     this.Filterjobs = this.jobs;
     this.FilterClosedJobs = this.closedJobs;
 
     this.categoryjobPositions = [];
-    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
- 
+    this.categoryjobPositions.push({
+      positionId: 'null',
+      positionName: 'Select Job Position ',
+      positionCode: '',
+      description: '',
+      categoryId: 'null',
+    });
 
     this.filtersForm = this.fb.group({
       location: [''],
       jobType: [''],
       jobCategory: [''],
-      jobPosition:[''],
+      jobPosition: [''],
     });
     this.displayResetToast();
   }
 
-  private displayResetToast(): void
-  {
-    this.toastr.success("Filters Reset Successfully !!");
-  }
-  
-  private displayEmptyJobsToast(): void
-  {
-    this.toastr.error("No Jobs Found !!");
-  }
-  
-  private displayJobsToast(): void
-  {
-    this.toastr.success("Jobs Found !!");
-  }
-  
-  private displayFilterEmptyToast(): void
-  {
-    this.toastr.error("NO Filter Selected !!");
+  private displayResetToast(): void {
+    this.toastr.success('Filters Reset Successfully !!');
   }
 
-  public activeJobTab():void{
-      this.isActiveSection = true;
-  }
-  
-  public closedJobTab():void{
-      this.isActiveSection = true;
+  private displayEmptyJobsToast(): void {
+    this.toastr.error('No Jobs Found !!');
   }
 
-  public loadJobPositionsByCategoryId():void
-  {
-    var selectedCategoryId  = this.filtersForm.get('jobCategory')?.value;
+  private displayJobsToast(): void {
+    this.toastr.success('Jobs Found !!');
+  }
+
+  private displayFilterEmptyToast(): void {
+    this.toastr.error('NO Filter Selected !!');
+  }
+
+  public activeJobTab(): void {
+    this.isActiveSection = true;
+  }
+
+  public closedJobTab(): void {
+    this.isActiveSection = true;
+  }
+
+  public loadJobPositionsByCategoryId(): void {
+    var selectedCategoryId = this.filtersForm.get('jobCategory')?.value;
     this.categoryjobPositions = [];
-    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
-    
-    this.jobPositions.forEach((pos) =>{
-      if(selectedCategoryId===pos.categoryId)
+    this.categoryjobPositions.push({
+      positionId: 'null',
+      positionName: 'Select Job Position ',
+      positionCode: '',
+      description: '',
+      categoryId: 'null',
+    });
+
+    this.jobPositions.forEach((pos) => {
+      if (selectedCategoryId === pos.categoryId)
         this.categoryjobPositions.push(pos);
     });
   }
-
 }

@@ -1,9 +1,10 @@
-import { NgClass, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -16,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-add-employee',
   standalone: true,
-  imports: [NgIf, NgClass, ReactiveFormsModule, HttpClientModule, ToastrModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, HttpClientModule, ToastrModule],
   templateUrl: './add-employee.component.html',
   styleUrl: './add-employee.component.css',
 })
@@ -33,7 +34,10 @@ export class AddEmployeeComponent implements OnInit {
 
   constructor(
     private addEmployeeService: EmployeeService,
-  ) {}
+  ) {
+    this.designations.push({designationId: 0 , designationName: "Select Designations " , empId: ""});
+    this.loadDesignations();
+  }
 
   ngOnInit() {
     this.addEmployeeForm = new FormGroup({
@@ -52,11 +56,11 @@ export class AddEmployeeComponent implements OnInit {
     return this.addEmployeeForm.controls;
   }
   
-  loadDesignations(){
+   private loadDesignations(): void{
     this.addEmployeeService.getAllDesignations().subscribe(
       (res)=>{
         this.designations = this.designations.concat(res.designation);
-        console.log(res + " " + res.message);
+        console.log("all designations:::" + " " + res.designation);
       },
       (error)=>{
         console.log(error);
