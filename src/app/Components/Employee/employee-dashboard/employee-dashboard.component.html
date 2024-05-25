@@ -1,4 +1,4 @@
-<div style="display: flex; flex-direction: row;">
+<div style="display: flex; flex-direction: row;" class="cont">
   <div
     class="sidenav"
     [ngClass]="collapsed ? 'sidenav-collapsed' : 'sidenav'"
@@ -13,9 +13,7 @@
     </div>
     <ul class="sidenav-nav">
       <li class="sidenav-nav-item float:left py-2" *ngFor="let data of sideBarData">
-        <!-- *ngIf="(!data.requiredPrivilege || (!data.requiredSpecialPrivilege && (data.requiredPrivilege === hasPrivilege)) || ((data.requiredSpecialPrivilege == hasSpecialPrivilege) && (data.requiredPrivilege === hasPrivilege)))" -->
         <a
-          
           [routerLink]="['/employee-dashboard/' + data.routeLink]"
           class="sidenav-nav-link w-100 px-3"
           routerLinkActive="active"
