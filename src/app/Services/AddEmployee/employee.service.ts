@@ -52,7 +52,14 @@ export class EmployeeService {
   disableEmployee(employeeId: any): Observable<any>{
     return this.http.put<any>(
       environment.baseURL+'EmployeeAccount/disableAccount/'+ employeeId,
-      employeeId
+      null
+    )
+  }
+
+  enableEmployeeAccount(employeeId: any): Observable<any>{
+    return this.http.put<any>(
+      environment.baseURL+'EmployeeAccount/enableAccount/'+ employeeId,
+      null
     )
   }
 

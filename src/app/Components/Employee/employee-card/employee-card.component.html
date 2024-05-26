@@ -1,27 +1,51 @@
-<div >
-    <div class="card m-3">
-      <div class="card-body">
-        <div class="align d-flex" style="align-items: center; justify-content: space-between;">
-          <div class="d-flex" style="flex-direction: row;">
-            <button class="logo">
-              {{ Employee.firstName ? Employee.firstName.charAt(0).toUpperCase() : "U" }}{{ Employee.lastName ? Employee.lastName.charAt(0).toUpperCase() : "U" }}
-            </button>
-  
-            <div class="d-flex" style="flex-direction: column; margin-left: 10px;">
-              <span class="card-title">
-                <b>{{ Employee.firstName }} {{ Employee.lastName }} - ({{Employee.employeeId}})</b>
-              </span>
-              <span>
-                <p style="font-size: 13px;">{{ Designation.designationName }}</p>
-              </span>
-            </div>
-          </div>
-          <span>{{ Employee.email }}</span>
+<div class="card m-3" style="width: 60vw; max-width: 60vw;">
+  <div class="card-body">
+    <div class="d-flex flex-row">
+      <div class="d-flex align-items-center">
+        <span class="logo">
+          <span class="logo-text">
+            {{
+              Employee.firstName
+                ? Employee.firstName.charAt(0).toUpperCase()
+                : "U"
+            }}{{
+              Employee.lastName ? Employee.lastName.charAt(0).toUpperCase() : ""
+            }}
+          </span>
+        </span>
+      </div>
+      <div class="align-self-stretch" style="margin-left: 2rem">
+        <div class="d-flex flex-column">
+          <span>
+            <span style="font-size: large; font-weight: 500">
+              {{ Employee.firstName }} {{ Employee.lastName }}
+            </span>
+            ({{ Employee.empId }})
+          </span>
+          <span style="font-size: 1rem; margin-left: 1rem">
+            {{ Designation ? Designation.designationName : "loading..." }}
+          </span>
+          <span>
+            {{ Employee ? Employee.email : "loading..." }}
+          </span>
         </div>
-  
-        <div class="align d-flex" style="align-items: center; justify-content: flex-end;">
-          <button class="btn btn-danger" (click)="disableEmployee(Employee.employeeId)">Disable</button>
-        </div>
+      </div>
+      <div class="ms-auto">
+        <button
+        *ngIf="!disabledEmployee"
+          class="btn btn-danger"
+          (click)="disableEmployee(Employee.employeeId)"
+        >
+          Disable
+        </button>
+        <button
+          *ngIf="disabledEmployee"
+          class="btn btn-warning"
+          (click)="enableEmployee(Employee.employeeId)"
+        >
+          Enable
+        </button>
       </div>
     </div>
   </div>
+</div>

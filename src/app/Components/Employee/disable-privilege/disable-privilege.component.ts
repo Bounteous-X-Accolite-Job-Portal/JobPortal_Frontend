@@ -41,13 +41,14 @@ export class DisablePrivilegeComponent {
   }
 
   private loadEmployees(): void {
-    console.log('show spinner');
-    // this.spinnerService.showSpinner();
+    this.spinnerService.showSpinner();
 
     this.employeeService.getAllEmployee().subscribe(
       (res) => {
         console.log("all emplyees : ",res);
+        
         this.employees = res.employees;
+
         this.employees.forEach((employee) => {
           console.log('Inactive ' + employee.inactive);
 
@@ -58,18 +59,44 @@ export class DisablePrivilegeComponent {
             this.disabledEmployees.push(employee);
             console.log(this.disabledEmployees);
           }
-          // console.log('hide spinner');
-          // this.spinnerService.hideSpinner();
         });
 
         console.log('Active emp : ', this.activeEmployees);
         console.log('Disable emp : ', this.disabledEmployees);
+
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.log(error);
         console.log(' error : hide spinner');
-        // this.spinnerService.hideSpinner();
+        this.spinnerService.hideSpinner();
       }
     );
+  }
+
+  makeEmployeeDisable(data : {employeeId : string}){
+    let newArray : Employee[] = [];
+    for (let i = 0; i < this.activeEmployees.length; i++) {
+        if (this.activeEmployees[i].employeeId !== data.employeeId) {
+            newArray.push(this.activeEmployees[i]);
+        }
+        else{
+          this.disabledEmployees.push(this.activeEmployees[i]);
+        }
+    }
+    this.activeEmployees = newArray;
+  }
+
+  makeEmployeeEnable(data : {employeeId : string}){
+    let newArray : Employee[] = [];
+    for (let i = 0; i < this.disabledEmployees.length; i++) {
+        if (this.disabledEmployees[i].employeeId !== data.employeeId) {
+            newArray.push(this.activeEmployees[i]);
+        }
+        else{
+          this.activeEmployees.push(this.activeEmployees[i]);
+        }
+    }
+    this.disabledEmployees = newArray;
   }
 }
