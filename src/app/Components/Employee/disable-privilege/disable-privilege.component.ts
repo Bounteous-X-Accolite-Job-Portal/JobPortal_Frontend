@@ -7,7 +7,7 @@ import { EmployeeCardComponent } from '../employee-card/employee-card.component'
 import { AllEmployee } from '../../../Models/Backend/Employee/AllEmployee';
 import { EmployeeCardData } from '../../../Models/Backend/Employee/EmployeeCardData';
 import { SpinnerService } from '../../../Services/spinner.service';
-import { error } from 'console';
+
 
 @Component({
   selector: 'app-disable-privilege',

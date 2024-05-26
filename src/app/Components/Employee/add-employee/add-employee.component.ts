@@ -13,18 +13,25 @@ import { Designation } from '../../../Models/DesignationResponse/Designation';
 import { AddEmployee } from '../../../Models/Backend/Employee/AddEmployee';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
+import { AllDesignationResponse } from '../../../Models/DesignationResponse/AllDesignationResponse';
 
 @Component({
   selector: 'app-add-employee',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, HttpClientModule, ToastrModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    ToastrModule,
+  ],
   templateUrl: './add-employee.component.html',
   styleUrl: './add-employee.component.css',
 })
 export class AddEmployeeComponent implements OnInit {
   toaster = inject(ToastrService);
-  
-  designation!: Designation;
+
+  // designation!: Designation;
   addEmployeeForm!: FormGroup;
   id?: string;
   title!: string;
@@ -32,10 +39,12 @@ export class AddEmployeeComponent implements OnInit {
   submitted = false;
   designations: Designation[] = [];
 
-  constructor(
-    private addEmployeeService: EmployeeService,
-  ) {
-    this.designations.push({designationId: 0 , designationName: "Select Designations " , empId: ""});
+  constructor(private addEmployeeService: EmployeeService) {
+    this.designations.push({
+      designationId: 0,
+      designationName: 'Select Designations ',
+      empId: '',
+    });
     this.loadDesignations();
   }
 
@@ -44,65 +53,68 @@ export class AddEmployeeComponent implements OnInit {
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+      phone: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10),
+      ]),
       empId: new FormControl('', Validators.required),
       designationId: new FormControl('', Validators.required),
     });
-
-   
   }
 
   get f() {
     return this.addEmployeeForm.controls;
   }
-  
-   private loadDesignations(): void{
+
+  private loadDesignations(): void {
     this.addEmployeeService.getAllDesignations().subscribe(
-      (res)=>{
+      (res) => {
+        // this.designations =  res.designation;
         this.designations = this.designations.concat(res.designation);
-        console.log("all designations:::" + " " + res.designation);
+        console.log(res);
       },
-      (error)=>{
+      (error) => {
         console.log(error);
       }
-    )
+    );
   }
 
   onSubmit() {
     this.submitted = true;
 
-    let employee : AddEmployee = {
-      empId : this.addEmployeeForm.value.empId,
-      firstName : this.addEmployeeForm.value.firstName,
-      lastName : this.addEmployeeForm.value.lastName,
-      email : this.addEmployeeForm.value.email,
-      phone : this.addEmployeeForm.value.phone,
-      designationId : this.addEmployeeForm.value.designationId,
-    }
+    let employee: AddEmployee = {
+      empId: this.addEmployeeForm.value.empId,
+      firstName: this.addEmployeeForm.value.firstName,
+      lastName: this.addEmployeeForm.value.lastName,
+      email: this.addEmployeeForm.value.email,
+      phone: this.addEmployeeForm.value.phone,
+      designationId: this.addEmployeeForm.value.designationId,
+    };
 
     if (this.addEmployeeForm.invalid) {
       return;
     } else {
       console.log(employee);
 
-      this.addEmployeeService
-        .addEmployee(employee)
-        .subscribe((data: any) => {
-          console.log('Status', data.status, 'data message', data.message);
+      this.addEmployeeService.addEmployee(employee).subscribe((data: any) => {
+        console.log('Status', data.status, 'data message', data.message);
 
-          if (data.status == 200) {
-            this.loading = false;
-            
-            this.toaster.success("Successfully added employee.");
-            console.log('success adding employee');
-            
-            this.submitted = false;
-            this.addEmployeeForm.reset();
-          } else {
-            this.toaster.error("Some error occured while registering employee, please try again.");
-            console.log('error');
-          }
-        });
+        if (data.status == 200) {
+          this.loading = false;
+
+          this.toaster.success('Successfully added employee.');
+          console.log('success adding employee');
+
+          this.submitted = false;
+          this.addEmployeeForm.reset();
+        } else {
+          this.toaster.error(
+            'Some error occured while registering employee, please try again.'
+          );
+          console.log('error');
+        }
+      });
     }
   }
 }
