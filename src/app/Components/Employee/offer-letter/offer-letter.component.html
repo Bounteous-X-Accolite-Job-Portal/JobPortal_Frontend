@@ -1,0 +1,26 @@
+<div class="container mt-5">
+    <div class="mb-5">
+        <span>
+            <h2 style="display: inline;">Job Offered Candidates -:</h2>
+        </span>
+    </div>
+    <div *ngFor="let profile of allProfiles" class="card mb-3">
+        <div class="card-header">
+            <span>
+              <b>{{profile.candidate.firstName}} {{profile.candidate.lastName}} ({{profile.candidate.email}}) </b>
+            </span>
+            <span style="float:right">
+              <button type="button" class="btn btn-primary btn-sm" (click)="generateOfferLetter(profile.successfulOffer)">
+                Generate Offer Letter
+              </button>
+            </span>
+        </div>
+        <div class="card-body">
+            <div>
+                <p class="card-title">Position - {{profile.job != null ? profile.job.jobTitle : profile.closedJob?.jobTitle}} ({{profile.job != null ? profile.job.jobCode : profile.closedJob?.jobCode}})</p>
+                <p class="card-title">Experience for Job - {{profile.job != null ? profile.job.experience : profile.closedJob?.experience}}</p>
+                <p class="card-title">Job description - {{profile.job != null ? profile.job.jobDescription : profile.closedJob?.jobDescription}}</p>
+            </div>
+        </div>
+    </div>
+</div>
