@@ -1,4 +1,4 @@
-import { CommonModule, NgClass, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import {
@@ -13,7 +13,7 @@ import { Designation } from '../../../Models/DesignationResponse/Designation';
 import { AddEmployee } from '../../../Models/Backend/Employee/AddEmployee';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
-import { AllDesignationResponse } from '../../../Models/DesignationResponse/AllDesignationResponse';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-add-employee',
@@ -31,7 +31,6 @@ import { AllDesignationResponse } from '../../../Models/DesignationResponse/AllD
 export class AddEmployeeComponent implements OnInit {
   toaster = inject(ToastrService);
 
-  // designation!: Designation;
   addEmployeeForm!: FormGroup;
   id?: string;
   title!: string;
@@ -39,12 +38,10 @@ export class AddEmployeeComponent implements OnInit {
   submitted = false;
   allDesignations: Designation[] = [];
 
-  constructor(private addEmployeeService: EmployeeService) {
-    this.allDesignations.push({
-      designationId: 0,
-      designationName: 'Select Designations ',
-      empId: '',
-    });
+  constructor(
+    private addEmployeeService: EmployeeService,
+    private spinnerService: SpinnerService,
+  ) {
     this.loadDesignations();
   }
 
@@ -68,19 +65,23 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   private loadDesignations(): void {
+    this.spinnerService.showSpinner();
+
     this.addEmployeeService.getAllDesignations().subscribe(
       (res) => {
-        // this.designations =  res.designation;
-        this.allDesignations = this.allDesignations.concat(res.allDesignations);
+        this.allDesignations =  res.allDesignations
         console.log(res.allDesignations);
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.log(error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
   onSubmit() {
+    this.spinnerService.showSpinner();
     this.submitted = true;
 
     let employee: AddEmployee = {
@@ -93,8 +94,11 @@ export class AddEmployeeComponent implements OnInit {
     };
 
     if (this.addEmployeeForm.invalid) {
+      this.toaster.error("Invalid form, please fill all the details !");
+      this.spinnerService.hideSpinner();
       return;
-    } else {
+    } 
+    else {
       console.log(employee);
 
       this.addEmployeeService.addEmployee(employee).subscribe((data: any) => {
@@ -108,11 +112,14 @@ export class AddEmployeeComponent implements OnInit {
 
           this.submitted = false;
           this.addEmployeeForm.reset();
+
+          this.spinnerService.hideSpinner();
         } else {
           this.toaster.error(
             'Some error occured while registering employee, please try again.'
           );
           console.log('error');
+          this.spinnerService.hideSpinner();
         }
       });
     }

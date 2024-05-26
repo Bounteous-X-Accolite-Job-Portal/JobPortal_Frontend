@@ -23,10 +23,10 @@
             ({{ Employee.empId }})
           </span>
           <span style="font-size: 1rem; margin-left: 1rem">
-            {{ Designation ? Designation.designationName : "loading..." }}
+            <i>{{ Designation ? Designation.designationName : "loading..." }}</i>
           </span>
-          <span>
-            {{ Employee ? Employee.email : "loading..." }}
+          <span style="padding-top: 0.8rem;">
+            <span style="font-weight: 500;">{{ Employee ? Employee.email : "loading..." }}</span>
           </span>
         </div>
       </div>

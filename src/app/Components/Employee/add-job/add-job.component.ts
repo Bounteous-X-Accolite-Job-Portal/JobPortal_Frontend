@@ -1,6 +1,6 @@
-import { CommonModule, DatePipe, formatDate } from '@angular/common';
-import { Component, OnInit, input } from '@angular/core';
-import { AbstractControl,FormControl,FormGroup,ReactiveFormsModule,Validators,} from '@angular/forms';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { JobCategory } from '../../../Models/JobCategoryResponse/JobCategory';
 import { JobService } from '../../../Services/Job/job.service';
 import { location } from '../../../Models/JoblocationResponse/location';
@@ -11,20 +11,19 @@ import { Degree } from '../../../Models/DegreeResponse/Degree';
 import { Job } from '../../../Models/JobResponse/Job';
 import { SpinnerComponent } from '../../spinner/spinner.component';
 import { SpinnerService } from '../../../Services/spinner.service';
-import { timestamp } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-add-job',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SpinnerComponent],
+  imports: [CommonModule, ReactiveFormsModule, SpinnerComponent, ToastrModule],
   templateUrl: './add-job.component.html',
   styleUrl: './add-job.component.css',
   providers: [DatePipe]
 })
 export class AddJobComponent implements OnInit {
   jobForm!: FormGroup;
-  isLoading: boolean = false;
-  submitting = false;
+
   submitted = false;
   locations: location[] = [];
   jobTypes: JobType[] = [];
@@ -35,22 +34,20 @@ export class AddJobComponent implements OnInit {
   jobs: Job[] = [];
   jobData: any;
   lastDateError: boolean = true;
+
   constructor(
     private jobService: JobService,
     private addJobService: AddJobService,
-    private toastr: ToastrService
+    private toast: ToastrService,
+    private spinnerService: SpinnerService,
   ) {
-    this.locations.push({locationId: "null" , address: "Select Job Location " , city: "" , state: "" , country : ""});
     this.loadJobLocations();
-    this.jobTypes.push({jobTypeId: "null" , typeName : " Select Job Type "});
     this.loadJobTypes();
-    this.jobCategories.push({categoryId:"null",categoryCode:"Select Job Category ",categoryName:"",description:""})
     this.loadJobCategories();
-    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
     this.loadJobPositions();
-    this.degrees.push({degreeId:"null",degreeName:"Select Degree ",durationInYears:0});
     this.loadDegrees();
   }
+
   ngOnInit(): void {
     console.log(this.lastDateError);
     this.jobForm = new FormGroup(
@@ -58,77 +55,103 @@ export class AddJobComponent implements OnInit {
         jobCode: new FormControl('', Validators.required),
         jobDescription: new FormControl('', Validators.required),
         jobTitle: new FormControl('', Validators.required),
-        degreeId: new FormControl(''),
-        categoryId: new FormControl(''),
-        positionId: new FormControl(''),
-        locationId: new FormControl(''),
-        jobType: new FormControl(''),
-        experience: new FormControl(''),
+        degreeId: new FormControl('', Validators.required),
+        categoryId: new FormControl('', Validators.required),
+        positionId: new FormControl('', Validators.required),
+        locationId: new FormControl('', Validators.required),
+        jobType: new FormControl('', Validators.required),
+        experience: new FormControl('', Validators.required),
         lastDate: new FormControl('', Validators.required),
       },
     );
   }
 
   private loadJobLocations(): void {
+    this.spinnerService.showSpinner();
+
     this.jobService.getAllJobLocations().subscribe(
       (res) => {
         this.locations= this.locations.concat(res.allJobLocations);
         console.log(this.locations);
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading job locations:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
   private loadJobCategories(): void {
+    this.spinnerService.showSpinner();
+
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
         this.jobCategories = this.jobCategories.concat(res.allJobCategory);
         console.log(this.jobCategories);
-        this.isLoading = false;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading job locations:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
   private loadJobTypes(): void {
+    this.spinnerService.showSpinner();
+
     this.jobService.getAllJobTypes().subscribe(
       (res) => {
         this.jobTypes = this.jobTypes.concat(res.allJobTypes);
         console.log(this.jobTypes);
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading job types:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
+
   private loadJobPositions(): void {
+    this.spinnerService.showSpinner();
+
     this.jobService.getAllJobPosition().subscribe(
       (res) => {
         this.jobPositions = res.allJobPositions;
         console.log(this.jobPositions);
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading job types:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
+
   private loadDegrees(): void {
+    this.spinnerService.showSpinner();
+
     this.jobService.getAllDegrees().subscribe(
       (res) => {
         this.degrees = this.degrees.concat(res.degrees);
         console.log(this.degrees);
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading Degrees:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
+
   get f() {
     return this.jobForm.controls;
   }
+
   onSubmit() {
+    this.spinnerService.showSpinner();
+    this.submitted = true;
+
     console.log(this.jobForm.value);
     this.jobData = {
       jobCode: this.jobForm.value.jobCode,
@@ -142,32 +165,43 @@ export class AddJobComponent implements OnInit {
       experience: this.jobForm.value.experience,
       lastDate: this.jobForm.value.lastDate,
     };
-    let given = this.jobForm.value.lastDate;
+
     if (this.jobForm.valid) {
       console.log(this.jobForm.value.lastDate, " ", new Date());
+
       this.addJobService.addJobs(this.jobData).subscribe(
         (res) => {
           console.log('success ', res);
-          this.toastr.success("Job Posted Successfully !!");
+          this.toast.success("Job Posted Successfully !!");
           this.jobForm.reset();
+          this.spinnerService.hideSpinner();
+          this.submitted = false;
         },
         (error) => {
           console.error('Error submission:', error);
+          this.toast.error("Error while job posting" + error.message);
+          this.spinnerService.hideSpinner();
         }
       );
+
     } else {
       console.log('invalid form');
+      this.toast.error("invalid form, please fill all the details !");
+      this.spinnerService.hideSpinner();
     }
-    this.submitted = true;
   }
-  public loadJobPositionsByCategoryId():void
-  {
+
+  public loadJobPositionsByCategoryId(){
+    this.spinnerService.showSpinner();
+
     var selectedCategoryId  = this.jobForm.value.categoryId;
     this.categoryjobPositions = [];
-    this.categoryjobPositions.push({positionId:"null",positionName:"Select Job Position ",positionCode:"",description:"",categoryId:"null"});
+
     this.jobPositions.forEach((pos) =>{
       if(selectedCategoryId===pos.categoryId)
         this.categoryjobPositions.push(pos);
     });
+
+    this.spinnerService.hideSpinner();
   }
 }
