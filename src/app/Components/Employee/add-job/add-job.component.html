@@ -53,6 +53,7 @@
       <div class="mb-3 col">
         <label class="form-label">Degree</label><br />
         <select formControlName="degreeId">
+          <option value="" selected>Select degree required for job</option>
           <option *ngFor="let deg of degrees" [value]="deg.degreeId">
             {{ deg.degreeName }}
           </option>
@@ -86,6 +87,7 @@
       <div class="mb-3 col">
         <label class="form-label">Job Location</label><br />
         <select formControlName="locationId">
+          <option value="" selected>Select job location</option>
           <option *ngFor="let loc of locations" [value]="loc.locationId">
             {{ loc.address }} {{ loc.city }} {{ loc.state }} {{ loc.country }}
           </option>
@@ -97,6 +99,7 @@
           formControlName="categoryId"
           (change)="loadJobPositionsByCategoryId()"
         >
+          <option value="" selected>Select job category</option>
           <option *ngFor="let cat of jobCategories" [value]="cat.categoryId">
             {{ cat.categoryName }} {{ cat.categoryCode }}
           </option>
@@ -105,6 +108,7 @@
       <div class="mb-3 col">
         <label class="form-label">Job Type</label><br />
         <select formControlName="jobType">
+          <option value="" selected>Select job type</option>
           <option *ngFor="let typ of jobTypes" [value]="typ.jobTypeId">
             {{ typ.typeName }}
           </option>
@@ -113,6 +117,7 @@
       <div class="mb-3 col">
         <label class="form-label">Job Position</label><br />
         <select formControlName="positionId">
+          <option value="" selected>Select job position</option>
           <option
             *ngFor="let pos of categoryjobPositions"
             [value]="pos.positionId"
@@ -123,20 +128,14 @@
       </div>
       <div class="mb-3">
         <button
-          [disabled]="submitting"
+          [disabled]="jobForm.invalid"
           class="btn btn-primary"
           style="float: right"
         >
-          <span
-            *ngIf="submitting"
-            class="spinner-border spinner-border-sm me-1"
-          ></span>
           Add Job
         </button>
       </div>
     </form>
-  </div>
-  <div *ngIf="isLoading" class="text-center m-5">
-    <span class="spinner-border spinner-border-lg align-center"></span>
+    <div class="mt-4"></div>
   </div>
 </div>

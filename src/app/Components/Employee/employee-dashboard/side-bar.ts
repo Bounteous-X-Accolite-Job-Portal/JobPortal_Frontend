@@ -1,7 +1,7 @@
 export const sideBarData = [
   {
     routeLink: 'add-job',
-    icon: 'fal fa-id-card',
+    icon: 'fa-solid fa-plus',
     label: 'Add New Job',
     requiredPrivilege: true,
     requiredSpecialPrivilege: false,

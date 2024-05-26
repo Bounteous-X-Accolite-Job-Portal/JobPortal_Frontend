@@ -7,11 +7,7 @@
     min-height: 3rem;
     border-radius: 100%;
     padding: 0.313rem;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 900;
     border: none;
-}
-
-.logo-text{
-    padding-left: 7px;
 }

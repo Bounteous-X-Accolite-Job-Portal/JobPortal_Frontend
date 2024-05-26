@@ -96,6 +96,7 @@
         <div class="mb-3 col">
           <label class="form-label">Designation Id</label><br />
           <select formControlName="designationId" style="width: 100%;">
+            <option value="">Select employee designation</option>
             <option
               *ngFor="let designation of allDesignations"
               [value]="designation.designationId"

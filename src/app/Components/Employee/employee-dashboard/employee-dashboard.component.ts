@@ -14,8 +14,9 @@ import { SpinnerService } from '../../../Services/spinner.service';
   styleUrl: './employee-dashboard.component.css'
 })
 export class EmployeeDashboardComponent implements OnInit {
-  collapsed = false;
+  collapsed : boolean = false;
   sideBarData = sideBarData;
+  
   public name : string = "Employee";
   hasPrivilege : boolean = false;
   hasSpecialPrivilege : boolean = false;
@@ -68,8 +69,9 @@ export class EmployeeDashboardComponent implements OnInit {
   }
 
   closeSidenav() {
-    this.collapsed = false;
+    this.collapsed = true;
   }
+
   toggleCollapse() {
     this.collapsed = !this.collapsed;
   }
