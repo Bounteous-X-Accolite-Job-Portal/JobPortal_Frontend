@@ -1,4 +1,4 @@
-<section class="h-100 gradient-custom-2 pt-5">
+<!-- <section class="h-100 gradient-custom-2 pt-5">
   <div class="container card pt-3">
     <div class="card-header">
       Personal Information
@@ -12,4 +12,46 @@
       2 days ago
     </div>
   </div>    
+</section> -->
+
+
+<section class="h-100 gradient-custom-2" style="min-height: 87vh;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card">
+          <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:150px; align-items: center; justify-content:space-between">
+            <div class="ms-4 mt-1 d-flex flex-row row" style="justify-content: center; align-items: center;">
+              <div class="col img-thumbnail" style="width: 80px; z-index: 1; height: 80px; color: #000; display: flex; align-items: center; justify-content: center; border-radius: 55%;">
+                <h2>{{cand === undefined ? "" : cand.firstName.charAt(0).toUpperCase()}}{{cand === undefined ? "" : cand.lastName.charAt(0).toUpperCase()}}</h2>
+              </div>
+              <div class="col mx-3">
+                <h4>{{cand === undefined ? "loading.." : cand.firstName}} {{cand === undefined ? "loading.." :cand.lastName}}</h4>
+                <p>{{cand === undefined ? "loading.." :cand.email}}</p>
+              </div>
+            </div>
+            <div class="ms-4 mt-1 d-flex flex-column">
+              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+                style="z-index: 1; color: white; margin-right:2rem;">
+                Edit profile
+              </button>
+            </div>
+          </div>
+          <div class="card-body p-4 text-black fw-bold">
+            <div class="">
+              <p class="lead fw-normal mb-1">About</p>
+              <div class="p-4" style="background-color: #f8f9fa;">
+                <p class="font-italic mb-2">Phone : {{cand === undefined ? "loading.." :cand.phone}}</p>
+                <p class="font-italic mb-2">Address : {{cand === undefined ? "loading.." :cand.addressLine1}}</p>
+                <p class="font-italic mb-2">City : {{cand === undefined ? "loading.." :cand.city}}</p>
+                <p class="font-italic mb-2">State : {{cand === undefined ? "loading.." :cand.state}}</p>
+                <p class="font-italic mb-2">Country : {{cand === undefined ? "loading.." :cand.country}}</p>
+                <p class="font-italic mb-2">Zipcode : {{cand === undefined ? "loading.." :cand.zipCode}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

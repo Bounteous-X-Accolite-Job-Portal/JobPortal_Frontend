@@ -32,7 +32,6 @@
           </div>
         </div>
       </div>
-
       <div class="mb-3 col">
         <label class="form-label">Job Description</label>
         <input
@@ -59,7 +58,6 @@
           </option>
         </select>
       </div>
-
       <div class="mb-3 col">
         <label class="form-label">Last Date</label>
         <input
@@ -85,7 +83,6 @@
           [ngClass]="{ 'is-invalid': submitted && f['experience'].errors }"
         />
       </div>
-
       <div class="mb-3 col">
         <label class="form-label">Job Location</label><br />
         <select formControlName="locationId">
@@ -94,7 +91,6 @@
           </option>
         </select>
       </div>
-
       <div class="mb-3 col">
         <label class="form-label">Job Category</label><br />
         <select formControlName="categoryId" (change)="loadJobPositionsByCategoryId()">
@@ -119,7 +115,6 @@
           </option>
         </select>
       </div>
-
       <div class="mb-3">
         <button [disabled]="submitting" class="btn btn-primary" style="float: right;">
           <span
