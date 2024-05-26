@@ -4,6 +4,8 @@ import { ApplicationResponse } from '../../Models/ApplicationResponse/Applicatio
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { Guid } from 'guid-typescript';
+import { SuccessfulOfferResponse } from '../../Models/SuccessfulOffers/SuccessfulOfferResponse';
+import { ResponseModal } from '../../Models/ResponseModal';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +28,17 @@ export class ApplicationServiceService {
     return this.http.put<ApplicationResponse>(
       environment.baseURL + 'Application/jobApplication/changeStatus/' + applicationId, data
     );
+  }
+
+  getAllSuccessfulOffers() : Observable<SuccessfulOfferResponse>{
+    return this.http.get<SuccessfulOfferResponse>(
+      environment.baseURL + "Application/jobApplication/successfulApplication"
+    );
+  }
+
+  generateOfferLetter(successfulOfferId : Guid) : Observable<ResponseModal> {
+    return this.http.post<ResponseModal>(
+      environment.baseURL + "Application/sendOfferLetter/" + successfulOfferId, null
+    )
   }
 }

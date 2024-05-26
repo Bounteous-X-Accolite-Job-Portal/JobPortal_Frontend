@@ -68,6 +68,7 @@ export class AddJobComponent implements OnInit {
       },
     );
   }
+
   private loadJobLocations(): void {
     this.jobService.getAllJobLocations().subscribe(
       (res) => {

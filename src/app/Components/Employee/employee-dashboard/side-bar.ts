@@ -48,4 +48,11 @@ export const sideBarData = [
     requiredPrivilege: true,
     requiredSpecialPrivilege: false,
   },
+  {
+    routeLink: 'jobOffered',
+    icon: 'fa-solid fa-envelope-open-text',
+    label: 'Job Offered',
+    requiredPrivilege: true,
+    requiredSpecialPrivilege: true,
+  },
 ];

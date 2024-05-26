@@ -54,6 +54,7 @@ import { SettingsComponent } from './Components/Employee/settings/settings.compo
 import { ProfileComponent } from './Components/Employee/profile/profile.component';
 import { CrudStatusJobDataComponent } from './Components/Employee/crud-status-job-data/crud-status-job-data.component';
 import { EmailComponentChangePasswordComponent } from './email-component-change-password/email-component-change-password.component';
+import { OfferLetterComponent } from './Components/Employee/offer-letter/offer-letter.component';
 
 export const routes: Routes = [
   {
@@ -175,6 +176,7 @@ export const routes: Routes = [
       },
       { path: 'your-jobs', component: YourJobsComponent },
       { path: 'designation', component: DesignationComponent },
+      { path: 'jobOffered', component: OfferLetterComponent },
       { path: '**', component: ProfileComponent }
 
     ],

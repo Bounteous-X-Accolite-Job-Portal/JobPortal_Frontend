@@ -18,9 +18,12 @@ export class CrudPositionJobDataComponent {
 
   jobPositions: position[] = [];
 
-  constructor(private jobService: JobService,
-              private crudJobDataService: CrudJobDataService,
-              private toastr: ToastrService){}
+  constructor(
+    private jobService: JobService,
+    private crudJobDataService: CrudJobDataService,
+    private toastr: ToastrService
+  ){}
+  
   ngOnInit(){
     this.loadJobPositions();
   }
