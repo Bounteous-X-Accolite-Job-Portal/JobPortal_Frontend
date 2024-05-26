@@ -8,6 +8,7 @@ import { DesignationResponse } from '../../Models/DesignationResponse/Designatio
 import { EmployeeResponse } from '../../Models/Backend/Employee/EmployeeResponse';
 import { EmployeeProfileData } from '../../Models/Backend/Employee/EmployeeProfileData';
 import { AddEmployee } from '../../Models/Backend/Employee/AddEmployee';
+import { AllDesignationResponse } from '../../Models/DesignationResponse/AllDesignationResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -55,8 +56,8 @@ export class EmployeeService {
     )
   }
 
-  getAllDesignations(): Observable<DesignationResponse>{
-    return this.http.get<DesignationResponse>(
+  getAllDesignations(): Observable<AllDesignationResponse>{
+    return this.http.get<AllDesignationResponse>(
       environment.baseURL+ 'Designation/getAllDesignations'
     )
   }

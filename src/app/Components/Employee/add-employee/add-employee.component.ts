@@ -37,10 +37,10 @@ export class AddEmployeeComponent implements OnInit {
   title!: string;
   loading = false;
   submitted = false;
-  designations: Designation[] = [];
+  allDesignations: Designation[] = [];
 
   constructor(private addEmployeeService: EmployeeService) {
-    this.designations.push({
+    this.allDesignations.push({
       designationId: 0,
       designationName: 'Select Designations ',
       empId: '',
@@ -71,8 +71,8 @@ export class AddEmployeeComponent implements OnInit {
     this.addEmployeeService.getAllDesignations().subscribe(
       (res) => {
         // this.designations =  res.designation;
-        this.designations = this.designations.concat(res.designation);
-        console.log(res);
+        this.allDesignations = this.allDesignations.concat(res.allDesignations);
+        console.log(res.allDesignations);
       },
       (error) => {
         console.log(error);
@@ -89,7 +89,7 @@ export class AddEmployeeComponent implements OnInit {
       lastName: this.addEmployeeForm.value.lastName,
       email: this.addEmployeeForm.value.email,
       phone: this.addEmployeeForm.value.phone,
-      designationId: this.addEmployeeForm.value.designationId,
+      designationId: parseInt(this.addEmployeeForm.value.designationId, 10),
     };
 
     if (this.addEmployeeForm.invalid) {

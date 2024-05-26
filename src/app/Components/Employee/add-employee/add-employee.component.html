@@ -97,7 +97,7 @@
           <label class="form-label">Designation Id</label><br />
           <select formControlName="designationId" style="width: 100%;">
             <option
-              *ngFor="let designation of designations"
+              *ngFor="let designation of allDesignations"
               [value]="designation.designationId"
             >
               {{ designation.designationName }}
