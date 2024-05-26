@@ -10,7 +10,12 @@ import { Degree } from '../../../Models/DegreeResponse/Degree';
 import { EducationInstitution } from '../../../Models/EducationInstitutionResponse/EducationInstitution';
 import { Company } from '../../../Models/CompanyResponse/Company';
 import { Status } from '../../../Models/Status';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { StatusService } from '../../../Services/Status/status.service';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
@@ -23,7 +28,7 @@ import { CandidateService } from '../../../Services/CandidateService/candidate.s
     CommonModule,
     ReactiveFormsModule,
     ToastrModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './job-applicant.component.html',
   styleUrl: './job-applicant.component.css',
@@ -39,9 +44,9 @@ export class JobApplicantComponent implements OnInit {
   companies: Company[] = [];
   allStatus: Status[] = [];
   filtersForm!: FormGroup;
-  searchText: string ='';
+  searchText: string = '';
 
-  searchedApplicants: ApplicantData[] = [];
+  showApplicants: ApplicantData[] = [];
   applicantsLength: number = 0;
 
   constructor(
@@ -102,8 +107,8 @@ export class JobApplicantComponent implements OnInit {
           console.log('applicants data', res);
 
           this.applicants = res.applicants;
-          this.filterapplicants = this.applicants;
-          this.searchedApplicants = this.applicants;
+          this.filterapplicants = res.applicants;
+          this.showApplicants = res.applicants;
           this.applicantsLength =
             res.applicants == null ? 0 : res.applicants.length;
 
@@ -122,7 +127,8 @@ export class JobApplicantComponent implements OnInit {
             console.log('applicants data on closed job', res);
 
             this.applicants = res.applicants;
-
+            this.filterapplicants = res.applicants;
+            this.showApplicants = res.applicants;
             this.applicantsLength =
               res.applicants == null ? 0 : res.applicants.length;
 
@@ -154,44 +160,57 @@ export class JobApplicantComponent implements OnInit {
   }
 
   private loadAllInstitutions(): void {
+    this.spinnerService.showSpinner();
+
     this.candidService.getAllInstitutions().subscribe(
       (res) => {
         console.log(res);
         this.educationInstitutions = res.educationInstitution;
         console.log(this.educationInstitutions);
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.log(error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
   private loadDegrees(): void {
+    this.spinnerService.showSpinner();
+
     this.candidService.getAllDegrees().subscribe(
       (res) => {
         this.degrees = res.degrees;
         console.log(this.degrees);
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading Degrees:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
   private loadAllComapnies(): void {
+    this.spinnerService.showSpinner();
+
     this.candidService.getAllCompanies().subscribe(
       (res) => {
         console.log(res.companies);
         this.companies = res.companies;
         console.log(this.companies);
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.log(error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
   public onSubmit(): void {
+    this.spinnerService.showSpinner();
     console.log(this.filtersForm.value);
 
     this.filterJobs(
@@ -200,32 +219,31 @@ export class JobApplicantComponent implements OnInit {
       this.filtersForm.get('institute')?.value,
       this.filtersForm.get('status')?.value
     );
+
+    this.spinnerService.hideSpinner();
   }
 
-  private filterJobs(
-    degreeId: string,
-    companyId: string,
-    instituteId: string,
-    statusId: number
-  ): void {
+  private filterJobs(degreeId: string, companyId: string, instituteId: string, statusId: number): void {
+    this.spinnerService.showSpinner();
+
     let degreecheck: boolean = false;
     let companycheck: boolean = false;
     let institutecheck: boolean = false;
     let statuscheck: boolean = false;
-    
+
     if (!this.isEmptyId(degreeId)) degreecheck = true;
     if (!this.isEmptyId(companyId)) companycheck = true;
     if (!this.isEmptyId(instituteId)) institutecheck = true;
     if (!this.isEmptyId(statusId)) statuscheck = true;
-    
-    if(!degreecheck && !companycheck && !institutecheck && !statuscheck)
-    {
+
+    if (!degreecheck && !companycheck && !institutecheck && !statuscheck) {
       this.displayFilterEmptyToast();
+      this.spinnerService.hideSpinner();
       return;
     }
-    
+
     this.filterapplicants = [];
-    
+
     this.applicants.forEach((applicant) => {
       let flg: boolean = true;
 
@@ -255,7 +273,7 @@ export class JobApplicantComponent implements OnInit {
 
         if (!tmp) flg = false;
       }
-      
+
       if (statuscheck) {
         if (applicant.status.statusId != statusId) flg = false;
       }
@@ -264,14 +282,16 @@ export class JobApplicantComponent implements OnInit {
         this.filterapplicants.push(applicant);
       }
     });
-    
-    if (this.filterapplicants.length > 0) 
+
+    if (this.filterapplicants.length > 0) {
       this.displayApplicationToast();
-    else 
-    {
+      this.showApplicants = this.filterapplicants;
+    }
+    else {
       this.displayEmptyApplicationToast();
       this.resetFilters();
     }
+    this.spinnerService.hideSpinner();
   }
 
   private isEmptyId(id: string | number): boolean {
@@ -279,8 +299,10 @@ export class JobApplicantComponent implements OnInit {
   }
 
   public resetFilters(): void {
+    this.filterapplicants = this.applicants;
+    this.showApplicants = this.applicants;
+    this.searchText = '';
     this.displayResetToast();
-    this.ngOnInit();
   }
 
   private displayFilterEmptyToast(): void {
@@ -299,30 +321,29 @@ export class JobApplicantComponent implements OnInit {
     this.toastr.error('No Applications Found !!');
   }
 
+  search(searchText : string) {
+    if (!this.searchText) return;
 
+    this.spinnerService.showSpinner();
 
-filterItems() {
-
-  if (!this.searchText.trim()) {
-    this.searchedApplicants = this.applicants.slice();
-    return;
-  }
-      if (Array.isArray(this.applicants)) {
-        this.searchedApplicants = this.filterApplicants(this.applicants, this.searchText.toLowerCase());
-        console.log('Filtered applicants:', this.searchedApplicants);
-      } 
+    if (!searchText.trim()) {
+      this.showApplicants = this.applicants.slice();
+      this.spinnerService.hideSpinner();
+      return;
     }
 
+    this.showApplicants = [];
 
-filterApplicants(applicants: ApplicantData[], searchText: string): ApplicantData[] {
-    return applicants.filter((item) => {
+    this.showApplicants = this.filterapplicants.filter((item) => {
       const firstName = item.candidate.firstName.toLowerCase().includes(searchText);
       const lastName = item.candidate.lastName.toLowerCase().includes(searchText);
-      //const skills = item.skills.candidateSkills.toLowerCase().includes(searchText);
+      const skills = item.skills.candidateSkills.toLowerCase().includes(searchText);
       const email = item.candidate.email.toLowerCase().includes(searchText);
-      return firstName || lastName  || email;
+
+      return firstName || lastName || email || skills;
     });
-}
-
-
+    
+    console.log('Filtered applicants:', this.showApplicants);
+    this.spinnerService.hideSpinner();
+  }
 }
