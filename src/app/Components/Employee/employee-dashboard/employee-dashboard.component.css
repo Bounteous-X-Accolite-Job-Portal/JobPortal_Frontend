@@ -14,7 +14,7 @@ div{
 }
 
 .sidenav {
-    background: #0D016B;
+    background: #0a0156;
     transition: all .5s ease;
     /* position: absolute; */
     /* z-index: 1; */
@@ -42,6 +42,7 @@ div{
     padding: 0.938rem 0.938rem 0 0.938rem;
     width: 100%;
 }
+
 .logo-container .logo {
     background: #fff;
     text-align: center;
@@ -54,12 +55,14 @@ div{
     cursor: pointer;
     border: none;
 }
+
 .logo-container .logo-text {
     margin-left: 1.5rem;
     font-size: 24px;
     font-weight: 700;
     color: #fff;
 }
+
 .logo-container .btn-close {
     margin-left: auto;
     cursor: pointer;
@@ -69,13 +72,16 @@ div{
     background-color: transparent;
     border: none;
 }
+
 .logo-container .btn-close .fa-times {
     color: #fff;
     font-size: 24px;
 }
+
 .sidenav-collapsed {
     width: 16.5625rem;
 }
+
 .sidenav-nav {
     list-style: none;
     padding: 0.938rem;
@@ -84,9 +90,11 @@ div{
     flex-direction: column;
     height: calc(100% - 3.65rem);
 }
+
 .sidenav-nav .sidenav-nav-item {
     width: 100%;
 }
+
 .sidenav-nav .sidenav-nav-item .sidenav-nav-link {
     display: flex;
     align-items: center;
@@ -97,9 +105,11 @@ div{
     border-radius: 0.625rem;
     transition: all .3s ease;
 }
+
 .sidenav-link-text{
     margin-left: 1.6rem;
 }
+
 .sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-nav-icon {
     font-size: 22px;
     width: 2rem;
@@ -107,7 +117,10 @@ div{
     margin: 0 0.5rem;
     text-align: center;
 }
+
+
 .sidenav-nav .sidenav-nav-item:hover .sidenav-nav-link {
     background-color: #fff;
     color: #000;
 }
+

@@ -10,7 +10,7 @@ import { Degree } from '../../../Models/DegreeResponse/Degree';
 import { EducationInstitution } from '../../../Models/EducationInstitutionResponse/EducationInstitution';
 import { Company } from '../../../Models/CompanyResponse/Company';
 import { Status } from '../../../Models/Status';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { StatusService } from '../../../Services/Status/status.service';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
@@ -23,6 +23,7 @@ import { CandidateService } from '../../../Services/CandidateService/candidate.s
     CommonModule,
     ReactiveFormsModule,
     ToastrModule,
+    FormsModule
   ],
   templateUrl: './job-applicant.component.html',
   styleUrl: './job-applicant.component.css',
@@ -38,7 +39,9 @@ export class JobApplicantComponent implements OnInit {
   companies: Company[] = [];
   allStatus: Status[] = [];
   filtersForm!: FormGroup;
+  searchText: string ='';
 
+  searchedApplicants: ApplicantData[] = [];
   applicantsLength: number = 0;
 
   constructor(
@@ -100,6 +103,7 @@ export class JobApplicantComponent implements OnInit {
 
           this.applicants = res.applicants;
           this.filterapplicants = this.applicants;
+          this.searchedApplicants = this.applicants;
           this.applicantsLength =
             res.applicants == null ? 0 : res.applicants.length;
 
@@ -118,6 +122,7 @@ export class JobApplicantComponent implements OnInit {
             console.log('applicants data on closed job', res);
 
             this.applicants = res.applicants;
+
             this.applicantsLength =
               res.applicants == null ? 0 : res.applicants.length;
 
@@ -293,4 +298,31 @@ export class JobApplicantComponent implements OnInit {
   private displayEmptyApplicationToast(): void {
     this.toastr.error('No Applications Found !!');
   }
+
+
+
+filterItems() {
+
+  if (!this.searchText.trim()) {
+    this.searchedApplicants = this.applicants.slice();
+    return;
+  }
+      if (Array.isArray(this.applicants)) {
+        this.searchedApplicants = this.filterApplicants(this.applicants, this.searchText.toLowerCase());
+        console.log('Filtered applicants:', this.searchedApplicants);
+      } 
+    }
+
+
+filterApplicants(applicants: ApplicantData[], searchText: string): ApplicantData[] {
+    return applicants.filter((item) => {
+      const firstName = item.candidate.firstName.toLowerCase().includes(searchText);
+      const lastName = item.candidate.lastName.toLowerCase().includes(searchText);
+      //const skills = item.skills.candidateSkills.toLowerCase().includes(searchText);
+      const email = item.candidate.email.toLowerCase().includes(searchText);
+      return firstName || lastName  || email;
+    });
+}
+
+
 }

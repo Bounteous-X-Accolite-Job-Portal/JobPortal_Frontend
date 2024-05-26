@@ -1,7 +1,11 @@
 <div class="container mw-80">
   <div class="card bg-glass px-5 mt-3">
     <h3 class="my-4">Add Employee</h3>
-    <form *ngIf="!loading" [formGroup]="addEmployeeForm" (ngSubmit)="onSubmit()">
+    <form
+      *ngIf="!loading"
+      [formGroup]="addEmployeeForm"
+      (ngSubmit)="onSubmit()"
+    >
       <div class="row">
         <div class="mb-3 col">
           <label class="form-label">First Name</label>
@@ -88,41 +92,24 @@
             </div>
           </div>
         </div>
+        
         <div class="mb-3 col">
-          <label class="form-label"> Designation </label>
-          <input
-            type="number"
-            placeholder="Designation Id"
-            formControlName="designationId"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['designationId'].errors }"
-          />
-
-          <div
-            *ngIf="submitted && f['designationId'].errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f['designationId'].errors?.['required']">
-              Designation is required
-            </div>
-          </div>
-          
+          <label class="form-label">Designation Id</label><br />
+          <select formControlName="designationId" style="width: 100%;">
+            <option
+              *ngFor="let designation of allDesignations"
+              [value]="designation.designationId"
+            >
+              {{ designation.designationName }}
+            </option>
+          </select>
         </div>
-        <!-- <div class="mb-3 col">
-            <label class="form-label">Designation Id</label><br />
-            <select formControlName="designationId">
-              <option *ngFor="let des of designation; let i = index" [value]="">
-                {{ deg.degreeName }}
-              </option>
-            </select>
-          </div> -->
       </div>
-      
+    
       <div class="mb-3" style="float: right;">
         <button class="btn btn-primary">
           Add Employee
         </button>
-       
       </div>
     </form>
   </div>

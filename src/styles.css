@@ -1,90 +1,140 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import "~bootstrap/dist/css/bootstrap.css"; */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 /* @import "~@fortawesome/fontawesome-free/css/all.css"; */
 /* @import 'ngx-toastr/toastr'; */
 
-body{
-    font-family: Roboto;
-    position: relative;
-    margin: 0;
-    padding: 0;
+body {
+  font-family: Roboto;
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
 
 .gradient-custom-2 {
-    /* fallback for old browsers */
-    background: #2b2980;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgb(68, 34, 148), rgba(166, 193, 238, 1));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgb(148, 67, 141), rgba(166, 193, 238, 1))
-    }
-    
-    .text-style-add, .text-style-del:hover{
-      color: #fff;
-      background-color: #0a0150;
-      border-radius: 28px;
-    }
-    .text-style-add:hover, .text-style-del{
-      color: #0b015b;
-      background-color: #fff;
-    }
-    
-    .btn-primary-1 {
-      --bs-btn-border-radius: 25px;
-      --bs-btn-bg: #0d016b;
-      --bs-btn-border-color: #0d016b;
-      --bs-btn-hover-color: #fff;
-      --bs-btn-hover-bg: #0b015b;
-      --bs-btn-hover-border-color: #0a0156;
-      --bs-btn-focus-shadow-rgb: 49, 39, 129;
-      --bs-btn-active-color: #fff;
-      --bs-btn-active-bg: #0a0156;
-      --bs-btn-active-border-color: #0a0150;
-      --bs-btn-active-shadow: 10px 20px 20px rgba(0, 0, 0, 0.125);
-      --bs-btn-disabled-color: #fff;
-      --bs-btn-disabled-bg: #0d016b;
-      --bs-btn-disabled-border-color: #0d016b;
-      transition: all .3s;
-    }
-    
-    .btn-outline-primary {
-      font-weight: bolder;
-      --bs-btn-border-radius: 25px;
-      --bs-btn-bg: #fff;
-      --bs-btn-border-color: #0d016b;
-      --bs-btn-hover-color: #fff;
-      --bs-btn-hover-bg: #0b015b;
-      --bs-btn-hover-border-color: #130969;
-      --bs-btn-focus-shadow-rgb: 49, 39, 129;
-      --bs-btn-active-color: #fff;
-      --bs-btn-active-bg: #0a0156;
-      --bs-btn-active-border-color: #0a0150;
-      --bs-btn-active-shadow: 10px 20px 20px rgba(0, 0, 0, 0.125);
-      --bs-btn-disabled-color: #fff;
-      --bs-btn-disabled-bg: #0d016b;
-      --bs-btn-disabled-border-color: #0d016b;
-    }
+  background: #2b2980;
+  background: -webkit-linear-gradient(
+    to right,
+    rgb(68, 34, 148),
+    rgba(166, 193, 238, 1)
+  );
+  background: linear-gradient(
+    to right,
+    rgb(148, 67, 141),
+    rgba(166, 193, 238, 1)
+  );
+}
 
-    a{
-      color:#0d016b;
-      font-weight: 500;
-      text-decoration: none;
-    }
+.text-style-add,
+.text-style-del:hover {
+  color: #fff;
+  background-color: #0a0150;
+  border-radius: 28px;
+}
+.text-style-add:hover,
+.text-style-del {
+  color: #0b015b;
+  background-color: #fff;
+}
 
-    .delete-outer:hover{
-      color: red;
-      background-color: white;
-      border-radius: 28px;
-      border: 1px solid red;
+.btn-primary-1 {
+  --bs-btn-border-radius: 25px;
+  --bs-btn-bg: #0d016b;
+  --bs-btn-border-color: #0d016b;
+  --bs-btn-hover-color: #0d016b;
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #0a0156;
+  --bs-btn-focus-shadow-rgb: 49, 39, 129;
+  --bs-btn-color: #fff;
+  --bs-btn-active-bg: #0a0156;
+  --bs-btn-active-border-color: #0a0150;
+  --bs-btn-active-shadow: 10px 20px 20px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #0d016b;
+  --bs-btn-disabled-border-color: #0d016b;
+  transition: all 0.3s;
+}
 
-    }
+.btn-primary {
+  --bs-btn-border-radius: 25px;
+  --bs-btn-bg: #0d016b;
+  --bs-btn-border-color: #0d016b;
+  --bs-btn-hover-color: #0d016b;
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #0a0156;
+  --bs-btn-focus-shadow-rgb: 49, 39, 129;
+  --bs-btn-color: #fff;
+  --bs-btn-active-bg: #0a0156;
+  --bs-btn-active-border-color: #0a0150;
+  --bs-btn-active-shadow: 10px 20px 20px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #0d016b;
+  --bs-btn-disabled-border-color: #0d016b;
+  transition: all 0.3s;
+}
 
-    .delete-outer{
-      border-radius: 50%;
-      color: #fff;
-      background-color: red;
-      border: 1px solid red;  
-    }
+.btn-outline-primary {
+  font-weight: bolder;
+  --bs-btn-border-radius: 25px;
+  --bs-btn-bg: #fff;
+  --bs-btn-border-color: #0d016b;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #0b015b;
+  --bs-btn-hover-border-color: #130969;
+  --bs-btn-focus-shadow-rgb: 49, 39, 129;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #0a0156;
+  --bs-btn-active-border-color: #0a0150;
+  --bs-btn-active-shadow: 10px 20px 20px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #0d016b;
+  --bs-btn-disabled-border-color: #0d016b;
+}
+
+a {
+  color: #0d016b;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.delete-outer:hover {
+  color: red;
+  background-color: white;
+  border-radius: 28px;
+  border: 1px solid red;
+}
+
+.delete-outer {
+  border-radius: 50%;
+  color: #fff;
+  background-color: red;
+  border: 1px solid red;
+}
+
+select {
+  width: 50%;
+  border: 1px solid rgb(209, 206, 206);
+  height: 36px;
+  border-radius: 8px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: var(--bs-nav-pills-link-active-color);
+  background-color: #0a0156;
+}
+
+.nav-link{
+  color: #0a0156;
+}
+
+.nav-link:hover{
+  color: #0a0156;
+  text-shadow: .5px 1px;
+}
+
+h1,h2,h3{
+  color: #0a0156;
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+}

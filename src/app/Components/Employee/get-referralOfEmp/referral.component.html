@@ -1,40 +1,29 @@
-<!-- referral.component.html -->
-<div class="card-container">
-<div *ngFor="let referral of referralData">
-  <div class="card">
-    <div class="card-header">
-      <h5 class="card-title">Candidate Email: {{ referral.candidate.email }}</h5>
-    </div>
-    <div class="card-body">
-      <p class="card-text">Candidate Name {{referral.candidate.firstName}} {{referral.candidate.lastName}}</p>
-      <p class="card-text">Job Code: {{referral.job.jobCode}}</p>
-      <p class="card-text">Job Title: {{referral.job.jobTitle}}</p>
-      <p class="card-text">Status {{referral.statusData.statusName}}</p>
-      
+<div class="container">
+  <h2 class="heading">Referral Data</h2>
+  <div *ngIf="referralData.length === 0">
+    <p class="paragraph">
+      Hey! You don't have any referrals at the moment, but you can refer people
+      from the Jobs Tab.
+    </p>
+  </div>
+  <div *ngIf="referralData.length > 0">
+    <div *ngFor="let referral of referralData">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            Candidate Email: {{ referral.candidate.email }}
+          </h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            Candidate Name: {{ referral.candidate.firstName }}
+            {{ referral.candidate.lastName }}
+          </p>
+          <p class="card-text">Job Code: {{ referral.job.jobCode }}</p>
+          <p class="card-text">Job Title: {{ referral.job.jobTitle }}</p>
+          <p class="card-text">Status: {{ referral.statusData.statusName }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-</div>
-<!-- <div class="card" style="width: 50rem;">
-  
-  <div class="card" *ngFor="let referral of referralData">
-   <div class="card-header">
-    Candidate Name:
-   </div>
-    <div class="card-body">
-      <p> {{ referral.candidate.firstName }} {{ referral.candidate.lastName }}</p>
-      <p>Candidate Email: {{ referral.candidate.email }}</p>
-      
-    </div>
-  </div>
-</div> -->
-
-      
-        <!-- <p class="card-body">Candidate Name: {{ referral.candidate?.firstName }}</p>
-        <p class="card-body">{{referral.job?.jobTitle}}</p> -->
-        <!-- <td>{{referral.job?.jobTitle}}</td>
-          -->
-
-<div *ngIf="!referrals || referrals.length === 0">
-  <p>No referrals found.</p>
-</div> --

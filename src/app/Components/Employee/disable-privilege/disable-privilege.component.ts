@@ -3,70 +3,73 @@ import { Employee } from '../../../Models/Backend/Employee/Employee';
 import { EmployeeService } from '../../../Services/AddEmployee/employee.service';
 import { CommonModule } from '@angular/common';
 import { Designation } from '../../../Models/DesignationResponse/Designation';
+import { EmployeeCardComponent } from '../employee-card/employee-card.component';
+import { AllEmployee } from '../../../Models/Backend/Employee/AllEmployee';
+import { EmployeeCardData } from '../../../Models/Backend/Employee/EmployeeCardData';
+import { SpinnerService } from '../../../Services/spinner.service';
+
 
 @Component({
   selector: 'app-disable-privilege',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './disable-privilege.component.html',
-  styleUrl: './disable-privilege.component.css'
+  styleUrl: './disable-privilege.component.css',
+  imports: [EmployeeCardComponent, CommonModule],
 })
-export class DisablePrivilegeComponent implements OnInit{
-Employees!: Employee[];
-Designations: Designation[] = [];
+export class DisablePrivilegeComponent {
+  public ActiveEmployeesToggle: boolean = true;
+  employees: Employee[] = [];
+  activeEmployees: Employee[] = [];
+  disabledEmployees: Employee[] = [];
 
-constructor(private employeeService: EmployeeService){}
+  constructor(
+    private spinnerService: SpinnerService,
+    private employeeService: EmployeeService
+  ) {}
 
-ngOnInit(){
-  this.fetchingEmployees();
+  ActiveEmployees() {
+    this.ActiveEmployeesToggle = true;
+  }
 
-}
+  DisabledEmployees() {
+    this.ActiveEmployeesToggle = false;
+  }
 
-fetchingEmployees(){
-  this.employeeService.getAllEmployee().subscribe(
-    (res)=>{
-      console.log(res);
-      this.Employees = res.employees;
+  ngOnInit(): void {
+    this.loadEmployees();
+    console.log('employees', this.employees);
+  }
 
-      for(let i=0;i<this.Employees.length;i++)
-        this.getDesignationByDesignationId(this.Employees[i].designationId);
+  private loadEmployees(): void {
+    console.log('show spinner');
+    // this.spinnerService.showSpinner();
 
-      console.log("emps : ",this.Employees);
-      console.log("des : ",this.Designations);
-    },
-    (error)=>{
-      console.log(error);
-    }
-  )
-}
+    this.employeeService.getAllEmployee().subscribe(
+      (res) => {
+        console.log("all emplyees : ",res);
+        this.employees = res.employees;
+        this.employees.forEach((employee) => {
+          console.log('Inactive ' + employee.inactive);
 
-private getDesignationByDesignationId(designationId:number):void
-{
-  this.employeeService.getDesignationByDesignationId(designationId).subscribe(
-    (res)=>{
-      console.log(designationId," > ",res);
-      this.Designations.push(res.designation);
+          if (!employee.inactive) {
+            this.activeEmployees.push(employee);
+            console.log(this.activeEmployees);
+          } else {
+            this.disabledEmployees.push(employee);
+            console.log(this.disabledEmployees);
+          }
+          // console.log('hide spinner');
+          // this.spinnerService.hideSpinner();
+        });
 
-      console.log("desg:  ",this.Designations);
-    },  
-    (error)=>{
-      console.log(error);
-    }
-  )
-}
-
-disableEmployee(employeeId: any){
-  console.log(employeeId);
-  this.employeeService.disableEmployee(employeeId).subscribe(
-    (res)=>{
-      console.log(res);
-    },
-    (error)=>{
-      console.log(error);
-    }
-  )
-}
-
-
-
+        console.log('Active emp : ', this.activeEmployees);
+        console.log('Disable emp : ', this.disabledEmployees);
+      },
+      (error) => {
+        console.log(error);
+        console.log(' error : hide spinner');
+        // this.spinnerService.hideSpinner();
+      }
+    );
+  }
 }
