@@ -1,77 +1,82 @@
-<div class="m-3">
-    <h3>Applicants -: </h3>
-    <div *ngIf="applicantsLength === 0">
-        <p>Till now, no candidates applied on this job posting !</p>
-    </div>
-
-    <div class="Filters">
-        <form [formGroup]="filtersForm">
+<div class="p-5 pt-3">
+    <h3>-- All Applicants on the Job Posting --</h3>
+    <div>
+        <form [formGroup]="filtersForm" class="d-flex flex-row align-items-center overflow-scroll">
           <div>
-              <p>Degree</p>
-              <select formControlName="degree">
+              <!-- <p>Degree</p> -->
+              <select formControlName="degree" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their degrees">
+                <option value="">Select Degree</option>
                   <option *ngFor="let deg of degrees" [value]="deg.degreeId">
                       {{deg.degreeName}}
                   </option>
               </select>
           </div>
             <div>
-                <p>Education Institution</p>
-                <select formControlName="institute">
+                <!-- <p>Education Institution</p> -->
+                <select formControlName="institute" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their previous institution name">
+                    <option value="">Select Institution</option>
                     <option *ngFor="let inst of educationInstitutions" [value]="inst.institutionId">
                         {{inst.institutionOrSchool}}
                     </option>
                 </select>
             </div>
             <div>
-                <p>Past Company</p>
-                <select formControlName="company">
+                <!-- <p>Past Company</p> -->
+                <select formControlName="company" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their previous company name">
+                    <option value="">Select Company</option>
                     <option *ngFor="let cmp of companies" [value]="cmp.companyId">
                         {{cmp.companyName}}
                     </option>
                 </select>
             </div>
             <div>      
-                <p>Application Status</p>
-                <select formControlName="status">
+                <!-- <p>Application Status</p> -->
+                <select formControlName="status" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their application status">
+                    <option value="">Select Status</option>
                     <option *ngFor="let stat of allStatus" [value]="stat.statusId">
                         {{stat.statusName}}
                     </option>
                 </select>
             </div>
             
-            <div class="d-flex justify-content-between">
-                <button style="--clr:#8A2BE2" (click)=onSubmit()><span>Search</span><i></i></button>
-                <button style="--clr:#8A2BE2" (click)=resetFilters()><span>Reset</span><i></i></button>
+            <div class="d-flex flex-row mx-2">
+                <button type="button" class="btn btn-info m-2" (click)=onSubmit()><span>Search</span><i></i></button>
+                <button type="button" class="btn btn-secondary m-2" (click)=resetFilters()><span>Reset</span><i></i></button>
             </div>
         </form>
     </div>
 
-    <div class="searchBar">
-    <div class="mb-4 col">
-        <label for="search-text">Search for the interviewer</label>
-        <input
-        type="text"
-        [(ngModel)]="searchText"
-        [ngModelOptions]="{ standalone: true }"
-        class="form-control"  
-        id="search-text"
-        aria-describedby="search-text"
-        (input)="filterItems()"
-        placeholder="Enter applicant name, skills to search applicants"
-        autofocus
-        />
-    </div>
+    <div class="d-flex flex-row mb-5">
+        <div class="d-flex justify-content-center align-items-center">Search : </div>
+        <div class="d-flex justify-content-center align-items-center col px-3">
+            <label for="search-text" hidden>Search for the interviewer</label>
+            <input
+                type="search"
+                [(ngModel)]="searchText"
+                [ngModelOptions]="{ standalone: true }"
+                class="form-control"  
+                id="search-text"
+                aria-describedby="search-text"
+                (input)="search(searchText)"
+                placeholder="Search using applicant's name, email or skills"
+            />
+        </div>
     </div>
       
-
+    <div *ngIf="applicantsLength === 0">
+        <p>Till now, no candidates applied on this job posting !</p>
+    </div>
     <!-- <div *ngIf="applicantsLength !== 0">
         <app-applicant-card *ngFor="let item of filterapplicants" [applicant]="item"></app-applicant-card>
     </div>
     <div *ngIf="searchedApplicants.length !== 0">
         <app-applicant-card *ngFor="let item of searchedApplicants" [applicant]="item"></app-applicant-card>
     </div> -->
-    <div *ngIf="searchedApplicants.length !== 0 || filterapplicants.length !== 0">
-        <app-applicant-card *ngFor="let item of searchedApplicants.length !== 0 ? searchedApplicants : filterapplicants" [applicant]="item"></app-applicant-card>
-      </div>
+    <div *ngIf="applicantsLength !== 0 && showApplicants.length === 0">
+        <p>No candidate found under your search/filtered criteria !</p>
+    </div>
+    <div *ngIf="showApplicants.length !== 0">
+        <app-applicant-card *ngFor="let item of showApplicants" [applicant]="item"></app-applicant-card>
+    </div>
     
 </div>

@@ -78,37 +78,10 @@ export class YourJobsComponent implements OnInit {
 
     this.loadJobs();
     this.loadClosedJobs();
-
-    this.loadJobs();
-    this.loadClosedJobs();
-
-    this.locations.push({
-      locationId: 'null',
-      address: 'Select Job Location ',
-      city: '',
-      state: '',
-      country: '',
-    });
+    
     this.loadJobLocations();
-
-    this.jobTypes.push({ jobTypeId: 'null', typeName: ' Select Job Type ' });
     this.loadJobTypes();
-
-    this.jobCategories.push({
-      categoryId: 'null',
-      categoryCode: 'Select Job Category ',
-      categoryName: '',
-      description: '',
-    });
     this.loadJobCategories();
-
-    this.categoryjobPositions.push({
-      positionId: 'null',
-      positionName: 'Select Job Position ',
-      positionCode: '',
-      description: '',
-      categoryId: 'null',
-    });
     this.loadJobPositions();
   }
 
@@ -389,14 +362,7 @@ export class YourJobsComponent implements OnInit {
   public loadJobPositionsByCategoryId(): void {
     var selectedCategoryId = this.filtersForm.get('jobCategory')?.value;
     this.categoryjobPositions = [];
-    this.categoryjobPositions.push({
-      positionId: 'null',
-      positionName: 'Select Job Position ',
-      positionCode: '',
-      description: '',
-      categoryId: 'null',
-    });
-
+  
     this.jobPositions.forEach((pos) => {
       if (selectedCategoryId === pos.categoryId)
         this.categoryjobPositions.push(pos);
