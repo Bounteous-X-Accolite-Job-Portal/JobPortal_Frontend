@@ -15,7 +15,7 @@ export const sideBarData = [
   },
   {
     routeLink: 'interview-hub',
-    icon: 'fa-solid fa-users',
+    icon: 'fa-solid fa-laptop-code',
     label: 'Interview Hub',
     requiredPrivilege: false,
     requiredSpecialPrivilege: false,
@@ -52,6 +52,13 @@ export const sideBarData = [
     routeLink: 'jobOffered',
     icon: 'fa-solid fa-envelope-open-text',
     label: 'Job Offered',
+    requiredPrivilege: true,
+    requiredSpecialPrivilege: true,
+  },
+  {
+    routeLink: 'allEmployees',
+    icon: 'fas fa-users',
+    label: 'Employees',
     requiredPrivilege: true,
     requiredSpecialPrivilege: true,
   },

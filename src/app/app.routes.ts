@@ -142,7 +142,7 @@ export const routes: Routes = [
       {path:'referral',component:ReferralComponent},
       {path:'addReferral',component:AddReferralComponent},
       {
-        path: 'disable-employee-privilege',
+        path: 'allEmployees',
         component: DisablePrivilegeComponent,
       },
       { path: 'add-employee', component: AddEmployeeComponent },
