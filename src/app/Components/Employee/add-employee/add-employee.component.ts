@@ -101,27 +101,34 @@ export class AddEmployeeComponent implements OnInit {
     else {
       console.log(employee);
 
-      this.addEmployeeService.addEmployee(employee).subscribe((data: any) => {
-        console.log('Status', data.status, 'data message', data.message);
+      this.addEmployeeService.addEmployee(employee).subscribe(
+        (data: any) => {
+          console.log('Status', data.status, 'data message', data.message);
 
-        if (data.status == 200) {
-          this.loading = false;
+          if (data.status == 200) {
+            this.loading = false;
 
-          this.toaster.success('Successfully added employee.');
-          console.log('success adding employee');
+            this.toaster.success('Successfully added employee.');
+            console.log('success adding employee');
 
-          this.submitted = false;
-          this.addEmployeeForm.reset();
+            this.submitted = false;
+            this.addEmployeeForm.reset();
 
-          this.spinnerService.hideSpinner();
-        } else {
-          this.toaster.error(
-            'Some error occured while registering employee, please try again.'
-          );
-          console.log('error');
+            this.spinnerService.hideSpinner();
+          } else {
+            this.toaster.error(
+              'Some error occured while registering employee, please try again.'
+            );
+            console.log('error');
+            this.spinnerService.hideSpinner();
+          }
+        },
+        (error) => {
+          console.log(error);
+          this.toaster.error("Some error occured while registering" + error.message);
           this.spinnerService.hideSpinner();
         }
-      });
+    );
     }
   }
 }
