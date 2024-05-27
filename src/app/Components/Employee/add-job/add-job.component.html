@@ -34,13 +34,13 @@
       </div>
       <div class="mb-3 col">
         <label class="form-label">Job Description</label>
-        <input
+        <textarea
           type="text"
           placeholder="Enter Job Description"
           formControlName="jobDescription"
           class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f['jobDescription'].errors }"
-        />
+        ></textarea>
         <div
           *ngIf="submitted && f['jobDescription'].errors"
           class="invalid-feedback"

@@ -29,6 +29,7 @@ import { JobService } from '../../Services/Job/job.service';
 export class JobdetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   toaster = inject(ToastrService);  
+  
   job?: Job;
   location?: location ;
   degree?: Degree;
