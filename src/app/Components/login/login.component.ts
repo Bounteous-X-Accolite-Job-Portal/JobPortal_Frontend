@@ -7,7 +7,7 @@ import { Router, RouterModule } from '@angular/router';
 import { LoginResponse } from '../../Models/loginResponse';
 import { UserStoreService } from '../../Services/user-store.service';
 import { SpinnerService } from '../../Services/spinner.service';
-import { ForgetPasswordService } from '../../forget-password.service';
+import { ForgetPasswordService } from '../../Services/ForgetPassword/forget-password.service';
 import { error } from 'console';
 import { resertPassword } from '../../Models/resetPasswordmodel';
 

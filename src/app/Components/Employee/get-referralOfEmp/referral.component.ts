@@ -1,25 +1,17 @@
-import { Component, inject } from '@angular/core';
-import { ReferralServiceService } from '../../../referral-service.service';
-import { Referral } from '../../../referral';
+import { Component } from '@angular/core';
+import { ReferralServiceService } from '../../../Services/ReferralService/referral-service.service';
 import { JobService } from '../../../Services/Job/job.service';
-import { Job } from '../../../Models/JobResponse/Job';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserStoreService } from '../../../Services/user-store.service';
 import { AuthService } from '../../../Services/auth.service';
-import { GetReferral } from '../../../get-referral';
-import { Referralresponse } from '../../../referralresponse';
+import { GetReferral } from '../../../Models/ReferralResponse/get-referral';
+import { Referralresponse } from '../../../Models/ReferralResponse/referralresponse';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
-import { Guid } from 'guid-typescript';
-import { CandidateResponse } from '../../../Models/CandidateAccountResponse/CandidateResponse';
-import { JobResponse } from '../../../Models/JobResponse/JobResponse';
-import { ReferralResponse } from '../../../Models/ReferralResponse/ReferralResponse';
 import { forkJoin } from 'rxjs';
-import { Application } from 'express';
-import { ApplicationServiceService } from '../../../Services/ApplicationService/application-service.service';
-import { StatusServiceService } from '../../../status-service.service';
-
+import { StatusServiceService } from '../../../Services/Status/status-service.service';
+import { ReferralCompleteResponse } from '../../../Models/ReferralResponse/ReferralCompleteResponse';
 
 
 @Component({
@@ -37,7 +29,7 @@ export class ReferralComponent {
   // candidateDetails: { [candidateId: string]: CandidateResponse } = {}; 
   //candidateDetails : CandidateResponse[] = [];
 
-  referralData: ReferralResponse[] = [];
+  referralData: ReferralCompleteResponse[] = [];
 
 
   // jobId:string='';
@@ -90,7 +82,7 @@ this.referalService.getreferral(this.empId).subscribe(
           (result) => {
             console.log("all data ", result);
 
-            let data : ReferralResponse = {
+            let data : ReferralCompleteResponse = {
               candidate : result.candidateDetails.candidate,
               referral : res.referrals[i],
               job : result.jobDetails.job,

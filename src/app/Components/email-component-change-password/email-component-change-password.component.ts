@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { resertPassword } from '../Models/resetPasswordmodel';
-import { ChangePasswordService } from '../change-password.service';
+import { resertPassword } from '../../Models/resetPasswordmodel';
+import { ChangePasswordService } from '../../Services/ChangePassword/change-password.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { catchError, tap, throwError } from 'rxjs';

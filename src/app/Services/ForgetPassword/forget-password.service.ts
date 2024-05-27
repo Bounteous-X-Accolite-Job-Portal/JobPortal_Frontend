@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { resertPassword } from './Models/resetPasswordmodel';
+import { resertPassword } from '../../Models/resetPasswordmodel';
 
 @Injectable({
   providedIn: 'root'

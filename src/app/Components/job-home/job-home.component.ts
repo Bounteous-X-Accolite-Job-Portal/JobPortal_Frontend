@@ -89,7 +89,7 @@ export class JobHomeComponent {
     }
 
     this.loadJobs();
-    if (this.hasPrivilege) {
+    if(this.hasPrivilege){
       this.loadClosedJobs();
     }
 

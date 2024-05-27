@@ -23,7 +23,7 @@ import { EmployeeDashboardComponent } from './Components/Employee/employee-dashb
 import { InterviewHubComponent } from './Components/Employee/interview-hub/interview-hub.component';
 import { InterviewComponent } from './Components/JobApplication/interview/interview.component';
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
-import { ReferralServiceService } from './referral-service.service';
+import { ReferralServiceService } from './Services/ReferralService/referral-service.service';
 import { ReferralComponent } from './Components/Employee/get-referralOfEmp/referral.component';
 import { CrudCategoryJobDataComponent } from './Components/Employee/crud-category-job-data/crud-category-job-data.component';
 import { CrudPositionJobDataComponent } from './Components/Employee/crud-position-job-data/crud-position-job-data.component';
@@ -48,12 +48,12 @@ import { JobApplicantComponent } from './Components/JobApplication/job-applicant
 import { YourJobsComponent } from './Components/Employee/your-jobs/your-jobs.component';
 import { DisablePrivilegeComponent } from './Components/Employee/disable-privilege/disable-privilege.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ForgetPasswordComponentComponent } from './forget-password-component/forget-password-component.component';
+import { ForgetPasswordComponentComponent } from './Components/forget-password-component/forget-password-component.component';
 import { DesignationComponent } from './Components/Employee/designation/designation.component';
 import { SettingsComponent } from './Components/Employee/settings/settings.component';
 import { ProfileComponent } from './Components/Employee/profile/profile.component';
 import { CrudStatusJobDataComponent } from './Components/Employee/crud-status-job-data/crud-status-job-data.component';
-import { EmailComponentChangePasswordComponent } from './email-component-change-password/email-component-change-password.component';
+import { EmailComponentChangePasswordComponent } from './Components/email-component-change-password/email-component-change-password.component';
 import { OfferLetterComponent } from './Components/Employee/offer-letter/offer-letter.component';
 
 export const routes: Routes = [

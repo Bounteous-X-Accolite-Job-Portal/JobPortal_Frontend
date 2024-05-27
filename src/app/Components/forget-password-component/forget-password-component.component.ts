@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router' ;
 import { catchError, tap, throwError } from 'rxjs';
-import { ForgetPasswordService } from '../forget-password.service';
+import { ForgetPasswordService } from '../../Services/ForgetPassword/forget-password.service';
 import { ActivatedRoute } from '@angular/router';
-import { resertPassword } from '../Models/resetPasswordmodel';
+import { resertPassword } from '../../Models/resetPasswordmodel';
 import { FormsModule } from '@angular/forms';
 
 

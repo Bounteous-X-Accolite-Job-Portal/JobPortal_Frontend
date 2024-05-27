@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Referral } from '../../../referral';
-import { ReferralServiceService } from '../../../referral-service.service';
+import { Referral } from '../../../Models/ReferralResponse/referral';
+import { ReferralServiceService } from '../../../Services/ReferralService/referral-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { JobService } from '../../../Services/Job/job.service';
