@@ -7,7 +7,6 @@ import { Degree } from '../../Models/DegreeResponse/Degree';
 import { JobType } from '../../Models/JobTypeResponse/JobType';
 import { JobCategory } from '../../Models/JobCategoryResponse/JobCategory';
 import { position } from '../../Models/JobPositionResponse/position';
-import { AllJobPosition } from '../../Models/JobPositionResponse/AllJobPosition';
 import { DegreeResponse } from '../../Models/DegreeResponse/DegreeRespose';
 import { JobCategoryResponse } from '../../Models/JobCategoryResponse/JobCategoryResponse';
 import { JobTypeResponse } from '../../Models/JobTypeResponse/JobTypeResponse';
@@ -38,8 +37,10 @@ export class JobdetailsComponent {
   jobPosition?: position ;
   logginnedUserId : string = '';
   userapplied :boolean = false;
-  stringForButton:string = '';
+  stringForButton:string = 'Apply';
   isEmployee:boolean = false;
+
+  isLoggedIn : boolean = false;
 
   constructor(
     private jobService : JobService,
@@ -49,10 +50,11 @@ export class JobdetailsComponent {
     private renderer: Renderer2,
     private elementRef: ElementRef) {}
 
-  ngOnInit():void
-  {
+  ngOnInit(){
     this.userapplied = false;
-    this.loadJobDetails();
+    
+    this.isLoggedIn = this.auth.isLoggedIn();
+
     this.userStore.getIdFromStore()
         .subscribe((val) => {
             console.log(val);
@@ -61,6 +63,8 @@ export class JobdetailsComponent {
             this.logginnedUserId = val || idFromToken;
             console.log("Logged User Id : ",this.logginnedUserId);
         })
+
+    this.loadJobDetails();
   }
   
   private loadJobDetails(): void{
@@ -74,7 +78,9 @@ export class JobdetailsComponent {
       this.loadDegreeDetails();
       this.loadTypeDetails();
       
-      this.loadcheckCandidateApplicable();
+      if(this.isLoggedIn){
+        this.loadcheckCandidateApplicable();
+      }
     });
   }
 
@@ -141,21 +147,28 @@ export class JobdetailsComponent {
 
   public applynow(jobId?:string):void
   {
-    this.jobService.applyForJob(jobId).subscribe(
-      (res) =>
-        {
-          this.stringForButton = "Already Applied !";
-          this.disableApplyButton();
-          this.displayAppliedMessage();
-          console.log("Success",res);
-          this.router.navigate(['jobs']);
-        },
-      (error) =>
-        {
-          this.displayNotAppliedMessage();
-          console.log("Error",error);
-        }
-    )
+    if(!this.isLoggedIn){
+      this.toaster.info("Please login to apply !");
+      this.router.navigate(["/login"]);
+      return;
+    }
+    else{
+      this.jobService.applyForJob(jobId).subscribe(
+        (res) =>
+          {
+            this.stringForButton = "Already Applied !";
+            this.disableApplyButton();
+            this.displayAppliedMessage();
+            console.log("Success",res);
+            this.router.navigate(['jobs']);
+          },
+        (error) =>
+          {
+            this.displayNotAppliedMessage();
+            console.log("Error",error);
+          }
+      )
+    }
   }
 
   private loadcheckCandidateApplicable():void{
