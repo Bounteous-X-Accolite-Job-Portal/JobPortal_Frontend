@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Referral } from './referral';
-import { environment } from '../environments/environment.development';
+import { Referral } from '../../Models/ReferralResponse/referral';
+import { environment } from '../../../environments/environment.development';
 import { Observable } from 'rxjs';
-import { Employee } from './Models/Backend/Employee/Employee';
-import { EmployeeDashboardComponent } from './Components/Employee/employee-dashboard/employee-dashboard.component';
-import { Referralresponse } from './referralresponse';
-import { GetReferral } from './get-referral';
+import { Employee } from '../../Models/Backend/Employee/Employee';
+import { EmployeeDashboardComponent } from '../../Components/Employee/employee-dashboard/employee-dashboard.component';
+import { Referralresponse } from '../../Models/ReferralResponse/referralresponse';
+import { GetReferral } from '../../Models/ReferralResponse/get-referral';
 
 @Injectable({
   providedIn: 'root'

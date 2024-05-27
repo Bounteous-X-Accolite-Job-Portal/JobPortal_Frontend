@@ -3,7 +3,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { navbarData } from './nav-data';
 import { CommonModule } from '@angular/common';
 import { UserStoreService } from '../../Services/user-store.service';
-import { AuthService } from '../../Services/auth.service';import { ChangePasswordService } from '../../change-password.service';
+import { AuthService } from '../../Services/auth.service';import { ChangePasswordService } from '../../Services/ChangePassword/change-password.service';
  
 
 @Component({

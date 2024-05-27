@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { ForgetPasswordService } from '../forget-password.service';
-import { ChangePasswordService } from '../change-password.service';
+import { ForgetPasswordService } from '../Services/ForgetPassword/forget-password.service';
+import { ChangePasswordService } from '../Services/ChangePassword/change-password.service';
 import { resertPassword } from '../Models/resetPasswordmodel';
 import { catchError, tap, throwError } from 'rxjs';
 // import { MessageService } from 'primeng/api';
