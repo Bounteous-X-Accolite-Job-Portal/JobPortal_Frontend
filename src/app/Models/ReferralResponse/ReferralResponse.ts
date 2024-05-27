@@ -1,14 +1,11 @@
-import { GetReferral } from "../../get-referral";
-import { Referral } from "../../referral";
-import { Referralresponse } from "../../referralresponse";
-import { Status } from "../../status";
-import { Candidate } from "../Backend/Candidate";
-import { Job } from "../JobResponse/Job";
-import { StatusModel } from "../StatusResponse/StatusModel";
+import { Guid } from "guid-typescript"
 
-export interface ReferralResponse{
-    referral: Referralresponse,
-    candidate: Candidate,
-    job: Job,
-    statusData: StatusModel
+export interface Referralresponse {
+    referralId?:Guid,
+    candidateId?:Guid,
+    jobId?:Guid,
+    empId?:Guid,
+    statusId?:number
 }
+
+

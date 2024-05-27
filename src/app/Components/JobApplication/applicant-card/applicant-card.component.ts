@@ -3,9 +3,7 @@ import { ApplicantData } from '../../../Models/ApplicantsResponse/ApplicantData'
 import { CommonModule } from '@angular/common';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Status } from '../../../Models/Status';
 import { StatusService } from '../../../Services/Status/status.service';
-import { StatusResponse } from '../../../Models/StatusResponse/StatusResponse';
 import { ApplicationServiceService } from '../../../Services/ApplicationService/application-service.service';
 import { ApplicationResponse } from '../../../Models/ApplicationResponse/ApplicationResponse';
 import { ToastrModule } from 'ngx-toastr';
@@ -16,7 +14,6 @@ import { ApplicantInterviewResponse } from '../../../Models/InterviewResponse/Ap
 import { ApplicantInterview } from '../../../Models/InterviewResponse/ApplicantInterview';
 import { Interview } from '../../../Models/InterviewResponse/Interview';
 import { StatusModel } from '../../../Models/StatusResponse/StatusModel';
-import { AllStatusResponse } from '../../../Models/StatusResponse/AllStatusResponse';
 import { RouterModule } from '@angular/router';
 
 @Component({
