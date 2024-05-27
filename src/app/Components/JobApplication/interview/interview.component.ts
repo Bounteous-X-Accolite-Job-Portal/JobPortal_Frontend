@@ -14,6 +14,10 @@ import { FilterPipe } from '../../../Models/filter.pipe';
 import { ActivatedRoute } from '@angular/router';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { EmployeeService } from '../../../Services/AddEmployee/employee.service';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
+import { AddInterviewResponse } from '../../../Models/InterviewResponse/AddInterviewResponse';
+import { InterviewService } from '../../../Services/InterviewService/interview.service';
 
 @Component({
   selector: 'app-interview',
@@ -30,7 +34,9 @@ export class InterviewComponent implements OnInit {
     private route: ActivatedRoute,
     private spinnerService: SpinnerService,
     private employeeService: EmployeeService,
-    private _location: Location
+    private _location: Location,
+    private toast : ToastrService,
+    private interviewService : InterviewService
   ) {}
 
   searchText = '';
@@ -117,17 +123,20 @@ export class InterviewComponent implements OnInit {
     console.log(data);
 
     if (this.addInterviewForm.valid) {
-      this.http
-        .post(environment.baseURL + 'Interview/AddInterview', data)
+      this.interviewService.addInterview(data)
         .subscribe(
-          (response) => {
+          (response : AddInterviewResponse) => {
             console.log('success : ', response);
+            this.toast.success(response.message);
+
             this.addInterviewForm.reset();
+            this.employeeIdOfInterviewer = "";
 
             this.spinnerService.hideSpinner();
           },
           (error) => {
             console.error('Error sending POST request:', error);
+            this.toast.error("Error while scheduling interview");
             this.spinnerService.hideSpinner();
           }
         );

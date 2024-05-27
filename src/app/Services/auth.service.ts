@@ -9,6 +9,7 @@ import { jwtDecode } from "jwt-decode";
 import { environment } from '../../environments/environment.development';
 
 import { SpinnerService } from './spinner.service';
+import { ResponseModal } from '../Models/ResponseModal';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,10 @@ export class AuthService {
 
   loginUser(loginData: any): Observable<any> {
     return this.http.post<LoginResponse>(environment.baseURL + 'Account/login', loginData);
+  }
+
+  logoutFromBackend(): Observable<ResponseModal> {
+    return this.http.post<ResponseModal>(environment.baseURL + "Account/logout", null);
   }
 
   logout()
