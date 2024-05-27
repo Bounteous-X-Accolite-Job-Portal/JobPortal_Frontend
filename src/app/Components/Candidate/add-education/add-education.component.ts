@@ -60,9 +60,9 @@ constructor(private router:Router) {}
   private loadAllInstitutions(): void {
     this.httpService.getAllInstitutions().subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
         this.Institutions = this.Institutions.concat(res.educationInstitution);
-        console.log(this.Institutions);
+        // console.log(this.Institutions);
       },
       (error) => {
         console.log(error);
@@ -74,7 +74,7 @@ constructor(private router:Router) {}
     this.httpService.getAllDegrees().subscribe(
       (res) => {
         this.degrees = this.degrees.concat(res.degrees);
-        console.log(this.degrees);
+        // console.log(this.degrees);
       },
       (error) => {
         console.error('Error loading Degrees:', error);

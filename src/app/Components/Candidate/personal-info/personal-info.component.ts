@@ -55,12 +55,11 @@ export class PersonalInfoComponent {
 
     this.userStore.getIdFromStore()
     .subscribe((val) => {
-      console.log(val);
+      // console.log(val);
       let idFromToken = this.auth.getIdFromToken();
-      console.log(idFromToken);
+      // console.log(idFromToken);
       this.userId = val || idFromToken;
-      console.log("Logged User Id : ",this.userId);
-
+      // console.log("Logged User Id : ",this.userId);
       this.spinnerService.hideSpinner();
     })
 
@@ -71,10 +70,10 @@ export class PersonalInfoComponent {
 
       this.cs.getCandidateById(this.userId).subscribe(
         (res) => {
-          console.log(res);
+          // console.log(res);
           this.candidate=res.candidate;
-          this.toastr.success("Candidate data loaded");
-          console.log(this.candidate);
+          this.toastr.success("Candidate data retrieved");
+          // console.log(this.candidate);
 
           this.profileForm.get('phone')?.setValue(this.candidate.phone || 'NA');
           this.profileForm.get('addressLine1')?.setValue(this.candidate.addressLine1 || 'NA');
@@ -86,7 +85,7 @@ export class PersonalInfoComponent {
           this.spinnerService.hideSpinner();
         },
         (error) => {
-          console.log(error);        
+          console.log(error);
           this.toastr.error("Error in retrieving data");
           this.spinnerService.hideSpinner();
         }
@@ -124,11 +123,12 @@ export class PersonalInfoComponent {
 
     this.cs.updateCandidateProfile(this.candidate).subscribe(
       (res)=>{
-        console.log(res);
+        this.toastr.success("Profile updated successfully");
         this.ngOnInit();
       },
       (error)=>{
-        console.log(error);
+        this.toastr.error("Error updating profile");
+        // console.log(error);
       }
     );
   }

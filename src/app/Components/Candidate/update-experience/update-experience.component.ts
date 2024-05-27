@@ -53,9 +53,9 @@ export class UpdateExperienceComponent {
   private loadAllComapnies(): void {
     this.httpService.getAllCompanies().subscribe(
       (res) => {
-        console.log(res.companies);
+        // console.log(res.companies);
         this.companies = this.companies.concat(res.companies);
-        console.log(this.companies);
+        // console.log(this.companies);
       },
       (error) => {
         console.log(error);
@@ -67,11 +67,12 @@ export class UpdateExperienceComponent {
     this.candidateService.updateCandidateExperience(this.candidateExperience)
       .subscribe(
         (res) => {
-          console.log('exp response : ', res);
+          // console.log('exp response : ', res);
           this.toastr.success('Experience Updated Successfully!!');
           this.router.navigate(['profile', 'exp']);
         },
         (error) => {
+          this.toastr.error("Error in updating experience");
           console.log(error);
         }
       );
@@ -80,7 +81,7 @@ export class UpdateExperienceComponent {
   private loadCandidateExperience(id:string):void{
     this.candidateService.getCandidateExperience(id).subscribe(
       (res)=>{
-        console.log(res);
+        // console.log(res);
         this.candidateExperience = res.experience;
       
         this.updatecandidateExperience.get('experienceTitle')?.setValue(this.candidateExperience.experienceTitle || '');
