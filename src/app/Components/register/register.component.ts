@@ -1,19 +1,19 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
 import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
+import { SpinnerService } from '../../Services/spinner.service';
 
 @Component({
   selector: 'app-register',
@@ -24,6 +24,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     CommonModule,
     RouterModule,
+    ToastrModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -35,8 +36,9 @@ export class RegisterComponent {
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private toast : ToastrService,
+    private spinnerService : SpinnerService
   ) {}
 
   registerForm = this.fb.group(
@@ -77,6 +79,8 @@ export class RegisterComponent {
   }
 
   onSubmitRegister(): void {
+    this.spinnerService.showSpinner();
+
     if (this.registerForm.valid) {
       const registerData = {
         firstName: this.registerForm.value.firstName,
@@ -89,17 +93,24 @@ export class RegisterComponent {
         (res) => {
           console.log(res.message);
           if (res.status == 200) {
+            this.toast.success(res.message);
             this.router.navigate(['/login']);
           } else {
             this.message = res.message;
+            this.toast.error(res.message);
           }
+          this.spinnerService.hideSpinner();
         },
         (error) => {
           console.error('Registration error:', error);
+          this.toast.error("Error while registartion, please try again.");
+          this.spinnerService.hideSpinner();
         }
       );
     } else {
       console.log("Invalid Form");
+      this.toast.error("Invalid Form !");
+      this.spinnerService.hideSpinner();
     }
   }
 }
