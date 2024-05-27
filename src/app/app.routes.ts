@@ -133,6 +133,8 @@ export const routes: Routes = [
     canActivateChild: [childAuthGuard, childEmployeeGuardGuard],
     children: [
       { path: 'profile', component: ProfileComponent },
+      { path: 'change-password', component: EmailComponentChangePasswordComponent},
+      { path: 'forgot-password', component: ChangePasswordComponent},
       {
         path: 'add-job',
         component: AddJobComponent,
