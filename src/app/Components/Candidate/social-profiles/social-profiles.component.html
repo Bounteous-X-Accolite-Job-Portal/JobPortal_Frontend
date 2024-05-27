@@ -1,24 +1,24 @@
-<section class="vh-100" style="background-color: #8c3f9b">
-  <div class="container py-5 px-5 h-100 w-50">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="card mb-4 mb-lg-0">
-        <div class="card-body p-0">
-          <form [formGroup]="mediaForm">
+<section class="vh-100">
+  <div class="container py-5 px-5 h-100 w-100">
+    <div class="row d-flex justify-content-center align-items-center h-100 w-100">
+      <div class="card mb-4 mb-lg-0 w-100">
+        <div class="card-body m-4 p-4 w-100">
+          <form [formGroup]="mediaForm" style="display: flex; align-items: center; flex-direction: column; width: 100%;">
             <button
-              class="btn btn-primary w-100"
+              class="btn btn-primary w-50"
               *ngIf="enableAddButton"
               (click)="activeAddSocialMedia()"
             >
               Click Here To Add URLs
             </button>
             <button
-              class="btn btn-primary w-100"
+              class="btn btn-primary w-50"
               *ngIf="enableEditButton"
               (click)="activeEditSocialMedia()"
             >
               Click Here To Edit URLs
             </button>
-            <ul class="list-group list-group-flush rounded-3">
+            <ul class="list-group list-group-flush rounded-3 w-50">
               <li
                 class="list-group-item d-flex justify-content-between align-items-center p-3"
               >
@@ -53,7 +53,7 @@
               </li>
             </ul>
             <button
-              class="btn btn-success w-100"
+              class="btn btn-success w-50"
               *ngIf="isAccessible"
               (click)="
                 updateSocialMedia ? funupdateSocialMedia() : funaddSocialMedia()
