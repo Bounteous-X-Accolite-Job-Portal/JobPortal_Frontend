@@ -90,7 +90,9 @@ export class JobHomeComponent  {
     }
 
     this.loadJobs();
-    this.loadClosedJobs();
+    if(this.hasPrivilege){
+      this.loadClosedJobs();
+    }
 
     this.locations.push({locationId: "null" , address: "Select Job Location " , city: "" , state: "" , country : ""});
     this.loadJobLocations();
