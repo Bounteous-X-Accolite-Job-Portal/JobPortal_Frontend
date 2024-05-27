@@ -60,13 +60,13 @@ ngOnInit() : void{
       this.msg=res.message;
       if(res.resume==null)
       {
-        this.toastr.info("Khali hai bhai");
+        this.toastr.info("No resume present");
         this.resumeExists=false;
         this.userResume = {"resumeUrl":'',"resumeId":'',"candidateId":''};
       }
       else
       {
-        this.toastr.success("Aa gaya resume link");
+        this.toastr.success("Resume successfully retrieved");
         this.resumeExists=true;
         this.userResume=res.resume;       
         this.resumeUrl = this.userResume !== undefined ? this.userResume.resumeUrl : "";
