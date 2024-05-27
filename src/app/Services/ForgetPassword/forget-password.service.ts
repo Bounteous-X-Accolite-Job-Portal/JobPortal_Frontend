@@ -1,21 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { resertPassword } from '../../Models/resetPasswordmodel';
+import { ResetPassword } from '../../Models/ResetPassword';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ForgetPasswordService {
-  apiEndpoint="https://localhost:7283/api/Email"
+  // apiEndpoint = 'https://localhost:7283/api/Email';
 
-  constructor(private http:HttpClient) { }
-  sendForgetPasswordLink(email:string)
-  {
-    return this.http.post<any>(`${this.apiEndpoint}/Email/${email}`,{})
+  constructor(private http: HttpClient) {}
+  sendForgetPasswordLink(email: string) {
+    return this.http.post<any>(environment.baseURL+"Email/Email/"+`${email}`, {});
   }
-  resertPassword(resertPasswordObj:resertPassword)
-  {
+  resertPassword(resertPasswordObj: ResetPassword) {
     console.log(this.resertPassword);
-    return this.http.post<any>(`${this.apiEndpoint}/reset-Password`,resertPasswordObj);
+    return this.http.post<any>(
+      environment.baseURL+`Email/reset-Password`,
+      resertPasswordObj
+    );
   }
 }
