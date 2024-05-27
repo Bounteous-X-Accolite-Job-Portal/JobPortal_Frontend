@@ -8,6 +8,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
   
 } from '@angular/forms';
 import { catchError, tap, throwError } from 'rxjs';
@@ -47,9 +48,10 @@ export class EmailComponentChangePasswordComponent {
   ngOnInit()
   {
     this.pwdForm = this.fb.group({
-      currentPassword:[''],
-      newPassword:[''],
-      confirmPassword:['']
+      currentPassword:['',Validators.required],
+      newPassword:['',Validators.required],
+      confirmPassword:['',Validators.required],
+      email:['']
     },
     {
       validators: this.passwordMatchValidator,
@@ -59,34 +61,11 @@ export class EmailComponentChangePasswordComponent {
     return this.pwdForm.controls;
   }
 
-  // resetPassword() {
-  //   this.userStoreService.getEmailFromStore().subscribe((val) => {
-  //     this.resetPasswordObj.email = val || this.authService.getEmailFromToken();
-  //   });
-  //   if (
-  //     this.resetPasswordObj.newPassword !=
-  //     this.resetPasswordObj.confirmPassword
-  //   ) {
-  //     return;
-  //   }
-  //   console.log(this.resetPasswordObj);
-
-  //   this.resetPasswordService
-  //     .changePassword(this.resetPasswordObj)
-
-  //     .pipe(
-  //       tap((response) => {
-  //         console.log('Reset password response:', response);
-  //         this.router.navigate(['login']);
-  //       }),
-  //       catchError((error) => {
-  //         return throwError(() => error);
-  //       })
-  //     )
-  //     .subscribe();
-  // }
 
   resetPassword(){
+    this.userStoreService.getEmailFromStore().subscribe((val) => {
+          this.pwdForm.get('email')?.setValue(val || this.authService.getEmailFromToken());
+        });
     console.log(this.pwdForm.value);
     this.changePasswordService.changePassword(this.pwdForm.value).subscribe(
       (res)=>{
@@ -101,7 +80,7 @@ export class EmailComponentChangePasswordComponent {
 
 
   passwordMatchValidator(formGroup: FormGroup): any {
-    const passwordControl = formGroup.get('newPassowrd');
+    const passwordControl = formGroup.get('newPassword');
     const confirmPasswordControl = formGroup.get('confirmPassword');
 
     if (passwordControl && confirmPasswordControl) {

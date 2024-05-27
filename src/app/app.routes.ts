@@ -135,11 +135,8 @@ export const routes: Routes = [
         path: 'change-password',
         component: EmailComponentChangePasswordComponent,
       },
-      { path: 'forgot-password', component: ForgetPasswordComponentComponent },
       {
-        path: 'add-job',
-        component: AddJobComponent,
-        canActivate: [hasPrivilegeGuard],
+        path: 'add-job', component: AddJobComponent, canActivate: [hasPrivilegeGuard],
       },
       { path: 'interview-hub', component: InterviewHubComponent },
       { path: 'referral', component: ReferralComponent },

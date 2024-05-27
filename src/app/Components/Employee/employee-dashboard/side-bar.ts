@@ -21,13 +21,6 @@ export const sideBarData = [
     requiredSpecialPrivilege: false,
   },
   {
-    routeLink: 'settings',
-    icon: 'fal fa-cog',
-    label: 'Settings',
-    requiredPrivilege: true,
-    requiredSpecialPrivilege: false,
-  },
-  {
     routeLink: 'referral',
     icon: 'fal fa-solid fa-handshake',
     label: 'Referal',
@@ -61,5 +54,19 @@ export const sideBarData = [
     label: 'Employees',
     requiredPrivilege: true,
     requiredSpecialPrivilege: true,
+  },
+  {
+    routeLink: 'change-password',
+    icon: 'fas fa-key',
+    label: 'Change Password',
+    requiredPrivilege: false,
+    requiredSpecialPrivilege: false,
+  },
+  {
+    routeLink: 'settings',
+    icon: 'fal fa-cog',
+    label: 'Settings',
+    requiredPrivilege: true,
+    requiredSpecialPrivilege: false,
   },
 ];

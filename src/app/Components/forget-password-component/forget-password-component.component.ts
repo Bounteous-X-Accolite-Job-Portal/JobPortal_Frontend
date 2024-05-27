@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router' ;
+import { Router, RouterLink } from '@angular/router' ;
 import { catchError, tap, throwError } from 'rxjs';
 import { ForgetPasswordService } from '../../Services/ForgetPassword/forget-password.service';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +9,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-forget-password-component',
   standalone: true,
-  imports: [FormsModule, ToastrModule],
+  imports: [FormsModule, ToastrModule, RouterLink],
   templateUrl: './forget-password-component.component.html',
   styleUrl: './forget-password-component.component.css'
 })
@@ -18,7 +18,7 @@ export class ForgetPasswordComponentComponent implements OnInit {
   confirmPassword: string = '';
   resetPasswordObj:ResetPassword=new ResetPassword();
   email: string | undefined;
-  
+
   constructor(
     private resetPasswordService: ForgetPasswordService,
     private route: ActivatedRoute,
@@ -34,9 +34,9 @@ export class ForgetPasswordComponentComponent implements OnInit {
     }
     resetPassword() {
       if (
-        this.resetPasswordObj.newPassword !==
-        this.resetPasswordObj.confirmPassword
+        this.resetPasswordObj.newPassword !== this.resetPasswordObj.confirmPassword
       ) {
+        this.toaster.error("New Password & Confirm Password didn't match!!")
         return;
       }
       console.log(this.resetPasswordObj)
