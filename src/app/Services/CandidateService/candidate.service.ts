@@ -21,6 +21,7 @@ import { Skills } from '../../Models/SkillsResponse/Skills';
 import { candidateExperience } from '../../Models/ExperienceResponse/candidateExperience';
 import { StatusResponse } from '../../Models/StatusResponse/StatusResponse';
 import { AllCompanyResponse } from '../../Models/CompanyResponse/AllCompanyResponse';
+import { Candidate } from '../../Models/Backend/Candidate';
 
 @Injectable({
   providedIn: 'root'
@@ -114,5 +115,8 @@ export class CandidateService {
   }
   getStatusByStatusId(id:number):Observable<StatusResponse>{
     return this.http.get<StatusResponse>(environment.baseURL+'JobStatus/'+id);
+  }
+  updateCandidateProfile(candidate : Candidate){
+    return this.http.put<Candidate>(environment.baseURL+'CandidateAccount/updateCandidateProfile',candidate);
   }
 }
