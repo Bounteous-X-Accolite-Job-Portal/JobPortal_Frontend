@@ -1,7 +1,6 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { interviewCardData } from '../../../Models/InterviewResponse/InterviewCardData';
 import { CommonModule } from '@angular/common';
-import { Guid } from 'guid-typescript';
 import { ExperienceWithCompany } from '../../../Models/ExperienceResponse/ExperienceWithCompany';
 import { forkJoin } from 'rxjs';
 import { SkillsServiceService } from '../../../Services/Skills/skills-service.service';
@@ -11,13 +10,13 @@ import { Skills } from '../../../Models/SkillsResponse/Skills';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { InterviewFeedbackService } from '../../../Services/InterviewFeedback/interview-feedback.service';
 import { AddInterviewFeedbackResponse } from '../../../Models/InterviewFeedback/AddInterviewFeedbackResponse';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-interview-card',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './interview-card.component.html',
   styleUrl: './interview-card.component.css'
 })
@@ -38,7 +37,6 @@ export class InterviewCardComponent implements OnInit {
     private companyService: CompanyService,
     private formBuilder: FormBuilder,
     private interviewFeedbackService: InterviewFeedbackService,
-    private router : Router,
     private spinnerService: SpinnerService,
   ){}
 

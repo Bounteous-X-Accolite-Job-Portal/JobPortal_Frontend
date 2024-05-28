@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { ApplicantData } from '../../../Models/ApplicantsResponse/ApplicantData';
 import { CommonModule } from '@angular/common';
 import { SpinnerService } from '../../../Services/spinner.service';
@@ -25,6 +25,7 @@ import { RouterModule } from '@angular/router';
 })
 export class ApplicantCardComponent implements OnInit {
   @Input() applicant !: ApplicantData;
+  @Output() changeStatusEmitter = new EventEmitter<{ applicationId : Guid, statusId: number }>();
 
   toaster = inject(ToastrService);
 
@@ -92,6 +93,11 @@ export class ApplicantCardComponent implements OnInit {
         (res: ApplicationResponse) => {
           console.log("change application status response", res)
 
+          let emitData = {
+            applicationId : res.application.applicationId,
+            statusId : newStatusId
+          }
+          this.changeStatusEmitter.emit(emitData);
           this.toaster.success("Successfully changed the application status !");
           
           this.form.reset();

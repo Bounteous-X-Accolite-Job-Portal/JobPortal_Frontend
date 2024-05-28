@@ -5,6 +5,7 @@ export interface ClosedJob{
     jobCode: string,
     jobTitle: string,
     jobDescription: string,
+    postDate: Date,
     lastDate: Date,
     degreeId: Guid,
     experience: string,
