@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { UserStoreService } from './user-store.service';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,8 @@ export class PermissionService {
   constructor(
     private auth : AuthService,
     private router: Router,
-    private store: UserStoreService
+    private store: UserStoreService,
+    private toast : ToastrService
   ) { }
 
   canActivate(): boolean {
@@ -19,6 +22,7 @@ export class PermissionService {
       return true;
     }
 
+    // this.toast.info("Please login to access that resource.");
     this.router.navigate(['login'])
     return false;
   }
@@ -28,6 +32,7 @@ export class PermissionService {
       return true;
     }
 
+    // this.toast.info("Please login to access that resource.");
     this.router.navigate(['login'])
     return false;
   }
@@ -52,6 +57,7 @@ export class PermissionService {
       return true;
     }
 
+    this.toast.info("You are not authorised to access that resource.");
     this.router.navigate([''])
     return false;
   }
@@ -66,6 +72,7 @@ export class PermissionService {
       return true;
     }
 
+    this.toast.info("You are not authorised to access that resource.");
     this.router.navigate([''])
     return false;
   }
@@ -80,6 +87,7 @@ export class PermissionService {
       return true;
     }
 
+    this.toast.info("You are not authorised to access that resource.");
     this.router.navigate(['employee-dashboard'])
     return false;
   }
@@ -94,6 +102,7 @@ export class PermissionService {
       return true;
     }
 
+    this.toast.info("You are not authorised to access that resource.");
     this.router.navigate(['employee-dashboard'])
     return false;
   }

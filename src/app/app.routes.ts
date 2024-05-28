@@ -42,7 +42,6 @@ import { candidateGuard } from './Guards/candidate.guard';
 import { candidateChildGuard } from './Guards/candidate-child.guard';
 import { hasPrivilegeGuard } from './Guards/has-privilege.guard';
 import { hasSpecialPrivilegeGuard } from './Guards/has-special-privilege.guard';
-import { hasSpecialPrivilegeChildGuard } from './Guards/has-special-privilege-child.guard';
 import { JobApplicantComponent } from './Components/JobApplication/job-applicant/job-applicant.component';
 import { YourJobsComponent } from './Components/Employee/your-jobs/your-jobs.component';
 import { DisablePrivilegeComponent } from './Components/Employee/disable-privilege/disable-privilege.component';
@@ -53,6 +52,7 @@ import { ProfileComponent } from './Components/Employee/profile/profile.componen
 import { CrudStatusJobDataComponent } from './Components/Employee/crud-status-job-data/crud-status-job-data.component';
 import { EmailComponentChangePasswordComponent } from './Components/email-component-change-password/email-component-change-password.component';
 import { OfferLetterComponent } from './Components/Employee/offer-letter/offer-letter.component';
+import { hasPrivilegeChildGuard } from './Guards/has-privilege-child.guard';
 
 export const routes: Routes = [
   {
@@ -64,7 +64,11 @@ export const routes: Routes = [
     path: 'landing',
     component: LandingComponent,
   },
-  { path: 'referral', component: ReferralComponent },
+  { 
+    path: 'referral', 
+    component: ReferralComponent,
+    canActivate: [authGuard, employeeGuardGuard]
+  },
   {
     path: 'about',
     component: AboutComponent,
@@ -90,14 +94,17 @@ export const routes: Routes = [
   {
     path: 'jobs/:jobId/applicants',
     component: JobApplicantComponent,
+    canActivate: [authGuard, employeeGuardGuard, hasPrivilegeGuard]
   },
   {
     path: 'application/:applicationId/scheduleInterview',
     component: InterviewComponent,
+    canActivate: [authGuard, employeeGuardGuard, hasPrivilegeGuard]
   },
   {
     path: 'closedJobs/:closedJobId/applicants',
     component: JobApplicantComponent,
+    canActivate: [authGuard, employeeGuardGuard, hasPrivilegeGuard]
   },
   {
     path: 'job-details/:jobId',
@@ -106,26 +113,31 @@ export const routes: Routes = [
   {
     path: 'closedJob/job-details/:closedJobId',
     component: JobdetailsComponent,
+    canActivate: [authGuard, employeeGuardGuard, hasPrivilegeGuard]
   },
-  {
-    path: 'user-profile',
-    component: UserProfileComponent,
-  },
+  // {
+  //   path: 'user-profile',
+  //   component: UserProfileComponent,
+  //   canActivate: [authGuard, candidateGuard]
+  // },
   {
     path: 'try',
     component: TryComponent,
   },
-  {
-    path: 'update',
-    component: UpdateEducationComponent,
-  },
+  // {
+  //   path: 'update',
+  //   component: UpdateEducationComponent,
+  //   canActivate: [authGuard, candidateGuard]
+  // },
   {
     path: 'crud-job-data',
     component: CrudCategoryJobDataComponent,
+    canActivate: [authGuard, employeeGuardGuard, hasPrivilegeGuard]
   },
   {
     path: 'edit-job/:id',
     component: EditJobComponent,
+    canActivate: [authGuard, employeeGuardGuard, hasPrivilegeGuard]
   },
   {
     path: 'employee-dashboard',
@@ -139,7 +151,9 @@ export const routes: Routes = [
         component: EmailComponentChangePasswordComponent,
       },
       {
-        path: 'add-job', component: AddJobComponent, canActivate: [hasPrivilegeGuard],
+        path: 'add-job', 
+        component: AddJobComponent, 
+        canActivate: [hasPrivilegeGuard],
       },
       { path: 'interview-hub', component: InterviewHubComponent },
       { path: 'referral', component: ReferralComponent },
@@ -147,13 +161,18 @@ export const routes: Routes = [
       {
         path: 'allEmployees',
         component: DisablePrivilegeComponent,
+        canActivate: [hasSpecialPrivilegeGuard],
       },
-      { path: 'add-employee', component: AddEmployeeComponent },
-      { path: 'settings', component: SettingsComponent },
+      { 
+        path: 'add-employee', 
+        component: AddEmployeeComponent,
+        canActivate: [hasPrivilegeGuard],
+      },
+      { path: 'settings', component: SettingsComponent, canActivate: [hasPrivilegeGuard] },
       {
         path: 'settings',
-        canActivate: [hasSpecialPrivilegeGuard],
-        canActivateChild: [hasSpecialPrivilegeChildGuard],
+        canActivate: [hasPrivilegeGuard],
+        canActivateChild: [hasPrivilegeChildGuard],
         children: [
           {
             path: 'crud-category-job-data',
@@ -181,8 +200,16 @@ export const routes: Routes = [
         ],
       },
       { path: 'your-jobs', component: YourJobsComponent },
-      { path: 'designation', component: DesignationComponent },
-      { path: 'jobOffered', component: OfferLetterComponent },
+      { 
+        path: 'designation', 
+        component: DesignationComponent,
+        canActivate: [hasPrivilegeGuard],
+      },
+      { 
+        path: 'jobOffered', 
+        component: OfferLetterComponent,
+        canActivate: [hasPrivilegeGuard, hasSpecialPrivilegeGuard],
+      },
       { path: '**', component: ProfileComponent },
     ],
   },
@@ -195,6 +222,8 @@ export const routes: Routes = [
       { path: 'edu', component: CandidateEducationComponent },
       {
         path: 'edu',
+        canActivate: [candidateGuard],
+        canActivateChild: [candidateChildGuard],
         children: [
           { path: 'add-edu', component: AddEducationComponent },
           { path: 'update-edu/:id', component: UpdateEducationComponent },
@@ -203,6 +232,8 @@ export const routes: Routes = [
       { path: 'exp', component: ExperienceComponent },
       {
         path: 'exp',
+        canActivate: [candidateGuard],
+        canActivateChild: [candidateChildGuard],
         children: [
           { path: 'add-exp', component: AddExperienceComponent },
           { path: 'update-exp/:id', component: UpdateExperienceComponent },
