@@ -44,11 +44,12 @@ export class ForgetPasswordComponentComponent implements OnInit {
         .resertPassword(this.resetPasswordObj)
         .pipe(
           tap((response) => {
-            console.log('Reset password response:', response);
+            // console.log('Reset password response:', response);
             this.toaster.success('Successfully Changed Password, Login with your new credentials!')
             this.router.navigate(['login']);
           }),
           catchError((error) => {
+            this.toaster.error('Error : ', error);
             return throwError(() => error);
           })
         )

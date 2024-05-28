@@ -19,6 +19,7 @@ import { ClosedApplicationService } from '../../../Services/ClosedApplication/cl
 import { forkJoin } from 'rxjs';
 import { ClosedJobServiceService } from '../../../Services/ClosedJob/closed-job-service.service';
 import { JobService } from '../../../Services/Job/job.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-interview-hub',
@@ -47,11 +48,12 @@ export class InterviewHubComponent implements OnInit {
     private closedApplicationService: ClosedApplicationService,
     private jobService: JobService,
     private closedJobService : ClosedJobServiceService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.loadInterviews();
-    console.log('interviews', this.interviews);
+    // console.log('interviews', this.interviews);
   }
 
   isActiveInterview(interview: Interview): boolean {
@@ -131,12 +133,12 @@ export class InterviewHubComponent implements OnInit {
   }
 
   private loadInterviews(): void {
-    console.log('show spinner');
+    // console.log('show spinner');
     this.spinnerService.showSpinner();
 
     this.getInterviewsService.getAllInterviewsOfLoggedInEmployee().subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
         this.interviews = res.allInterviews;
 
         this.interviews.forEach((interview) => {
@@ -177,7 +179,7 @@ export class InterviewHubComponent implements OnInit {
                       }
                   },
                   (error) => {
-                      console.error('Error in API calls interviewhub : ', error);
+                      this.toastr.error('Error in API calls interviewhub : ', error);
                   }
                 );
               });
@@ -186,7 +188,7 @@ export class InterviewHubComponent implements OnInit {
             this.closedApplicationService
             .getClosedApplicationById(interview.closedApplicationId.toString())
             .subscribe((closedApplication) => {
-              console.log("closedJob", closedApplication);
+              // console.log("closedJob", closedApplication);
 
               forkJoin({
                 candidate : this.candidateService.getCandidateById(closedApplication.closedApplication.candidateId.toString()),
@@ -218,19 +220,21 @@ export class InterviewHubComponent implements OnInit {
                     }
                 },
                 (error) => {
-                    console.error('Error in API calls interviewhub : ', error);
+                    // console.error('Error in API calls interviewhub : ', error);
+                    this.toastr.error('Error: ', error);
                 }
               );
             });
           }
         });
 
-        console.log('hide spinner');
+        // console.log('hide spinner');
         this.spinnerService.hideSpinner();
       },
       (error) => {
         this.spinnerService.hideSpinner();
-        console.error('Error loading job locations:', error);
+        this.toastr.error('Error: ', error);
+        // console.error('Error loading job locations:', error);
       }
     );
   }

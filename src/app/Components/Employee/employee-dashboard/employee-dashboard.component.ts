@@ -25,7 +25,10 @@ export class EmployeeDashboardComponent implements OnInit {
     private userStore : UserStoreService, 
     private authService : AuthService,
     private spinnerService : SpinnerService,
-  ) { }
+  ) { 
+    this.checkHasPrivilege();
+    this.checkHasSpecialPrivilege();
+  }
 
   ngOnInit(): void {
     this.userStore.getNameFromStore()
@@ -33,9 +36,6 @@ export class EmployeeDashboardComponent implements OnInit {
         let nameFromToken = this.authService.getNameFromToken();
         this.name = val || nameFromToken;
     })
-
-    this.checkHasPrivilege();
-    this.checkHasSpecialPrivilege();
   }
 
   checkHasPrivilege(){
@@ -49,7 +49,7 @@ export class EmployeeDashboardComponent implements OnInit {
 
     this.spinnerService.hideSpinner();
 
-    console.log("hasPrivilege at emp dash", this.hasPrivilege);
+    // console.log("hasPrivilege at emp dash", this.hasPrivilege);
   }
 
   checkHasSpecialPrivilege(){
@@ -59,13 +59,13 @@ export class EmployeeDashboardComponent implements OnInit {
     .subscribe((val) => {
         let specialPrivilege = this.authService.checkHasSpecialPrivilegeFromToken();
         this.hasSpecialPrivilege = val || specialPrivilege;
-        this.hasPrivilege  = false;
-        this.hasSpecialPrivilege  = false;
+        // this.hasPrivilege  = false;
+        // this.hasSpecialPrivilege  = false;
     })
 
     this.spinnerService.hideSpinner();
 
-    console.log("hasSpecialPrivilege at emp dash", this.hasSpecialPrivilege);
+    // console.log("hasSpecialPrivilege at emp dash", this.hasSpecialPrivilege);
   }
 
   closeSidenav() {

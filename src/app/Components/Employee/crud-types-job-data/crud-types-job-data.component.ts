@@ -4,6 +4,8 @@ import { JobService } from '../../../Services/Job/job.service';
 import { CrudJobDataService } from '../../../Services/CrudJobData/crud-job-data.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { SpinnerService } from '../../../Services/spinner.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-crud-types-job-data',
@@ -16,7 +18,9 @@ export class CrudTypesJobDataComponent {
 
   jobTypes: JobType[] = [];
 
-  constructor(private jobService: JobService, private crudJobDataService: CrudJobDataService){}
+  constructor(private jobService: JobService, private crudJobDataService: CrudJobDataService,
+    private spinnerService: SpinnerService, private toastr: ToastrService
+  ){}
   ngOnInit(){
     this.loadJobTypes();
   }
@@ -34,13 +38,16 @@ export class CrudTypesJobDataComponent {
   }
   
   private loadJobTypes(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllJobTypes().subscribe(
       (res) => {
         this.jobTypes = res.allJobTypes;
-        console.log(this.jobTypes);
+        this.spinnerService.hideSpinner();
+        // console.log(this.jobTypes);
       },
       (error) => {
-        console.error('Error loading job types:', error);
+        this.spinnerService.hideSpinner();
+        this.toastr.error('Error loading job types:', error);
       }
     );
   }
