@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { JobService } from '../../../Services/Job/job.service';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-crud-position-job-data',
@@ -21,7 +22,8 @@ export class CrudPositionJobDataComponent {
   constructor(
     private jobService: JobService,
     private crudJobDataService: CrudJobDataService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinnerService: SpinnerService
   ){}
   
   ngOnInit(){
@@ -29,26 +31,35 @@ export class CrudPositionJobDataComponent {
   }
 
   deleteByPositionId(positionId: string) : void{
+    this.spinnerService.showSpinner();
     this.crudJobDataService.deletePositionByPositionId(positionId).subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
         this.loadJobPositions();
+        this.spinnerService.hideSpinner();
         this.toastr.success("Position Deleted Successfully!");
       },
       (error) => {
-        console.error('Error deleting positions:', error);
+        this.spinnerService.hideSpinner();
+        // console.error('Error deleting positions:', error);
+        this.toastr.error('Error deleting positions:', error);
       }
     );
   }
   
   private loadJobPositions(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllJobPosition().subscribe(
       (res) => {
+        this.spinnerService.hideSpinner();
         this.jobPositions = res.allJobPositions;
-        console.log(this.jobPositions);
+        
+        // console.log(this.jobPositions);
       },
       (error) => {
-        console.error('Error loading job types:', error);
+        this.spinnerService.hideSpinner();
+        this.toastr.error('Error loading job types:', error);
+        // console.error('Error loading job types:', error);
       }
     );
   }

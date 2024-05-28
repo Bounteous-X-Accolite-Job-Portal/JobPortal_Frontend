@@ -12,6 +12,7 @@ import { InterviewFeedbackService } from '../../../Services/InterviewFeedback/in
 import { AddInterviewFeedbackResponse } from '../../../Models/InterviewFeedback/AddInterviewFeedbackResponse';
 import { Router, RouterModule } from '@angular/router';
 import { SpinnerService } from '../../../Services/spinner.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-interview-card',
@@ -38,6 +39,7 @@ export class InterviewCardComponent implements OnInit {
     private formBuilder: FormBuilder,
     private interviewFeedbackService: InterviewFeedbackService,
     private spinnerService: SpinnerService,
+    private toastr: ToastrService
   ){}
 
   ngOnInit() {
@@ -49,24 +51,24 @@ export class InterviewCardComponent implements OnInit {
   }
 
   newFeedback(){
-    console.log('show spinner');
+    // console.log('show spinner');
     this.spinnerService.showSpinner();
 
     this.form.reset();
     this.submitted = false;
 
-    console.log('hide spinner');
+    // console.log('hide spinner');
     this.spinnerService.hideSpinner();
   }
 
   formClosed(){
-    console.log('show spinner');
+    // console.log('show spinner');
     this.spinnerService.showSpinner();
     
     this.submitted = false;
     this.form.reset();
 
-    console.log('hide spinner');
+    // console.log('hide spinner');
     this.spinnerService.hideSpinner();
   }
 
@@ -91,12 +93,13 @@ export class InterviewCardComponent implements OnInit {
 
       this.interviewFeedbackService.addFeedback(feedbackData).subscribe(
         (data: AddInterviewFeedbackResponse) => {
-          console.log('Status', data.status, 'data message', data.message);
-
+          // console.log('Status', data.status, 'data message', data.message);
           this.submitting = false;
+          this.toastr.success('Feedback added successfully!');
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
+          this.toastr.error('Error: ', error);
           this.submitted = false;
         }
       );
@@ -145,13 +148,15 @@ export class InterviewCardComponent implements OnInit {
             // console.log("Experience : ", this.experience);
           },
           (error) => {
-              console.log("Error in company API", error);
-          }
-        )
-
-      },
-      (error)=> {
-        console.error(error);
+              this.toastr.error("Error in company API", error);
+              
+            }
+          )
+          
+        },
+        (error)=> {
+        this.toastr.error("Error :", error);
+        // console.error(error);
       }
     )
 

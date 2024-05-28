@@ -24,7 +24,8 @@ export class DisablePrivilegeComponent {
 
   constructor(
     private spinnerService: SpinnerService,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    // private toastr: ToastrService
   ) {}
 
   ActiveEmployees() {
@@ -37,7 +38,7 @@ export class DisablePrivilegeComponent {
 
   ngOnInit(): void {
     this.loadEmployees();
-    console.log('employees', this.employees);
+    // console.log('employees', this.employees);
   }
 
   private loadEmployees(): void {
@@ -45,7 +46,7 @@ export class DisablePrivilegeComponent {
 
     this.employeeService.getAllEmployee().subscribe(
       (res) => {
-        console.log("all emplyees : ",res);
+        // console.log("all emplyees : ",res);
         
         this.employees = res.employees;
 
@@ -54,21 +55,21 @@ export class DisablePrivilegeComponent {
 
           if (!employee.inactive) {
             this.activeEmployees.push(employee);
-            console.log(this.activeEmployees);
+            // console.log(this.activeEmployees);
           } else {
             this.disabledEmployees.push(employee);
-            console.log(this.disabledEmployees);
+            // console.log(this.disabledEmployees);
           }
         });
 
-        console.log('Active emp : ', this.activeEmployees);
-        console.log('Disable emp : ', this.disabledEmployees);
+        // console.log('Active emp : ', this.activeEmployees);
+        // console.log('Disable emp : ', this.disabledEmployees);
 
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.log(error);
-        console.log(' error : hide spinner');
+        // console.log(error);
+        // console.log(' error : hide spinner');
         this.spinnerService.hideSpinner();
       }
     );

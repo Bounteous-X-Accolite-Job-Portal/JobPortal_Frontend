@@ -39,26 +39,27 @@ export class EmployeeCardComponent {
 
     this.employeeService.getDesignationByDesignationId(designationId).subscribe(
       (res)=>{
-        console.log("desg:  ",this.Designation);
+        // console.log("desg:  ",this.Designation);
         this.Designation = res.designation;
         this.spinnerService.hideSpinner();
         
 
       },  
       (error)=>{
-        console.log(error);
+        // console.log(error);
         this.spinnerService.hideSpinner();
+        this.toasterService.error('Error: ', error);
       }
     )
   }
   
   disableEmployee(employeeId: any){
     this.spinnerService.showSpinner();
-    console.log(employeeId);
+    // console.log(employeeId);
 
     this.employeeService.disableEmployee(employeeId).subscribe(
       (res)=>{
-        console.log(res);
+        // console.log(res);
         if(res.status == 200){
           this.toasterService.success(res.message);
           this.changesStatus.emit({employeeId});
@@ -69,7 +70,7 @@ export class EmployeeCardComponent {
         this.spinnerService.hideSpinner();
       },
       (error)=>{
-        console.log(error);
+        // console.log(error);
         this.toasterService.error("Something went wrong, please try again !");
         this.spinnerService.hideSpinner();
       }
@@ -78,11 +79,11 @@ export class EmployeeCardComponent {
 
   enableEmployee(employeeId : string){
     this.spinnerService.showSpinner();
-    console.log(employeeId);
+    // console.log(employeeId);
 
     this.employeeService.enableEmployeeAccount(employeeId).subscribe(
       (res)=>{
-        console.log(res);
+        // console.log(res);
 
         if(res.status == 200){
           this.toasterService.success(res.message);
@@ -95,7 +96,7 @@ export class EmployeeCardComponent {
         }
       },
       (error)=>{
-        console.log(error);
+        // console.log(error);
         this.toasterService.error("Something went wrong, please try again !");
         this.spinnerService.hideSpinner();
       }
