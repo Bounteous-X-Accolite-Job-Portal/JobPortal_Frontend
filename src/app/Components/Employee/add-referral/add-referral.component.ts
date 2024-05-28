@@ -5,11 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { JobService } from '../../../Services/Job/job.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-referral',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,ToastrModule],
+  imports: [FormsModule, ReactiveFormsModule,ToastrModule, CommonModule],
   templateUrl: './add-referral.component.html',
   styleUrl: './add-referral.component.css'
 })
@@ -41,15 +42,17 @@ ngOnInit()
     this.referralService.addreferral(this.referralObj).subscribe(
       (res:any)=>
         {
-          console.log(this.referralObj)
-          console.log("Success");
-          this.toastr.success("Referral Done");
+          // console.log(this.referralObj)
+          // console.log("Success");
+          this.toastr.success("Successfully Referred " + this.referralObj.firstName);
         },
         (error:any) => {
-          this.toastr.error("OOPS!! Referral Cant be added")
-          console.error('Error deleting degree:', error);}
-
+          this.toastr.error("Error occurred while referring, Please try again!");
+          // console.error('Error while referring :', error);}
+        }
     );
   
   }
+
+  
 }

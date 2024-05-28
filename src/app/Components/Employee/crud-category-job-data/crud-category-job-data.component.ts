@@ -27,10 +27,10 @@ export class CrudCategoryJobDataComponent implements OnInit{
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
         this.jobCategories = res.allJobCategory;
-        console.log(this.jobCategories);
+        // console.log(this.jobCategories);
       },
       (error) => {
-        console.error('Error loading job categories:', error);
+        // console.error('Error loading job categories:', error);
       }
     );
   }
@@ -38,12 +38,12 @@ export class CrudCategoryJobDataComponent implements OnInit{
   deleteCategoryById(categoryId : string) : void{
     this.crudJobDataService.deleteCategoryByCategoryId(categoryId).subscribe(
       (res) => {
-        console.log("Category Deleted!");
+        // console.log("Category Deleted!");
         this.toastr.success("Category Deleted Successfully!");
         this.loadJobCategories();
       },
       (error) => {
-        console.error('Error deleting categories:', error);
+        // console.error('Error deleting categories:', error);
       }
     );
   }
