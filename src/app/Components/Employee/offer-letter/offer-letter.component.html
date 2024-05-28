@@ -4,6 +4,7 @@
             <h2 style="display: inline;">Job Offered Candidates -:</h2>
         </span>
     </div>
+    <div *ngIf="allProfiles.length === 0">At present, there are no applicants to get job offer.</div>
     <div *ngFor="let profile of allProfiles" class="card mb-3">
         <div class="card-header">
             <span>
@@ -19,7 +20,14 @@
             <div>
                 <p class="card-title">Position - {{profile.job != null ? profile.job.jobTitle : profile.closedJob?.jobTitle}} ({{profile.job != null ? profile.job.jobCode : profile.closedJob?.jobCode}})</p>
                 <p class="card-title">Experience for Job - {{profile.job != null ? profile.job.experience : profile.closedJob?.experience}}</p>
-                <p class="card-title">Job description - {{profile.job != null ? profile.job.jobDescription : profile.closedJob?.jobDescription}}</p>
+                <p class="card-title" *ngIf="profile.job !== null">
+                    Job description - {{ profile.job?.jobDescription  | slice:0:100 }}
+                    <a [routerLink]="['/job-details', profile.job.jobId]" routerLinkActive="router-link-active"  *ngIf="(profile.job !== undefined && profile.job !== null  && profile.job.jobDescription !== undefined && profile.job.jobDescription !== null && profile.job.jobDescription.length > 100)">...show more</a>
+                </p>
+                <p class="card-title" *ngIf="profile.job === null">
+                    Job description - {{ profile.closedJob?.jobDescription  | slice:0:100 }}
+                    <a [routerLink]="['/closedJob/job-details', profile.closedJob.closedJobId]" routerLinkActive="router-link-active"  *ngIf="(profile.closedJob !== undefined && profile.closedJob !== null  && profile.closedJob.jobDescription !== undefined && profile.closedJob.jobDescription !== null && profile.closedJob.jobDescription.length > 100)">...show more</a>
+                </p>
             </div>
         </div>
     </div>

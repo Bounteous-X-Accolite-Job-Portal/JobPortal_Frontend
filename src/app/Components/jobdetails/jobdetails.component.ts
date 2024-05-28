@@ -18,6 +18,9 @@ import { AuthService } from '../../Services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { JobService } from '../../Services/Job/job.service';
+import { SpinnerService } from '../../Services/spinner.service';
+import { ClosedJob } from '../../Models/ClosedJobResponse/ClosedJob';
+import { ClosedJobServiceService } from '../../Services/ClosedJob/closed-job-service.service';
 
 @Component({
   selector: 'app-jobdetails',
@@ -29,12 +32,19 @@ import { JobService } from '../../Services/Job/job.service';
 export class JobdetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   toaster = inject(ToastrService);  
+
+  jobId !: string;
+  closedJobId !: string;
+
   job?: Job;
+  closedJob ?: ClosedJob;
+
   location?: location ;
   degree?: Degree;
   jobtype?: JobType;
   jobcategory?: JobCategory;
   jobPosition?: position ;
+
   logginnedUserId : string = '';
   userapplied :boolean = false;
   stringForButton:string = 'Apply';
@@ -48,11 +58,16 @@ export class JobdetailsComponent {
     private userStore : UserStoreService,
     private auth : AuthService,
     private renderer: Renderer2,
-    private elementRef: ElementRef) {}
+    private elementRef: ElementRef,
+    private spinnerService : SpinnerService,
+    private closedJobService : ClosedJobServiceService
+  ) {}
 
   ngOnInit(){
     this.userapplied = false;
-    
+    this.getJobId();
+    this.getClosedJobId();
+
     this.isLoggedIn = this.auth.isLoggedIn();
 
     this.userStore.getIdFromStore()
@@ -66,89 +81,155 @@ export class JobdetailsComponent {
 
     this.loadJobDetails();
   }
-  
-  private loadJobDetails(): void{
-    const id = String(this.route.snapshot.params['jobId']);
-    this.jobService.getJobById(id).subscribe(event => {
-      this.job = event.job;
 
-      this.loadLocationDetails();
-      this.loadPositionDetails();
-      this.loadCategoryDetails();
-      this.loadDegreeDetails();
-      this.loadTypeDetails();
-      
-      if(this.isLoggedIn){
-        this.loadcheckCandidateApplicable();
-      }
+  getJobId() {
+    this.spinnerService.showSpinner();
+
+    this.route.params.subscribe((params) => {
+      this.jobId = params['jobId']; // Access the 'id' parameter from the URL
+      console.log('Job ID:', this.jobId);
+
+      this.spinnerService.hideSpinner();
     });
   }
 
-  private loadLocationDetails() : void
-  {
-    this.jobService.getLocationById(this.job?.locationId).subscribe(
+  getClosedJobId() {
+    this.spinnerService.showSpinner();
+
+    this.route.params.subscribe((params) => {
+      this.closedJobId = params['closedJobId']; // Access the 'id' parameter from the URL
+      console.log('Closed Job ID:', this.closedJobId);
+
+      this.spinnerService.hideSpinner();
+    });
+  }
+  
+  private loadJobDetails(): void{
+    this.spinnerService.showSpinner();
+
+    if (this.jobId !== undefined){
+      this.jobService.getJobById(this.jobId).subscribe(event => {
+        this.job = event.job;
+
+        this.loadLocationDetails(event.job.locationId);
+        this.loadPositionDetails(event.job.positionId);
+        this.loadCategoryDetails(event.job.categoryId);
+        this.loadDegreeDetails(event.job.degreeId);
+        this.loadTypeDetails(event.job.jobType);
+        
+        if(this.isLoggedIn){
+          this.loadcheckCandidateApplicable();
+        }
+
+        this.spinnerService.hideSpinner();
+      });
+    }
+    else{
+      this.closedJobService.getClosedJobById(this.closedJobId).subscribe(
+        event => {
+          console.log("closed job - ", event.closedJob);
+          this.closedJob = event.closedJob;
+
+          this.loadLocationDetails(event.closedJob.locationId.toString());
+          this.loadPositionDetails(event.closedJob.positionId.toString());
+          this.loadCategoryDetails(event.closedJob.categoryId.toString());
+          this.loadDegreeDetails(event.closedJob.degreeId.toString());
+          this.loadTypeDetails(event.closedJob.jobTypeId.toString());
+
+          this.spinnerService.hideSpinner();
+        }
+      );
+    }
+  }
+
+  private loadLocationDetails(locationId : string) : void{
+    this.spinnerService.showSpinner();
+
+    this.jobService.getLocationById(locationId).subscribe(
       (loc: JobLocationResponse) => {
         this.location = loc.jobLocation;
         console.log(loc);
+        this.spinnerService.hideSpinner();
       },
       (error) =>{
         console.error(error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
-  private loadPositionDetails(): void{
-    this.jobService.getPositionById(this.job?.positionId).subscribe(
+  private loadPositionDetails(positionId : string): void{
+    this.spinnerService.showSpinner();
+
+    this.jobService.getPositionById(positionId).subscribe(
       (pos: JobPositionResponse) => {
         this.jobPosition = pos.jobPosition;
         console.log(pos);
+        this.spinnerService.hideSpinner();
       },
       (error) =>{
         console.error(error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
-  private loadCategoryDetails(): void{
-    this.jobService.getCategoryById(this.job?.categoryId).subscribe(
+  private loadCategoryDetails(categoryId : string): void{
+    this.spinnerService.showSpinner();
+
+    this.jobService.getCategoryById(categoryId).subscribe(
       (cat : JobCategoryResponse) => {
         this.jobcategory = cat.jobCategory;
         console.log("cat  :"+cat.jobCategory);
+        this.spinnerService.hideSpinner();
       },
       (error) =>{
         console.error(error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
     
-  private loadDegreeDetails(): void{
-    this.jobService.getDegreeById(this.job?.degreeId).subscribe(
+  private loadDegreeDetails(degreeId : string): void{
+    this.spinnerService.showSpinner();
+
+    this.jobService.getDegreeById(degreeId).subscribe(
       (deg : DegreeResponse) => {
         this.degree = deg.degree;
         console.log("deg : "+deg);
+        this.spinnerService.hideSpinner();
       },
       (error) =>{
         console.error(error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
-  private loadTypeDetails() : void{
-    this.jobService.getJobTypeById(this.job?.jobType).subscribe(
+  private loadTypeDetails(typeId : string) : void{
+    this.spinnerService.showSpinner();
+
+    this.jobService.getJobTypeById(typeId).subscribe(
     (typ: JobTypeResponse) => {
       this.jobtype = typ.jobType;
       console.log(this.jobtype);
+      this.spinnerService.hideSpinner();
     },
     (error) =>{
       console.error(error);
+      this.spinnerService.hideSpinner();
     }
   );
   }
 
   public applynow(jobId?:string):void
   {
+    this.spinnerService.showSpinner();
+
     if(!this.isLoggedIn){
       this.toaster.info("Please login to apply !");
+
+      this.spinnerService.hideSpinner();
       this.router.navigate(["/login"]);
       return;
     }
@@ -160,23 +241,28 @@ export class JobdetailsComponent {
             this.disableApplyButton();
             this.displayAppliedMessage();
             console.log("Success",res);
+
+            this.spinnerService.hideSpinner();
             this.router.navigate(['jobs']);
           },
         (error) =>
           {
             this.displayNotAppliedMessage();
             console.log("Error",error);
+            this.spinnerService.hideSpinner();
           }
       )
     }
   }
 
   private loadcheckCandidateApplicable():void{
+    this.spinnerService.showSpinner();
+
     this.jobService.checkCandidateApplicable(this.job?.jobId).subscribe(
       (res) =>{
-        console.log(res);
-        var status = res.status;
-        console.log("rece : ",status);
+          console.log(res);
+          var status = res.status;
+          console.log("rece : ",status);
           if(status=="400")
           {
             this.stringForButton = "Employee Logged In !!";
@@ -199,10 +285,12 @@ export class JobdetailsComponent {
           }
 
           console.log(">>>button : ",this.stringForButton);
+          this.spinnerService.hideSpinner();
       },
       (error) =>
         {
           console.log(error);
+          this.spinnerService.hideSpinner();
         }
     )
   }

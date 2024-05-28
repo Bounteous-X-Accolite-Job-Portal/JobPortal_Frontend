@@ -19,6 +19,8 @@ import {
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { StatusService } from '../../../Services/Status/status.service';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
+import { Guid } from 'guid-typescript';
+import { StatusServiceService } from '../../../Services/Status/status-service.service';
 
 @Component({
   selector: 'app-job-applicant',
@@ -56,7 +58,8 @@ export class JobApplicantComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService,
     private statusService: StatusService,
-    private candidService: CandidateService
+    private candidService: CandidateService,
+    private getStatusService : StatusServiceService
   ) {}
 
   ngOnInit(): void {
@@ -352,5 +355,35 @@ export class JobApplicantComponent implements OnInit {
 
     console.log('Filtered applicants:', this.showApplicants);
     this.spinnerService.hideSpinner();
+  }
+
+  changeStatus(data : {applicationId : Guid, statusId: number}){
+    this.getStatusService.getstatus(data.statusId).subscribe(
+      (status) => {
+        for (let i = 0; i < this.applicants.length; i++) {
+          if (this.applicants[i].applicationId === data.applicationId) {
+              this.applicants[i].status.statusId = status.statusViewModel.statusId;
+              this.applicants[i].status.statusName = status.statusViewModel.statusName;
+              break;
+          }
+        }
+    
+        for (let i = 0; i < this.filterapplicants.length; i++) {
+          if (this.filterapplicants[i].applicationId === data.applicationId) {
+              this.filterapplicants[i].status.statusId = status.statusViewModel.statusId;
+              this.filterapplicants[i].status.statusName = status.statusViewModel.statusName;
+              break;
+          }
+        }
+    
+        for (let i = 0; i < this.showApplicants.length; i++) {
+          if (this.showApplicants[i].applicationId === data.applicationId) {
+              this.showApplicants[i].status.statusId = status.statusViewModel.statusId;
+              this.showApplicants[i].status.statusName = status.statusViewModel.statusName;
+              break;
+          }
+        }
+      }
+    )
   }
 }

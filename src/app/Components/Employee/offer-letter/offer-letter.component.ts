@@ -11,11 +11,12 @@ import { CommonModule } from '@angular/common';
 import { SuccessfulOffer } from '../../../Models/SuccessfulOffers/SuccessfulOffer';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-offer-letter',
   standalone: true,
-  imports: [CommonModule, ToastrModule],
+  imports: [CommonModule, ToastrModule, RouterModule],
   templateUrl: './offer-letter.component.html',
   styleUrl: './offer-letter.component.css'
 })
