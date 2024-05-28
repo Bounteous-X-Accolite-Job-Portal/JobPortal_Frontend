@@ -33,7 +33,7 @@
         </div>
         <div class="row">
           <div class="column">
-            <button class="btn btn-primary-1 mb-2" [routerLink]="['/job-details',(job !== undefined ? job.jobId : closedJob.closedJobId)]" >Click Here for Details..</button>
+            <button class="btn btn-primary-1 mb-2" [routerLink]="(job !== undefined ? ['/job-details', job.jobId] : ['/closedJob/job-details/', closedJob.closedJobId])">Click Here for Details..</button>
           </div>
           <div class="column">  
             <button *ngIf="isEmployee && hasPrivilege" class="btn btn-primary-1 mb-2" [routerLink]="(job !== undefined ? ['/jobs', job.jobId , 'applicants'] : ['/closedJobs', closedJob.closedJobId , 'applicants'])">View Applicants</button>

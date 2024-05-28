@@ -26,7 +26,7 @@
         <p class="card-title">Position - {{interview.ClosedJob.jobTitle}} ({{interview.ClosedJob.jobCode}})</p>
         <p class="card-title">Experience for Job - {{interview.ClosedJob.experience}}</p>
         <p class="card-title">Job description - {{interview.ClosedJob.jobDescription | slice:0:100}}
-          <a [routerLink]="['/job-details', interview.ClosedJob.closedJobId]" *ngIf="interview.ClosedJob.jobDescription.length > 100">...show more</a>
+          <a [routerLink]="['/closedJob/job-details', interview.ClosedJob.closedJobId]" *ngIf="interview.ClosedJob.jobDescription.length > 100">...show more</a>
         </p>
       </div>
       <div>
