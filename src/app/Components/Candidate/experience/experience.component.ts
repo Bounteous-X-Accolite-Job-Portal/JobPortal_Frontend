@@ -18,6 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ExperienceComponent implements OnInit{
   userId: string = "";
+  empExpe: boolean=false;
 
 constructor(private candidService : CandidateService,    
             private userStore : UserStoreService,
@@ -32,11 +33,11 @@ ngOnInit(): void
 {
   this.userStore.getIdFromStore()
     .subscribe((val) => {
-      console.log(val);
+      // console.log(val);
       let idFromToken = this.auth.getIdFromToken();
-      console.log(idFromToken);
+      // console.log(idFromToken);
       this.userId = val || idFromToken;
-      console.log("Logged User Id : ",this.userId);
+      // console.log("Logged User Id : ",this.userId);
     })
 
     this.loadExperienceDetails();
@@ -45,12 +46,21 @@ ngOnInit(): void
 private loadExperienceDetails() : void{
   this.candidService.getAllcandidateExperiences(this.userId).subscribe(
     (res) => {
-      console.log(res);
+      // console.log(res);
       this.expList = res.experiences;
-      console.log("Experience : ",this.expList);
+      if(this.expList.length==0) {
+        this.empExpe=true;
+        this.toastr.info("Experience is empty");
+      }
+      else {
+        this.toastr.success("Experience retrieved successfully");
+        this.empExpe=false;
+      }
+      // console.log("Experience : ",this.expList);
       this.loadCompany();
     },
     (error)=>{
+      this.toastr.error("Error fetching experience")
       console.log(error);
     }
   )
@@ -62,7 +72,7 @@ private loadCompany() : void{
     this.getCompanyById(this.expList[i].companyId);
   }
 
-  console.log(this.companyList);
+  // console.log(this.companyList);
 }
 
 private getCompanyById(companyId?: string) : void{
@@ -79,7 +89,7 @@ private getCompanyById(companyId?: string) : void{
 public deleteExperience(experienceId?:string) {
   this.candidService.deleteExperience(experienceId).subscribe(
     (res) =>{
-      console.log(res);
+      // console.log(res);
       this.toastr.success("Experience Deleted !!");
       this.ngOnInit();
     },

@@ -3,6 +3,7 @@
   style="padding: 20vh"
 >
   <div class="w-75 bg-white rounded p-5" style="height: auto">
+    <div><a routerLink=".."><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</a></div>
     <div class="row w-full my-5 d-flex justify-content-center">
       <div class="d-flex justify-content-center mb-3">
         <h2>Add Education</h2>
@@ -10,7 +11,7 @@
       <hr />
       <form [formGroup]="addCandidateEducation" (ngSubmit)="addEducation()">
         <div class="form-group mb-3">
-          <label>Institution Name</label>
+          <label class="mx-2">Institution Name</label>
           <select formControlName="institutionId">
             <option *ngFor="let inst of Institutions;"[value] = inst.institutionId>
               {{ inst.institutionOrSchool }}
@@ -19,7 +20,7 @@
         </div>
 
         <div class="form-group mb-3">
-          <label>Degree Name : </label>
+          <label class="mx-2">Degree Name</label>
           <select formControlName="degreeId">
             <option *ngFor="let degree of degrees"[value]=degree.degreeId>
               {{ degree.degreeName }}
@@ -28,7 +29,7 @@
         </div>
 
         <div class="form-group mb-3">
-          <label for="Grade">Grade</label>
+          <label for="Grade" class="mx-2">Grade</label>
           <input
             type="number"
             class="form-control"
