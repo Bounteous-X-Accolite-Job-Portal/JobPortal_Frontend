@@ -117,7 +117,7 @@ export class AddEmployeeComponent implements OnInit {
             this.spinnerService.hideSpinner();
           } else {
             this.toaster.error(
-              'Some error occured while registering employee, please try again.'
+              data.message
             );
             // console.log('error');
             this.spinnerService.hideSpinner();
