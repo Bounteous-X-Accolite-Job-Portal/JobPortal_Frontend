@@ -49,7 +49,7 @@ export class EmployeeDashboardComponent implements OnInit {
 
     this.spinnerService.hideSpinner();
 
-    console.log("hasPrivilege at emp dash", this.hasPrivilege);
+    // console.log("hasPrivilege at emp dash", this.hasPrivilege);
   }
 
   checkHasSpecialPrivilege(){
@@ -65,7 +65,7 @@ export class EmployeeDashboardComponent implements OnInit {
 
     this.spinnerService.hideSpinner();
 
-    console.log("hasSpecialPrivilege at emp dash", this.hasSpecialPrivilege);
+    // console.log("hasSpecialPrivilege at emp dash", this.hasSpecialPrivilege);
   }
 
   closeSidenav() {

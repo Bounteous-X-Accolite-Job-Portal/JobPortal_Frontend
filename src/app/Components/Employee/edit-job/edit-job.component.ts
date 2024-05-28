@@ -188,7 +188,7 @@ f: any;
     console.log("updt job : ",this.job);
     this.jobService.updateJob(this.job).subscribe(
       (res)=>{
-        console.log(res);
+        // console.log(res);
         if(res.status==200)
           {
             this.toastr.success("Job Updated Successfully !!");
@@ -200,7 +200,8 @@ f: any;
           }
       },
       (error)=>{
-        console.log(error);
+        // console.log(error);
+        this.toastr.error('Error: ', error);
       }
     )
     this.isLoading=false;

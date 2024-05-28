@@ -12,6 +12,7 @@ import { CandidateService } from '../../../Services/CandidateService/candidate.s
 import { forkJoin } from 'rxjs';
 import { StatusServiceService } from '../../../Services/Status/status-service.service';
 import { ReferralCompleteResponse } from '../../../Models/ReferralResponse/ReferralCompleteResponse';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -43,7 +44,8 @@ export class ReferralComponent {
     private router:Router,
     private userStore : UserStoreService,
     private auth : AuthService,
-    private StatusService:StatusServiceService
+    private StatusService:StatusServiceService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit():void{
@@ -52,19 +54,19 @@ export class ReferralComponent {
 
 private loadreferralofEmplyoee():void{
 this.userStore.getIdFromStore().subscribe((val)=> {
-console.log(val);
+// console.log(val);
 let idFromToken=this.auth.getIdFromToken();
-console.log(idFromToken);
+// console.log(idFromToken);
 this.empId=val || idFromToken;
-console.log("Emplyoee Id of Logged Inuser",this.empId);
+// console.log("Emplyoee Id of Logged Inuser",this.empId);
 
 })
 this.referalService.getreferral(this.empId).subscribe(
   (res:GetReferral)=>{
-    console.log("response",res);
+    // console.log("response",res);
     this.referrals=res.referrals;
 
-    console.log("Hey", this.referrals);
+    // console.log("Hey", this.referrals);
     for (let i = 0; i < this.referrals.length; i++) {
       const jobId=this.referrals[i].jobId?.toString();
       const candidateId = this.referrals[i].candidateId?.toString(); 
@@ -72,7 +74,7 @@ this.referalService.getreferral(this.empId).subscribe(
       //console.log(statusId)
       
       if (candidateId !== undefined && jobId !== undefined && statusId!==undefined) {
-        console.log("Status Id", statusId);
+        // console.log("Status Id", statusId);
 
         forkJoin({
           candidateDetails : this.candidateService.getCandidateById(candidateId),
@@ -80,7 +82,7 @@ this.referalService.getreferral(this.empId).subscribe(
           statusDetails:this.StatusService.getstatus(statusId)
         }).subscribe(
           (result) => {
-            console.log("all data ", result);
+            // console.log("all data ", result);
 
             let data : ReferralCompleteResponse = {
               candidate : result.candidateDetails.candidate,
@@ -88,11 +90,12 @@ this.referalService.getreferral(this.empId).subscribe(
               job : result.jobDetails.job,
               statusData: result.statusDetails.statusViewModel
             } 
-            console.log(data)
+            // console.log(data)
             this.referralData.push(data);
           },
           (error) => {
-            console.log(error);
+            // console.log(error);
+            this.toastr.error('Error: ', error);
           }
         )
 

@@ -64,7 +64,7 @@ export class DesignationComponent implements OnInit {
 
     this.spinnerService.hideSpinner();
 
-    console.log("hasSpecialPrivilege at emp dash", this.hasSpecialPrivilege);
+    // console.log("hasSpecialPrivilege at emp dash", this.hasSpecialPrivilege);
   }
 
   loadDesignationAndPrivileges(){
@@ -75,7 +75,7 @@ export class DesignationComponent implements OnInit {
       privileges : this.designationWithPrivilege.getAllDesignationWithPrivilege()
     }).subscribe(
       (result) => {
-        console.log("all designation with privilege", result);
+        // console.log("all designation with privilege", result);
 
         let map = new Map();
         result.privileges.allPrivileges.forEach(element => {
@@ -110,15 +110,15 @@ export class DesignationComponent implements OnInit {
     this.spinnerService.showSpinner();
 
     let newDes : string = this.form.value.newDesignation;
-    console.log("new designation", newDes);
+    // console.log("new designation", newDes);
 
     this.designationService.addDesignation(newDes).subscribe(
       (res : DesignationResponse) => {
-        console.log("added designation", res);
+        // console.log("added designation", res);
 
         this.designationWithPrivilege.getPrivilegeByDesignationId(res.designation.designationId).subscribe(
           (privilegeRes : DesignationWithPrivilegeResponse) => {
-            console.log("privilege in add designation", privilegeRes);
+            // console.log("privilege in add designation", privilegeRes);
 
             let designation : DesignationAndPrivilege = {
               designation : res.designation,
@@ -132,14 +132,14 @@ export class DesignationComponent implements OnInit {
             document.getElementById("closeButton")?.click();
           },
           (error) => {
-            console.log(error);
+            // console.log(error);
             this.toaster.error(error.message);
             this.spinnerService.hideSpinner();
           }
         )
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         this.toaster.error(error.message);
         this.spinnerService.hideSpinner();
       }
@@ -153,7 +153,7 @@ export class DesignationComponent implements OnInit {
 
       this.designationService.deleteDesignation(id).subscribe(
         (res : DesignationResponse) => {
-          console.log("deleted designation", res);
+          // console.log("deleted designation", res);
 
           this.allDesignations = this.removeDesignationFromAllDesignations(this.allDesignations, res);
 
@@ -161,8 +161,9 @@ export class DesignationComponent implements OnInit {
           this.spinnerService.hideSpinner();
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.spinnerService.hideSpinner();
+        this.toaster.error("Error :", error);
         }
       )
     }
@@ -185,7 +186,7 @@ export class DesignationComponent implements OnInit {
 
     this.designationWithPrivilege.addPrivilege(designationId).subscribe(
       (result) => {
-        console.log("add privilege", result);
+        // console.log("add privilege", result);
 
         this.addPrivilegeToDesignation(this.allDesignations, designationId, result.designationWithPrivilege);
 
@@ -193,8 +194,9 @@ export class DesignationComponent implements OnInit {
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         this.spinnerService.hideSpinner();
+        this.toaster.error("Error :", error);
       }
     )
   }
@@ -212,7 +214,7 @@ export class DesignationComponent implements OnInit {
 
     this.designationWithPrivilege.removePrivilege(privilegeId).subscribe(
       (result) => {
-        console.log("remove privilege", result);
+        // console.log("remove privilege", result);
 
         this.removePrivilegeFromDesignation(this.allDesignations, result.designationWithPrivilege.designationId);
 
@@ -220,8 +222,8 @@ export class DesignationComponent implements OnInit {
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.log(error);
         this.spinnerService.hideSpinner();
+        this.toaster.error("Error :", error);
       }
     )
   }
