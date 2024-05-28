@@ -1,5 +1,5 @@
 .cont{
-	background: linear-gradient(to top right, darkmagenta 0%, hotpink 100%);
+	/* background: linear-gradient(to top right, darkmagenta 0%, hotpink 100%); */
     min-height: 87vh;
     min-width: 100%;
     display: flex;
