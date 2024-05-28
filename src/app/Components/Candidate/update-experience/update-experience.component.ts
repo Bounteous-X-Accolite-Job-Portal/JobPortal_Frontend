@@ -22,10 +22,10 @@ export class UpdateExperienceComponent {
   isWorking: boolean = false;
   formBuilder = inject(FormBuilder);
   updatecandidateExperience = this.formBuilder.group({
-    experienceTitle: ['', Validators.required],
-    companyId: [''],
-    description: ['', Validators.required],
-    startDate: [null as Date | null, Validators.required],
+    experienceTitle: [''],
+    companyId: [''] ,
+    description: [''],
+    startDate: [null as Date | null],
     endDate: [null as Date | null],
     isCurrentlyWorking: [false],
   });
@@ -64,7 +64,15 @@ export class UpdateExperienceComponent {
   }
 
   public updateExperience(): void {
-    this.candidateService.updateCandidateExperience(this.candidateExperience)
+   this.candidateExperience.companyId = this.updatecandidateExperience.get('companyId')?.value || '';
+   this.candidateExperience.experienceTitle = this.updatecandidateExperience.get('experienceTitle')?.value || '';
+   this.candidateExperience.description = this.updatecandidateExperience.get('description')?.value || '';
+   this.candidateExperience.startDate = this.updatecandidateExperience.get('startDate')?.value || this.candidateExperience.startDate;
+   this.candidateExperience.isCurrentlyWorking = this.updatecandidateExperience.get('isCurrentlyWorking')?.value || false;
+   this.candidateExperience.endDate =this.updatecandidateExperience.get('endDate')?.value || undefined;
+   //this.candidateExperience.endDate =this.candidateExperience.isCurrentlyWorking?(this.updatecandidateExperience.get('endDate')?.value || null):null;
+  
+  this.candidateService.updateCandidateExperience(this.candidateExperience)
       .subscribe(
         (res) => {
           console.log('exp response : ', res);
@@ -86,8 +94,9 @@ export class UpdateExperienceComponent {
         this.updatecandidateExperience.get('experienceTitle')?.setValue(this.candidateExperience.experienceTitle || '');
         this.updatecandidateExperience.get('companyId')?.setValue(this.candidateExperience.companyId || '');
         this.updatecandidateExperience.get('description')?.setValue(this.candidateExperience.description || '');
-        this.updatecandidateExperience.get('startDate')?.setValue(this.candidateExperience.startDate || Date.now());
-        this.updatecandidateExperience.get('endDate')?.setValue(this.candidateExperience.endDate || Date.now());
+        this.updatecandidateExperience.get('startDate')?.setValue(this.candidateExperience.startDate || '');
+        this.updatecandidateExperience.get('endDate')?.setValue(this.candidateExperience.endDate || null);
+        this.updatecandidateExperience.get('isCurrentlyWorking')?.setValue(this.candidateExperience.isCurrentlyWorking);
       },
       (error)=>
       {
