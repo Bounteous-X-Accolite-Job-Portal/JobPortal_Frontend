@@ -6,12 +6,12 @@ import { Company } from '../../../Models/CompanyResponse/Company';
 import { CompanyService } from '../../../Services/Company/company.service';
 import { CommonModule } from '@angular/common';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-update-Experience',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ToastrModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ToastrModule, RouterLink],
   templateUrl: './update-Experience.component.html',
   styleUrl: './update-Experience.component.css',
 })

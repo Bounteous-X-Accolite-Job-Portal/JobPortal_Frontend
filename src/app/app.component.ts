@@ -83,7 +83,7 @@ export class AppComponent {
         this.isEmployee = employee || val;
     })
 
-    console.log("isEmployee at profile tab", this.isEmployee);
+    // console.log("isEmployee at profile tab", this.isEmployee);
     this.spinnerService.hideSpinner();
   }
 }
