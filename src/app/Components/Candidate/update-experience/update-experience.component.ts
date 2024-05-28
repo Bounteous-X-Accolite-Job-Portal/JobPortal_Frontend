@@ -95,7 +95,7 @@ export class UpdateExperienceComponent {
         this.updatecandidateExperience.get('experienceTitle')?.setValue(this.candidateExperience.experienceTitle || '');
         this.updatecandidateExperience.get('companyId')?.setValue(this.candidateExperience.companyId || '');
         this.updatecandidateExperience.get('description')?.setValue(this.candidateExperience.description || '');
-        this.updatecandidateExperience.get('startDate')?.setValue(this.candidateExperience.startDate || '');
+        this.updatecandidateExperience.get('startDate')?.setValue(this.candidateExperience.startDate || null);
         this.updatecandidateExperience.get('endDate')?.setValue(this.candidateExperience.endDate || null);
         this.updatecandidateExperience.get('isCurrentlyWorking')?.setValue(this.candidateExperience.isCurrentlyWorking);
       },
