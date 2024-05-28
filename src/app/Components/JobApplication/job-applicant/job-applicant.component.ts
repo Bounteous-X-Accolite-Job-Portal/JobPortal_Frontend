@@ -223,7 +223,12 @@ export class JobApplicantComponent implements OnInit {
     this.spinnerService.hideSpinner();
   }
 
-  private filterJobs(degreeId: string, companyId: string, instituteId: string, statusId: number): void {
+  private filterJobs(
+    degreeId: string,
+    companyId: string,
+    instituteId: string,
+    statusId: number
+  ): void {
     this.spinnerService.showSpinner();
 
     let degreecheck: boolean = false;
@@ -286,8 +291,7 @@ export class JobApplicantComponent implements OnInit {
     if (this.filterapplicants.length > 0) {
       this.displayApplicationToast();
       this.showApplicants = this.filterapplicants;
-    }
-    else {
+    } else {
       this.displayEmptyApplicationToast();
       this.resetFilters();
     }
@@ -321,7 +325,7 @@ export class JobApplicantComponent implements OnInit {
     this.toastr.error('No Applications Found !!');
   }
 
-  search(searchText : string) {
+  search(searchText: string) {
     if (!this.searchText) return;
 
     this.spinnerService.showSpinner();
@@ -335,14 +339,17 @@ export class JobApplicantComponent implements OnInit {
     this.showApplicants = [];
 
     this.showApplicants = this.filterapplicants.filter((item) => {
-      const firstName = item.candidate.firstName.toLowerCase().includes(searchText);
-      const lastName = item.candidate.lastName.toLowerCase().includes(searchText);
-      const skills = item.skills.candidateSkills.toLowerCase().includes(searchText);
+      const firstName = item.candidate.firstName
+        .toLowerCase()
+        .includes(searchText);
+      const lastName = item.candidate.lastName
+        .toLowerCase()
+        .includes(searchText);
       const email = item.candidate.email.toLowerCase().includes(searchText);
 
-      return firstName || lastName || email || skills;
+      return firstName || lastName || email;
     });
-    
+
     console.log('Filtered applicants:', this.showApplicants);
     this.spinnerService.hideSpinner();
   }

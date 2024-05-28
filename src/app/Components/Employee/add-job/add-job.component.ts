@@ -49,7 +49,7 @@ export class AddJobComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.lastDateError);
+    // console.log(this.lastDateError);
     this.jobForm = new FormGroup(
       {
         jobCode: new FormControl('', Validators.required),
@@ -72,11 +72,11 @@ export class AddJobComponent implements OnInit {
     this.jobService.getAllJobLocations().subscribe(
       (res) => {
         this.locations= this.locations.concat(res.allJobLocations);
-        console.log(this.locations);
+        // console.log(this.locations);
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.error('Error loading job locations:', error);
+        // console.error('Error loading job locations:', error);
         this.spinnerService.hideSpinner();
       }
     );
@@ -87,11 +87,11 @@ export class AddJobComponent implements OnInit {
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
         this.jobCategories = this.jobCategories.concat(res.allJobCategory);
-        console.log(this.jobCategories);
+        // console.log(this.jobCategories);
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.error('Error loading job locations:', error);
+        // console.error('Error loading job locations:', error);
         this.spinnerService.hideSpinner();
       }
     );
@@ -102,11 +102,11 @@ export class AddJobComponent implements OnInit {
     this.jobService.getAllJobTypes().subscribe(
       (res) => {
         this.jobTypes = this.jobTypes.concat(res.allJobTypes);
-        console.log(this.jobTypes);
+        // console.log(this.jobTypes);
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.error('Error loading job types:', error);
+        // console.error('Error loading job types:', error);
         this.spinnerService.hideSpinner();
       }
     );
@@ -118,11 +118,11 @@ export class AddJobComponent implements OnInit {
     this.jobService.getAllJobPosition().subscribe(
       (res) => {
         this.jobPositions = res.allJobPositions;
-        console.log(this.jobPositions);
+        // console.log(this.jobPositions);
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.error('Error loading job types:', error);
+        // console.error('Error loading job types:', error);
         this.spinnerService.hideSpinner();
       }
     );
@@ -134,11 +134,11 @@ export class AddJobComponent implements OnInit {
     this.jobService.getAllDegrees().subscribe(
       (res) => {
         this.degrees = this.degrees.concat(res.degrees);
-        console.log(this.degrees);
+        // console.log(this.degrees);
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.error('Error loading Degrees:', error);
+        // console.error('Error loading Degrees:', error);
         this.spinnerService.hideSpinner();
       }
     );
@@ -152,7 +152,7 @@ export class AddJobComponent implements OnInit {
     this.spinnerService.showSpinner();
     this.submitted = true;
 
-    console.log(this.jobForm.value);
+    // console.log(this.jobForm.value);
     this.jobData = {
       jobCode: this.jobForm.value.jobCode,
       jobDescription: this.jobForm.value.jobDescription,
@@ -167,25 +167,25 @@ export class AddJobComponent implements OnInit {
     };
 
     if (this.jobForm.valid) {
-      console.log(this.jobForm.value.lastDate, " ", new Date());
+      // console.log(this.jobForm.value.lastDate, " ", new Date());
 
       this.addJobService.addJobs(this.jobData).subscribe(
         (res) => {
-          console.log('success ', res);
+          // console.log('success ', res);
           this.toast.success("Job Posted Successfully !!");
           this.jobForm.reset();
           this.spinnerService.hideSpinner();
           this.submitted = false;
         },
         (error) => {
-          console.error('Error submission:', error);
+          // console.error('Error submission:', error);
           this.toast.error("Error while job posting" + error.message);
           this.spinnerService.hideSpinner();
         }
       );
 
     } else {
-      console.log('invalid form');
+      // console.log('invalid form');
       this.toast.error("invalid form, please fill all the details !");
       this.spinnerService.hideSpinner();
     }

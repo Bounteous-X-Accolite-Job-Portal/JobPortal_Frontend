@@ -1,22 +1,20 @@
-div{
+div {
   padding: 0;
-  margin:0;
+  margin: 0;
 }
 
-.Jobhunt
-{
-display: flex;
-flex-direction: row;
-height: 87vh;
-margin: 0;
-padding: 0;
-position: absolute;
-font-family: Roboto, sans-serif;
-width: 100vw;
+.Jobhunt {
+  display: flex;
+  flex-direction: row;
+  height: 87vh;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  font-family: Roboto, sans-serif;
+  width: 100vw;
 }
 
-.jobListing
-{
+.jobListing {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -29,8 +27,7 @@ width: 100vw;
   background-color: #dccff0;
 }
 
-.Filters
-{
+.Filters {
   display: flex;
   flex-direction: column;
   width: 25%;
@@ -42,8 +39,7 @@ width: 100vw;
   margin: 0;
 }
 
-
-select{
+select {
   width: 90%;
   height: 2rem;
   border-radius: 1rem;
@@ -52,11 +48,10 @@ select{
   margin-bottom: 1rem;
 }
 
-p{
+p {
   margin-bottom: 0.3rem;
   font-weight: bolder;
 }
-
 
 button {
   position: relative;
@@ -132,19 +127,30 @@ button:hover i::after {
   animation: move 3s infinite;
 }
 
+@media (min-width: 768px) and (max-width: 1080px) {
+  #btn-styling {
+    flex-direction: column;
+    width: auto;
+    align-items: center;
+  }
+  .reset-btn {
+    margin-top: 10px;
+  }
+}
+
 @media (max-width: 768px) {
-  .Jobhunt{
+  .Jobhunt {
     flex-direction: column;
     height: auto;
   }
-  .Filters{
+  .Filters {
     width: 100%;
   }
-  .jobListing{
+  .jobListing {
     overflow-y: hidden;
     width: 100%;
   }
-  form{
+  form {
     flex-direction: row;
   }
 }

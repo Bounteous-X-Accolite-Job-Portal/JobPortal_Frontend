@@ -1,81 +1,102 @@
 import { Component } from '@angular/core';
-import { resertPassword } from '../../Models/resetPasswordmodel';
+import { ResetPassword } from '../../Models/ResetPassword';
 import { ChangePasswordService } from '../../Services/ChangePassword/change-password.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+  
+} from '@angular/forms';
 import { catchError, tap, throwError } from 'rxjs';
+import { UserStoreService } from '../../Services/user-store.service';
+import { AuthService } from '../../Services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-email-component-change-password',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,ReactiveFormsModule,CommonModule],
   templateUrl: './email-component-change-password.component.html',
-  styleUrl: './email-component-change-password.component.css'
+  styleUrl: './email-component-change-password.component.css',
 })
 export class EmailComponentChangePasswordComponent {
   newPassword: string = '';
   confirmPassword: string = '';
-  resetPasswordObj:resertPassword=new resertPassword();
-  email: string | undefined;
+  resetPasswordObj: ResetPassword=  new ResetPassword();
+  email: string = '';
   value: any;
-  gotemail:boolean=false;
-  public resetPasswordEmail!:string;
-  public isValidEmail!:boolean;
-  public isRequired :boolean = true;
-  //msgService = inject(MessageService)
+  gotemail: boolean = false;
+  public resetPasswordEmail!: string;
+  public isValidEmail!: boolean;
+  public isRequired: boolean = true;
+  public pwdForm!: FormGroup;
+
+  changePasswordForm!: FormGroup;
 
   constructor(
-    private resetPasswordService: ChangePasswordService,
+    private changePasswordService: ChangePasswordService,
     private route: ActivatedRoute,
     private router: Router,
-  //  private messageService:MessageService
-  
-  ){}
+    private userStoreService: UserStoreService,
+    private authService: AuthService,
+    private fb : FormBuilder
+  ) {}
   ngOnInit()
   {
-    this.route.queryParams.subscribe((params) => {
-      this.email = params['email'];
-      this.resetPasswordObj.Email = this.email;
+    this.pwdForm = this.fb.group({
+      currentPassword:['',Validators.required],
+      newPassword:['',Validators.required],
+      confirmPassword:['',Validators.required],
+      email:['']
+    },
+    {
+      validators: this.passwordMatchValidator,
     });
-
   }
-  resetPassword() {
-    if (
-      this.resetPasswordObj.NewPassword !==
-      this.resetPasswordObj.ConfirmPassword
-    ) {
-      
-      return;
-    }
-    console.log(this.resetPasswordObj)
-   
-    this.resetPasswordService
-      .  changePassword
-      (this.resetPasswordObj)
-     
-      .pipe(
-        
-        tap((response) => {
-          console.log('Reset password response:', response);
-          // this.messageService.add
-          // ({severity:'success', 
-          // summary:'Service Message', 
-          // detail:'Via MessageService'});
+  get f() {
+    return this.pwdForm.controls;
+  }
 
-          
-          this.router.navigate(['login']);
-        }),
-        catchError((error) => {
-          // this.messageService.add({
-          //   severity: 'error',
-          //   summary: 'Error',
-          //   detail: 'Invalid Reset Link',
-          // });
-          
-          return throwError(() => error);
-        })
-      )
-      .subscribe();
+
+  resetPassword(){
+    this.userStoreService.getEmailFromStore().subscribe((val) => {
+          this.pwdForm.get('email')?.setValue(val || this.authService.getEmailFromToken());
+        });
+    console.log(this.pwdForm.value);
+    this.changePasswordService.changePassword(this.pwdForm.value).subscribe(
+      (res)=>{
+        console.log(res);
+      },
+      (error)=>
+        {
+          console.log(error);
+      }
+    )
+  }
+
+
+  passwordMatchValidator(formGroup: FormGroup): any {
+    const passwordControl = formGroup.get('newPassword');
+    const confirmPasswordControl = formGroup.get('confirmPassword');
+
+    if (passwordControl && confirmPasswordControl) {
+      const password = passwordControl.value;
+      const confirmPassword = confirmPasswordControl.value;
+
+      if (password !== confirmPassword && confirmPassword !== '') {
+        confirmPasswordControl.setErrors({ passwordMismatch: true });
+        return { passwordMismatch: true };
+      } else {
+        confirmPasswordControl.setErrors(null);
+        return null;
+      }
+    } else {
+      return null;
+    }
   }
 
 }
