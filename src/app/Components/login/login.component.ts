@@ -8,8 +8,6 @@ import { LoginResponse } from '../../Models/loginResponse';
 import { UserStoreService } from '../../Services/user-store.service';
 import { SpinnerService } from '../../Services/spinner.service';
 import { ForgetPasswordService } from '../../Services/ForgetPassword/forget-password.service';
-import { error } from 'console';
-import { ResetPassword } from '../../Models/ResetPassword';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
