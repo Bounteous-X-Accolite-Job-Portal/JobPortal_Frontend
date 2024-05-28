@@ -12,8 +12,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
   selector: 'app-update-Experience',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, ToastrModule, RouterLink],
-  templateUrl: './update-Experience.component.html',
-  styleUrl: './update-Experience.component.css',
+  templateUrl: './update-experience.component.html',
+  styleUrl: './update-experience.component.css',
 })
 export class UpdateExperienceComponent {
   route: ActivatedRoute = inject(ActivatedRoute);

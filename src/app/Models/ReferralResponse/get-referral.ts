@@ -1,11 +1,7 @@
-
-import { Guid } from "guid-typescript"
-import { Referralresponse } from "./referralresponse";
-
+import { ReferralResponse } from "./ReferralResponse";
 
 export interface GetReferral {
     status: string;
     message: string;
-    referrals:Referralresponse [] ;  
-
+    referrals: ReferralResponse[];  
 }
