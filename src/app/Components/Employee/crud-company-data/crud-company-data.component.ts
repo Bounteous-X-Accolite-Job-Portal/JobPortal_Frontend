@@ -5,6 +5,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { CrudJobDataService } from '../../../Services/CrudJobData/crud-job-data.service';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
 import { RouterLink } from '@angular/router';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-crud-company-data',
@@ -18,7 +19,8 @@ companies!: Company[];
 constructor(
   private candidateService: CandidateService,
   private crudJobDataService: CrudJobDataService,
-  private toastr: ToastrService
+  private toastr: ToastrService,
+  private spinnerService : SpinnerService
 ) {}
 
 ngOnInit() {
@@ -26,9 +28,12 @@ ngOnInit() {
 }
 
 private loadCompanies(): void {
+  this.spinnerService.showSpinner();
   this.candidateService.getAllCompanies().subscribe(
     (res) => {
+      
       this.companies = res.companies;
+      
       // console.log(res);
     },
     (error) => {
