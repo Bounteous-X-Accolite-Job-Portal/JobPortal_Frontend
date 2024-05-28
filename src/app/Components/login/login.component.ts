@@ -8,16 +8,19 @@ import { LoginResponse } from '../../Models/loginResponse';
 import { UserStoreService } from '../../Services/user-store.service';
 import { SpinnerService } from '../../Services/spinner.service';
 import { ForgetPasswordService } from '../../Services/ForgetPassword/forget-password.service';
+import { error } from 'console';
+import { ResetPassword } from '../../Models/ResetPassword';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule, FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, FormsModule, ToastrModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  message: string = "";
+  message: string = '';
   public resetPasswordEmail!: string;
   public isValidEmail!: boolean;
   public isRequired: boolean = true;
@@ -39,8 +42,8 @@ export class LoginComponent {
     private userStore: UserStoreService,
     private spinnerService: SpinnerService,
     private forgetService: ForgetPasswordService,
-
-  ) { }
+    private toaster: ToastrService
+  ) {}
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -48,24 +51,15 @@ export class LoginComponent {
     rememberMe: [true],
   });
 
-
-
-
-
-
   get f() {
     return this.loginForm.controls;
   }
-
-
-
 
   onSubmit() {
     console.log('show spinner');
     this.spinnerService.showSpinner();
 
     if (this.loginForm.valid) {
-     
       this.authService.loginUser(this.loginForm.value).subscribe(
         (data: LoginResponse) => {
           console.log(data);
@@ -84,8 +78,12 @@ export class LoginComponent {
             this.userStore.setIsEmployeeForStore(tokenPayload['IsEmployee']);
             this.userStore.setRoleForStore(tokenPayload['Role']);
             this.userStore.setIdForStore(tokenPayload['Id']);
-            this.userStore.setHasPrivilegeForStore(tokenPayload["HasPrivilege"]);
-            this.userStore.setHasSpecialPrivilegeForStore(tokenPayload["HasSpecialPrivilege"]);
+            this.userStore.setHasPrivilegeForStore(
+              tokenPayload['HasPrivilege']
+            );
+            this.userStore.setHasSpecialPrivilegeForStore(
+              tokenPayload['HasSpecialPrivilege']
+            );
 
             this.authService.AuthEvent.emit(true);
 
@@ -112,7 +110,6 @@ export class LoginComponent {
       );
     }
   }
-    
 
   checkValidEmail(event: string) {
     this.value = event;
@@ -130,30 +127,15 @@ export class LoginComponent {
       console.log(this.value);
       this.forgetService.sendForgetPasswordLink(this.value).subscribe({
         next: (res: any) => {
-
-          this.resetPasswordEmail = " ";
-          const buttonRef = document.getElementById("closeBtn");
+          this.resetPasswordEmail = ' ';
+          const buttonRef = document.getElementById('closeBtn');
           buttonRef?.click();
+          this.toaster.info("Check you mail to reset password!!")
+          
         },
 
-        error: (err: any) => {
-
-        },
+        error: (err: any) => {},
       });
     }
   }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-

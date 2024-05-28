@@ -26,7 +26,6 @@ export class ResumeComponent {
 
   resumeUrl : string | undefined = "";
   urlSafe : SafeResourceUrl | undefined;
-  str = 'https://www.accolite.com';
   
 
 constructor(
@@ -42,11 +41,11 @@ constructor(
 ngOnInit() : void{
   this.userStore.getIdFromStore()
   .subscribe((val) => {
-    console.log(val);
+    // console.log(val);
     let idFromToken = this.auth.getIdFromToken();
-    console.log(idFromToken);
+    // console.log(idFromToken);
     this.userId = val || idFromToken;
-    console.log("Logged User Id : ",this.userId);
+    // console.log("Logged User Id : ",this.userId);
   })
 
 
@@ -56,17 +55,17 @@ ngOnInit() : void{
 
   this.resumeService.getResumeByCandidateId(this.userId).subscribe(
     (res) => {
-      console.log(res);
+      // console.log(res);
       this.msg=res.message;
       if(res.resume==null)
       {
-        this.toastr.info("Khali hai bhai");
+        this.toastr.info("No resume present");
         this.resumeExists=false;
         this.userResume = {"resumeUrl":'',"resumeId":'',"candidateId":''};
       }
       else
       {
-        this.toastr.success("Aa gaya resume link");
+        this.toastr.success("Resume successfully retrieved");
         this.resumeExists=true;
         this.userResume=res.resume;       
         this.resumeUrl = this.userResume !== undefined ? this.userResume.resumeUrl : "";
@@ -77,7 +76,7 @@ ngOnInit() : void{
     },
     (error) => {
       console.log(error);
-      this.toastr.error("Error aa gayi bhai");
+      this.toastr.error("Error in retrieving resume");
     }
     )
 }
@@ -89,7 +88,7 @@ add() {
   console.log(this.resumeForm.value);
   this.resumeService.addResumeByCandidateId(this.resumeForm.get('resumeUrl')?.value).subscribe(
     (res) => {
-      console.log(res);
+      // console.log(res);
       this.toastr.success("Resume link added");
       this.ngOnInit();
     },

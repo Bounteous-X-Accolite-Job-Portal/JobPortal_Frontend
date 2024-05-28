@@ -5,6 +5,8 @@ import { EducationInstitution } from '../../../Models/EducationInstitutionRespon
 import { CrudJobDataService } from '../../../Services/CrudJobData/crud-job-data.service';
 import { ToastrService } from 'ngx-toastr';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
+import { SpinnerComponent } from '../../spinner/spinner.component';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-crud-institution-data',
@@ -19,7 +21,8 @@ export class CrudInstitutionDataComponent {
   constructor(
     private candidateService: CandidateService,
     private crudJobDataService: CrudJobDataService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinnerService: SpinnerService
   ) {}
 
   ngOnInit() {
@@ -27,13 +30,18 @@ export class CrudInstitutionDataComponent {
   }
 
   private loadInstitutions(): void {
+    this.spinnerService.showSpinner();
     this.candidateService.getAllInstitutions().subscribe(
       (res) => {
+        
         this.institutions = res.educationInstitution;
-        console.log(this.institutions);
+        this.spinnerService.hideSpinner();
+        // console.log(this.institutions);
       },
       (error) => {
-        console.error('Error loading Institutions:', error);
+        this.spinnerService.hideSpinner();
+        // console.error('Error loading Institutions:', error);
+        this.toastr.error('Error loading Institutions:', error);
       }
     );
   }
@@ -43,12 +51,12 @@ export class CrudInstitutionDataComponent {
       .deleteInstitutionByInstitutionId(institutionId)
       .subscribe(
         (res) => {
-          console.log('Institution Deleted!', res);
+          // console.log('Institution Deleted!', res);
           this.loadInstitutions();
           this.toastr.success('Institution Deleted Successfully!');
         },
         (error) => {
-          console.error('Error deleting Institution:', error);
+          // console.error('Error deleting Institution:', error);
           this.toastr.error('Error', error);
         }
       );

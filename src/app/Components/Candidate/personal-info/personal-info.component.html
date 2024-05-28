@@ -1,7 +1,7 @@
-<section class="h-100 gradient-custom-2" style="min-height: 87vh">
+<section class="h-100 gradient-custom-2" style="min-height: 87vh; width: 100%; height: auto;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-lg-9 col-xl-7">
+      <div class="col col-lg-9 col-xl-7" style="width: 80%;">
         <div class="card">
           <div
             class="rounded-top text-white d-flex flex-row"
@@ -73,8 +73,8 @@
             <p class="lead fw-normal mb-1">About</p>
             <div class="row">
               <div
-                class="p-4 col"
-                style="background-color: #f8f9fa; width: 25%"
+                class="p-4 col-4"
+                style="background-color: #f8f9fa; width: 20%"
               >
                 <p class="font-italic mb-2">
                   Phone :
@@ -97,19 +97,20 @@
               </div>
               <div
                 class="col p-4"
-                style="background-color: #f8f9fa; width: 25%"
+                style="background-color: #f8f9fa; width: 85%"
               >
                 <form [formGroup]="profileForm">
-                  <input type="text font-italic mb-2 " formControlName="phone"/>
-                  <input type="text font-italic mb-2 " formControlName="addressLine1"/>
-                  <input type="text font-italic mb-2 " formControlName="city"/>
-                  <input type="text font-italic mb-2 " formControlName="state"/>
-                  <input type="text font-italic mb-2 " formControlName="country"/>
-                  <input type="text font-italic mb-2 " formControlName="zipCode"/>
+                  <input type="text" class="font-italic mb-1 w-50 d-block" formControlName="phone"/>
+                  <input type="text" class="font-italic mb-1 w-50 d-block" formControlName="addressLine1"/>
+                  <input type="text" class="font-italic mb-1 w-50 d-block" formControlName="city"/>
+                  <input type="text" class="font-italic mb-1 w-50 d-block" formControlName="state"/>
+                  <input type="text" class="font-italic mb-1 w-50 d-block" formControlName="country"/>
+                  <input type="text" class="font-italic mb-1 w-50 d-block" formControlName="zipCode"/>
                 </form>
               </div>
             </div>
-            <button *ngIf="isAccessible" (click)="funUpdateProfile()">SAVE</button>
+            <button *ngIf="isAccessible" (click)="funUpdateProfile()" class="btn btn-primary text-style-add mx-3">UPDATE</button>
+            <button *ngIf="isAccessible" (click)="disableFields()" class="btn btn-outline-primary text-style-del">CANCEL</button>
           </div>
         </div>
       </div>

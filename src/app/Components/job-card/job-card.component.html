@@ -35,10 +35,10 @@
           <div class="column">
             <button class="btn btn-primary-1 mb-2" [routerLink]="(job !== undefined ? ['/job-details', job.jobId] : ['/closedJob/job-details/', closedJob.closedJobId])">Click Here for Details..</button>
           </div>
-          <div class="column">  
+          <div class="">  
             <button *ngIf="isEmployee && hasPrivilege" class="btn btn-primary-1 mb-2" [routerLink]="(job !== undefined ? ['/jobs', job.jobId , 'applicants'] : ['/closedJobs', closedJob.closedJobId , 'applicants'])">View Applicants</button>
           </div>
-          <div class="column">
+          <div class="">
             <a *ngIf="canEdit" class='btn btn-primary text-style-add' [routerLink]="['/edit-job',job.jobId]"><i class="fas fa-edit"></i></a>
           </div>
         </div>

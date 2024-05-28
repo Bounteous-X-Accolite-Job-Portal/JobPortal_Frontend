@@ -70,11 +70,11 @@ export class AddEmployeeComponent implements OnInit {
     this.addEmployeeService.getAllDesignations().subscribe(
       (res) => {
         this.allDesignations =  res.allDesignations
-        console.log(res.allDesignations);
+        // console.log(res.allDesignations);
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         this.spinnerService.hideSpinner();
       }
     );
@@ -99,17 +99,17 @@ export class AddEmployeeComponent implements OnInit {
       return;
     } 
     else {
-      console.log(employee);
+      // console.log(employee);
 
       this.addEmployeeService.addEmployee(employee).subscribe(
         (data: any) => {
-          console.log('Status', data.status, 'data message', data.message);
+          // console.log('Status', data.status, 'data message', data.message);
 
           if (data.status == 200) {
             this.loading = false;
 
             this.toaster.success('Successfully added employee.');
-            console.log('success adding employee');
+            // console.log('success adding employee');
 
             this.submitted = false;
             this.addEmployeeForm.reset();
@@ -119,12 +119,12 @@ export class AddEmployeeComponent implements OnInit {
             this.toaster.error(
               'Some error occured while registering employee, please try again.'
             );
-            console.log('error');
+            // console.log('error');
             this.spinnerService.hideSpinner();
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.toaster.error("Some error occured while registering" + error.message);
           this.spinnerService.hideSpinner();
         }

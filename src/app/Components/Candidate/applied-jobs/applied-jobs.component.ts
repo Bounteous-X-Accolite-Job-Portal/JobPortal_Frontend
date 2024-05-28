@@ -21,6 +21,7 @@ export class AppliedJobsComponent {
   candidateJobs: Job[] = [];
   candidateApplications: JobApplication[] = [];
   applicationStatus: Status[] = [];
+  notApplied: boolean=false;
 
   constructor(
     private candidService : CandidateService,
@@ -32,11 +33,11 @@ export class AppliedJobsComponent {
   ngOnInit() : void{
     this.userStore.getIdFromStore()
     .subscribe((val) => {
-      console.log(val);
+      // console.log(val);
       let idFromToken = this.auth.getIdFromToken();
-      console.log(idFromToken);
+      // console.log(idFromToken);
       this.userId = val || idFromToken;
-      console.log("Logged User Id : ",this.userId);
+      // console.log("Logged User Id : ",this.userId);
     })
 
     this.loadJobApplicationsApplied(this.userId);
@@ -48,13 +49,15 @@ export class AppliedJobsComponent {
     this.candidService.getAllJobApplicationByCandidate(id).subscribe(
     (res) => {
       this.candidateApplications = res.allJobApplications;
-      console.log("fetched applications : ",this.candidateApplications);
+      // console.log("fetched applications : ",this.candidateApplications);
+      this.toastr.success("Jobs fetched successfully");
       for(let i = 0;i<this.candidateApplications.length;i++)
           this.getStatusofApplication(this.candidateApplications[i].statusId);
 
-      console.log("status : ",this.applicationStatus);
+      // console.log("status : ",this.applicationStatus);
     },
     (error) => {
+      this.toastr.error("Error in fetching applied jobs");
       console.log(error);
     }
     )
@@ -76,7 +79,7 @@ export class AppliedJobsComponent {
     this.candidService.getAllAppliedJobsByCandidate(id).subscribe(
     (res) => {
       this.candidateJobs = res.allJobs;
-      console.log(this.candidateJobs);
+      // console.log(this.candidateJobs);
     },
     (error) => {
       console.log(error);

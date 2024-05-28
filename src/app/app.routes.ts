@@ -47,7 +47,6 @@ import { hasSpecialPrivilegeChildGuard } from './Guards/has-special-privilege-ch
 import { JobApplicantComponent } from './Components/JobApplication/job-applicant/job-applicant.component';
 import { YourJobsComponent } from './Components/Employee/your-jobs/your-jobs.component';
 import { DisablePrivilegeComponent } from './Components/Employee/disable-privilege/disable-privilege.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ForgetPasswordComponentComponent } from './Components/forget-password-component/forget-password-component.component';
 import { DesignationComponent } from './Components/Employee/designation/designation.component';
 import { SettingsComponent } from './Components/Employee/settings/settings.component';
@@ -66,7 +65,7 @@ export const routes: Routes = [
     path: 'landing',
     component: LandingComponent,
   },
-  {path:'referral',component:ReferralComponent},
+  { path: 'referral', component: ReferralComponent },
   {
     path: 'about',
     component: AboutComponent,
@@ -77,9 +76,8 @@ export const routes: Routes = [
     canActivate: [loggedInGuard],
   },
   {
-    path:'reset',
-    component:ForgetPasswordComponentComponent
-  
+    path: 'forgot-password',
+    component: ForgetPasswordComponentComponent,
   },
   {
     path: 'register',
@@ -138,13 +136,15 @@ export const routes: Routes = [
     children: [
       { path: 'profile', component: ProfileComponent },
       {
-        path: 'add-job',
-        component: AddJobComponent,
-        canActivate: [hasPrivilegeGuard],
+        path: 'change-password',
+        component: EmailComponentChangePasswordComponent,
+      },
+      {
+        path: 'add-job', component: AddJobComponent, canActivate: [hasPrivilegeGuard],
       },
       { path: 'interview-hub', component: InterviewHubComponent },
-      {path:'referral',component:ReferralComponent},
-      {path:'addReferral',component:AddReferralComponent},
+      { path: 'referral', component: ReferralComponent },
+      { path: 'addReferral', component: AddReferralComponent },
       {
         path: 'allEmployees',
         component: DisablePrivilegeComponent,
@@ -175,14 +175,16 @@ export const routes: Routes = [
             component: CrudInstitutionDataComponent,
           },
           { path: 'crud-company-data', component: CrudCompanyDataComponent },
-          {path : 'crud-status-job-data', component:CrudStatusJobDataComponent}
+          {
+            path: 'crud-status-job-data',
+            component: CrudStatusJobDataComponent,
+          },
         ],
       },
       { path: 'your-jobs', component: YourJobsComponent },
       { path: 'designation', component: DesignationComponent },
       { path: 'jobOffered', component: OfferLetterComponent },
-      { path: '**', component: ProfileComponent }
-
+      { path: '**', component: ProfileComponent },
     ],
   },
   {
@@ -211,13 +213,16 @@ export const routes: Routes = [
       { path: 'skills', component: SkillsComponent },
       { path: 'resume', component: ResumeComponent },
       { path: 'sml', component: SocialProfilesComponent },
-      { path: 'applied-jobs', component: AppliedJobsComponent},
+      { path: 'applied-jobs', component: AppliedJobsComponent },
       { path: 'per-info/:id', component: PersonalInfoComponent },
       { path: 'skills/::id', component: SkillsComponent },
       { path: 'resume/:id', component: ResumeComponent },
       { path: 'sml/:id', component: SocialProfilesComponent },
-      { path: 'changePassword', component: EmailComponentChangePasswordComponent },
-      { path: '**', component: PersonalInfoComponent }      
+      {
+        path: 'changePassword',
+        component: EmailComponentChangePasswordComponent,
+      },
+      { path: '**', component: PersonalInfoComponent },
     ],
   },
 ];
