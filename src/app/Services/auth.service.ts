@@ -58,7 +58,7 @@ export class AuthService {
 
   storeToken(tokenValue: string)
   {
-    this.cookieService.set("token", tokenValue, { expires: 30, secure: true, sameSite: 'Lax' });
+    this.cookieService.set("token", tokenValue, { expires: 30, path: '/', secure: true, sameSite: 'None' });
   }
 
   getToken()
