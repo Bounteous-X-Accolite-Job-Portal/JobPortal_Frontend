@@ -58,7 +58,7 @@ export class AuthService {
 
   storeToken(tokenValue: string)
   {
-    this.cookieService.set("token", tokenValue, 30, '/', 'localhost', true, 'Lax');
+    this.cookieService.set("token", tokenValue, 30, '/', environment.baseURL, true, 'Lax');
   }
 
   getToken()
