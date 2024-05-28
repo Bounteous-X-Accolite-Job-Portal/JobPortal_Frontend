@@ -41,11 +41,11 @@ export class SocialProfilesComponent {
 
   ngOnInit(): void {
     this.userStore.getIdFromStore().subscribe((val) => {
-      console.log(val);
+      // console.log(val);
       let idFromToken = this.auth.getIdFromToken();
-      console.log(idFromToken);
+      // console.log(idFromToken);
       this.userId = val || idFromToken;
-      console.log('Logged User Id : ', this.userId);
+      // console.log('Logged User Id : ', this.userId);
     });
 
     this.mediaForm = this.fb.group({
@@ -64,7 +64,8 @@ export class SocialProfilesComponent {
   private loadSocialMediaDetails() {
     this.candidService.getSocialMediaDetails(this.userId).subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
+        this.toastr.success("Social links fetched");
         this.socialMedia = res.socialMedia;
         this.checkSocialMedia();
 
@@ -75,6 +76,7 @@ export class SocialProfilesComponent {
         this.disablefields();
       },
       (error) => {
+        this.toastr.error("Error in fetching links")
         console.log(error);
       }
     );
@@ -95,7 +97,7 @@ export class SocialProfilesComponent {
     console.log(this.mediaForm.value);
     this.candidService.addSocialMedia(this.mediaForm.value).subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
         this.socialMedia.socialMediaId = res.socialMediaId;
         this.socialMedia.link1 = this.mediaForm.value.link1;
         this.socialMedia.link2 = this.mediaForm.value.link2;
@@ -116,7 +118,7 @@ export class SocialProfilesComponent {
 
     this.candidService.updateSocialMedia(this.socialMedia).subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
         this.ngOnInit();
         this.toastr.success('Socail Media Profiles Updated!!');
       },

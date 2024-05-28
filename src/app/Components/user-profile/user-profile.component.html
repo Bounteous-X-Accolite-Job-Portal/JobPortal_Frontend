@@ -9,15 +9,16 @@
       </button>
     </div>
     <ul class="sidenav-nav">
-      <li class="sidenav-nav-item  float:left pb-1" *ngFor="let data of navData">
-        <a [routerLink]="[data.routeLink]" class="sidenav-nav-link w-100 px-3" routerLinkActive="active" >
+      <li class="sidenav-nav-item  float:left pb-1 hover-text right" *ngFor="let data of navData">
+        <a [routerLink]="[data.routeLink]" class="sidenav-nav-link w-100 px-3" routerLinkActive="active" tool>
           <i class="sidenav-link-icon ml-5" [class]="data.icon"></i>
           <span class="sidenav-link-text " *ngIf="collapsed">{{data.label}}</span>
         </a>
+        <span class="tooltip-text">{{data.label}}</span>
       </li>
     </ul>
   </div>
-  <div class="comp" style="width: 100%;">
+  <div class="comp gradient-custom-2" style="width: 100%;">
     <router-outlet></router-outlet>
   </div>
 </div>

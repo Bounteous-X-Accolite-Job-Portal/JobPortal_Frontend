@@ -1,7 +1,7 @@
 <div class="d-flex gradient-custom-2 justify-content-center flex-wrap" style="padding: 20vh;">
   <div class="w-75 bg-white rounded p-5" style="height: auto;">
+    <div><a routerLink=".."><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</a></div>
     <h2>Education</h2>
-    <div>Candidate with user ID : {{userId}}</div><hr>
     <div class="d-flex justify-content-end p-1">
       <a [routerLink]="['add-edu']" class="btn btn-primary px-3 text-style-add fs-5 fw-bold">Add Education</a>
     </div>  
@@ -18,7 +18,7 @@
             <th>Action</th>
           </tr>
         </thead>
-            <tbody>
+        <tbody>
               <tr *ngFor="let tmp of eduList; let i = index">
                 <td>{{tmp.grade}}</td>
                 <td>{{this.institutions[i].institutionOrSchool}}</td>
@@ -26,14 +26,15 @@
                 <td>{{tmp.startYear}}</td>
                 <td>{{tmp.endYear}}</td>
                 <td>
-                    <a class='btn btn-primary text-style-add' [routerLink]="['update-edu',tmp.educationId]"><i class="fas fa-edit"></i>
+                  <a class='btn btn-primary text-style-add' [routerLink]="['update-edu',tmp.educationId]"><i class="fas fa-edit"></i>
                     </a>
                     <a class='btn btn-danger' (click)="deleteEducation(tmp.educationId)"><i class="fa fa-trash"></i>
                     </a>
                   </td>
                 </tr>
               </tbody>
-        </table>
-    </div>
+            </table>
+          </div>
+          <h3 *ngIf="emptyEdu">Empty Education, please add your education</h3>
   </div>
 </div>

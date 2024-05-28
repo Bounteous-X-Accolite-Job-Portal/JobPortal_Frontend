@@ -35,11 +35,11 @@ export class SkillsComponent {
 
   ngOnInit(): void {
     this.userStore.getIdFromStore().subscribe((val) => {
-      console.log(val);
+      // console.log(val);
       let idFromToken = this.auth.getIdFromToken();
-      console.log(idFromToken);
+      // console.log(idFromToken);
       this.userId = val || idFromToken;
-      console.log('Logged User Id : ', this.userId);
+      // console.log('Logged User Id : ', this.userId);
     });
 
     this.skillForm = this.fb.group({
@@ -53,16 +53,17 @@ export class SkillsComponent {
     this.candidService.getSkillsOfCandidate(this.userId).subscribe(
       (res)=>
         {
-          console.log(res);
+          // console.log(res);
           this.userSkills = res.skills;
           this.checkCandidateSkills();
-          console.log("com skills : ",this.userSkills);
-          console.log("skl : ",this.userSkills.candidateSkills);
-
+          // console.log("com skills : ",this.userSkills);
+          // console.log("skl : ",this.userSkills.candidateSkills);
+          this.toastr.success("Skills retrieved");
           this.skillForm.get('candidateSkills')?.setValue(this.userSkills.candidateSkills || '');
         },
       (error)=>
         {
+          this.toastr.error("Error in fetching skills");
           console.log(error);
         }
     );
@@ -84,7 +85,7 @@ export class SkillsComponent {
   private displayskills() : void{
     this.arrayOfSkills = this.userSkills.candidateSkills.split(",");
     //this.arrayOfSkills = this.skillForm.get('skills')?.value.split(",");
-    console.log(this.arrayOfSkills);
+    // console.log(this.arrayOfSkills);
   }
 
 
@@ -92,7 +93,7 @@ export class SkillsComponent {
     console.log("forms value : ",this.skillForm.value);
     this.candidService.addSkilsOfCandidate(this.skillForm.get('candidateSkills')?.value).subscribe(
       (res)=>{
-        console.log(res);
+        // console.log(res);
         this.ngOnInit();
         this.toastr.success("Skills Updated !!");
       },
@@ -106,7 +107,7 @@ export class SkillsComponent {
     this.userSkills.candidateSkills = this.skillForm.value.candidateSkills;
     this.candidService.updateSkillsOfCandidate(this.userSkills).subscribe(
       (res) =>{
-        console.log(res);
+        // console.log(res);
         this.ngOnInit();
         this.toastr.success("Skills Updated !!");
       },

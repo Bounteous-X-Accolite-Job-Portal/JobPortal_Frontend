@@ -11,12 +11,12 @@ import { Company } from '../../../Models/CompanyResponse/Company';
 import { CompanyService } from '../../../Services/Company/company.service';
 import { CommonModule } from '@angular/common';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-add-Experience',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule , ToastrModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule , ToastrModule, RouterLink],
   templateUrl: './add-Experience.component.html',
   styleUrl: './add-Experience.component.css',
 })
@@ -54,9 +54,9 @@ export class AddExperienceComponent {
   private loadAllComapnies(): void {
     this.httpService.getAllCompanies().subscribe(
       (res) => {
-        console.log(res.companies);
+        // console.log(res.companies);
         this.companies = this.companies.concat(res.companies);
-        console.log(this.companies);
+        // console.log(this.companies);
       },
       (error) => {
         console.log(error);
@@ -65,14 +65,14 @@ export class AddExperienceComponent {
   }
 
   public displayinfo() : void{
-    console.log(this.candidateExperience.value);
+    // console.log(this.candidateExperience.value);
     this.addExperience();
   }
 
   public addExperience() : void{
       this.candidateService.addCandidateExperience(this.candidateExperience.value).subscribe(
         (res) => {
-          console.log("exp response : ",res);
+          // console.log("exp response : ",res);
           this.toastr.success("Experience Added Successfully!!");
           this.router.navigate(['profile','exp']);
         },
