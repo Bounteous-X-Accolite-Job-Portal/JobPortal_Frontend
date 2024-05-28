@@ -23,7 +23,6 @@ import { EmployeeDashboardComponent } from './Components/Employee/employee-dashb
 import { InterviewHubComponent } from './Components/Employee/interview-hub/interview-hub.component';
 import { InterviewComponent } from './Components/JobApplication/interview/interview.component';
 import { JobdetailsComponent } from './Components/jobdetails/jobdetails.component';
-import { ReferralServiceService } from './Services/ReferralService/referral-service.service';
 import { ReferralComponent } from './Components/Employee/get-referralOfEmp/referral.component';
 import { CrudCategoryJobDataComponent } from './Components/Employee/crud-category-job-data/crud-category-job-data.component';
 import { CrudPositionJobDataComponent } from './Components/Employee/crud-position-job-data/crud-position-job-data.component';
