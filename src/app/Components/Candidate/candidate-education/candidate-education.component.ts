@@ -24,6 +24,7 @@ export class CandidateEducationComponent {
   degrees: Degree[] = [];
   institutions : EducationInstitution[] = [];
   httpService=inject(CandidateService);
+  emptyEdu:boolean=true;
 
   userId: string = "";
   constructor(
@@ -41,17 +42,25 @@ export class CandidateEducationComponent {
   {
     this.userStore.getIdFromStore()
     .subscribe((val) => {
-      console.log(val);
+      // console.log(val);
       let idFromToken = this.auth.getIdFromToken();
-      console.log(idFromToken);
+      // console.log(idFromToken);
       this.userId = val || idFromToken;
-      console.log("Logged User Id : ",this.userId);
+      // console.log("Logged User Id : ",this.userId);
     })
     
     this.httpService.getAllcandidateEducation(this.userId).subscribe(
       (res : AllCandidateEducation ) =>{
         console.log("response",res);
         this.eduList = res.candidateEducation;
+        if(this.eduList.length==0) {
+          this.emptyEdu=true;
+          this.toastr.info("Empty education list");
+        }
+        else {
+          this.emptyEdu=false;
+          this.toastr.success("Education retrieved");
+        }
         console.log("eulist",this.eduList);
         this.storedata();
       },
