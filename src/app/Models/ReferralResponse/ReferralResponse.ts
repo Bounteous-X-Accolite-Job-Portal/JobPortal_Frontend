@@ -1,6 +1,6 @@
 import { Guid } from "guid-typescript"
 
-export interface Referralresponse {
+export interface ReferralResponse {
     referralId?:Guid,
     candidateId?:Guid,
     jobId?:Guid,

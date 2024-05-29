@@ -7,82 +7,76 @@ import { Router, RouterLink } from '@angular/router';
 import { UserStoreService } from '../../../Services/user-store.service';
 import { AuthService } from '../../../Services/auth.service';
 import { GetReferral } from '../../../Models/ReferralResponse/get-referral';
-import { Referralresponse } from '../../../Models/ReferralResponse/referralresponse';
+import { ReferralResponse } from '../../../Models/ReferralResponse/ReferralResponse';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
 import { forkJoin } from 'rxjs';
 import { StatusServiceService } from '../../../Services/Status/status-service.service';
 import { ReferralCompleteResponse } from '../../../Models/ReferralResponse/ReferralCompleteResponse';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-referral',
   standalone: true,
   imports: [CommonModule,FormsModule, RouterLink],
   templateUrl: './referral.component.html',
-  styleUrl: './referral.component.css'
+  styleUrl: './referral.component.css',
 })
 export class ReferralComponent {
-  //httpService=inject(ReferralServiceService)
-  //httpServiceCandidate=inject(CandidateService)
-  
-  //jobs: Job[] = [];
-  // candidateDetails: { [candidateId: string]: CandidateResponse } = {}; 
-  //candidateDetails : CandidateResponse[] = [];
-
   referralData: ReferralCompleteResponse[] = [];
 
-
-  // jobId:string='';
   value: any;
-  empId:string="";
-  //candidateId:string='';
-  referrals:Referralresponse[]=[];
-  constructor(private referalService: ReferralServiceService,
-    private jobService:JobService,
-    private candidateService:CandidateService,
-    private router:Router,
-    private userStore : UserStoreService,
-    private auth : AuthService,
-    private StatusService:StatusServiceService,
-    private toastr: ToastrService
-  ) { }
+  empId: string = '';
+  referrals: ReferralResponse[] = [];
 
-  ngOnInit():void{
+  constructor(
+    private referalService: ReferralServiceService,
+    private jobService: JobService,
+    private candidateService: CandidateService,
+    private userStore: UserStoreService,
+    private auth: AuthService,
+    private StatusService: StatusServiceService,
+    private toastr: ToastrService
+  ) {}
+
+  ngOnInit(): void {
     this.loadreferralofEmplyoee();
   }
 
-private loadreferralofEmplyoee():void{
-this.userStore.getIdFromStore().subscribe((val)=> {
-// console.log(val);
-let idFromToken=this.auth.getIdFromToken();
-// console.log(idFromToken);
-this.empId=val || idFromToken;
-// console.log("Emplyoee Id of Logged Inuser",this.empId);
+  private loadreferralofEmplyoee(): void {
+    this.userStore.getIdFromStore().subscribe((val) => {
+      // console.log(val);
+      let idFromToken = this.auth.getIdFromToken();
+      // console.log(idFromToken);
+      this.empId = val || idFromToken;
+      // console.log("Emplyoee Id of Logged Inuser",this.empId);
+    });
+    this.referalService.getreferral(this.empId).subscribe(
+      (res: GetReferral) => {
+        // console.log("response",res);
+        this.referrals = res.referrals;
 
-})
-this.referalService.getreferral(this.empId).subscribe(
-  (res:GetReferral)=>{
-    // console.log("response",res);
-    this.referrals=res.referrals;
+        // console.log("Hey", this.referrals);
+        for (let i = 0; i < this.referrals.length; i++) {
+          const jobId = this.referrals[i].jobId?.toString();
+          const candidateId = this.referrals[i].candidateId?.toString();
+          const statusId = this.referrals[i].statusId;
+          //console.log(statusId)
 
-    // console.log("Hey", this.referrals);
-    for (let i = 0; i < this.referrals.length; i++) {
-      const jobId=this.referrals[i].jobId?.toString();
-      const candidateId = this.referrals[i].candidateId?.toString(); 
-      const statusId=this.referrals[i].statusId;
-      //console.log(statusId)
-      
-      if (candidateId !== undefined && jobId !== undefined && statusId!==undefined) {
-        // console.log("Status Id", statusId);
+          if (
+            candidateId !== undefined &&
+            jobId !== undefined &&
+            statusId !== undefined
+          ) {
+            // console.log("Status Id", statusId);
 
-        forkJoin({
-          candidateDetails : this.candidateService.getCandidateById(candidateId),
-          jobDetails : this.jobService.getJobById(jobId),
-          statusDetails:this.StatusService.getstatus(statusId)
-        }).subscribe(
-          (result) => {
-            // console.log("all data ", result);
+            forkJoin({
+              candidateDetails:
+                this.candidateService.getCandidateById(candidateId),
+              jobDetails: this.jobService.getJobById(jobId),
+              statusDetails: this.StatusService.getstatus(statusId),
+            }).subscribe(
+              (result) => {
+                // console.log("all data ", result);
 
             let data : ReferralCompleteResponse = {
               candidate : result.candidateDetails.candidate,

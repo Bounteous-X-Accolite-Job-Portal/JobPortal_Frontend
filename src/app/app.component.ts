@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from './Services/auth.service';
 import { AppModule } from './app.module';
@@ -7,7 +7,7 @@ import { SpinnerService } from './Services/spinner.service';
 import { SpinnerComponent } from './Components/spinner/spinner.component';
 import { UserStoreService } from './Services/user-store.service';
 import { ResponseModal } from './Models/ResponseModal';
-import { Toast, ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -83,7 +83,7 @@ export class AppComponent {
         this.isEmployee = employee || val;
     })
 
-    console.log("isEmployee at profile tab", this.isEmployee);
+    // console.log("isEmployee at profile tab", this.isEmployee);
     this.spinnerService.hideSpinner();
   }
 }

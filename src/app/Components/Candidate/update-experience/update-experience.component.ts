@@ -6,14 +6,14 @@ import { Company } from '../../../Models/CompanyResponse/Company';
 import { CompanyService } from '../../../Services/Company/company.service';
 import { CommonModule } from '@angular/common';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-update-Experience',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ToastrModule],
-  templateUrl: './update-Experience.component.html',
-  styleUrl: './update-Experience.component.css',
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ToastrModule, RouterLink],
+  templateUrl: './update-experience.component.html',
+  styleUrl: './update-experience.component.css',
 })
 export class UpdateExperienceComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
@@ -95,7 +95,7 @@ export class UpdateExperienceComponent {
         this.updatecandidateExperience.get('experienceTitle')?.setValue(this.candidateExperience.experienceTitle || '');
         this.updatecandidateExperience.get('companyId')?.setValue(this.candidateExperience.companyId || '');
         this.updatecandidateExperience.get('description')?.setValue(this.candidateExperience.description || '');
-        this.updatecandidateExperience.get('startDate')?.setValue(this.candidateExperience.startDate || '');
+        this.updatecandidateExperience.get('startDate')?.setValue(this.candidateExperience.startDate || null);
         this.updatecandidateExperience.get('endDate')?.setValue(this.candidateExperience.endDate || null);
         this.updatecandidateExperience.get('isCurrentlyWorking')?.setValue(this.candidateExperience.isCurrentlyWorking);
       },

@@ -83,14 +83,14 @@ export class LoginComponent {
               tokenPayload['HasSpecialPrivilege']
             );
 
-            this.authService.AuthEvent.emit(true);
-
             console.log('CheckIsEmployee', tokenPayload['IsEmployee']);
 
             if (tokenPayload['IsEmployee']) {
               this.router.navigate(['/employee-dashboard']);
+              this.authService.AuthEvent.emit(true);
             } else {
               this.router.navigate(['/jobs']);
+              this.authService.AuthEvent.emit(true);
             }
           } else {
             this.message = data.message;

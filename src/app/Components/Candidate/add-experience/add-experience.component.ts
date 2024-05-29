@@ -17,8 +17,8 @@ import { Router, RouterLink } from '@angular/router';
   selector: 'app-add-Experience',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule , ToastrModule, RouterLink],
-  templateUrl: './add-Experience.component.html',
-  styleUrl: './add-Experience.component.css',
+  templateUrl: './add-experience.component.html',
+  styleUrl: './add-experience.component.css',
 })
 export class AddExperienceComponent {
   companies: Company[] = [];

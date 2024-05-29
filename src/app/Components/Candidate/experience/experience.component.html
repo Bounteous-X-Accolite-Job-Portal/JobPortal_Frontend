@@ -1,5 +1,5 @@
 <div class="d-flex gradient-custom-2 justify-content-center flex-wrap" style="padding: 20vh;">
-  <div class="w-75 bg-white rounded p-5" style="height: auto;">
+  <div class="w-100 bg-white rounded p-5" style="height: auto;">
     <div><a routerLink=".."><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</a></div>
       <h2>Experience</h2>
       <hr>
@@ -11,7 +11,6 @@
         <thead>
           <tr>
             <th>Title</th>
-            <th>Description</th>
             <th>Company</th>
             <th>Start Date</th>
             <th>End Date</th>
@@ -22,7 +21,6 @@
             <tbody>
               <tr *ngFor="let tmp of expList; let i = index">
                 <td>{{tmp.experienceTitle}}</td>
-                <td>{{tmp.description}}</td>
                 <td>{{this.companyList[i].companyName}}</td>
                 <td>{{tmp.startDate}}</td>
                 <td>{{tmp.endDate!=null?tmp.endDate:"NA"}}</td>
