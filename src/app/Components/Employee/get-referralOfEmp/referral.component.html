@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="heading">Referral Data</h2>
+  <h2 class="heading text-center">Referral Data</h2>
   <div *ngIf="referralData.length === 0">
     <p class="paragraph">
       Hey! You don't have any referrals at the moment, but you can refer people
@@ -11,17 +11,17 @@
       <div class="card">
         <div class="card-header">
           <h5 class="card-title">
-            Candidate Email: {{ referral.candidate.email }}
+            {{ referral.candidate.firstName }} {{ referral.candidate.lastName }} <span class="float-end">{{ referral.candidate.email }}</span> 
           </h5>
         </div>
         <div class="card-body">
-          <p class="card-text">
-            Candidate Name: {{ referral.candidate.firstName }}
-            {{ referral.candidate.lastName }}
-          </p>
-          <p class="card-text">Job Code: {{ referral.job.jobCode }}</p>
-          <p class="card-text">Job Title: {{ referral.job.jobTitle }}</p>
-          <p class="card-text">Status: {{ referral.statusData.statusName }}</p>
+         
+          <span class="card-text">{{ referral.job.jobCode }} :  <i>{{ referral.job.jobTitle }}</i></span>
+          
+          <span class="card-text btn btn-warning float-end">Status: {{ referral.statusData.statusName }}</span>
+           
+          <div class="card-text">Want to know more about this job?<a [routerLink]="['/job-details', referral.job.jobId]">Click here</a></div>
+          
         </div>
       </div>
     </div>

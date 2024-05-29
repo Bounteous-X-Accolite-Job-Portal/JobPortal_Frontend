@@ -3,6 +3,7 @@ import { ReferralServiceService } from '../../../Services/ReferralService/referr
 import { JobService } from '../../../Services/Job/job.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { UserStoreService } from '../../../Services/user-store.service';
 import { AuthService } from '../../../Services/auth.service';
 import { GetReferral } from '../../../Models/ReferralResponse/get-referral';
@@ -16,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-referral',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule,FormsModule, RouterLink],
   templateUrl: './referral.component.html',
   styleUrl: './referral.component.css',
 })
@@ -77,28 +78,41 @@ export class ReferralComponent {
               (result) => {
                 // console.log("all data ", result);
 
-                let data: ReferralCompleteResponse = {
-                  candidate: result.candidateDetails.candidate,
-                  referral: res.referrals[i],
-                  job: result.jobDetails.job,
-                  statusData: result.statusDetails.statusViewModel,
-                };
-                // console.log(data)
-                this.referralData.push(data);
-              },
-              (error) => {
-                // console.log(error);
-                this.toastr.error('Error: ', error);
-              }
-            );
-          } else {
-            console.log('Candidate ID is undefined.');
+            let data : ReferralCompleteResponse = {
+              candidate : result.candidateDetails.candidate,
+              referral : res.referrals[i],
+              job : result.jobDetails.job,
+              statusData: result.statusDetails.statusViewModel
+            } 
+            // console.log(data)
+            this.referralData.push(data);
+            console.log(result);
+          },
+          (error) => {
+            // console.log(error);
+            this.toastr.error('Error: ', error);
           }
-        }
-      },
-      (error) => {
-        console.log('Error fetching referrals:', error);
+        )
+
+      } else {
+        console.log("Candidate ID is undefined.");
       }
-    );
+      
+    }
+    
+  },
+  (error) => {
+    console.log("Error fetching referrals:", error);
   }
+);
+
+
+
 }
+
+
+  
+}
+
+
+

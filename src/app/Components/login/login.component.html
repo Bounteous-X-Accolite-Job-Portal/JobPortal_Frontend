@@ -75,10 +75,17 @@
                   Remember me
                 </label>
               </div>
-              
-              <!--FORGET PASSWORD-->
-              <div class="form-inline fr mt-4"> <a id="forgot" data-bs-toggle="modal" data-bs-target="#exampleModal" class="font-weight-bold">Forgot password?</a> </div>
 
+              <!--FORGET PASSWORD-->
+              <div class="form-inline fr mt-4">
+                <a
+                  id="forgot"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  class="font-weight-bold"
+                  >Forgot password?</a
+                >
+              </div>
 
               <div class="d-flex justify-content-center w-70px">
                 <button
@@ -109,8 +116,8 @@
           Login<br />
         </h1>
         <p
-          class="mb-4 opacity-70 text-justify"
-          style="color: hsl(223, 54%, 97%)"
+          class="mb-4 opacity-70"
+          style="color: hsl(223, 54%, 97%); text-align: justify"
         >
           Bounteous x Accolite accelerates the future for the world’s most
           ambitious brands through a range of services including Strategy,
@@ -128,31 +135,63 @@
 
 <!--GET EMAIL AFTER FORGET PASSWORD-->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
-                  <span style="font-size: 25px; font-weight: 700;">Forget your password?</span>
-                  <br>
-                  <small>Enter Your E-Mail to get the reset password Link</small>
-              </h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <div class="form-group pt-3">
-                  <div class="input-group">
-                      <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                      <input [ngModel] ="resetPasswordEmail" (ngModelChange)="checkValidEmail($event)" type="email" class="form-control" placeholder="Email">
-                  </div>
-              </div>
-              <small *ngIf="isRequired" class="text-danger">*Email is required*</small>
-              <small *ngIf="!isValidEmail && !resetPasswordEmail" class="text-danger">*Email is invalid*</small>
-          </div>
-          <div class="modal-footer">
-              <button type="button" id="closeBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" (click)="confirmToSend()" class="btn btn-primary">Send</button>
-          </div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <span style="font-size: 25px; font-weight: 700"
+            >Forget your password?</span
+          >
+          <br />
+          <small>Enter Your E-Mail to get the reset password Link</small>
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
+      <div class="modal-body">
+        <div class="form-group pt-3">
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+            <input
+              [ngModel]="resetPasswordEmail"
+              (ngModelChange)="checkValidEmail($event)"
+              type="email"
+              class="form-control"
+              placeholder="Email"
+            />
+          </div>
+        </div>
+        <small *ngIf="isRequired" class="text-danger"
+          >*Email is required*</small
+        >
+        <small *ngIf="!isValidEmail && !resetPasswordEmail" class="text-danger"
+          >*Email is invalid*</small
+        >
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          id="closeBtn"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button type="button" (click)="confirmToSend()" class="btn btn-primary">
+          Send
+        </button>
+      </div>
+    </div>
   </div>
 </div>

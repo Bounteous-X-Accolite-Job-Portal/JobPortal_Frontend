@@ -7,17 +7,23 @@ import { environment } from '../../../environments/environment.development';
   providedIn: 'root',
 })
 export class ChangePasswordService {
-  apiEndPoint = 'https://localhost:7283/api/';
-
   constructor(private http: HttpClient) {}
-  sendChangePasswordLink(email: string) {
-    return this.http.post<any>(`${this.apiEndPoint}/${email}`, {});
-  }
-
-  changePassword(resertPasswordObj: ResetPassword) {
+  
+  changePassword(resetPasswordObj: ResetPassword) {
     return this.http.post<ResetPassword>(
       environment.baseURL+'ChangePassword/ChangePassword',
-      resertPasswordObj
+      resetPasswordObj
+    );
+  }
+
+  sendForgetPasswordLink(email: string) {
+    return this.http.post<any>(environment.baseURL  + 'ChangePassword/ChangePasswordEmail/' + `${email}`, {});
+  }
+  
+  resetPassword(resetPasswordObj: any) {
+    return this.http.post<any>(
+      environment.baseURL+ `Email/reset-Password`,
+      resetPasswordObj
     );
   }
 }
