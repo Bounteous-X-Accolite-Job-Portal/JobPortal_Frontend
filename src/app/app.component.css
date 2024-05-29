@@ -47,3 +47,15 @@
   color: #0b015b;
   font-weight: 500;
 }
+
+/* .navbar{
+  position: fixed;
+  z-index: 1000;
+  width: 100vw;
+
+}
+
+router-outlet{
+  position: absolute;
+  top: 20vw;
+} */

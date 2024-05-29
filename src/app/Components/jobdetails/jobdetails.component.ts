@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Renderer2, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Job } from '../../Models/JobResponse/Job';
 import { location } from '../../Models/JoblocationResponse/location';
 import { Degree } from '../../Models/DegreeResponse/Degree';
@@ -25,7 +25,7 @@ import { ClosedJobServiceService } from '../../Services/ClosedJob/closed-job-ser
 @Component({
   selector: 'app-jobdetails',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,ToastrModule],
+  imports: [CommonModule,ReactiveFormsModule,ToastrModule, RouterLink],
   templateUrl: './jobdetails.component.html',
   styleUrl: './jobdetails.component.css'
 })
@@ -49,7 +49,7 @@ export class JobdetailsComponent {
   userapplied :boolean = false;
   stringForButton:string = 'Apply';
   isEmployee:boolean = false;
-
+  
   isLoggedIn : boolean = false;
 
   constructor(

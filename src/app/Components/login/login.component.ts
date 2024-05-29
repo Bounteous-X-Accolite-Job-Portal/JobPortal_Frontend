@@ -7,8 +7,8 @@ import { Router, RouterModule } from '@angular/router';
 import { LoginResponse } from '../../Models/loginResponse';
 import { UserStoreService } from '../../Services/user-store.service';
 import { SpinnerService } from '../../Services/spinner.service';
-import { ForgetPasswordService } from '../../Services/ForgetPassword/forget-password.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ChangePasswordService } from '../../Services/ChangePassword/change-password.service';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +39,7 @@ export class LoginComponent {
     private router: Router,
     private userStore: UserStoreService,
     private spinnerService: SpinnerService,
-    private forgetService: ForgetPasswordService,
+    private forgetService: ChangePasswordService,
     private toaster: ToastrService
   ) {}
 
@@ -128,7 +128,7 @@ export class LoginComponent {
           this.resetPasswordEmail = ' ';
           const buttonRef = document.getElementById('closeBtn');
           buttonRef?.click();
-          this.toaster.info("Check you mail to reset password!!")
+          this.toaster.info("Check your mail to reset password!!")
           
         },
 
