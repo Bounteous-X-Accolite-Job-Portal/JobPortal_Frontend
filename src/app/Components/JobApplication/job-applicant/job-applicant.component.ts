@@ -84,7 +84,7 @@ export class JobApplicantComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       this.jobId = params['jobId']; // Access the 'id' parameter from the URL
-      console.log('Job ID:', this.jobId);
+      // console.log('Job ID:', this.jobId);
 
       this.spinnerService.hideSpinner();
     });
@@ -95,7 +95,7 @@ export class JobApplicantComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       this.closedJobId = params['closedJobId']; // Access the 'id' parameter from the URL
-      console.log('Closed Job ID:', this.closedJobId);
+      // console.log('Closed Job ID:', this.closedJobId);
 
       this.spinnerService.hideSpinner();
     });
@@ -107,7 +107,7 @@ export class JobApplicantComponent implements OnInit {
     if (this.jobId !== undefined) {
       this.applicantService.getApplicantsByJobId(this.jobId).subscribe(
         (res: ApplicantResponse) => {
-          console.log('applicants data', res);
+          // console.log('applicants data', res);
 
           this.applicants = res.applicants;
           this.filterapplicants = res.applicants;
@@ -127,7 +127,7 @@ export class JobApplicantComponent implements OnInit {
         .getApplicantsByClosedJobId(this.closedJobId)
         .subscribe(
           (res: ApplicantResponse) => {
-            console.log('applicants data on closed job', res);
+            // console.log('applicants data on closed job', res);
 
             this.applicants = res.applicants;
             this.filterapplicants = res.applicants;
@@ -153,7 +153,7 @@ export class JobApplicantComponent implements OnInit {
         this.allStatus = res.allStatus;
 
         this.spinnerService.hideSpinner();
-        console.log('all status', this.allStatus);
+        // console.log('all status', this.allStatus);
       },
       (error) => {
         console.log(error);
@@ -167,9 +167,9 @@ export class JobApplicantComponent implements OnInit {
 
     this.candidService.getAllInstitutions().subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
         this.educationInstitutions = res.educationInstitution;
-        console.log(this.educationInstitutions);
+        // console.log(this.educationInstitutions);
         this.spinnerService.hideSpinner();
       },
       (error) => {
@@ -185,7 +185,7 @@ export class JobApplicantComponent implements OnInit {
     this.candidService.getAllDegrees().subscribe(
       (res) => {
         this.degrees = res.degrees;
-        console.log(this.degrees);
+        // console.log(this.degrees);
         this.spinnerService.hideSpinner();
       },
       (error) => {
@@ -200,9 +200,9 @@ export class JobApplicantComponent implements OnInit {
 
     this.candidService.getAllCompanies().subscribe(
       (res) => {
-        console.log(res.companies);
+        // console.log(res.companies);
         this.companies = res.companies;
-        console.log(this.companies);
+        // console.log(this.companies);
         this.spinnerService.hideSpinner();
       },
       (error) => {
@@ -214,7 +214,7 @@ export class JobApplicantComponent implements OnInit {
 
   public onSubmit(): void {
     this.spinnerService.showSpinner();
-    console.log(this.filtersForm.value);
+    // console.log(this.filtersForm.value);
 
     this.filterJobs(
       this.filtersForm.get('degree')?.value,
@@ -353,7 +353,7 @@ export class JobApplicantComponent implements OnInit {
       return firstName || lastName || email;
     });
 
-    console.log('Filtered applicants:', this.showApplicants);
+    // console.log('Filtered applicants:', this.showApplicants);
     this.spinnerService.hideSpinner();
   }
 

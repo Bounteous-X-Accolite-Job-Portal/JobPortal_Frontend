@@ -19,9 +19,10 @@
           <span class="card-text">{{ referral.job.jobCode }} :  <i>{{ referral.job.jobTitle }}</i></span>
           
           <span class="card-text btn btn-warning float-end">Status: {{ referral.statusData.statusName }}</span>
-           
-          <div class="card-text">Want to know more about this job?<a [routerLink]="['/job-details', referral.job.jobId]">Click here</a></div>
-          
+           <br/><br/>
+          <p class="card-title">Job description - {{referral.job.jobDescription | slice:0:100}}
+            <a [routerLink]="['/job-details', referral.job.jobId]" routerLinkActive="router-link-active"  *ngIf="referral.job.jobDescription.length > 100">...show more</a>
+          </p>
         </div>
       </div>
     </div>

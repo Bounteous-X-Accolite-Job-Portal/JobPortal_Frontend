@@ -54,22 +54,22 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log('show spinner');
+    // console.log('show spinner');
     this.spinnerService.showSpinner();
 
     if (this.loginForm.valid) {
       this.authService.loginUser(this.loginForm.value).subscribe(
         (data: LoginResponse) => {
-          console.log(data);
-          console.log('Status', data.status, 'data message', data.message);
+          // console.log(data);
+          // console.log('Status', data.status, 'data message', data.message);
 
           if (data.status == 200) {
-            console.log(data.token);
+            // console.log(data.token);
             this.authService.storeToken(data.token ? data.token : '');
 
             // setting up user store
             const tokenPayload: any = this.authService.decodedToken();
-            console.log('Token payload in login line 67 ', tokenPayload);
+            // console.log('Token payload in login line 67 ', tokenPayload);
 
             this.userStore.setEmailForStore(tokenPayload['Email']);
             this.userStore.setNameForStore(tokenPayload['Name']);
@@ -83,7 +83,7 @@ export class LoginComponent {
               tokenPayload['HasSpecialPrivilege']
             );
 
-            console.log('CheckIsEmployee', tokenPayload['IsEmployee']);
+            // console.log('CheckIsEmployee', tokenPayload['IsEmployee']);
 
             if (tokenPayload['IsEmployee']) {
               this.router.navigate(['/employee-dashboard']);
@@ -96,11 +96,11 @@ export class LoginComponent {
             this.message = data.message;
           }
 
-          console.log('hide spinner');
+          // console.log('hide spinner');
           this.spinnerService.hideSpinner();
         },
         (error: any) => {
-          console.log('hide spinner');
+          // console.log('hide spinner');
           this.spinnerService.hideSpinner();
 
           console.log(error);
