@@ -131,5 +131,5 @@ select {
 .nav-link:hover{
   color: #0a0156;
   text-shadow: .5px 1px;
-  letter-spacing: 2px;
+  /* letter-spacing: 2px; */
 }

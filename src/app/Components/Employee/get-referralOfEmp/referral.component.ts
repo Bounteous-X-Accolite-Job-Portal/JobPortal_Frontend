@@ -13,6 +13,7 @@ import { forkJoin } from 'rxjs';
 import { StatusServiceService } from '../../../Services/Status/status-service.service';
 import { ReferralCompleteResponse } from '../../../Models/ReferralResponse/ReferralCompleteResponse';
 import { ToastrService } from 'ngx-toastr';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-referral',
@@ -35,7 +36,8 @@ export class ReferralComponent {
     private userStore: UserStoreService,
     private auth: AuthService,
     private StatusService: StatusServiceService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinnerService: SpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +45,7 @@ export class ReferralComponent {
   }
 
   private loadreferralofEmplyoee(): void {
+    this.spinnerService.showSpinner();
     this.userStore.getIdFromStore().subscribe((val) => {
       // console.log(val);
       let idFromToken = this.auth.getIdFromToken();
@@ -86,15 +89,18 @@ export class ReferralComponent {
             } 
             // console.log(data)
             this.referralData.push(data);
-            console.log(result);
+            this.spinnerService.hideSpinner();
+            // console.log(result);
           },
           (error) => {
             // console.log(error);
+            this.spinnerService.hideSpinner();
             this.toastr.error('Error: ', error);
           }
         )
-
+        
       } else {
+        this.spinnerService.hideSpinner();
         console.log("Candidate ID is undefined.");
       }
       
@@ -102,6 +108,7 @@ export class ReferralComponent {
     
   },
   (error) => {
+    this.spinnerService.hideSpinner();
     console.log("Error fetching referrals:", error);
   }
 );

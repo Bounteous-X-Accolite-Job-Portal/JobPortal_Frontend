@@ -7,7 +7,12 @@ import { SkillsServiceService } from '../../../Services/Skills/skills-service.se
 import { ExperienceServiceService } from '../../../Services/Experience/experience-service.service';
 import { CompanyService } from '../../../Services/Company/company.service';
 import { Skills } from '../../../Models/SkillsResponse/Skills';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { InterviewFeedbackService } from '../../../Services/InterviewFeedback/interview-feedback.service';
 import { AddInterviewFeedbackResponse } from '../../../Models/InterviewFeedback/AddInterviewFeedbackResponse';
 import { Router, RouterModule } from '@angular/router';
@@ -19,18 +24,18 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './interview-card.component.html',
-  styleUrl: './interview-card.component.css'
+  styleUrl: './interview-card.component.css',
 })
 export class InterviewCardComponent implements OnInit {
-  @Input() interview !: interviewCardData
-  @Input() doneInterview !: boolean;
+  @Input() interview!: interviewCardData;
+  @Input() doneInterview!: boolean;
 
-  form !: FormGroup;
+  form!: FormGroup;
   submitting = false;
   submitted = false;
 
-  skills ?: Skills;
-  experience : ExperienceWithCompany[] = []
+  skills?: Skills;
+  experience: ExperienceWithCompany[] = [];
 
   constructor(
     private skillService: SkillsServiceService,
@@ -40,7 +45,7 @@ export class InterviewCardComponent implements OnInit {
     private interviewFeedbackService: InterviewFeedbackService,
     private spinnerService: SpinnerService,
     private toastr: ToastrService
-  ){}
+  ) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -50,7 +55,7 @@ export class InterviewCardComponent implements OnInit {
     });
   }
 
-  newFeedback(){
+  newFeedback() {
     // console.log('show spinner');
     this.spinnerService.showSpinner();
 
@@ -61,10 +66,10 @@ export class InterviewCardComponent implements OnInit {
     this.spinnerService.hideSpinner();
   }
 
-  formClosed(){
+  formClosed() {
     // console.log('show spinner');
     this.spinnerService.showSpinner();
-    
+
     this.submitted = false;
     this.form.reset();
 
@@ -72,14 +77,14 @@ export class InterviewCardComponent implements OnInit {
     this.spinnerService.hideSpinner();
   }
 
-  get f(){
+  get f() {
     return this.form.controls;
   }
 
-  submitFeedback(){
+  submitFeedback() {
     this.submitting = true;
     this.submitted = true;
-    
+
     if (this.form.invalid) {
       this.submitted = false;
       return;
@@ -90,6 +95,8 @@ export class InterviewCardComponent implements OnInit {
         feedback: this.form.value.feedback,
         additionalLink: this.form.value.additionalLink,
       };
+
+      // console.log('feedback form data ', feedbackData);
 
       this.interviewFeedbackService.addFeedback(feedbackData).subscribe(
         (data: AddInterviewFeedbackResponse) => {
@@ -109,57 +116,54 @@ export class InterviewCardComponent implements OnInit {
     this.form.reset();
   }
 
-  ShowDetails(candidateId: string){
+  ShowDetails(candidateId: string) {
     this.skills;
-    this.experience = []
+    this.experience = [];
 
     forkJoin({
-      skills : this.skillService.getSkillsByCandidateId(candidateId.toString()),
-      experienceResponse : this.experienceService.getExperienceByCandidateId(candidateId.toString()),
+      skills: this.skillService.getSkillsByCandidateId(candidateId.toString()),
+      experienceResponse: this.experienceService.getExperienceByCandidateId(
+        candidateId.toString()
+      ),
     }).subscribe(
-      (result)=> {
-        
+      (result) => {
         this.skills = result.skills.skills;
 
         forkJoin(
-          (result.experienceResponse.experiences).map(element =>
-            this.companyService.getCompanyById(element.companyId.toString()),
+          result.experienceResponse.experiences.map((element) =>
+            this.companyService.getCompanyById(element.companyId.toString())
           )
         ).subscribe(
           (companies) => {
+            result.experienceResponse.experiences.forEach(
+              (element, index: number) => {
+                const company = companies[index];
+                // console.log("com", company)
 
-            (result.experienceResponse.experiences).forEach((element, index: number) => {
-                  
-              const company = companies[index];
-              // console.log("com", company)
-                  
-              let item: ExperienceWithCompany = {
+                let item: ExperienceWithCompany = {
                   experienceTitle: element.experienceTitle,
                   startDate: element.startDate,
                   endDate: element.endDate,
                   isCurrentlyWorking: element.isCurrentlyWorking,
                   description: element.description,
-                  Company: companies[index].company
+                  Company: companies[index].company,
+                };
+
+                this.experience.push(item);
               }
-              
-              this.experience.push(item);
-            });
-            
+            );
+
             // console.log("Experience : ", this.experience);
           },
           (error) => {
-              this.toastr.error("Error in company API", error);
-              
-            }
-          )
-          
-        },
-        (error)=> {
-        this.toastr.error("Error :", error);
+            this.toastr.error('Error in company API', error);
+          }
+        );
+      },
+      (error) => {
+        this.toastr.error('Error :', error);
         // console.error(error);
       }
-    )
-
+    );
   }
-
 }

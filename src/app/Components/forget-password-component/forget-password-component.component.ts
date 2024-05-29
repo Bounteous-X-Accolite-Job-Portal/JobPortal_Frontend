@@ -32,29 +32,6 @@ export class ForgetPasswordComponentComponent implements OnInit {
         this.resetPasswordObj.email = this.email;
       });
     }
-    // resetPassword() {
-    //   if (
-    //     this.resetPasswordObj.newPassword !== this.resetPasswordObj.confirmPassword
-    //   ) {
-    //     this.toaster.error("New Password & Confirm Password didn't match!!")
-    //     return;
-    //   }
-    //   console.log(this.resetPasswordObj)
-    //   this.resetPasswordService
-    //     .resertPassword(this.resetPasswordObj)
-    //     .pipe(
-    //       tap((response) => {
-    //         // console.log('Reset password response:', response);
-    //         this.toaster.success('Successfully Changed Password, Login with your new credentials!')
-    //         this.router.navigate(['login']);
-    //       }),
-    //       catchError((error) => {
-    //         this.toaster.error('Error : ', error);
-    //         return throwError(() => error);
-    //       })
-    //     )
-    //     .subscribe();
-    // }
 
     resetPassword()
     {
