@@ -191,11 +191,11 @@ export class InterviewHubComponent implements OnInit {
               // console.log("closedJob", closedApplication);
 
               forkJoin({
-                candidate : this.candidateService.getCandidateById(closedApplication.closedApplication.candidateId.toString()),
-                resume : this.resumeService.getResumeByCandidateId(closedApplication.closedApplication.candidateId.toString()),
-                job : (closedApplication.closedApplication.jobId != null) ? 
-                            this.jobService.getJobById(closedApplication.closedApplication.jobId.toString()):
-                            this.closedJobService.getClosedJobById(closedApplication.closedApplication.closedJobId.toString()),
+                candidate : this.candidateService.getCandidateById(closedApplication.application.candidateId.toString()),
+                resume : this.resumeService.getResumeByCandidateId(closedApplication.application.candidateId.toString()),
+                job : (closedApplication.application.jobId != null) ? 
+                            this.jobService.getJobById(closedApplication.application.jobId.toString()):
+                            this.closedJobService.getClosedJobById(closedApplication.application.closedJobId.toString()),
               }).subscribe(
                 (results: any) => {
                     let toBeAdded: interviewCardData = {
@@ -206,8 +206,8 @@ export class InterviewHubComponent implements OnInit {
                       feedbackId: interview.feedbackId,
                       Candidate: results.candidate.candidate,
                       Resume: results.resume.resume,
-                      Job: (closedApplication.closedApplication.jobId != null) ? (results.job.job) : null,
-                      ClosedJob: (closedApplication.closedApplication.jobId == null) ? (results.job.closedJob) : null,
+                      Job: (closedApplication.application.jobId != null) ? (results.job.job) : null,
+                      ClosedJob: (closedApplication.application.jobId == null) ? (results.job.closedJob) : null,
                     };
     
                     // console.log("toboadded : ", toBeAdded);

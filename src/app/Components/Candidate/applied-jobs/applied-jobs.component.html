@@ -1,14 +1,15 @@
 <div class="d-flex gradient-custom-2 justify-content-center flex-wrap" style="padding: 20vh;">
-    <div class="w-75 bg-white rounded p-5" style="height: auto;">
-      <h2>Applied Jobs :- </h2>
+    <div class="w-75 bg-white rounded p-5 mb-5" style="height: auto;">
+      <h2>Active Applications</h2>
       <hr>
-      <div class="table-responsive">
+      <div *ngIf="candidateJobs.length <= 0">No active applications to show.</div>
+      <div *ngIf="candidateJobs.length > 0" class="table-responsive">
         <table class="table">
           <thead>
             <tr>
               <th>Job Code</th>
               <th>Job Title</th>
-              <th>Last Date</th>
+              <th>Applied On</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -17,11 +18,33 @@
                   <td>{{job.jobCode}}</td>
                   <td>{{job.jobTitle}}</td>
                   <td>{{candidateApplications[i].appliedOn}}</td>
-                  <td>{{applicationStatus[i].statusName}}</td>
+                  <td>{{applicationStatus[i] !== undefined ? applicationStatus[i].statusName : "loading..."}}</td>
                   </tr>
                 </tbody>
           </table>
           <div *ngIf="notApplied" ><h2>No jobs applied till now!</h2></div>
+      </div>
+    </div>
+    <div *ngIf="rejectedApplicationData.length > 0" class="w-75 bg-white rounded p-5" style="height: auto;">
+      <h2>Rejected Applications</h2>
+      <hr>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Job Code</th>
+              <th>Job Title</th>
+              <th>Applied On</th>
+            </tr>
+          </thead>
+              <tbody>
+                <tr *ngFor="let item of rejectedApplicationData; let i = index">
+                  <td>{{item.job !== undefined ? item.job.jobCode : item.closedJob?.jobCode}}</td>
+                  <td>{{item.job !== undefined ? item.job.jobTitle : item.closedJob?.jobTitle}}</td>
+                  <td>{{item.application.appliedOn}}</td>
+                </tr>
+              </tbody>
+          </table>
       </div>
     </div>
   </div>

@@ -1,13 +1,13 @@
 <div class="container">
   <h2 class="heading text-center">Referral Data</h2>
-  <div *ngIf="referralData.length === 0">
+  <div *ngIf="referral.length === 0">
     <p class="paragraph">
       Hey! You don't have any referrals at the moment, but you can refer people
       from the Jobs Tab.
     </p>
   </div>
-  <div *ngIf="referralData.length > 0">
-    <div *ngFor="let referral of referralData">
+  <div *ngIf="referral.length > 0">
+    <div *ngFor="let referral of referral">
       <div class="card">
         <div class="card-header">
           <h5 class="card-title">
@@ -16,12 +16,16 @@
         </div>
         <div class="card-body">
          
-          <span class="card-text">{{ referral.job.jobCode }} :  <i>{{ referral.job.jobTitle }}</i></span>
+          <span class="card-text">{{ (referral.job !== undefined && referral.job !== null) ?  referral.job.jobCode : referral.closedJob?.jobCode }} :  <i>{{ (referral.job !== undefined && referral.job !== null) ?  referral.job.jobTitle : referral.closedJob?.jobCode }}</i></span>
           
           <span class="card-text btn btn-warning float-end">Status: {{ referral.statusData.statusName }}</span>
            
-          <div class="card-text">Want to know more about this job?<a [routerLink]="['/job-details', referral.job.jobId]">Click here</a></div>
-          
+          <p *ngIf="(referral.job !== undefined && referral.job !== null)" class="card-title">Job description - {{referral.job.jobDescription | slice:0:100}}
+            <a [routerLink]="['/job-details', referral.job.jobId]" routerLinkActive="router-link-active"  *ngIf="referral.job.jobDescription.length > 100">...show more</a>
+          </p>
+          <p *ngIf="(referral.closedJob !== undefined && referral.closedJob !== null)" class="card-title">Job description - {{referral.closedJob.jobDescription| slice:0:100}}
+            <a [routerLink]="['/closedJob/job-details', referral.closedJob.closedJobId]" *ngIf="referral.closedJob.jobDescription.length > 100">...show more</a>
+          </p>
         </div>
       </div>
     </div>
