@@ -3,7 +3,7 @@ import { ReferralServiceService } from '../../../Services/ReferralService/referr
 import { JobService } from '../../../Services/Job/job.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UserStoreService } from '../../../Services/user-store.service';
 import { AuthService } from '../../../Services/auth.service';
 import { GetReferral } from '../../../Models/ReferralResponse/get-referral';
@@ -18,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-referral',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule, RouterLink],
   templateUrl: './referral.component.html',
   styleUrl: './referral.component.css'
 })
@@ -92,6 +92,7 @@ this.referalService.getreferral(this.empId).subscribe(
             } 
             // console.log(data)
             this.referralData.push(data);
+            console.log(result);
           },
           (error) => {
             // console.log(error);
@@ -99,34 +100,9 @@ this.referalService.getreferral(this.empId).subscribe(
           }
         )
 
-        // this.candidateService.getCandidateById(candidateId).subscribe(
-        //   (candidateDetails: CandidateResponse) => {
-        //     console.log("Candidate Details:", candidateDetails);
-            
-        //     this.referralData.push()
-        //     this.candidateDetails[candidateId] = candidateDetails; 
-            
-        //   },
-        //   (error) => {
-        //     console.log("Error fetching candidate details:", error);
-        //   }
-        // );
       } else {
         console.log("Candidate ID is undefined.");
       }
-      // for(let j=0;j<this.referrals.length;j++)
-      //   {
-      //     const jobId=this.referrals[j].jobId?.toString();
-      //     if(jobId!==undefined){
-      //       //console.log("JobId",jobId);
-      //       this.jobService.getJobById(jobId).subscribe(
-      //         (jobDetails:JobResponse)=>
-      //           {
-      //             console.log("Job Details",jobDetails);
-      //           }
-      //       )
-      //     }
-      //   }
       
     }
     
@@ -137,30 +113,10 @@ this.referalService.getreferral(this.empId).subscribe(
 );
 
 
-    //console.log("referrals : ",this.referrals);
-    //console.log("candid : ",this.candidateDetails);
+
 }
 
-  // private loadJobs():void{
-  //   this.jobService.getAllJobs().subscribe(
-  //     (res) => {
-  //       this.jobs = res.allJobs;
-  //       // this.value=this.jobId;
-  //       console.log(this.value);
-  //       console.log(this.jobs);
-  //     },
-  //     (error) => {
-  //       console.error('Error loading Jobs',error);
-  //     }
-  //   );
-  // }
 
-  // addrefrral(jobId:string) {
-  //   console.log("passed jobId ; ",jobId);
-  //   this.jobService.jobId =jobId;
-  //   console.log("serice job ; ",this.jobService.jobId);
-  //  this.router.navigate(['employee-dashboard','addReferral']);
-  // }
   
 }
 

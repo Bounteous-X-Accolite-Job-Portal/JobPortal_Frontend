@@ -45,6 +45,7 @@ ngOnInit()
           // console.log(this.referralObj)
           // console.log("Success");
           this.toastr.success("Successfully Referred " + this.referralObj.firstName);
+          this.referralObj.firstName='';
         },
         (error:any) => {
           this.toastr.error("Error occurred while referring, Please try again!");

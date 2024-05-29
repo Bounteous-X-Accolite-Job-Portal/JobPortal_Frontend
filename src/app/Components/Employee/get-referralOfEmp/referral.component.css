@@ -10,8 +10,8 @@
   margin-bottom: 20px;
 } */
 .paragraph {
+  margin-top: 20px;
   font-size: 18px;
-  color: #666;
   text-align: center;
 }
 .card {
@@ -32,6 +32,8 @@
 }
 .card-body {
   padding: 15px;
+  /* width: 70%;
+  align-self: center; */
 }
 .card-text {
   margin-bottom: 10px;
