@@ -2,7 +2,7 @@
   class="d-flex gradient-custom-2 justify-content-center"
   style="padding: 20vh"
   >
-  <div class="w-75 bg-white rounded p-5" style="height: auto">
+  <div class="w-100 bg-white rounded p-5" style="height: auto">
     <div><a routerLink=".."><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</a></div>
     <div class="row w-full my-5 d-flex justify-content-center">
       <div class="d-flex justify-content-center mb-3">
@@ -31,8 +31,10 @@
         </div>
 
         <div class="form-group mb-3">
-          <label for="description" class="me-2">Description</label>
-          <textarea placeholder="Enter Job Description" formControlName="description"></textarea>
+          <div class="d-flex">
+            <label for="description" class="me-3">Description</label>
+            <textarea placeholder="Enter Job Description: " formControlName="description" class="w-75 rounded"></textarea>
+          </div>
         </div>
 
         <div class="row">

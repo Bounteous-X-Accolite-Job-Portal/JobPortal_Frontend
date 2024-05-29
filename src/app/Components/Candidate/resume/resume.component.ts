@@ -88,7 +88,7 @@ add() {
   console.log(this.resumeForm.value);
   this.resumeService.addResumeByCandidateId(this.resumeForm.get('resumeUrl')?.value).subscribe(
     (res) => {
-      // console.log(res);
+      console.log(res);
       this.toastr.success("Resume link added");
       this.ngOnInit();
     },
@@ -106,10 +106,10 @@ add() {
     this.resumeService.removeResumeByResumeId(this.userResume.resumeId).subscribe(
       (res)=>{
         console.log(res);
+        this.add();
       }
     );
-    this.add();
-    this.toastr.success("Resume linked updated successfuly");
+    this.toastr.success("Resume linked updated successfully");
   }
 
 
