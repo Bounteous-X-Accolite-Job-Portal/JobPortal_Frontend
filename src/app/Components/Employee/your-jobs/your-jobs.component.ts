@@ -19,7 +19,6 @@ import {
   FormBuilder,
   FormGroup,
   FormsModule,
-  NgModel,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -100,7 +99,7 @@ export class YourJobsComponent implements OnInit {
       .getAllJobsAddedByLoggedInEmployee(this.employeeId)
       .subscribe(
         (res: AllJob) => {
-          console.log('active jobs', res);
+          // console.log('active jobs', res);
 
           this.jobs = res.allJobs;
           this.Filterjobs = this.jobs;
@@ -120,7 +119,7 @@ export class YourJobsComponent implements OnInit {
       .getAllJobsAddedByLoggedInEmployee(this.employeeId)
       .subscribe(
         (res: AllClosedJobsResponse) => {
-          console.log('closed Jobs', res);
+          // console.log('closed Jobs', res);
 
           this.closedJobs = res.closedJobs;
           this.FilterClosedJobs = res.closedJobs;
@@ -128,7 +127,7 @@ export class YourJobsComponent implements OnInit {
           this.spinnerService.hideSpinner();
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.spinnerService.hideSpinner();
         }
       );
@@ -139,7 +138,7 @@ export class YourJobsComponent implements OnInit {
       (res) => {
         // this.locations = res.allJobLocations;
         this.locations = this.locations.concat(res.allJobLocations);
-        console.log(this.locations);
+        // console.log(this.locations);
       },
       (error) => {
         console.error('Error loading job locations:', error);
@@ -152,7 +151,7 @@ export class YourJobsComponent implements OnInit {
       (res) => {
         // this.jobTypes = res.allJobTypes;
         this.jobTypes = this.jobTypes.concat(res.allJobTypes);
-        console.log(this.jobTypes);
+        // console.log(this.jobTypes);
       },
       (error) => {
         console.error('Error loading job types:', error);
@@ -165,7 +164,7 @@ export class YourJobsComponent implements OnInit {
       (res) => {
         // this.jobCategories = res.allJobCategory;
         this.jobCategories = this.jobCategories.concat(res.allJobCategory);
-        console.log(this.jobCategories);
+        // console.log(this.jobCategories);
       },
       (error) => {
         console.error('Error loading job categories:', error);
@@ -177,7 +176,7 @@ export class YourJobsComponent implements OnInit {
     this.jobService.getAllJobPosition().subscribe(
       (res) => {
         this.jobPositions = this.jobPositions.concat(res.allJobPositions);
-        console.log(this.jobPositions);
+        // console.log(this.jobPositions);
       },
       (error) => {
         console.error('Error loading job Positions:', error);
@@ -340,7 +339,7 @@ export class YourJobsComponent implements OnInit {
   }
 
   private displayEmptyJobsToast(): void {
-    this.toastr.error('No Jobs Found !!');
+    this.toastr.info('No Jobs Found !!');
   }
 
   private displayJobsToast(): void {

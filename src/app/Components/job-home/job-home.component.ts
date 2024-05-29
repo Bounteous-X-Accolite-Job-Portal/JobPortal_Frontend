@@ -167,7 +167,7 @@ export class JobHomeComponent {
 
     this.closedJobService.getAllClosedJobs().subscribe(
       (data: AllClosedJobsResponse) => {
-        console.log('closed jobs', data);
+        // console.log('closed jobs', data);
 
         this.closedJobs = data.closedJobs;
         this.filteredClosedJobs = data.closedJobs;
@@ -186,7 +186,7 @@ export class JobHomeComponent {
       (res) => {
         // this.locations = res.allJobLocations;
         this.locations = this.locations.concat(res.allJobLocations);
-        console.log(this.locations);
+        // console.log(this.locations);
       },
       (error) => {
         console.error('Error loading job locations:', error);
@@ -199,7 +199,7 @@ export class JobHomeComponent {
       (res) => {
         // this.jobTypes = res.allJobTypes;
         this.jobTypes = this.jobTypes.concat(res.allJobTypes);
-        console.log(this.jobTypes);
+        // console.log(this.jobTypes);
       },
       (error) => {
         console.error('Error loading job types:', error);
@@ -212,7 +212,7 @@ export class JobHomeComponent {
       (res) => {
         // this.jobCategories = res.allJobCategory;
         this.jobCategories = this.jobCategories.concat(res.allJobCategory);
-        console.log(this.jobCategories);
+        // console.log(this.jobCategories);
       },
       (error) => {
         console.error('Error loading job categories:', error);
@@ -224,7 +224,7 @@ export class JobHomeComponent {
     this.jobService.getAllJobPosition().subscribe(
       (res) => {
         this.jobPositions = res.allJobPositions;
-        console.log('all pos : ', this.jobPositions);
+        // console.log('all pos : ', this.jobPositions);
       },
       (error) => {
         console.error('Error loading job Positions:', error);
@@ -237,7 +237,7 @@ export class JobHomeComponent {
       (res) => {
         this.jobs = res.allJobs;
         this.Filterjobs = this.jobs;
-        console.log(this.Filterjobs);
+        // console.log(this.Filterjobs);
       },
       (error) => {
         console.error('Error loading Jobs', error);
@@ -246,7 +246,7 @@ export class JobHomeComponent {
   }
 
   addrefrral(jobId: string) {
-    console.log('passed jobId ; ', jobId);
+    // console.log('passed jobId ; ', jobId);
     //   this.jobService.jobId =jobId;
     //   console.log("serice job ; ",this.jobService.jobId);
     //  this.router.navigate(['employee-dashboard','addReferral']);
@@ -256,7 +256,7 @@ export class JobHomeComponent {
     this.jobService.getAllDegrees().subscribe(
       (res) => {
         this.degrees = this.degrees.concat(res.degrees);
-        console.log(this.degrees);
+        // console.log(this.degrees);
       },
       (error) => {
         console.error('Error loading Degrees:', error);
@@ -275,11 +275,11 @@ export class JobHomeComponent {
       return;
     }
 
-    console.log(this.jobPositions[this.positionIndex]);
-    console.log(this.jobCategories[this.categoryIndex]);
-    console.log(this.jobTypes[this.typeIndex]);
-    console.log(this.locations[this.locationIndex]);
-    console.log(this.degrees[this.degreeIndex]);
+    // console.log(this.jobPositions[this.positionIndex]);
+    // console.log(this.jobCategories[this.categoryIndex]);
+    // console.log(this.jobTypes[this.typeIndex]);
+    // console.log(this.locations[this.locationIndex]);
+    // console.log(this.degrees[this.degreeIndex]);
 
     this.filterJobs(
       this.jobPositions[this.positionIndex].positionId,
@@ -302,11 +302,11 @@ export class JobHomeComponent {
       return;
     }
 
-    console.log(this.jobPositions[this.positionIndex]);
-    console.log(this.jobCategories[this.categoryIndex]);
-    console.log(this.jobTypes[this.typeIndex]);
-    console.log(this.locations[this.locationIndex]);
-    console.log(this.degrees[this.degreeIndex]);
+    // console.log(this.jobPositions[this.positionIndex]);
+    // console.log(this.jobCategories[this.categoryIndex]);
+    // console.log(this.jobTypes[this.typeIndex]);
+    // console.log(this.locations[this.locationIndex]);
+    // console.log(this.degrees[this.degreeIndex]);
 
     this.filterClosedJobs(
       this.jobPositions[this.positionIndex].positionId,

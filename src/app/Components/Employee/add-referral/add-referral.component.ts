@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Referral } from '../../../Models/ReferralResponse/referral';
 import { ReferralServiceService } from '../../../Services/ReferralService/referral-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JobService } from '../../../Services/Job/job.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
@@ -46,6 +46,8 @@ ngOnInit()
           // console.log("Success");
           this.toastr.success("Successfully Referred " + this.referralObj.firstName);
           this.referralObj.firstName='';
+          this.referralObj.lastName='';
+          this.referralObj.email='';
         },
         (error:any) => {
           this.toastr.error("Error occurred while referring, Please try again!");

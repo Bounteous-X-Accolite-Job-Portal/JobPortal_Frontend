@@ -33,11 +33,11 @@ export class UserProfileComponent implements OnInit {
     ngOnInit(): void {
         this.userStore.getNameFromStore()
         .subscribe((val) => {
-            console.log(val);
+            // console.log(val);
             let nameFromToken = this.auth.getNameFromToken();
-            console.log(nameFromToken);
+            // console.log(nameFromToken);
             this.name = val || nameFromToken;
-            console.log(this.name);
+            // console.log(this.name);
         })
     }
 

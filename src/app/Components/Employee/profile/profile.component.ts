@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit {
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         this.spinnerService.hideSpinner();
       }
     )
@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         this.spinnerService.hideSpinner();
       }
     )
@@ -73,14 +73,14 @@ export class ProfileComponent implements OnInit {
 
     this.employeeService.getEmployeeById(this.employeeId).subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
 
         this.employee = res.employee;
 
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         this.spinnerService.hideSpinner();
       }
     )
@@ -91,7 +91,7 @@ export class ProfileComponent implements OnInit {
 
     this.employeeService.getEmployeeProfileData(this.employeeId).subscribe(
       (res : EmployeeProfileData) => {
-        console.log(res);
+        // console.log(res);
 
         this.interviewsTaken = res.interviewTaken;
         this.candidatesReferred = res.candidatesReferred;
@@ -100,7 +100,7 @@ export class ProfileComponent implements OnInit {
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         this.spinnerService.hideSpinner();
       }
     )

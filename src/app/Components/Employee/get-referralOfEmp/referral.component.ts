@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ClosedJobServiceService } from '../../../Services/ClosedJob/closed-job-service.service';
 import { ApplicationServiceService } from '../../../Services/ApplicationService/application-service.service';
 import { ClosedApplicationService } from '../../../Services/ClosedApplication/closed-application.service';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-referral',
@@ -40,6 +41,7 @@ export class ReferralComponent {
     private auth: AuthService,
     private StatusService: StatusServiceService,
     private toastr: ToastrService,
+    private spinnerService: SpinnerService,
     private applicationService : ApplicationServiceService,
     private closedApplicationService : ClosedApplicationService
   ) {}
@@ -49,6 +51,7 @@ export class ReferralComponent {
   }
 
   private loadreferralofEmplyoee(): void {
+    this.spinnerService.showSpinner();
     this.userStore.getIdFromStore().subscribe((val) => {
       // console.log(val);
       let idFromToken = this.auth.getIdFromToken();

@@ -61,7 +61,7 @@ export class ApplicantCardComponent implements OnInit {
         this.allStatus = res.allStatus;
         
         this.spinnerService.hideSpinner();
-        console.log("all status", this.allStatus);
+        // console.log("all status", this.allStatus);
       },
       (error) => {
         console.log(error);
@@ -85,13 +85,13 @@ export class ApplicantCardComponent implements OnInit {
       return;
     } 
     else {
-      console.log("newStatusId", this.allStatus[this.statusId]);
-      console.log("application Id", this.applicant.applicationId);
+      // console.log("newStatusId", this.allStatus[this.statusId]);
+      // console.log("application Id", this.applicant.applicationId);
       let newStatusId = this.allStatus[this.statusId].statusId;
       
       this.applicationService.changeApplicationStatus(this.applicant.applicationId, newStatusId).subscribe(
         (res: ApplicationResponse) => {
-          console.log("change application status response", res)
+          // console.log("change application status response", res)
 
           let emitData = {
             applicationId : res.application.applicationId,
@@ -125,12 +125,12 @@ export class ApplicantCardComponent implements OnInit {
 
     this.interviewService.getAllApplicantInterviewsByApplicationId(ApplicationId).subscribe(
       (res : ApplicantInterviewResponse) => {
-        console.log("Applicant Interviews", res);
+        // console.log("Applicant Interviews", res);
 
         this.allInterviews = res.allInterviews;
 
         this.spinnerService.hideSpinner();
-        console.log("All interviews", this.allInterviews)
+        // console.log("All interviews", this.allInterviews)
       },
       (error) => {
         console.log(error);

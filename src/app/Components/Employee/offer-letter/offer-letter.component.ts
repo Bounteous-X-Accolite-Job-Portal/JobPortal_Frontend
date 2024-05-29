@@ -42,7 +42,7 @@ export class OfferLetterComponent implements OnInit {
 
     this.applicationService.getAllSuccessfulOffers().subscribe(
       (result : SuccessfulOfferResponse) => {
-        console.log("successful job offer", result);
+        // console.log("successful job offer", result);
 
         result.successfulJobApplication.forEach(element => {
           forkJoin({
@@ -51,7 +51,7 @@ export class OfferLetterComponent implements OnInit {
             closedJob: this.closedJob.getClosedJobById(element.closedJobId ? element.closedJobId.toString() : "3fa85f64-5717-4562-b3fc-2c963f66afa6")
           }).subscribe(
             (res)=> {
-              console.log("candidate and job of suucessful job offer", res);
+              // console.log("candidate and job of suucessful job offer", res);
 
               let  profile : SuccessfulProfile = {
                 successfulOffer : element,
@@ -63,7 +63,7 @@ export class OfferLetterComponent implements OnInit {
               this.allProfiles.push(profile);
             },
             (error) => {
-              console.log(error);
+              // console.log(error);
               this.spinnerService.hideSpinner();
             }
           )
@@ -72,7 +72,7 @@ export class OfferLetterComponent implements OnInit {
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         this.spinnerService.hideSpinner();
       }
     )

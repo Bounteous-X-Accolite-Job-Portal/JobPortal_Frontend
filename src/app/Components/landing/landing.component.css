@@ -314,3 +314,19 @@ h6,
 .footer .footer-menu a:hover {
     color: #FBA504;
 }
+
+.footer_section {
+    position: relative;
+    background-color: #ffffff;
+    text-align: center;
+  }
+  
+  .footer_section p {
+    color: #00204a;
+    padding: 25px 0;
+    margin: 0;
+  }
+  
+  .footer_section p a {
+    color: inherit;
+  }
