@@ -52,12 +52,10 @@ export class ReferralComponent {
 
   private loadreferralofEmplyoee(): void {
     this.spinnerService.showSpinner();
+
     this.userStore.getIdFromStore().subscribe((val) => {
-      // console.log(val);
       let idFromToken = this.auth.getIdFromToken();
-      // console.log(idFromToken);
       this.empId = val || idFromToken;
-      // console.log("Emplyoee Id of Logged Inuser",this.empId);
     });
 
     this.referalService.getreferral(this.empId).subscribe(
@@ -161,9 +159,12 @@ export class ReferralComponent {
             }
           }
         }
+
+        this.spinnerService.hideSpinner();
     },
     (error) => {
       console.log("Error fetching referrals:", error);
+      this.spinnerService.hideSpinner();
     }
 );
 

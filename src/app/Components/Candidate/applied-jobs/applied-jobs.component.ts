@@ -12,6 +12,7 @@ import { ClosedApplicationService } from '../../../Services/ClosedApplication/cl
 import { JobService } from '../../../Services/Job/job.service';
 import { ClosedJobServiceService } from '../../../Services/ClosedJob/closed-job-service.service';
 import { ClosedJob } from '../../../Models/ClosedJobResponse/ClosedJob';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 interface coupledData{
   application : JobApplication,
@@ -43,6 +44,7 @@ export class AppliedJobsComponent {
     private closedApplicationService : ClosedApplicationService,
     private jobService: JobService,
     private closedJobService : ClosedJobServiceService,
+    private spinnerService: SpinnerService,
   ) {}
 
   ngOnInit() : void{
@@ -59,6 +61,8 @@ export class AppliedJobsComponent {
 
   private loadJobApplicationsApplied(id:string)
   {
+    this.spinnerService.showSpinner();
+
     this.candidService.getAllJobApplicationByCandidate(id).subscribe(
       (res) => {
         this.candidateApplications = res.allJobApplications;
@@ -70,15 +74,19 @@ export class AppliedJobsComponent {
         }
 
         // console.log("status : ",this.applicationStatus);
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         this.toastr.error("Error in fetching applied jobs");
         console.log(error);
+        this.spinnerService.hideSpinner();
       }
     )
   }
 
   private loadAllRejectedJobApplications(candidateId : string){
+    this.spinnerService.showSpinner();
+
     this.closedApplicationService.getAllClosedApplicationsByCandidateId(candidateId).subscribe(
       (res) => {
         console.log("rejected applications", res);
@@ -117,37 +125,44 @@ export class AppliedJobsComponent {
             )
           }
         }
+
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.log(error);
+        this.spinnerService.hideSpinner();
       }
     )
   }
 
-  private loadRejectedJobs(){
-    
-  }
-
   private getStatusofApplication(id:number):void{
+    this.spinnerService.showSpinner();
+
     this.candidService.getStatusByStatusId(id).subscribe(
       (res)=>{
         this.applicationStatus.push(res.statusViewModel);
+        this.spinnerService.hideSpinner();
       },
       (error)=>{
         console.log(error);
+        this.spinnerService.hideSpinner();
       }
     )
   }
 
   private loadsAppliedJobs(id:string)
   {
+    this.spinnerService.showSpinner();
+
     this.candidService.getAllAppliedJobsByCandidate(id).subscribe(
     (res) => {
       this.candidateJobs = res.allJobs;
       // console.log(this.candidateJobs);
+      this.spinnerService.hideSpinner();
     },
     (error) => {
       console.log(error);
+      this.spinnerService.hideSpinner();
     }
     )
   }
