@@ -89,7 +89,7 @@ export class ReferralComponent {
                 
                 this.referral.push(data);
 
-                console.log(result);
+                // console.log(result);
             },
             (error) => {
               // console.log(error);
@@ -118,7 +118,7 @@ export class ReferralComponent {
                       
                       this.referral.push(data);
       
-                      console.log(result);
+                      // console.log(result);
                   },
                   (error) => {
                     // console.log(error);
@@ -148,7 +148,7 @@ export class ReferralComponent {
                       
                       this.referral.push(data);
       
-                      console.log(result);
+                      // console.log(result);
                   },
                   (error) => {
                     // console.log(error);

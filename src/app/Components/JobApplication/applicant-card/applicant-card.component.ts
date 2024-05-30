@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { ApplicantData } from '../../../Models/ApplicantsResponse/ApplicantData';
 import { CommonModule } from '@angular/common';
 import { SpinnerService } from '../../../Services/spinner.service';
@@ -28,10 +28,12 @@ export class ApplicantCardComponent implements OnInit {
   @Output() changeStatusEmitter = new EventEmitter<{ applicationId : Guid, statusId: number }>();
 
   toaster = inject(ToastrService);
-
   form !: FormGroup;
+  @ViewChild('myModalClose') modalClose: any;
   isSubmitted = false;
   statusId : number = 0;
+
+  getStatusId!: number;
 
   allStatus : StatusModel[] = [];
   allInterviews : ApplicantInterview[] = [];
@@ -50,6 +52,7 @@ export class ApplicantCardComponent implements OnInit {
     });
 
     this.getAllStatus();
+    this.getSuccessStatusId();
   }
 
   getAllStatus(){
@@ -99,12 +102,13 @@ export class ApplicantCardComponent implements OnInit {
           }
           this.changeStatusEmitter.emit(emitData);
           this.toaster.success("Successfully changed the application status !");
-          
+          // document.getElementById("closePopUp")?.click();
+          this.modalClose.nativeElement.click();
           this.form.reset();
           this.isSubmitted = false;
           this.spinnerService.hideSpinner();
 
-          document.getElementById("closePopUp")?.click();
+          
         },
         (error) => {
           this.toaster.error("Some error occured while changing status. Please try again !");
@@ -198,5 +202,21 @@ export class ApplicantCardComponent implements OnInit {
 
   showInterviewerDetails(){
     document.getElementById("showInterviewerDetails")?.click();
+  }
+
+  getSuccessStatusId(){
+    this.applicationService.getSuccessStatus().subscribe(
+      (res)=>{
+        console.log(res);
+        this.getStatusId = res;
+        if(res ==  -1){
+          console.log("Status doesn't exist");
+        }
+      },
+      (error)=>{
+        
+        console.log(error);
+      }
+    )
   }
 }

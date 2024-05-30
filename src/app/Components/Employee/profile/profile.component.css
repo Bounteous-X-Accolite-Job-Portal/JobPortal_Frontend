@@ -65,7 +65,8 @@
     z-index: 2;
     transform: translate(-50%, 50%);
     background-size: cover;
-    background-color: #a7a9aa;
+    background-color: #052c65;
+    color: white;
     border-radius: 50%;
     box-shadow: 0 15px 35px rgba(50,50,93,0.1), 0 5px 15px rgba(0,0,0,0.07);
     margin-bottom: 3rem;
