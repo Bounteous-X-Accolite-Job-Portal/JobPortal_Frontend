@@ -1,7 +1,7 @@
 import { ReferralResponse } from './ReferralResponse';
 
-export interface GetReferral {
+export interface AddReferralResponse {
   status: number;
   message: string;
-  referrals: ReferralResponse[];
+  referral: ReferralResponse;
 }

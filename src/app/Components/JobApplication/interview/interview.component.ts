@@ -61,7 +61,7 @@ export class InterviewComponent implements OnInit {
 
     this.employeeService.getAllEmployee().subscribe(
       (result: AllEmployee) => {
-        console.log("all employees", result);
+        // console.log("all employees", result);
 
         this.employee = result.employees;
 
@@ -120,13 +120,13 @@ export class InterviewComponent implements OnInit {
       link: this.addInterviewForm.value.link,
     };
 
-    console.log(data);
+    // console.log(data);
 
     if (this.addInterviewForm.valid) {
       this.interviewService.addInterview(data)
         .subscribe(
           (response : AddInterviewResponse) => {
-            console.log('success : ', response);
+            // console.log('success : ', response);
             this.toast.success(response.message);
 
             this.addInterviewForm.reset();

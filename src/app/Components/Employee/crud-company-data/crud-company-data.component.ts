@@ -34,7 +34,7 @@ private loadCompanies(): void {
       
       this.companies = res.companies;
       
-      // console.log(res);
+      this.spinnerService.hideSpinner();
     },
     (error) => {
       // console.error('Error loading Companies:', error);

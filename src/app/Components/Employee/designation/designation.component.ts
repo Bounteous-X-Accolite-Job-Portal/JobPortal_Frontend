@@ -2,12 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { DesignationService } from '../../../Services/Designation/designation.service';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { CommonModule } from '@angular/common';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
 import { DesignationResponse } from '../../../Models/DesignationResponse/DesignationResponse';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
@@ -18,6 +12,12 @@ import { DesignationWithPrivilegeResponse } from '../../../Models/DesignationWit
 import { DesignationWithPrivilege } from '../../../Models/DesignationWithPrivilegeResponse/DesignationWithPrivilege';
 import { UserStoreService } from '../../../Services/user-store.service';
 import { AuthService } from '../../../Services/auth.service';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-designation',

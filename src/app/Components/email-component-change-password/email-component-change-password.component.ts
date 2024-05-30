@@ -71,10 +71,10 @@ export class EmailComponentChangePasswordComponent {
           this.pwdForm.get('email')?.setValue(val || this.authService.getEmailFromToken());
     });
 
-    console.log(this.pwdForm.value);
+    // console.log(this.pwdForm.value);
     this.changePasswordService.changePassword(this.pwdForm.value).subscribe(
       (res)=>{
-        console.log(res);
+        // console.log(res);
         this.pwdForm.reset();
         this.toast.success("Successfully changed password !");
         this.spinnerService.hideSpinner();

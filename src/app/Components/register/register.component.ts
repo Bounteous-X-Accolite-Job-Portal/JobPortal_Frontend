@@ -91,7 +91,7 @@ export class RegisterComponent {
 
       this.authService.registerUser(registerData).subscribe(
         (res) => {
-          console.log(res.message);
+          // console.log(res.message);
           if (res.status == 200) {
             this.toast.success(res.message);
             this.router.navigate(['/login']);
@@ -108,7 +108,7 @@ export class RegisterComponent {
         }
       );
     } else {
-      console.log("Invalid Form");
+      // console.log("Invalid Form");
       this.toast.error("Invalid Form !");
       this.spinnerService.hideSpinner();
     }
