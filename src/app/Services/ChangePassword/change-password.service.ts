@@ -17,7 +17,7 @@ export class ChangePasswordService {
   }
 
   sendForgetPasswordLink(email: string) {
-    return this.http.post<any>(environment.baseURL  + 'ChangePassword/ChangePasswordEmail/' + `${email}`, {});
+    return this.http.post<any>(environment.baseURL+'Email/Email/' + `${email}`, {});
   }
   
   resetPassword(resetPasswordObj: any) {

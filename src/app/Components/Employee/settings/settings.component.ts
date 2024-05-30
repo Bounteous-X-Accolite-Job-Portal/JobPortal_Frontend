@@ -92,11 +92,11 @@ export class SettingsComponent implements OnInit {
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
         this.jobCategories = res.allJobCategory;
-        console.log(this.jobCategories);
+        // console.log(this.jobCategories);
         this.spinnerService.hideSpinner();
       },
       (error) => {
-        console.error('Error loading job locations:', error);
+        // console.error('Error loading job locations:', error);
         this.spinnerService.hideSpinner();
       }
     );
@@ -107,7 +107,7 @@ export class SettingsComponent implements OnInit {
 
     this.crudJobService.addCategory(this.addCategoryForm.value).subscribe(
       (response) => {
-        console.log('success : ', response);
+        // console.log('success : ', response);
         this.toastr.success('Categories added successfully!');
 
         this.addCategoryForm.reset();
@@ -117,7 +117,7 @@ export class SettingsComponent implements OnInit {
         this.route.navigate(['crud-category-job-data'], { relativeTo: this.router});
       },
       (error) => {
-        console.error('Error adding categories:', error);
+        // console.error('Error adding categories:', error);
         this.toastr.error('Error adding categories!');
         this.spinnerService.hideSpinner();
       }
@@ -127,10 +127,10 @@ export class SettingsComponent implements OnInit {
   addPosition() {
     this.spinnerService.showSpinner();
 
-    console.log(this.addPositionForm.value);
+    // console.log(this.addPositionForm.value);
     this.crudJobService.addPosition(this.addPositionForm.value).subscribe(
       (response) => {
-        console.log('success : ', response);
+        // console.log('success : ', response);
         this.toastr.success('Position added successfully!');
 
         this.addPositionForm.reset();
@@ -140,7 +140,7 @@ export class SettingsComponent implements OnInit {
         this.route.navigate(['crud-position-job-data'], { relativeTo: this.router});
       },
       (error) => {
-        console.error('Error adding positions:', error);
+        // console.error('Error adding positions:', error);
         this.toastr.error('Error adding positions!');
         this.spinnerService.hideSpinner();
       }
@@ -152,7 +152,7 @@ export class SettingsComponent implements OnInit {
 
     this.crudJobService.addLocation(this.addLocationForm.value).subscribe(
       (response) => {
-        console.log('success : ', response);
+        // console.log('success : ', response);
         this.toastr.success('Location added successfully!');
 
         this.addLocationForm.reset();
@@ -162,7 +162,7 @@ export class SettingsComponent implements OnInit {
         this.route.navigate(['crud-location-job-data'], { relativeTo: this.router});
       },
       (error) => {
-        console.error('Error adding locations:', error);
+        // console.error('Error adding locations:', error);
         this.toastr.error('Error adding locations!');
         this.spinnerService.hideSpinner();
       }
@@ -174,7 +174,7 @@ export class SettingsComponent implements OnInit {
 
     this.crudJobService.addTypes(this.addTypeForm.value).subscribe(
       (response) => {
-        console.log('success : ', response);
+        // console.log('success : ', response);
         this.toastr.success('Job type added successfully!');
 
         this.addTypeForm.reset();
@@ -184,7 +184,7 @@ export class SettingsComponent implements OnInit {
         this.route.navigate(['crud-types-job-data'], { relativeTo: this.router});
       },
       (error) => {
-        console.error('Error adding jobtype:', error);
+        // console.error('Error adding jobtype:', error);
         this.toastr.error('Error adding Job type!');
         this.spinnerService.hideSpinner();
       }
@@ -196,7 +196,7 @@ export class SettingsComponent implements OnInit {
 
     this.crudJobService.addDegree(this.addDegreeForm.value).subscribe(
       (response) => {
-        console.log('success : ', response);
+        // console.log('success : ', response);
         this.toastr.success('Degree added successfully!');
         
         this.addDegreeForm.reset();
@@ -206,7 +206,7 @@ export class SettingsComponent implements OnInit {
         this.route.navigate(['crud-degree-data'], { relativeTo: this.router});
       },
       (error) => {
-        console.error('Error adding degree:', error);
+        // console.error('Error adding degree:', error);
         this.toastr.error('Error adding degree!');
         this.spinnerService.hideSpinner();
       }
@@ -219,7 +219,7 @@ export class SettingsComponent implements OnInit {
     this.candidateService.addInstitution(this.addInstitutionForm.value)
       .subscribe(
         (response) => {
-          console.log('success : ', response);
+          // console.log('success : ', response);
           this.toastr.success('Institution added successfully!');
 
           this.addInstitutionForm.reset();
@@ -229,7 +229,7 @@ export class SettingsComponent implements OnInit {
           this.route.navigate(['crud-institution-data'], { relativeTo: this.router});
         },
         (error) => {
-          console.error('Error adding institutions', error);
+          // console.error('Error adding institutions', error);
           this.toastr.error('Error adding Institution!');
           this.spinnerService.hideSpinner();
         }
@@ -242,7 +242,7 @@ export class SettingsComponent implements OnInit {
     this.candidateService.addCompany(this.addCompanyForm.value)
       .subscribe(
         (response) => {
-          console.log('success : ', response);
+          // console.log('success : ', response);
           this.toastr.success('Company added successfully!');
           
           this.addCompanyForm.reset();
@@ -252,7 +252,7 @@ export class SettingsComponent implements OnInit {
           this.route.navigate(['crud-company-data'], { relativeTo: this.router});
         },
         (error) => {
-          console.error('Error adding Companys', error);
+          // console.error('Error adding Companys', error);
           this.toastr.error('Error adding Company!');
           this.spinnerService.hideSpinner();
         }
@@ -265,7 +265,7 @@ export class SettingsComponent implements OnInit {
     this.crudJobService.addJobApplicationStatus(this.addStatusForm.value)
     .subscribe(
       (res) =>{
-        console.log(res);
+        // console.log(res);
         this.toastr.success('Status Added successfully!');
 
         this.addStatusForm.reset();
@@ -275,7 +275,7 @@ export class SettingsComponent implements OnInit {
         this.route.navigate(['crud-status-job-data'], { relativeTo: this.router});
       },
       (error)=>{
-        console.log(error);
+        // console.log(error);
         this.toastr.error("Error Adding Status !");
         this.spinnerService.hideSpinner();
       }

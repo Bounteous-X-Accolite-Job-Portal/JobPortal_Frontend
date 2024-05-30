@@ -24,16 +24,11 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-interview-hub',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    InterviewCardComponent,
-    CommonModule,
-  ],
+  imports: [ReactiveFormsModule, InterviewCardComponent, CommonModule],
   templateUrl: './interview-hub.component.html',
   styleUrl: './interview-hub.component.css',
 })
 export class InterviewHubComponent implements OnInit {
-
   public ActiveInterviewToggle: boolean = true;
   interviews: interviewResponse[] = [];
   activeInterviews: interviewCardData[] = [];
@@ -47,7 +42,7 @@ export class InterviewHubComponent implements OnInit {
     private resumeService: ResumeServiceService,
     private closedApplicationService: ClosedApplicationService,
     private jobService: JobService,
-    private closedJobService : ClosedJobServiceService,
+    private closedJobService: ClosedJobServiceService,
     private toastr: ToastrService
   ) {}
 
@@ -96,29 +91,26 @@ export class InterviewHubComponent implements OnInit {
 
     if (interviewDate.localeCompare(formattedToday) == -1) {
       return false;
-    } 
-    else if (interviewDate.localeCompare(formattedToday) == 0) {
+    } else if (interviewDate.localeCompare(formattedToday) == 0) {
       if (interviewTime.localeCompare(timeNow) == -1) {
         return false;
-      } 
-      else {
+      } else {
         return true;
       }
-    } 
-    else {
+    } else {
       return true;
     }
   }
 
-  formatto24(timeToConvert : any) {
-    let ampm = timeToConvert.split(" ")[1];
-    let time = timeToConvert.split(" ")[0];
-    if (ampm == "PM") {
-      let hours = time.split(":")[0];
-      let minutes = time.split(":")[1];
-      let seconds = time.split(":")[2];
+  formatto24(timeToConvert: any) {
+    let ampm = timeToConvert.split(' ')[1];
+    let time = timeToConvert.split(' ')[0];
+    if (ampm == 'PM') {
+      let hours = time.split(':')[0];
+      let minutes = time.split(':')[1];
+      let seconds = time.split(':')[2];
       let hours24 = JSON.parse(hours) + 12;
-      return hours24 + ":" + minutes + ":" + seconds;
+      return hours24 + ':' + minutes + ':' + seconds;
     } else {
       return time;
     }
@@ -142,89 +134,107 @@ export class InterviewHubComponent implements OnInit {
         this.interviews = res.allInterviews;
 
         this.interviews.forEach((interview) => {
-
           if (interview.applicationId !== null) {
             this.applicationService
               .getApplicationsById(interview.applicationId.toString())
               .subscribe((application) => {
-                // console.log("application", application);
+                // console.log('application', application);
 
                 forkJoin({
-                  candidate : this.candidateService.getCandidateById(application.application.candidateId.toString()),
-                  resume : this.resumeService.getResumeByCandidateId(application.application.candidateId.toString()),
-                  job : (application.application.jobId != null) ? 
-                              this.jobService.getJobById(application.application.jobId.toString()):
-                              this.closedJobService.getClosedJobById(application.application.closedJobId.toString()),
+                  candidate: this.candidateService.getCandidateById(
+                    application.application.candidateId.toString()
+                  ),
+                  resume: this.resumeService.getResumeByCandidateId(
+                    application.application.candidateId.toString()
+                  ),
+                  job:
+                    application.application.jobId != null
+                      ? this.jobService.getJobById(
+                          application.application.jobId.toString()
+                        )
+                      : this.closedJobService.getClosedJobById(
+                          application.application.closedJobId.toString()
+                        ),
                 }).subscribe(
                   (results: any) => {
-                      let toBeAdded: interviewCardData = {
-                        interviewId : interview.interviewId,
-                        interviewDate: interview.interviewDate,
-                        interviewTime: interview.interviewTime,
-                        link: interview.link,
-                        feedbackId: interview.feedbackId,
-                        Candidate: results.candidate.candidate,
-                        Resume: results.resume.resume,
-                        Job: (application.application.jobId != null) ? (results.job.job) : null,
-                        ClosedJob: (application.application.jobId == null) ? (results.job.closedJob) : null,
-                      };
-      
-                      // console.log("toboadded : ", toBeAdded);
-      
-                      if (this.isActiveInterview(interview)) {
-                        this.activeInterviews.push(toBeAdded);
-                        // console.log("is active ");
-                      } else {
-                        this.doneInterviews.push(toBeAdded);
-                      }
-                  },
-                  (error) => {
-                      this.toastr.error('Error in API calls interviewhub : ', error);
-                  }
-                );
-              });
-          }
-          else{
-            this.closedApplicationService
-            .getClosedApplicationById(interview.closedApplicationId.toString())
-            .subscribe((closedApplication) => {
-              // console.log("closedJob", closedApplication);
-
-              forkJoin({
-                candidate : this.candidateService.getCandidateById(closedApplication.closedApplication.candidateId.toString()),
-                resume : this.resumeService.getResumeByCandidateId(closedApplication.closedApplication.candidateId.toString()),
-                job : (closedApplication.closedApplication.jobId != null) ? 
-                            this.jobService.getJobById(closedApplication.closedApplication.jobId.toString()):
-                            this.closedJobService.getClosedJobById(closedApplication.closedApplication.closedJobId.toString()),
-              }).subscribe(
-                (results: any) => {
                     let toBeAdded: interviewCardData = {
-                      interviewId : interview.interviewId,
+                      interviewId: interview.interviewId,
                       interviewDate: interview.interviewDate,
                       interviewTime: interview.interviewTime,
                       link: interview.link,
                       feedbackId: interview.feedbackId,
                       Candidate: results.candidate.candidate,
                       Resume: results.resume.resume,
-                      Job: (closedApplication.closedApplication.jobId != null) ? (results.job.job) : null,
-                      ClosedJob: (closedApplication.closedApplication.jobId == null) ? (results.job.closedJob) : null,
+                      Job:
+                        application.application.jobId != null
+                          ? results.job.job
+                          : null,
+                      ClosedJob:
+                        application.application.jobId == null
+                          ? results.job.closedJob
+                          : null,
                     };
-    
-                    // console.log("toboadded : ", toBeAdded);
-    
+
+                    console.log('toboadded : ', toBeAdded);
+
                     if (this.isActiveInterview(interview)) {
                       this.activeInterviews.push(toBeAdded);
                       // console.log("is active ");
                     } else {
                       this.doneInterviews.push(toBeAdded);
                     }
-                },
-                (error) => {
+                  },
+                  (error) => {
+                    this.toastr.error(
+                      'Error in API calls interviewhub : ',
+                      error
+                    );
+                  }
+                );
+              });
+          } else {
+            this.closedApplicationService
+              .getClosedApplicationById(
+                interview.closedApplicationId.toString()
+              )
+              .subscribe((closedApplication) => {
+                // console.log("closedJob", closedApplication);
+
+              forkJoin({
+                candidate : this.candidateService.getCandidateById(closedApplication.application.candidateId.toString()),
+                resume : this.resumeService.getResumeByCandidateId(closedApplication.application.candidateId.toString()),
+                job : (closedApplication.application.jobId != null) ? 
+                            this.jobService.getJobById(closedApplication.application.jobId.toString()):
+                            this.closedJobService.getClosedJobById(closedApplication.application.closedJobId.toString()),
+              }).subscribe(
+                (results: any) => {
+                    let toBeAdded: interviewCardData = {
+                      interviewId: interview.interviewId,
+                      interviewDate: interview.interviewDate,
+                      interviewTime: interview.interviewTime,
+                      link: interview.link,
+                      feedbackId: interview.feedbackId,
+                      Candidate: results.candidate.candidate,
+                      Resume: results.resume.resume,
+                      Job: (closedApplication.application.jobId != null) ? (results.job.job) : null,
+                      ClosedJob: (closedApplication.application.jobId == null) ? (results.job.closedJob) : null,
+                    };
+
+                    // console.log("toboadded : ", toBeAdded);
+
+                    if (this.isActiveInterview(interview)) {
+                      this.activeInterviews.push(toBeAdded);
+                      // console.log("is active ");
+                    } else {
+                      this.doneInterviews.push(toBeAdded);
+                    }
+                  },
+                  (error) => {
                     // console.error('Error in API calls interviewhub : ', error);
                     this.toastr.error('Error: ', error);
-                }
-              );
-            });
+                  }
+                );
+              });
           }
         });
 

@@ -52,8 +52,8 @@ export class JobCardComponent {
 
     this.rectifyDate();
 
-    console.log("job card - active job", this.job);
-    console.log("job card - closed job ", this.closedJob);
+    // console.log("job card - active job", this.job);
+    // console.log("job card - closed job ", this.closedJob);
 
     this.spinnerService.hideSpinner();
   }
@@ -93,7 +93,7 @@ export class JobCardComponent {
       typeResponse : this.jobService.getJobTypeById(this.job !== undefined ? this.job.jobType : this.closedJob.jobTypeId.toString())
     }).subscribe(
       (result) => {
-        console.log("job card", result);
+        // console.log("job card", result);
         
         this.location = result.locationResponse.jobLocation;
         this.jobPosition = result.positionResponse.jobPosition;

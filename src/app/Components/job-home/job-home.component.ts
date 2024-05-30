@@ -133,7 +133,7 @@ export class JobHomeComponent {
 
     this.closedJobService.getAllClosedJobs().subscribe(
       (data: AllClosedJobsResponse) => {
-        console.log('closed jobs', data);
+        // console.log('closed jobs', data);
 
         this.closedJobs = data.closedJobs;
         this.filteredClosedJobs = data.closedJobs;

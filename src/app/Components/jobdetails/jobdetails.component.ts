@@ -72,11 +72,11 @@ export class JobdetailsComponent {
 
     this.userStore.getIdFromStore()
         .subscribe((val) => {
-            console.log(val);
+            // console.log(val);
             let idFromToken = this.auth.getIdFromToken();
-            console.log(idFromToken);
+            // console.log(idFromToken);
             this.logginnedUserId = val || idFromToken;
-            console.log("Logged User Id : ",this.logginnedUserId);
+            // console.log("Logged User Id : ",this.logginnedUserId);
         })
 
     this.loadJobDetails();
@@ -87,7 +87,7 @@ export class JobdetailsComponent {
 
     this.route.params.subscribe((params) => {
       this.jobId = params['jobId']; // Access the 'id' parameter from the URL
-      console.log('Job ID:', this.jobId);
+      // console.log('Job ID:', this.jobId);
 
       this.spinnerService.hideSpinner();
     });
@@ -98,7 +98,7 @@ export class JobdetailsComponent {
 
     this.route.params.subscribe((params) => {
       this.closedJobId = params['closedJobId']; // Access the 'id' parameter from the URL
-      console.log('Closed Job ID:', this.closedJobId);
+      // console.log('Closed Job ID:', this.closedJobId);
 
       this.spinnerService.hideSpinner();
     });
@@ -127,7 +127,7 @@ export class JobdetailsComponent {
     else{
       this.closedJobService.getClosedJobById(this.closedJobId).subscribe(
         event => {
-          console.log("closed job - ", event.closedJob);
+          // console.log("closed job - ", event.closedJob);
           this.closedJob = event.closedJob;
 
           this.loadLocationDetails(event.closedJob.locationId.toString());
@@ -148,7 +148,7 @@ export class JobdetailsComponent {
     this.jobService.getLocationById(locationId).subscribe(
       (loc: JobLocationResponse) => {
         this.location = loc.jobLocation;
-        console.log(loc);
+        // console.log(loc);
         this.spinnerService.hideSpinner();
       },
       (error) =>{
@@ -164,7 +164,7 @@ export class JobdetailsComponent {
     this.jobService.getPositionById(positionId).subscribe(
       (pos: JobPositionResponse) => {
         this.jobPosition = pos.jobPosition;
-        console.log(pos);
+        // console.log(pos);
         this.spinnerService.hideSpinner();
       },
       (error) =>{
@@ -180,7 +180,7 @@ export class JobdetailsComponent {
     this.jobService.getCategoryById(categoryId).subscribe(
       (cat : JobCategoryResponse) => {
         this.jobcategory = cat.jobCategory;
-        console.log("cat  :"+cat.jobCategory);
+        // console.log("cat  :"+cat.jobCategory);
         this.spinnerService.hideSpinner();
       },
       (error) =>{
@@ -196,7 +196,7 @@ export class JobdetailsComponent {
     this.jobService.getDegreeById(degreeId).subscribe(
       (deg : DegreeResponse) => {
         this.degree = deg.degree;
-        console.log("deg : "+deg);
+        // console.log("deg : "+deg);
         this.spinnerService.hideSpinner();
       },
       (error) =>{
@@ -212,7 +212,7 @@ export class JobdetailsComponent {
     this.jobService.getJobTypeById(typeId).subscribe(
     (typ: JobTypeResponse) => {
       this.jobtype = typ.jobType;
-      console.log(this.jobtype);
+      // console.log(this.jobtype);
       this.spinnerService.hideSpinner();
     },
     (error) =>{
@@ -240,7 +240,7 @@ export class JobdetailsComponent {
             this.stringForButton = "Already Applied !";
             this.disableApplyButton();
             this.displayAppliedMessage();
-            console.log("Success",res);
+            // console.log("Success",res);
 
             this.spinnerService.hideSpinner();
             this.router.navigate(['jobs']);
@@ -248,7 +248,7 @@ export class JobdetailsComponent {
         (error) =>
           {
             this.displayNotAppliedMessage();
-            console.log("Error",error);
+            console.error("Error",error);
             this.spinnerService.hideSpinner();
           }
       )
@@ -260,9 +260,9 @@ export class JobdetailsComponent {
 
     this.jobService.checkCandidateApplicable(this.job?.jobId).subscribe(
       (res) =>{
-          console.log(res);
+          // console.log(res);
           var status = res.status;
-          console.log("rece : ",status);
+          // console.log("rece : ",status);
           if(status=="400")
           {
             this.stringForButton = "Employee Logged In !!";
@@ -284,7 +284,7 @@ export class JobdetailsComponent {
             this.enableApplyButton();
           }
 
-          console.log(">>>button : ",this.stringForButton);
+          // console.log(">>>button : ",this.stringForButton);
           this.spinnerService.hideSpinner();
       },
       (error) =>
@@ -321,7 +321,7 @@ export class JobdetailsComponent {
   }
 
   public Refer(jobId?:string):void{
-    console.log(jobId);
+    // console.log(jobId);
     this.jobService.jobId = jobId || "";
     this.router.navigate(['employee-dashboard','addReferral']);
   }
