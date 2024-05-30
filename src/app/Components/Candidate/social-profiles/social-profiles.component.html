@@ -3,6 +3,7 @@
     <div class="row d-flex justify-content-center align-items-center h-100 w-100">
       <div class="card mb-4 mb-lg-0 w-100">
         <div class="card-body m-4 p-4 w-100">
+        <div *ngIf="enableBack" ><div (click)="disablefields()" style="cursor: pointer; font-weight: bold;"><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</div></div>
           <form [formGroup]="mediaForm" style="display: flex; align-items: center; flex-direction: column; width: 100%;">
             <button
               class="btn btn-primary w-50"

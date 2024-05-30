@@ -54,22 +54,22 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log('show spinner');
+    // console.log('show spinner');
     this.spinnerService.showSpinner();
 
     if (this.loginForm.valid) {
       this.authService.loginUser(this.loginForm.value).subscribe(
         (data: LoginResponse) => {
-          console.log(data);
-          console.log('Status', data.status, 'data message', data.message);
+          // console.log(data);
+          // console.log('Status', data.status, 'data message', data.message);
 
           if (data.status == 200) {
-            console.log(data.token);
+            // console.log(data.token);
             this.authService.storeToken(data.token ? data.token : '');
 
             // setting up user store
             const tokenPayload: any = this.authService.decodedToken();
-            console.log('Token payload in login line 67 ', tokenPayload);
+            // console.log('Token payload in login line 67 ', tokenPayload);
 
             this.userStore.setEmailForStore(tokenPayload['Email']);
             this.userStore.setNameForStore(tokenPayload['Name']);
@@ -83,7 +83,7 @@ export class LoginComponent {
               tokenPayload['HasSpecialPrivilege']
             );
 
-            console.log('CheckIsEmployee', tokenPayload['IsEmployee']);
+            // console.log('CheckIsEmployee', tokenPayload['IsEmployee']);
 
             if (tokenPayload['IsEmployee']) {
               this.router.navigate(['/employee-dashboard']);
@@ -96,14 +96,14 @@ export class LoginComponent {
             this.message = data.message;
           }
 
-          console.log('hide spinner');
+          // console.log('hide spinner');
           this.spinnerService.hideSpinner();
         },
         (error: any) => {
-          console.log('hide spinner');
+          // console.log('hide spinner');
           this.spinnerService.hideSpinner();
-
-          console.log(error);
+          this.toast.error("Could not login");
+          // console.log(error);
         }
       );
     }
@@ -116,13 +116,13 @@ export class LoginComponent {
     }
     const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
     this.isValidEmail = pattern.test(this.value);
-    console.log(this.isValidEmail);
+    // console.log(this.isValidEmail);
     return this.isValidEmail;
   }
 
   confirmToSend() {
     if (this.checkValidEmail(this.value)) {
-      console.log(this.value);
+      // console.log(this.value);
       this.forgetService.sendForgetPasswordLink(this.value).subscribe({
         next: (res: any) => {
           this.resetPasswordEmail = ' ';
@@ -131,7 +131,6 @@ export class LoginComponent {
           this.toaster.info("Check your mail to reset password!!")
           
         },
-
         error: (err: any) => {},
       });
     }

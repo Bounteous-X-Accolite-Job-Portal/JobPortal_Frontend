@@ -8,6 +8,7 @@ import { Job } from '../../../Models/JobResponse/Job';
 import { CommonModule } from '@angular/common';
 import { JobApplication } from '../../../Models/JobApplicationResponse/JobApplication';
 import { Status } from '../../../Models/Status';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-applied-jobs',
@@ -27,7 +28,8 @@ export class AppliedJobsComponent {
     private candidService : CandidateService,
     private userStore : UserStoreService,
     private auth : AuthService,
-    private toastr : ToastrService
+    private toastr : ToastrService,
+    private spinner : SpinnerService
   ) {}
 
   ngOnInit() : void{
@@ -46,19 +48,21 @@ export class AppliedJobsComponent {
 
   private loadJobApplicationsApplied(id:string)
   {
+    this.spinner.showSpinner();
     this.candidService.getAllJobApplicationByCandidate(id).subscribe(
     (res) => {
       this.candidateApplications = res.allJobApplications;
       // console.log("fetched applications : ",this.candidateApplications);
-      this.toastr.success("Jobs fetched successfully");
+      // this.toastr.success("Jobs fetched successfully");
       for(let i = 0;i<this.candidateApplications.length;i++)
           this.getStatusofApplication(this.candidateApplications[i].statusId);
-
+      this.spinner.hideSpinner();
       // console.log("status : ",this.applicationStatus);
     },
     (error) => {
       this.toastr.error("Error in fetching applied jobs");
       console.log(error);
+      this.spinner.hideSpinner();
     }
     )
   }

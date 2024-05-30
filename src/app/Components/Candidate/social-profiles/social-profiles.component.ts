@@ -6,12 +6,12 @@ import { SocialMedia } from '../../../Models/SocialMediaResponse/SocialMedia';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-social-profiles',
@@ -26,7 +26,8 @@ export class SocialProfilesComponent {
     private userStore: UserStoreService,
     private auth: AuthService,
     private toastr: ToastrService,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private spinner : SpinnerService
   ) {}
 
   mediaForm!: FormGroup;
@@ -38,6 +39,7 @@ export class SocialProfilesComponent {
   isAccessible: boolean = false;
   enableAddButton: boolean = false;
   enableEditButton: boolean = false;
+  enableBack: boolean = false;
 
   ngOnInit(): void {
     this.userStore.getIdFromStore().subscribe((val) => {
@@ -62,10 +64,11 @@ export class SocialProfilesComponent {
   }
 
   private loadSocialMediaDetails() {
+    this.spinner.showSpinner();
     this.candidService.getSocialMediaDetails(this.userId).subscribe(
       (res) => {
         // console.log(res);
-        this.toastr.success("Social links fetched");
+        // this.toastr.success("Social links fetched");
         this.socialMedia = res.socialMedia;
         this.checkSocialMedia();
 
@@ -74,10 +77,12 @@ export class SocialProfilesComponent {
         this.mediaForm.get('link3')?.setValue(this.socialMedia.link3 || '');
 
         this.disablefields();
+        this.spinner.hideSpinner();
       },
       (error) => {
         this.toastr.error("Error in fetching links")
         console.log(error);
+        this.spinner.hideSpinner();
       }
     );
   }
@@ -145,6 +150,7 @@ export class SocialProfilesComponent {
     this.mediaForm.controls['link1'].disable();
     this.mediaForm.controls['link2'].disable();
     this.mediaForm.controls['link3'].disable();
+    this.enableBack = false;
   }
 
   public enablefields(): void {
@@ -152,5 +158,6 @@ export class SocialProfilesComponent {
     this.mediaForm.controls['link1'].enable();
     this.mediaForm.controls['link2'].enable();
     this.mediaForm.controls['link3'].enable();
+    this.enableBack = true;
   }
 }
