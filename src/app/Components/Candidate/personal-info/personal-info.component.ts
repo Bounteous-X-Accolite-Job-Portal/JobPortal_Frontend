@@ -72,7 +72,7 @@ export class PersonalInfoComponent {
         (res) => {
           // console.log(res);
           this.candidate=res.candidate;
-          this.toastr.success("Candidate data retrieved");
+          // this.toastr.success("Candidate data retrieved");
           // console.log(this.candidate);
 
           this.profileForm.get('phone')?.setValue(this.candidate.phone || 'NA');
