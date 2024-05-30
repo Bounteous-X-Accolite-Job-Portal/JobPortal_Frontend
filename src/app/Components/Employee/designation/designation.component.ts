@@ -12,7 +12,12 @@ import { DesignationWithPrivilegeResponse } from '../../../Models/DesignationWit
 import { DesignationWithPrivilege } from '../../../Models/DesignationWithPrivilegeResponse/DesignationWithPrivilege';
 import { UserStoreService } from '../../../Services/user-store.service';
 import { AuthService } from '../../../Services/auth.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-designation',
