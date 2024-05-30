@@ -49,6 +49,10 @@ export class LoginComponent {
     rememberMe: [true],
   });
 
+  forgetPasswordForm = this.fb.group({
+    resetEmail: ['',Validators.required]
+  })
+
   get f() {
     return this.loginForm.controls;
   }
