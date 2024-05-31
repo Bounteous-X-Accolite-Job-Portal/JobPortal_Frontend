@@ -145,6 +145,7 @@
               <div class="d-flex justify-content-center ">
                 <button
                   (click)="onSubmitRegister()"
+                  [disabled]="registerForm.invalid"
                   type="submit"
                   class="btn btn-primary-1 btn-block px-3"
                 >

@@ -12,11 +12,12 @@
       </button>
     </div>
     <ul class="sidenav-nav">
-      <li class="sidenav-nav-item float:left py-1" *ngFor="let data of sideBarData">
+      <li class="sidenav-nav-item float:left py-1" *ngFor="let data of sideBarData" >
         <a
           [routerLink]="['/employee-dashboard/' + data.routeLink]"
           class="sidenav-nav-link w-100 px-3"
           routerLinkActive="active"
+          data-toggle="tooltip" data-placement="right" title={{data.label}}
           *ngIf="(!data.requiredPrivilege || hasPrivilege === data.requiredPrivilege) && (!data.requiredSpecialPrivilege || hasSpecialPrivilege === data.requiredSpecialPrivilege)"
         >
           <i class="sidenav-link-icon ml-5" [class]="data.icon"></i>

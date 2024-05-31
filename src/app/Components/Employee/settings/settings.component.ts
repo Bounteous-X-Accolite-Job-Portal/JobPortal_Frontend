@@ -253,7 +253,7 @@ export class SettingsComponent implements OnInit {
         },
         (error) => {
           // console.error('Error adding Companys', error);
-          this.toastr.error('Error adding Company!');
+          this.toastr.error('Error adding Company!', error);
           this.spinnerService.hideSpinner();
         }
       );
