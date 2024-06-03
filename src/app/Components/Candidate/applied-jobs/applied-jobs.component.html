@@ -17,7 +17,7 @@
                 <tr *ngFor="let job of candidateJobs; let i = index">
                   <td>{{job.jobCode}}</td>
                   <td>{{job.jobTitle}}</td>
-                  <td>{{candidateApplications[i].appliedOn}}</td>
+                  <td>{{candidateApplications[i] === undefined? "loading" : candidateApplications[i].appliedOn}}</td>
                   <td>{{applicationStatus[i] !== undefined ? applicationStatus[i].statusName : "loading..."}}</td>
                   </tr>
                 </tbody>
