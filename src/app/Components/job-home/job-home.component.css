@@ -2,7 +2,12 @@ div {
   padding: 0;
   margin: 0;
 }
-
+.dynamic-height{
+  height: 500px;
+}
+.dynamic-noheight{
+  height: 0px
+}
 .Jobhunt {
   display: flex;
   flex-direction: row;
