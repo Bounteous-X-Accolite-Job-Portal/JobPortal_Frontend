@@ -44,7 +44,8 @@ export class JobCardComponent {
     private jobService: JobService,
     private spinnerService: SpinnerService,
     private store: UserStoreService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router : Router
   ) {
     this.checkUser();
     this.checkHasPrivilege();
@@ -155,6 +156,7 @@ export class JobCardComponent {
       this.jobService.disableJob(this.job.jobId).subscribe(
         (res) => {
           console.log(res);
+          this.router.navigate(['jobhome']);
         },
         (error) => {
           console.log(error);
