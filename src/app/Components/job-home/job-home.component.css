@@ -52,7 +52,7 @@ p {
   margin-bottom: 0.3rem;
   font-weight: bolder;
 }
-
+/* 
 button {
   position: relative;
   background: #ffffff;
@@ -125,17 +125,23 @@ button:hover i::after {
   width: 15px;
   left: 80%;
   animation: move 3s infinite;
+} */
+
+#filterRight span{
+  font-family: 'Roboto';
+  font-weight: 400;
+  padding-left: 5px;
 }
 
 @media (min-width: 768px) and (max-width: 1080px) {
-  #btn-styling {
+  /* #btn-styling {
     flex-direction: column;
     width: auto;
     align-items: center;
   }
   .reset-btn {
     margin-top: 10px;
-  }
+  } */
 }
 
 @media (max-width: 768px) {
@@ -161,10 +167,9 @@ button:hover i::after {
     top: 6vh !important;
   }
 
-
   .jobListing {
     overflow-y: hidden;
-    width: 100%;
+      width: 100%;
   }
   form {
     flex-direction: row;
@@ -172,12 +177,11 @@ button:hover i::after {
 }
 
 @media (max-width: 560px){
-  /* Filter modal */
   .modal-dialog {
     position: relative;
-    margin: 3vw !important;
     width: 70vw !important;
     height: 40vh !important;
+    left: 15vw !important;
     top: 6vh !important;
   }
 

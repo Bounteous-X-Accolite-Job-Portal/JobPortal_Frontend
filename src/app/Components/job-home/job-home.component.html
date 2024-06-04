@@ -94,21 +94,17 @@
             </option>
           </select>
         </div>
-        <div class="d-flex justify-content-around" id="btn-styling">
+        <div class="d-flex justify-content-around" >
           <button
-            style="--clr: #8a2be2"
-            (click)="
-              FilterClosedJobToggle ? onSubmitForClosedJobs() : onSubmit()
-            "
-          >
-            <span>Search</span><i></i>
+            (click)="FilterClosedJobToggle ? onSubmitForClosedJobs() : onSubmit()" class="btn btn-outline-primary"
+            >
+            <span>Search</span>
           </button>
           <button
-            style="--clr: #8a2be2"
             (click)="resetFilters()"
-            class="reset-btn"
+            class="btn btn-primary"
           >
-            <span>Reset</span><i></i>
+            <span>Reset</span>
           </button>
         </div>
       </form>
@@ -120,7 +116,7 @@
       style="float: right"
       data-bs-toggle="modal"
       data-bs-target="#filterModal"
-      ><i class="fa-solid fa-filter">Filter</i></a
+      ><i class="fa fa-filter"><span>Filter</span></i></a
     >
   </div>
   <div
@@ -204,6 +200,7 @@
     <div class="modal-content">
       <div class="modal-header px-3 py-2">
         <h5 class="modal-title" id="exampleModalLabel">Filters</h5>
+        <hr/>
         <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
       </div>
       <div class="modal-body">
@@ -295,21 +292,17 @@
                 </option>
               </select>
             </div>
-            <div class="d-flex justify-content-around" id="btn-styling">
+            <div class="d-flex justify-content-around">
               <button
-                style="--clr: #8a2be2"
+                class="btn btn-primary"
                 (click)="
                   FilterClosedJobToggle ? onSubmitForClosedJobs() : onSubmit()
                 "
               >
-                <span>Search</span><i></i>
+                Search
               </button>
-              <button
-                style="--clr: #8a2be2"
-                (click)="resetFilters()"
-                class="reset-btn"
-              >
-                <span>Reset</span><i></i>
+              <button (click)="resetFilters()" class="btn btn-outline-primary">
+                <span>Reset</span>
               </button>
             </div>
           </form>
