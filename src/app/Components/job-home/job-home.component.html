@@ -157,6 +157,7 @@
             <app-job-card
               *ngFor="let job of Filterjobs"
               [job]="job"
+              [isActive]="true"
             ></app-job-card>
           </div>
         </div>
@@ -168,6 +169,7 @@
             <app-job-card
               *ngFor="let closedJob of filteredClosedJobs"
               [closedJob]="closedJob"
+              [isActive]="false"
             ></app-job-card>
           </div>
         </div>
