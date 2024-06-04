@@ -55,8 +55,14 @@
                   <div *ngIf="f.password.errors?.['required']">
                     Password is required
                   </div>
-                  <div *ngIf="f.password.errors?.['password']">
+                  <!-- <div *ngIf="f.password.errors?.['password']">
                     Password should be valid
+                  </div> -->
+                   <div *ngIf="f.password.errors?.['minlength']">
+                    Minimum length should be 6
+                  </div>
+                  <div *ngIf="f.password.errors?.['pattern']">
+                      Password must contain atleast one Uppercase, one lowercase, one special character  and one digit.
                   </div>
                 </small>
                 <div class="p-error">{{ message }}</div>
@@ -77,7 +83,9 @@
               </div>
 
               <!--FORGET PASSWORD-->
-              <div class="form-inline d-flex m-2 justify-content-center">
+              <div
+                class="form-inline d-flex m-2 justify-content-center"
+              >
                 <a
                   id="forgot"
                   data-bs-toggle="modal"
@@ -187,12 +195,7 @@
         >
           Close
         </button>
-        <button
-          type="button"
-          
-          (click)="confirmToSend()"
-          class="btn btn-primary"
-        >
+        <button type="button" (click)="confirmToSend()" class="btn btn-primary">
           Send
         </button>
       </div>

@@ -24,7 +24,7 @@
         {{ employee != undefined ? employee.firstName : "loading..." }}
         {{ employee != undefined ? employee.lastName : "loading..." }}
       </h1>
-      <span>{{ employee != undefined ? employee.empId : "loading..." }}</span>
+      <span>{{ employee != undefined ? employee.empId.toUpperCase() : "loading..." }}</span>
     </div>
     <div class="content__description">
       <p>Designation - {{ designation }}</p>
