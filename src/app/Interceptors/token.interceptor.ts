@@ -8,7 +8,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  console.log('Interceptor hitted');
+  // console.log('Interceptor hitted');
 
   const userToken = authService.getToken();
 

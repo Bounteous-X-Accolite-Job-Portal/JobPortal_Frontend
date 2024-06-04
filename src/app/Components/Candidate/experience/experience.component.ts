@@ -8,6 +8,7 @@ import { UserStoreService } from '../../../Services/user-store.service';
 import { Company } from '../../../Models/CompanyResponse/Company';
 import { CompanyService } from '../../../Services/Company/company.service';
 import { ToastrService } from 'ngx-toastr';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-experience',
@@ -24,7 +25,9 @@ constructor(private candidService : CandidateService,
             private userStore : UserStoreService,
             private auth : AuthService,
             private cmpService : CompanyService,
-            private toastr : ToastrService) {}
+            private toastr : ToastrService,
+            private spinner : SpinnerService,
+          ) {}
 
 expList: candidateExperience[]=[];
 companyList: Company[] = [];
@@ -44,24 +47,28 @@ ngOnInit(): void
 } 
 
 private loadExperienceDetails() : void{
+  this.spinner.showSpinner();
   this.candidService.getAllcandidateExperiences(this.userId).subscribe(
     (res) => {
       // console.log(res);
       this.expList = res.experiences;
       if(this.expList.length==0) {
         this.empExpe=true;
-        this.toastr.info("Experience is empty");
+        this.spinner.hideSpinner();
+        // this.toastr.info("Experience is empty");
       }
       else {
-        this.toastr.success("Experience retrieved successfully");
+        this.spinner.hideSpinner();
+        // this.toastr.success("Experience retrieved successfully");
         this.empExpe=false;
       }
       // console.log("Experience : ",this.expList);
       this.loadCompany();
     },
     (error)=>{
+      this.spinner.hideSpinner();
       this.toastr.error("Error fetching experience")
-      console.log(error);
+      // console.log(error);
     }
   )
 }

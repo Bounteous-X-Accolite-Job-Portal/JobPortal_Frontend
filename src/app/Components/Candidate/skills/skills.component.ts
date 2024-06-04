@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
 import { AuthService } from '../../../Services/auth.service';
 import { UserStoreService } from '../../../Services/user-store.service';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-skills',
@@ -16,12 +17,16 @@ import { UserStoreService } from '../../../Services/user-store.service';
   styleUrl: './skills.component.css'
 })
 export class SkillsComponent {
+  revert() {
+    this.ngOnInit();
+  }
   constructor(
     private candidService: CandidateService,
     private userStore: UserStoreService,
     private auth: AuthService,
     private toastr: ToastrService,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private spinner : SpinnerService
   ) {}
 
   userId: string ='';
@@ -50,6 +55,7 @@ export class SkillsComponent {
   }
 
   private loadCandidateSkills():void{
+    this.spinner.showSpinner();
     this.candidService.getSkillsOfCandidate(this.userId).subscribe(
       (res)=>
         {
@@ -58,12 +64,14 @@ export class SkillsComponent {
           this.checkCandidateSkills();
           // console.log("com skills : ",this.userSkills);
           // console.log("skl : ",this.userSkills.candidateSkills);
-          this.toastr.success("Skills retrieved");
+          // this.toastr.success("Skills retrieved");
+          this.spinner.hideSpinner();
           this.skillForm.get('candidateSkills')?.setValue(this.userSkills.candidateSkills || '');
         },
       (error)=>
         {
           this.toastr.error("Error in fetching skills");
+          this.spinner.hideSpinner();
           console.log(error);
         }
     );

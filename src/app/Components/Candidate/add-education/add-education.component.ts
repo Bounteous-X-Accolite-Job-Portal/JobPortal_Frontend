@@ -7,7 +7,6 @@ import {
   FormGroup,
   FormControl,
 } from '@angular/forms';
-import { candidateEducation } from '../../../Models/EducationResponse/candidateEducation';
 import { EducationInstitution } from '../../../Models/InstitutionResponse/EducationInstitution';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
 import { CommonModule } from '@angular/common';

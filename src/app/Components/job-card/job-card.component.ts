@@ -1,7 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { Job } from '../../Models/JobResponse/Job';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  RouterLink,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 import { location } from '../../Models/JoblocationResponse/location';
 import { Degree } from '../../Models/DegreeResponse/Degree';
 import { JobType } from '../../Models/JobTypeResponse/JobType';
@@ -17,36 +22,37 @@ import { AuthService } from '../../Services/auth.service';
 @Component({
   selector: 'app-job-card',
   standalone: true,
-  imports: [CommonModule , RouterLink , RouterOutlet ,RouterModule],
+  imports: [CommonModule, RouterLink, RouterOutlet, RouterModule],
   templateUrl: './job-card.component.html',
-  styleUrl: './job-card.component.css'
+  styleUrl: './job-card.component.css',
 })
 export class JobCardComponent {
-  @Input() job !: Job;
-  @Input() closedJob !: ClosedJob;
-  @Input() canEdit !: boolean;
+  @Input() job!: Job;
+  @Input() closedJob!: ClosedJob;
+  @Input() canEdit!: boolean;
 
-  isEmployee : boolean = false;
-  hasPrivilege : boolean = false;
+  isEmployee: boolean = false;
+  hasPrivilege: boolean = false;
 
-  location?: location ;
+  location?: location;
   degree?: Degree;
   jobtype?: JobType;
   jobcategory?: JobCategory;
-  jobPosition?: position ;
+  jobPosition?: position;
 
   constructor(
-    private jobService : JobService,
-    private spinnerService : SpinnerService,
-    private store : UserStoreService,
-    private authService : AuthService,
+    private jobService: JobService,
+    private spinnerService: SpinnerService,
+    private store: UserStoreService,
+    private authService: AuthService
   ) {
     this.checkUser();
     this.checkHasPrivilege();
   }
 
-  ngOnInit():void{
+  ngOnInit(): void {
     this.spinnerService.showSpinner();
+    console.log("job details", this.job);
 
     this.loadJobDetails();
 
@@ -58,43 +64,61 @@ export class JobCardComponent {
     this.spinnerService.hideSpinner();
   }
 
-  checkUser(){
+  checkUser() {
     this.spinnerService.showSpinner();
 
-    this.store.checkIsEmployeeFromStore()
-    .subscribe((val) => {
-        let emp = this.authService.checkIsEmployeeFromToken();
-        this.isEmployee = val || emp;
+    this.store.checkIsEmployeeFromStore().subscribe((val) => {
+      let emp = this.authService.checkIsEmployeeFromToken();
+      this.isEmployee = val || emp;
 
-        this.spinnerService.hideSpinner();
-    })
+      this.spinnerService.hideSpinner();
+    });
   }
 
-  checkHasPrivilege(){
+  checkHasPrivilege() {
     this.spinnerService.showSpinner();
 
-    this.store.checkHasPrivilegeFromStore()
-    .subscribe((val) => {
-        let privilege = this.authService.checkHasPrivilegeFromToken();
-        this.hasPrivilege = val || privilege;
+    this.store.checkHasPrivilegeFromStore().subscribe((val) => {
+      let privilege = this.authService.checkHasPrivilegeFromToken();
+      this.hasPrivilege = val || privilege;
 
-        this.spinnerService.hideSpinner();
-    })
+      this.spinnerService.hideSpinner();
+    });
   }
 
-  loadJobDetails(){
+  loadJobDetails() {
     this.spinnerService.showSpinner();
 
     forkJoin({
-      locationResponse : this.jobService.getLocationById(this.job !== undefined ? this.job.locationId : this.closedJob.locationId.toString()),
-      positionResponse : this.jobService.getPositionById(this.job !== undefined ? this.job.positionId : this.closedJob.positionId.toString()),
-      categoryResponse : this.jobService.getCategoryById(this.job !== undefined ? this.job.categoryId : this.closedJob.categoryId.toString()),
-      degreeResponse : this.jobService.getDegreeById(this.job != undefined ? this.job.degreeId : this.closedJob.degreeId.toString()),
-      typeResponse : this.jobService.getJobTypeById(this.job !== undefined ? this.job.jobType : this.closedJob.jobTypeId.toString())
+      locationResponse: this.jobService.getLocationById(
+        this.job !== undefined
+          ? this.job.locationId
+          : this.closedJob.locationId.toString()
+      ),
+      positionResponse: this.jobService.getPositionById(
+        this.job !== undefined
+          ? this.job.positionId
+          : this.closedJob.positionId.toString()
+      ),
+      categoryResponse: this.jobService.getCategoryById(
+        this.job !== undefined
+          ? this.job.categoryId
+          : this.closedJob.categoryId.toString()
+      ),
+      degreeResponse: this.jobService.getDegreeById(
+        this.job != undefined
+          ? this.job.degreeId
+          : this.closedJob.degreeId.toString()
+      ),
+      typeResponse: this.jobService.getJobTypeById(
+        this.job !== undefined
+          ? this.job.jobType
+          : this.closedJob.jobTypeId.toString()
+      ),
     }).subscribe(
       (result) => {
         // console.log("job card", result);
-        
+
         this.location = result.locationResponse.jobLocation;
         this.jobPosition = result.positionResponse.jobPosition;
         this.jobcategory = result.categoryResponse.jobCategory;
@@ -102,22 +126,44 @@ export class JobCardComponent {
         this.degree = result.degreeResponse.degree;
 
         this.spinnerService.hideSpinner();
+
+        console.log(this.job);
       },
       (error) => {
         console.log(error);
         this.spinnerService.hideSpinner();
       }
-    )
+    );
   }
 
-  private rectifyDate() : void{
+  private rectifyDate(): void {
     this.spinnerService.showSpinner();
 
-    if(this.job !== undefined){
-      let date = this.job.lastDate.split("T");
+    if (this.job !== undefined) {
+      let date = this.job.lastDate.split('T');
       this.job.lastDate = date[0];
     }
 
     this.spinnerService.hideSpinner();
+  }
+
+  public disableJob(): void {
+    var response = confirm('Do you want to disable this job ? ');
+    if (response) 
+    {
+      console.log('Job Disabled !!');
+      this.jobService.disableJob(this.job.jobId).subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    } 
+    else
+    {
+      console.log('You Denied to Disable Job !!');
+    }
   }
 }

@@ -10,6 +10,7 @@ import { Degree } from '../../../Models/DegreeResponse/Degree';
 import { EducationInstitution } from '../../../Models/InstitutionResponse/EducationInstitution';
 import { forkJoin } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-candidate-education',
@@ -30,16 +31,20 @@ export class CandidateEducationComponent {
   constructor(
     private userStore : UserStoreService,
     private auth : AuthService,
+    private spinner: SpinnerService,
     private toastr : ToastrService
   )
   {}
 
   ngOnInit():void{
+    // this.spinner.showSpinner();
     this.loadCandidateEducations();
+    // this.spinner.hideSpinner();
   }
   
   private loadCandidateEducations() :void
   {
+    this.spinner.showSpinner();
     this.userStore.getIdFromStore()
     .subscribe((val) => {
       // console.log(val);
@@ -51,26 +56,28 @@ export class CandidateEducationComponent {
     
     this.httpService.getAllcandidateEducation(this.userId).subscribe(
       (res : AllCandidateEducation ) =>{
-        console.log("response",res);
+        // console.log("response",res);
         this.eduList = res.candidateEducation;
         if(this.eduList.length==0) {
           this.emptyEdu=true;
-          this.toastr.info("Empty education list");
+          // this.toastr.info("Empty education list");
         }
         else {
           this.emptyEdu=false;
-          this.toastr.success("Education retrieved");
+          // this.toastr.success("Education retrieved");
         }
-        console.log("eulist",this.eduList);
+        this.spinner.hideSpinner();
+        // console.log("eulist",this.eduList);
         this.storedata();
       },
       (error) => {
         console.log(error);
+        this.spinner.hideSpinner();
       }
     );
 
-    console.log("degrees",this.degrees);
-    console.log("institutions",this.institutions);
+    // console.log("degrees",this.degrees);
+    // console.log("institutions",this.institutions);
   }
 
   private storedata() : void
@@ -84,11 +91,11 @@ export class CandidateEducationComponent {
 
   private addDegree(degreeId? : string): void
   {
-    console.log("fun call",degreeId);
+    // console.log("fun call",degreeId);
     this.httpService.getDegreeById(degreeId).subscribe(
       (res) => {
         this.degrees.push(res.degree);
-        console.log(res);
+        // console.log(res);
       },
       (error) =>{
         console.log(error);
@@ -100,7 +107,7 @@ export class CandidateEducationComponent {
     this.httpService.getInstitutionById(institutionId).subscribe(
       (res) => {
         this.institutions.push(res.educationInstitution);
-        console.log(res);
+        // console.log(res);
       },
      (error) =>{
         console.log(error);
@@ -111,12 +118,13 @@ export class CandidateEducationComponent {
   deleteEducation(educationId? : string) {
     this.httpService.deleteEducation(educationId).subscribe(
       (res) =>{
-        console.log(res);
+        // console.log(res);
         this.toastr.success("Education Deleted !!");
         this.ngOnInit();
       },
       (error) =>{
         console.log(error);
+        this.toastr.error("Education deleted");
       }
     )
   }

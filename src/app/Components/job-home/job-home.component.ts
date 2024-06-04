@@ -9,7 +9,7 @@ import { position } from '../../Models/JobPositionResponse/position';
 import { Job } from '../../Models/JobResponse/Job';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Degree } from '../../Models/DegreeResponse/Degree';
 import { ClosedJob } from '../../Models/ClosedJobResponse/ClosedJob';
 import { ClosedJobServiceService } from '../../Services/ClosedJob/closed-job-service.service';
@@ -46,11 +46,7 @@ export class JobHomeComponent {
   closedJobs: ClosedJob[] = [];
   filteredClosedJobs: ClosedJob[] = [];
 
-  positionIndex: number = 0;
-  typeIndex: number = 0;
-  locationIndex: number = 0;
-  categoryIndex: number = 0;
-  degreeIndex: number = 0;
+  filtersForm !: FormGroup;
 
   isEmployee: boolean = false;
   hasPrivilege: boolean = false;
@@ -68,14 +64,6 @@ export class JobHomeComponent {
     this.checkHasPrivilege();
   }
 
-  filtersForm = this.fb.group({
-    location: [''],
-    jobType: [''],
-    jobCategory: [''],
-    jobPosition: [''],
-    degree: [''],
-  });
-
   ngOnInit(): void {
     this.isEmployee = false;
     this.hasPrivilege = false;
@@ -88,45 +76,23 @@ export class JobHomeComponent {
       this.checkHasPrivilege();
     }
 
+    this.filtersForm = this.fb.group({
+      location: [''],
+      jobType: [''],
+      jobCategory: [''],
+      jobPosition: [''],
+      degree: [''],
+    });
+
     this.loadJobs();
     if(this.hasPrivilege){
       this.loadClosedJobs();
     }
 
-    this.locations.push({
-      locationId: 'null',
-      address: 'Select Job Location ',
-      city: '',
-      state: '',
-      country: '',
-    });
     this.loadJobLocations();
-
-    this.jobTypes.push({ jobTypeId: 'null', typeName: ' Select Job Type ' });
     this.loadJobTypes();
-
-    this.jobCategories.push({
-      categoryId: 'null',
-      categoryCode: 'Select Job Category ',
-      categoryName: '',
-      description: '',
-    });
     this.loadJobCategories();
-
-    this.categoryjobPositions.push({
-      positionId: 'null',
-      positionName: 'Select Job Position ',
-      positionCode: '',
-      description: '',
-      categoryId: 'null',
-    });
     this.loadJobPositions();
-
-    this.degrees.push({
-      degreeId: 'null',
-      degreeName: 'Select Degree ',
-      durationInYears: 0,
-    });
     this.loadDegrees();
   }
 
@@ -184,9 +150,7 @@ export class JobHomeComponent {
   private loadJobLocations(): void {
     this.jobService.getAllJobLocations().subscribe(
       (res) => {
-        // this.locations = res.allJobLocations;
-        this.locations = this.locations.concat(res.allJobLocations);
-        // console.log(this.locations);
+        this.locations = res.allJobLocations;
       },
       (error) => {
         console.error('Error loading job locations:', error);
@@ -197,9 +161,7 @@ export class JobHomeComponent {
   private loadJobTypes(): void {
     this.jobService.getAllJobTypes().subscribe(
       (res) => {
-        // this.jobTypes = res.allJobTypes;
-        this.jobTypes = this.jobTypes.concat(res.allJobTypes);
-        // console.log(this.jobTypes);
+        this.jobTypes = res.allJobTypes;
       },
       (error) => {
         console.error('Error loading job types:', error);
@@ -210,9 +172,7 @@ export class JobHomeComponent {
   private loadJobCategories(): void {
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
-        // this.jobCategories = res.allJobCategory;
-        this.jobCategories = this.jobCategories.concat(res.allJobCategory);
-        // console.log(this.jobCategories);
+        this.jobCategories = res.allJobCategory;
       },
       (error) => {
         console.error('Error loading job categories:', error);
@@ -224,7 +184,6 @@ export class JobHomeComponent {
     this.jobService.getAllJobPosition().subscribe(
       (res) => {
         this.jobPositions = res.allJobPositions;
-        // console.log('all pos : ', this.jobPositions);
       },
       (error) => {
         console.error('Error loading job Positions:', error);
@@ -237,7 +196,6 @@ export class JobHomeComponent {
       (res) => {
         this.jobs = res.allJobs;
         this.Filterjobs = this.jobs;
-        // console.log(this.Filterjobs);
       },
       (error) => {
         console.error('Error loading Jobs', error);
@@ -246,17 +204,13 @@ export class JobHomeComponent {
   }
 
   addrefrral(jobId: string) {
-    // console.log('passed jobId ; ', jobId);
-    //   this.jobService.jobId =jobId;
-    //   console.log("serice job ; ",this.jobService.jobId);
-    //  this.router.navigate(['employee-dashboard','addReferral']);
+    console.log('passed jobId ; ', jobId);
   }
 
   private loadDegrees(): void {
     this.jobService.getAllDegrees().subscribe(
       (res) => {
-        this.degrees = this.degrees.concat(res.degrees);
-        // console.log(this.degrees);
+        this.degrees = res.degrees;
       },
       (error) => {
         console.error('Error loading Degrees:', error);
@@ -265,56 +219,49 @@ export class JobHomeComponent {
   }
   public onSubmit(): void {
     if (
-      this.categoryIndex == 0 &&
-      this.locationIndex == 0 &&
-      this.positionIndex == 0 &&
-      this.typeIndex == 0 &&
-      this.degreeIndex == 0
+      this.isEmptyId(this.filtersForm.get('location')?.value) &&
+      this.isEmptyId(this.filtersForm.get('jobPosition')?.value) &&
+      this.isEmptyId(this.filtersForm.get('jobCategory')?.value) &&
+      this.isEmptyId(this.filtersForm.get('jobType')?.value) &&
+      this.isEmptyId(this.filtersForm.get('degree')?.value)
     ) {
       this.displayFilterEmptyToast();
       return;
     }
 
-    // console.log(this.jobPositions[this.positionIndex]);
-    // console.log(this.jobCategories[this.categoryIndex]);
-    // console.log(this.jobTypes[this.typeIndex]);
-    // console.log(this.locations[this.locationIndex]);
-    // console.log(this.degrees[this.degreeIndex]);
-
     this.filterJobs(
-      this.jobPositions[this.positionIndex].positionId,
-      this.locations[this.locationIndex].locationId,
-      this.jobTypes[this.typeIndex].jobTypeId,
-      this.jobCategories[this.categoryIndex].categoryId,
-      this.degrees[this.degreeIndex].degreeId
+      this.filtersForm.get('jobPosition')?.value,
+      this.filtersForm.get('location')?.value,
+      this.filtersForm.get('jobType')?.value,
+      this.filtersForm.get('jobCategory')?.value,
+      this.filtersForm.get('degree')?.value
     );
+
+  }
+
+  private isEmptyId(id: string): boolean {
+    return id === 'null' || id === '';
   }
 
   public onSubmitForClosedJobs(): void {
     if (
-      this.categoryIndex == 0 &&
-      this.locationIndex == 0 &&
-      this.positionIndex == 0 &&
-      this.typeIndex == 0 &&
-      this.degreeIndex == 0
+      this.isEmptyId(this.filtersForm.get('location')?.value) &&
+      this.isEmptyId(this.filtersForm.get('jobPosition')?.value) &&
+      this.isEmptyId(this.filtersForm.get('jobCategory')?.value) &&
+      this.isEmptyId(this.filtersForm.get('jobType')?.value) &&
+      this.isEmptyId(this.filtersForm.get('degree')?.value)
     ) {
       this.displayFilterEmptyToast();
       return;
     }
 
-    // console.log(this.jobPositions[this.positionIndex]);
-    // console.log(this.jobCategories[this.categoryIndex]);
-    // console.log(this.jobTypes[this.typeIndex]);
-    // console.log(this.locations[this.locationIndex]);
-    // console.log(this.degrees[this.degreeIndex]);
-
     this.filterClosedJobs(
-      this.jobPositions[this.positionIndex].positionId,
-      this.locations[this.locationIndex].locationId,
-      this.jobTypes[this.typeIndex].jobTypeId,
-      this.jobCategories[this.categoryIndex].categoryId,
-      this.degrees[this.degreeIndex].degreeId
-    );
+      this.filtersForm.get('jobPosition')?.value,
+      this.filtersForm.get('location')?.value,
+      this.filtersForm.get('jobType')?.value,
+      this.filtersForm.get('jobCategory')?.value,
+      this.filtersForm.get('degree')?.value
+    );    
   }
 
   private filterClosedJobs(
@@ -330,13 +277,12 @@ export class JobHomeComponent {
     let locationcheck: boolean = false;
     let categorycheck: boolean = false;
     let degreecheck: boolean = false;
-    let filterOnClosedJob: boolean = false;
 
-    if (positionId != 'null') positioncheck = true;
-    if (locationId != 'null') locationcheck = true;
-    if (categoryId != 'null') categorycheck = true;
-    if (typeId != 'null') typecheck = true;
-    if (degreeId != 'null') degreecheck = true;
+    if (!this.isEmptyId(positionId)) positioncheck = true;
+    if (!this.isEmptyId(locationId)) locationcheck = true;
+    if (!this.isEmptyId(categoryId)) categorycheck = true;
+    if (!this.isEmptyId(typeId)) typecheck = true;
+    if (!this.isEmptyId(degreeId)) degreecheck = true;
 
     this.closedJobs.forEach((job) => {
       let flg: boolean = true;
@@ -381,11 +327,11 @@ export class JobHomeComponent {
     let categorycheck: boolean = false;
     let degreecheck: boolean = false;
 
-    if (positionId != 'null') positioncheck = true;
-    if (locationId != 'null') locationcheck = true;
-    if (categoryId != 'null') categorycheck = true;
-    if (typeId != 'null') typecheck = true;
-    if (degreeId != 'null') degreecheck = true;
+    if (!this.isEmptyId(positionId)) positioncheck = true;
+    if (!this.isEmptyId(locationId)) locationcheck = true;
+    if (!this.isEmptyId(categoryId)) categorycheck = true;
+    if (!this.isEmptyId(typeId)) typecheck = true;
+    if (!this.isEmptyId(degreeId)) degreecheck = true;
 
     this.jobs.forEach((job) => {
       let flg: boolean = true;
@@ -420,19 +366,14 @@ export class JobHomeComponent {
     this.Filterjobs = this.jobs;
     this.filteredClosedJobs = this.closedJobs;
     this.categoryjobPositions = [];
-    this.categoryjobPositions.push({
-      positionId: 'null',
-      positionName: 'Select Job Position ',
-      positionCode: '',
-      description: '',
-      categoryId: 'null',
-    });
 
-    this.categoryIndex = 0;
-    this.positionIndex = 0;
-    this.locationIndex = 0;
-    this.degreeIndex = 0;
-    this.typeIndex = 0;
+    this.filtersForm = this.fb.group({
+      location: [''],
+      jobType: [''],
+      jobCategory: [''],
+      jobPosition: [''],
+      degree: [''],
+    });
 
     this.displayResetToast();
   }
@@ -454,16 +395,9 @@ export class JobHomeComponent {
   }
 
   public loadJobPositionsByCategoryId(): void {
-    var selectedCategoryId = this.jobCategories[this.categoryIndex].categoryId;
+    var selectedCategoryId = this.filtersForm.get('jobCategory')?.value;
     this.categoryjobPositions = [];
-    this.categoryjobPositions.push({
-      positionId: 'null',
-      positionName: 'Select Job Position ',
-      positionCode: '',
-      description: '',
-      categoryId: 'null',
-    });
-
+    
     this.jobPositions.forEach((pos) => {
       if (selectedCategoryId === pos.categoryId)
         this.categoryjobPositions.push(pos);

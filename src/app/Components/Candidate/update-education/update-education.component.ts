@@ -3,9 +3,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
   FormBuilder,
-  Validators,
   FormGroup,
-  FormControl,
 } from '@angular/forms';
 import { candidateEducation } from '../../../Models/EducationResponse/candidateEducation';
 import { EducationInstitution } from '../../../Models/InstitutionResponse/EducationInstitution';
@@ -14,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { Degree } from '../../../Models/DegreeResponse/Degree';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-update-education',
@@ -32,7 +31,7 @@ export class UpdateEducationComponent {
 
   candidateEducation! : candidateEducation;
 
-constructor(private router:Router , private fb : FormBuilder) {}
+constructor(private router:Router , private fb : FormBuilder , private spinner : SpinnerService) {}
 
   ngOnInit(): void {
     const id = String(this.route.snapshot.params['id']);
@@ -64,13 +63,16 @@ constructor(private router:Router , private fb : FormBuilder) {}
   }
 
   private loadAllInstitutions(): void {
+    this.spinner.showSpinner();
     this.httpService.getAllInstitutions().subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
         this.Institutions = this.Institutions.concat(res.educationInstitution);
-        console.log(this.Institutions);
+        this.spinner.hideSpinner();
+        // console.log(this.Institutions);
       },
       (error) => {
+        this.spinner.hideSpinner();
         console.log(error);
       }
     );
@@ -80,7 +82,7 @@ constructor(private router:Router , private fb : FormBuilder) {}
     this.httpService.getAllDegrees().subscribe(
       (res) => {
         this.degrees = this.degrees.concat(res.degrees);
-        console.log(this.degrees);
+        // console.log(this.degrees);
       },
       (error) => {
         console.error('Error loading Degrees:', error);
@@ -89,7 +91,7 @@ constructor(private router:Router , private fb : FormBuilder) {}
   }
 
   public updateEducation() : void{
-    console.log(this.updateCandidateEducation.value);
+    // console.log(this.updateCandidateEducation.value);
     this.candidateEducation.degreeId = this.updateCandidateEducation.get('degreeId')?.value;
     this.candidateEducation.institutionId = this.updateCandidateEducation.get('institutionId')?.value;
     this.candidateEducation.institutionOrSchoolName = this.updateCandidateEducation.get('institutionOrSchoolName')?.value;
@@ -99,7 +101,7 @@ constructor(private router:Router , private fb : FormBuilder) {}
 
       this.httpService.updateCandiateEducation(this.candidateEducation).subscribe(
         (res) => {
-          console.log(res);
+          // console.log(res);
           this.toastr.success("Education Updated Successfully!!");
           this.router.navigate(['profile','edu']);
         },
@@ -112,7 +114,7 @@ constructor(private router:Router , private fb : FormBuilder) {}
   private loadCandidateEducation(id:string):void{
     this.httpService.getCandidateEducation(id).subscribe(
       (res)=>{
-        console.log(res);
+        // console.log(res);
         this.candidateEducation = res.candidateEducation;
 
         this.updateCandidateEducation.get('institutionOrSchoolName')?.setValue(this.candidateEducation.institutionOrSchoolName || '');

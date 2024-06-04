@@ -31,14 +31,17 @@
         applicant.status.statusName
       }}</span>
     </span>
-    <span style="float: right">
+    <span style="float: right" *ngIf="applicant.status.statusId != this.getStatusId ">
+      
       <button
+      
         type="button"
         class="btn btn-secondary btn-sm"
         data-bs-toggle="modal"
         [attr.data-bs-target]="'#statusChange' + applicant.applicationId"
       >
-        Change Status
+      Change Status
+        
       </button>
     </span>
   </div>
@@ -330,6 +333,7 @@
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
+  data-target="#modal"
 >
   <div class="modal-dialog">
     <div class="modal-content">
@@ -349,6 +353,7 @@
           data-bs-dismiss="modal"
           aria-label="Close"
           id="closePopUp"
+          #myModalClose
         ></button>
       </div>
       <div class="modal-body">
@@ -384,6 +389,7 @@
               type="submit"
               class="btn btn-secondary btn-sm"
               (click)="submitStatus()"
+              
             >
               Submit
             </button>

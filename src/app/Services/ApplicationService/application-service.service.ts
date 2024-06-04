@@ -41,4 +41,10 @@ export class ApplicationServiceService {
       environment.baseURL + "Application/sendOfferLetter/" + successfulOfferId, null
     )
   }
+
+  getSuccessStatus(){
+    return this.http.get<number>(
+      environment.baseURL + 'JobStatus/getSuccessStatus'
+    )
+  }
 }
