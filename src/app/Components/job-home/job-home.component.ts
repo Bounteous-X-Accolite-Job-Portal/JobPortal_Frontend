@@ -391,7 +391,7 @@ export class JobHomeComponent {
   }
 
   private displayFilterEmptyToast(): void {
-    this.toaster.info('No Filter Selected !!');
+    this.toaster.info('No filter Selected !!');
   }
 
   public loadJobPositionsByCategoryId(): void {

@@ -1,12 +1,9 @@
-
 :root {
     --main1: #6222CC;
     --secondary: #FBA504;
     --light: #F6F4F9;
     --dark: #04000B;
 }
-
-
 
 h1,
 h2,
@@ -62,7 +59,6 @@ h6,
     border-radius: 50px;
 }
 
-/*** Hero Header ***/
 .hero-header {
     margin-bottom: 6rem;
     padding: 10rem 0;
@@ -90,122 +86,7 @@ h6,
     }
 }
 
-.feature-item {
-    transition: .5s;
-    background-color: #F6F4F9;
-}
 
-.feature-item:hover{
-    margin-top: -15px;
-    background-color: #6222CC;
-    color: #FFFFFF;
-}
-.feature-icon{
-    color: #FBA504;
-}
-
-
-
-
-.fact {
-    margin: 6rem 0;
-    background:
-        url(../../../assets/img/blob-top-left.png),
-        url(../../../assets/img/blob-top-right.png),
-        url(../../../assets/img/blob-bottom-left.png),
-        url(../../../assets/img/blob-bottom-right.png),
-        url(../../../assets/img/blob-center.png);
-    background-position:
-        left 0px top 0px,
-        right 0px top 0px,
-        left 0px bottom 0px,
-        right 0px bottom 0px,
-        center center;
-    background-repeat: no-repeat;
-}
-
-
-.service-item {
-    position: relative;
-    padding: 45px 30px;
-    background: #F6F4F9;
-    overflow: hidden;
-    transition: .5s;
-}
-
-.service-item:hover {
-    margin-top: -15px;
-    padding-bottom: 60px;
-    background: #6222CC;
-}
-
-.service-item .service-icon {
-    margin: 0 auto 20px auto;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #F6F4F9;
-    background: url(../../../assets/img/blob-primary.png) center center no-repeat;
-    background-size: contain;
-    transition: .5s;
-}
-
-.service-item:hover .service-icon {
-    color: var(--dark);
-    background: url(../../../assets/img/blob-secondary.png) center center no-repeat;
-    background-size: contain;
-}
-
-.service-item h5,
-.service-item p {
-    transition: .5s;
-}
-
-.service-item:hover h5,
-.service-item:hover p {
-    color: #FFFFFF;
-}
-
-.service-item a.btn {
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #6222CC;
-    background: #FFFFFF;
-    border-radius: 40px 40px 0 0;
-    transition: .5s;
-    z-index: 1;
-}
-
-.service-item a.btn:hover {
-    color: var(--dark);
-    background: #FBA504;
-}
-
-.service-item:hover a.btn {
-    bottom: 0;
-}
-
-
-
-.testimonial-carousel .testimonial-item {
-    padding: 0 30px 30px 30px;
-}
-
-
-
-.team-item .btn {
-    color: #6222CC;
-    background: #FFFFFF;
-}
-
-.team-item .btn:hover {
-    color: #FFFFFF;
-    background: #6222CC;
-}
 
 
 .footer {
