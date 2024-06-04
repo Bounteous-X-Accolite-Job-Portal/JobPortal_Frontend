@@ -72,9 +72,7 @@ export class PersonalInfoComponent {
         (res) => {
           // console.log(res);
           this.candidate=res.candidate;
-          this.toastr.success("Candidate data retrieved");
-          // console.log(this.candidate);
-
+       
           this.profileForm.get('phone')?.setValue(this.candidate.phone || 'NA');
           this.profileForm.get('addressLine1')?.setValue(this.candidate.addressLine1 || 'NA');
           this.profileForm.get('city')?.setValue(this.candidate.city || 'NA');
