@@ -119,8 +119,8 @@ export class LoginComponent {
         (error: any) => {
           // console.log('hide spinner');
           this.spinnerService.hideSpinner();
-
-          console.log(error);
+          this.toast.error("Could not login");
+          // console.log(error);
         }
       );
     }
@@ -133,13 +133,13 @@ export class LoginComponent {
     }
     const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
     this.isValidEmail = pattern.test(this.value);
-    console.log(this.isValidEmail);
+    // console.log(this.isValidEmail);
     return this.isValidEmail;
   }
 
   confirmToSend() {
     if (this.checkValidEmail(this.value)) {
-      console.log(this.value);
+      // console.log(this.value);
       this.forgetService.sendForgetPasswordLink(this.value).subscribe({
         next: (res: any) => {
           this.resetPasswordEmail = ' ';
@@ -147,7 +147,6 @@ export class LoginComponent {
           buttonRef?.click();
           this.toaster.info('Check your mail to reset password!!');
         },
-
         error: (err: any) => {},
       });
     }

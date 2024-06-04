@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ResumeServiceService } from '../../../Services/ResumeService/resume-service.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-resume',
@@ -34,7 +35,8 @@ constructor(
   private auth : AuthService,
   private toastr : ToastrService,
   private fb: FormBuilder,
-  private sanitizer : DomSanitizer
+  private sanitizer : DomSanitizer,
+  private spinner : SpinnerService
 ) {}
 
 
@@ -53,28 +55,35 @@ ngOnInit() : void{
     resumeUrl:['']
   });
 
+  this.getFunction();
+}
+
+
+getFunction(){
+  this.spinner.showSpinner();
   this.resumeService.getResumeByCandidateId(this.userId).subscribe(
     (res) => {
       // console.log(res);
       this.msg=res.message;
       if(res.resume==null)
       {
-        this.toastr.info("No resume present");
+        // this.toastr.info("No resume present");
         this.resumeExists=false;
         this.userResume = {"resumeUrl":'',"resumeId":'',"candidateId":''};
       }
       else
       {
-        this.toastr.success("Resume successfully retrieved");
+        // this.toastr.success("Resume successfully retrieved");
         this.resumeExists=true;
         this.userResume=res.resume;       
         this.resumeUrl = this.userResume !== undefined ? this.userResume.resumeUrl : "";
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.resumeUrl !== undefined ? this.resumeUrl : "");
       }
-
+      this.spinner.hideSpinner();
       this.resumeForm.get('resumeUrl')?.setValue(this.userResume.resumeUrl || '');
     },
     (error) => {
+      this.spinner.hideSpinner();
       console.log(error);
       this.toastr.error("Error in retrieving resume");
     }
@@ -100,17 +109,17 @@ add() {
 }
 
 
-  update(){
-    this.userResume.resumeUrl=this.resumeForm.value;
-    console.log(this.resumeForm.value);
-    this.resumeService.removeResumeByResumeId(this.userResume.resumeId).subscribe(
-      (res)=>{
-        console.log(res);
-        this.add();
-      }
-    );
-    this.toastr.success("Resume linked updated successfully");
-  }
+update(){
+  this.userResume.resumeUrl=this.resumeForm.value;
+  console.log(this.resumeForm.value);
+  this.resumeService.removeResumeByResumeId(this.userResume.resumeId).subscribe(
+    (res)=>{
+      console.log(res);
+      this.add();
+    }
+  );
+  this.toastr.success("Resume linked updated successfully");
+}
 
 
 }

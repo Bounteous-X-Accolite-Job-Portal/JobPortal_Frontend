@@ -86,9 +86,16 @@ export class JobService {
 
     updateJob(job:Job):Observable<JobResponse>{
       return this.http.put<JobResponse>(environment.baseURL+'Job/UpdateJob',job);
-    }
+    };
     getAllJobsAddedByLoggedInEmployee(employeeId : Guid) : Observable<AllJob>{
       return this.http.get<AllJob>(environment.baseURL + "Job/getAllJobsByEmployee/" + employeeId);
-    }
+    };
 
+    disableJob(jobId: string): Observable<JobResponse> {
+      const url = environment.baseURL+`Job/DisableJob/${jobId}`;
+      return this.http.put<JobResponse>(url, JSON.stringify(jobId), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+    
   }
