@@ -211,7 +211,6 @@ export class JobHomeComponent {
     this.jobService.getAllDegrees().subscribe(
       (res) => {
         this.degrees = res.degrees;
-        console.log(this.degrees);
       },
       (error) => {
         console.error('Error loading Degrees:', error);
@@ -384,7 +383,7 @@ export class JobHomeComponent {
   }
 
   private displayEmptyJobsToast(): void {
-    this.toaster.error('No Jobs Found !!');
+    this.toaster.info('No Jobs Found !!');
   }
 
   private displayJobsToast(): void {
@@ -392,7 +391,7 @@ export class JobHomeComponent {
   }
 
   private displayFilterEmptyToast(): void {
-    this.toaster.error('No Filter Selected !!');
+    this.toaster.info('No filter Selected !!');
   }
 
   public loadJobPositionsByCategoryId(): void {

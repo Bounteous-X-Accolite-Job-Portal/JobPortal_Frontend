@@ -148,9 +148,25 @@ button:hover i::after {
     flex-direction: column;
     height: auto;
   }
-  .Filters {
-    width: 100%;
+
+  .Filters{
+    display: none !important;
   }
+  #filterRight{
+    display: block !important;
+  }
+
+  /* Filter modal */
+  .modal-dialog {
+    position: fixed;
+    margin: 3vw !important;
+    width: 40vw !important;
+    height: 40vh !important;
+    left: 0px !important;
+    top: 6vh !important;
+  }
+
+
   .jobListing {
     overflow-y: hidden;
     width: 100%;
@@ -158,6 +174,18 @@ button:hover i::after {
   form {
     flex-direction: row;
   }
+}
+
+@media (max-width: 560px){
+  /* Filter modal */
+  .modal-dialog {
+    position: relative;
+    margin: 3vw !important;
+    width: 70vw !important;
+    height: 40vh !important;
+    top: 6vh !important;
+  }
+
 }
 
 @keyframes move {

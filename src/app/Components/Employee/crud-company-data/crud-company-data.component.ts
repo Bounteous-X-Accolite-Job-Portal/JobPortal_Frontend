@@ -39,6 +39,7 @@ private loadCompanies(): void {
     (error) => {
       // console.error('Error loading Companies:', error);
       this.toastr.error("Error loading Companies: ", error);
+      this.spinnerService.hideSpinner();
     }
   );
 }
