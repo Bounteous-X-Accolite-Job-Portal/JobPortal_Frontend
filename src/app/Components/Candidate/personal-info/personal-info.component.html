@@ -1,7 +1,10 @@
-<section class="h-100 gradient-custom-2" style="min-height: 87vh; width: 100%; height: auto;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-lg-9 col-xl-7" style="width: 80%;">
+<section
+  class="h-100 gradient-custom-2"
+  style="min-height: 87vh; width: 100%; height: auto"
+>
+  <div class="container h-100">
+    <div class="row h-100">
+      <div class="col col-lg-9 col-xl-7" style="width: 100%; padding-top: 10vh">
         <div class="card">
           <div
             class="rounded-top text-white d-flex flex-row"
@@ -29,7 +32,7 @@
                   border-radius: 55%;
                 "
               >
-                <div class="fw-bold fs-2 " style="color:#0a0156">
+                <div class="fw-bold fs-2" style="color: #0a0156">
                   {{
                     candidate === undefined
                       ? ""
@@ -71,47 +74,76 @@
             <label *ngIf="isAccessible">*Update values as per requirement</label>
             <div class="row">
               <div
-                class="p-4 col-4"
-                style="background-color: #f8f9fa; width: 20%"
-              >
-                <label class="font-italic mb-2">
-                  Phone :
-                </label>
-                <label class="font-italic mb-2">
-                  Address :
-                </label>
-                <label class="font-italic mb-2">
-                  City :
-                </label>
-                <label class="font-italic mb-2">
-                  State :
-                </label>
-                <label class="font-italic mb-2">
-                  Country :
-                </label>
-                <label class="font-italic mb-2">
-                  Zipcode :
-                </label>
-              </div>
-              <div
-                class="p-4 col-4"
-                style="background-color: #f8f9fa; width: 75%"
+                class="col p-4"
+                style="background-color: #f8f9fa; width: 85%"
               >
                 <form [formGroup]="profileForm">
-                  <input type="text" class="font-italic w-50 d-block mb-2" formControlName="phone"/>
-                  <input type="text" class="font-italic w-50 d-block mb-2" formControlName="addressLine1"/>
-                  <input type="text" class="font-italic w-50 d-block mb-2" formControlName="city"/>
-                  <input type="text" class="font-italic w-50 d-block mb-2" formControlName="state"/>
-                  <input type="text" class="font-italic w-50 d-block mb-2" formControlName="country"/>
-                  <input type="text" class="font-italic w-50 d-block mb-2" formControlName="zipCode"/>
+                  <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="font-italic mb-2 d-inline">Phone :</div>
+                    <input
+                      type="text"
+                      class="font-italic mb-1 w-75"
+                      formControlName="phone"
+                    />
+                  </div>
+                  <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="font-italic mb-2 d-inline">Address :</div>
+                    <input
+                      type="text"
+                      class="font-italic mb-1 w-75"
+                      formControlName="addressLine1"
+                    />
+                  </div>
+                  <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="font-italic mb-2 d-inline">City :</div>
+                    <input
+                      type="text"
+                      class="font-italic mb-1 w-75"
+                      formControlName="city"
+                    />
+                  </div>
+                  <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="font-italic mb-2 d-inline">State :</div>
+                    <input
+                      type="text"
+                      class="font-italic mb-1 w-75"
+                      formControlName="state"
+                    />
+                  </div>
+                  <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="font-italic mb-2 d-inline">Country :</div>
+                    <input
+                      type="text"
+                      class="font-italic mb-1 w-75"
+                      formControlName="country"
+                    />
+                  </div>
+                  <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="font-italic mb-2 d-inline">Zipcode :</div>
+                    <input
+                      type="text"
+                      class="font-italic mb-1 w-75"
+                      formControlName="zipCode"
+                    />
+                  </div>
                 </form>
               </div>
             </div>
-            <div class="btns">
-              <button *ngIf="isAccessible" (click)="funUpdateProfile()" class="btn btn-primary text-style-add mx-3">UPDATE</button>
-              <button *ngIf="isAccessible" (click)="disableFields()" class="btn btn-outline-primary text-style-del">CANCEL</button>
-            </div>
-            </div>
+            <button
+              *ngIf="isAccessible"
+              (click)="funUpdateProfile()"
+              class="btn btn-primary text-style-add mx-3"
+            >
+              UPDATE
+            </button>
+            <button
+              *ngIf="isAccessible"
+              (click)="disableFields()"
+              class="btn btn-outline-primary text-style-del"
+            >
+              CANCEL
+            </button>
+          </div>
         </div>
       </div>
     </div>

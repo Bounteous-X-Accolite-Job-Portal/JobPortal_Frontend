@@ -6,6 +6,7 @@
         padding-right: 15px;
         font-size: 27px;
         margin-bottom: 0rem;
+        
       "
     >
       Filters
@@ -18,6 +19,7 @@
           flex-direction: column;
           padding-left: 10%;
           padding-right: 10%;
+          transition: all 1s;
         "
       >
         <div>
@@ -162,6 +164,7 @@
             <app-job-card
               *ngFor="let job of Filterjobs"
               [job]="job"
+              [isActive]="true"
             ></app-job-card>
           </div>
         </div>
@@ -173,6 +176,7 @@
             <app-job-card
               *ngFor="let closedJob of filteredClosedJobs"
               [closedJob]="closedJob"
+              [isActive]="false"
             ></app-job-card>
           </div>
         </div>

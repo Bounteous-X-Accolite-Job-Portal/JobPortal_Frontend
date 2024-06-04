@@ -1,9 +1,12 @@
+
 :root {
   --main1: #6222cc;
   --secondary: #fba504;
   --light: #f6f4f9;
   --dark: #04000b;
 }
+
+
 
 h1,
 h2,
@@ -22,6 +25,7 @@ h6,
 .fw-medium {
   font-weight: 500 !important;
 }
+
 
 .btn {
   font-weight: 500;
@@ -95,6 +99,9 @@ h6,
   color: #fba504;
 }
 
+
+
+
 .fact {
   margin: 6rem 0;
   background: url(../../../assets/img/blob-top-left.png),
@@ -106,6 +113,7 @@ h6,
     right 0px bottom 0px, center center;
   background-repeat: no-repeat;
 }
+
 
 .service-item {
   position: relative;
@@ -172,7 +180,14 @@ h6,
   bottom: 0;
 }
 
-/*** Team ***/
+
+
+.testimonial-carousel .testimonial-item {
+    padding: 0 30px 30px 30px;
+}
+
+
+
 .team-item .btn {
   color: #6222cc;
   background: #ffffff;
@@ -183,7 +198,7 @@ h6,
   background: #6222cc;
 }
 
-/*** Footer ***/
+
 .footer {
   margin-top: 6rem;
   padding-top: 9rem;

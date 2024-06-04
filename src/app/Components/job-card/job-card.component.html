@@ -40,7 +40,7 @@
           <div class="">  
             <button *ngIf="isEmployee && hasPrivilege" class="btn btn-primary-1 mb-2" [routerLink]="(job !== undefined ? ['/jobs', job.jobId , 'applicants'] : ['/closedJobs', closedJob.closedJobId , 'applicants'])">View Applicants</button>
           </div>
-          <span class="btn btn-danger">
+          <span *ngIf="isActive" class="btn btn-danger">
             <a *ngIf="isEmployee && hasPrivilege" (click)="disableJob()">Disable Job </a>
           </span>
           <div class="">
