@@ -7,6 +7,7 @@ import { CompanyService } from '../../../Services/Company/company.service';
 import { CommonModule } from '@angular/common';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-update-Experience',
@@ -34,7 +35,7 @@ export class UpdateExperienceComponent {
   candidateService = inject(CandidateService);
   candidateExperience!: candidateExperience;
 
-  constructor(private toastr: ToastrService, private router: Router) {}
+  constructor(private toastr: ToastrService, private router: Router, private spinner: SpinnerService) {}
 
   ngOnInit(): void {
     const id = String(this.route.snapshot.params['id']);
@@ -87,6 +88,7 @@ export class UpdateExperienceComponent {
   }
 
   private loadCandidateExperience(id:string):void{
+    this.spinner.showSpinner();
     this.candidateService.getCandidateExperience(id).subscribe(
       (res)=>{
         // console.log(res);
@@ -98,9 +100,11 @@ export class UpdateExperienceComponent {
         this.updatecandidateExperience.get('startDate')?.setValue(this.candidateExperience.startDate || null);
         this.updatecandidateExperience.get('endDate')?.setValue(this.candidateExperience.endDate || null);
         this.updatecandidateExperience.get('isCurrentlyWorking')?.setValue(this.candidateExperience.isCurrentlyWorking);
+        this.spinner.hideSpinner();
       },
       (error)=>
       {
+        this.spinner.hideSpinner();
         console.log(error);
       }
     )

@@ -1,7 +1,7 @@
 <div class="container mw-80">
   <div class="card bg-glass p-5 mt-3">
     <h2 class="mb-4">Add Referral</h2>
-    <form (ngSubmit)="addreferal()" #resetForm="ngForm">
+    <form (ngSubmit)="addreferal()" [formGroup]="referralForm">
       <div class="mb-4 col">
         <div class="form-group">
           <label for="firstName">First Name</label>
@@ -10,7 +10,7 @@
             class="form-control mb-3"
             id="firstName"
             name="firstName"
-            [(ngModel)]="referralObj.firstName"
+            formControlName="firstName"
             required
           />
         </div>
@@ -21,7 +21,7 @@
             class="form-control mb-3"
             id="lastName"
             name="lastName"
-            [(ngModel)]="referralObj.lastName"
+            formControlName="lastName"
             required
           />
         </div>
@@ -32,12 +32,12 @@
             class="form-control mb-3"
             id="email"
             name="email"
-            [(ngModel)]="referralObj.email"
+            formControlName="email"
             required
           />
         </div>
         <div class="mb-3"></div>
-        <button type="submit" class="btn btn-primary btn-block float-end">
+        <button type="submit" class="btn btn-primary btn-block float-end" [disabled]="referralForm.invalid">
           Refer
         </button>
       </div>

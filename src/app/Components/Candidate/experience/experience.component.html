@@ -21,7 +21,7 @@
             <tbody>
               <tr *ngFor="let tmp of expList; let i = index">
                 <td>{{tmp.experienceTitle}}</td>
-                <td>{{this.companyList[i].companyName}}</td>
+                <td>{{this.companyList[i] ==undefined ? "loading" : this.companyList[i].companyName}}</td>
                 <td>{{tmp.startDate}}</td>
                 <td>{{tmp.endDate!=null?tmp.endDate:"NA"}}</td>
                 <td>{{tmp.isCurrentlyWorking}}</td>

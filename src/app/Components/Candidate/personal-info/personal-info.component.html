@@ -6,7 +6,7 @@
           <div
             class="rounded-top text-white d-flex flex-row"
             style="
-              background-color: #000;
+              background-color: #0a0156;
               height: 150px;
               align-items: center;
               justify-content: space-between;
@@ -29,7 +29,7 @@
                   border-radius: 55%;
                 "
               >
-                <h2>
+                <div class="fw-bold fs-2 " style="color:#0a0156">
                   {{
                     candidate === undefined
                       ? ""
@@ -39,7 +39,7 @@
                       ? ""
                       : candidate.lastName.charAt(0).toUpperCase()
                   }}
-                </h2>
+                </div>
               </div>
               <div class="col mx-3">
                 <h4>
@@ -58,10 +58,7 @@
             <div class="ms-4 mt-1 d-flex flex-column">
               <button
                 type="button"
-                data-mdb-button-init
-                data-mdb-ripple-init
                 class="btn btn-outline-dark"
-                data-mdb-ripple-color="dark"
                 style="z-index: 1; color: white; margin-right: 2rem"
                 (click)="enableFields()"
               >
