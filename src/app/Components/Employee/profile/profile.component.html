@@ -1,9 +1,18 @@
-<div class="profile-page ">
+<div class="profile-page">
   <div class="content">
     <div class="content__cover">
       <div class="content__avatar">
         <div class="logotext">
-            {{employee != undefined ? employee.firstName.charAt(0).toUpperCase() : "E"}} {{employee != undefined ? employee.lastName.charAt(0).toUpperCase() : ""}}
+          {{
+            employee != undefined
+              ? employee.firstName.charAt(0).toUpperCase()
+              : "E"
+          }}
+          {{
+            employee != undefined
+              ? employee.lastName.charAt(0).toUpperCase()
+              : ""
+          }}
         </div>
       </div>
       <div class="content__bull">
@@ -11,18 +20,37 @@
       </div>
     </div>
     <div class="content__title">
-      <h1>{{employee != undefined ? employee.firstName : "loading..."}} {{employee != undefined ? employee.lastName : "loading..."}}</h1>
-      <span>{{employee != undefined ? employee.empId : "loading..."}}</span>
+      <h1>
+        {{ employee != undefined ? employee.firstName : "loading..." }}
+        {{ employee != undefined ? employee.lastName : "loading..." }}
+      </h1>
+      <span>{{ employee != undefined ? employee.empId.toUpperCase() : "loading..." }}</span>
     </div>
     <div class="content__description">
-      <p>Designation - {{designation}}</p>
-      <p>Phone No. - {{(employee != undefined && employee.phone != null) ? employee.phone : "000-000-0000"}}</p>
-      <p>Email - {{employee != undefined ? employee.email : "loading..."}}</p>
+      <p>Designation - {{ designation }}</p>
+      <p>
+        Phone No. -
+        {{
+          employee != undefined && employee.phone != null
+            ? employee.phone
+            : "000-000-0000"
+        }}
+      </p>
+      <p>Email - {{ employee != undefined ? employee.email : "loading..." }}</p>
     </div>
     <ul class="content__list">
-      <li><span>{{jobsAdded}}</span>Job Added</li>
-      <li><span>{{interviewsTaken}}</span>Interview Taken</li>
-      <li><span>{{candidatesReferred}}</span>Candidate Referred</li>
+      <li>
+        <span>{{ jobsAdded }}</span
+        >Job Added
+      </li>
+      <li>
+        <span>{{ interviewsTaken }}</span
+        >Interview Taken
+      </li>
+      <li>
+        <span>{{ candidatesReferred }}</span
+        >Candidate Referred
+      </li>
     </ul>
   </div>
 </div>

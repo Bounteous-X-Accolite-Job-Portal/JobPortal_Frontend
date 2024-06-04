@@ -10,11 +10,12 @@
         </div>
       </div>
       <div class="solu_description">
-        <div class="dateId">
+        <div class="three-div">
+        <div class="locationId">
             <i class="fa fa-location-arrow d-inline" aria-hidden="true"></i>
-            <div class="mx-3">
+            <span class="mx-3">
             {{location?.city}} , {{location?.state}} , {{location?.country}}
-            </div>
+            </span>
         </div>
         <div class="dateId">
             <div class="block1">
@@ -26,6 +27,7 @@
                 <div class="mx-3">Last Date - {{job !== undefined ? job.lastDate : closedJob.lastDate}}</div>
             </div>
         </div>
+      </div>
         <div class="details">
             <div class="option">{{jobtype?.typeName}}</div>
             <div class="option">{{jobcategory?.categoryName}}</div>

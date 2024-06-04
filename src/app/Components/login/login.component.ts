@@ -13,7 +13,13 @@ import { ChangePasswordService } from '../../Services/ChangePassword/change-pass
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule, FormsModule, ToastrModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ToastrModule,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -45,13 +51,20 @@ export class LoginComponent {
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.pattern('^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$'),
+      ],
+    ],
     rememberMe: [true],
   });
 
   forgetPasswordForm = this.fb.group({
-    resetEmail: ['',Validators.required]
-  })
+    resetEmail: ['', Validators.required],
+  });
 
   get f() {
     return this.loginForm.controls;
@@ -132,8 +145,7 @@ export class LoginComponent {
           this.resetPasswordEmail = ' ';
           const buttonRef = document.getElementById('closeBtn');
           buttonRef?.click();
-          this.toaster.info("Check your mail to reset password!!")
-          
+          this.toaster.info('Check your mail to reset password!!');
         },
         error: (err: any) => {},
       });
