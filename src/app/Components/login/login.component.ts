@@ -31,14 +31,7 @@ export class LoginComponent {
   value: any;
   checkBoxValue: any = false;
   toast: any;
-  checkCheckBoxvalue(): boolean {
-    if (this.checkBoxValue == true) {
-      this.checkBoxValue = false;
-    } else {
-      this.checkBoxValue = true;
-    }
-    return this.checkBoxValue;
-  }
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -46,7 +39,8 @@ export class LoginComponent {
     private userStore: UserStoreService,
     private spinnerService: SpinnerService,
     private forgetService: ChangePasswordService,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+
   ) {}
 
   loginForm = this.fb.group({
@@ -62,8 +56,8 @@ export class LoginComponent {
     rememberMe: [true],
   });
 
-  forgetPasswordForm = this.fb.group({
-    resetEmail: ['', Validators.required],
+  emailForm : any = this.fb.group({
+    resetEmail: [' ', [Validators.required, Validators.email]],
   });
 
   get f() {
@@ -126,29 +120,37 @@ export class LoginComponent {
     }
   }
 
-  checkValidEmail(event: string) {
-    this.value = event;
-    if (this.value) {
-      this.isRequired = false;
-    }
-    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
-    this.isValidEmail = pattern.test(this.value);
-    // console.log(this.isValidEmail);
-    return this.isValidEmail;
-  }
+  // checkValidEmail(event: string) {
+  //   this.value = event;
+  //   if (this.value) {
+  //     this.isRequired = false;
+  //   }
+  //   const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
+  //   this.isValidEmail = pattern.test(this.value);
+  //   // console.log(this.isValidEmail);
+  //   return this.isValidEmail;
+  // }
 
-  confirmToSend() {
-    if (this.checkValidEmail(this.value)) {
-      // console.log(this.value);
-      this.forgetService.sendForgetPasswordLink(this.value).subscribe({
+  confirmToSend() { 
+      this.spinnerService.showSpinner();
+      console.log(this.emailForm.get('resetEmail').value);
+      this.forgetService.sendForgetPasswordLink(this.emailForm.get('resetEmail').value).subscribe({
         next: (res: any) => {
-          this.resetPasswordEmail = ' ';
-          const buttonRef = document.getElementById('closeBtn');
-          buttonRef?.click();
+          console.log(res);
+          this.emailForm.reset();
+          document.getElementById('closeBtn')?.click();
+          this.spinnerService.hideSpinner();
           this.toaster.info('Check your mail to reset password!!');
         },
-        error: (err: any) => {},
+        error: (err: any) => {
+          this.spinnerService.hideSpinner();
+            this.emailForm.reset();
+            document.getElementById('closeBtn')?.click();
+            this.toaster.error('Sorry! This email is not registered with us!' );
+          // }
+          
+        },
       });
-    }
+    // }
   }
 }
