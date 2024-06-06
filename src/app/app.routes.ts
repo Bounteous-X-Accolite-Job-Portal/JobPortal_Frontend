@@ -54,6 +54,7 @@ import { EmailComponentChangePasswordComponent } from './Components/email-compon
 import { OfferLetterComponent } from './Components/Employee/offer-letter/offer-letter.component';
 import { hasPrivilegeChildGuard } from './Guards/has-privilege-child.guard';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
+import { UploadComponent } from './Components/upload/upload.component';
 
 export const routes: Routes = [
   {
@@ -110,6 +111,10 @@ export const routes: Routes = [
   {
     path: 'job-details/:jobId',
     component: JobdetailsComponent,
+  },
+  {
+    path: 'upload',
+    component: UploadComponent,
   },
   {
     path: 'closedJob/job-details/:closedJobId',
@@ -249,7 +254,7 @@ export const routes: Routes = [
   {
     path: '**',
     component: PageNotFoundComponent,
-  },
+  }
 ];
 
 export default routes;

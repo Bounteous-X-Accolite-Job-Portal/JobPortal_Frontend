@@ -1,14 +1,13 @@
 <div
-  class="d-flex gradient-custom-2 justify-content-center"
-  style="padding: 20vh"
+  class="d-flex gradient-custom-2"
+  style="padding: 10vh"
   >
   <div class="w-100 bg-white rounded p-5" style="height: auto">
     <div><a routerLink=".."><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</a></div>
-    <div class="row w-full my-5 d-flex justify-content-center">
+    <div class="row w-full d-flex justify-content-center">
       <div class="d-flex justify-content-center mb-3">
         <h2>Add Experience</h2>
       </div>
-      <hr />
       <form [formGroup]="candidateExperience" (ngSubmit)="displayinfo()">
         <div class="form-group mb-3">
           <label for="experienceTitle">Job Title</label>
@@ -22,8 +21,9 @@
         </div>
 
         <div class="form-group mb-3">
-          <label class="me-2">Company Name</label>
+          <label class="me-2 d-block">Company Name</label>
           <select formControlName="companyId">
+            <option [value]="">Select company</option>
             <option *ngFor="let cmp of companies" [value]="cmp.companyId">
               {{ cmp.companyName }}
             </option>
@@ -31,9 +31,9 @@
         </div>
 
         <div class="form-group mb-3">
-          <div class="d-flex">
+          <div>
             <label for="description" class="me-3">Description</label>
-            <textarea placeholder="Enter Job Description: " formControlName="description" class="w-75 rounded"></textarea>
+            <textarea placeholder="Enter Job Description: " formControlName="description" class="w-100 rounded"></textarea>
           </div>
         </div>
 

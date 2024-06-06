@@ -133,3 +133,8 @@ select {
   text-shadow: .5px 1px;
   /* letter-spacing: 2px; */
 }
+
+textarea{
+  border: 1px solid rgb(209, 206, 206);
+  padding: 10px;
+}
