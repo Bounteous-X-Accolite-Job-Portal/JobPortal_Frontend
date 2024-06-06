@@ -55,8 +55,15 @@
                   <div *ngIf="f.password.errors?.['required']">
                     Password is required
                   </div>
-                  <div *ngIf="f.password.errors?.['password']">
+                  <!-- <div *ngIf="f.password.errors?.['password']">
                     Password should be valid
+                  </div> -->
+                  <div *ngIf="f.password.errors?.['minlength']">
+                    Minimum length should be 6
+                  </div>
+                  <div *ngIf="f.password.errors?.['pattern']">
+                    Password must contain atleast one Uppercase, one lowercase,
+                    one special character and one digit.
                   </div>
                 </small>
                 <div class="p-error">{{ message }}</div>
@@ -87,12 +94,11 @@
                 >
               </div>
 
-              <div class="d-flex justify-content-center ">
+              <div class="d-flex justify-content-center">
                 <button
                   type="submit"
-                  data-mdb-button-init
-                  data-mdb-ripple-init
-                  class="btn btn-primary-1 btn-block px-3 "
+                  [disabled]="loginForm.invalid"
+                  class="btn btn-primary-1 btn-block px-3"
                   (click)="onSubmit()"
                 >
                   Login
@@ -159,39 +165,56 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">
-        <div class="form-group pt-3">
-          <div class="input-group">
-            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-            <input
-              [ngModel]="resetPasswordEmail"
-              (ngModelChange)="checkValidEmail($event)"
-              type="email"
-              class="form-control"
-              placeholder="Email"
-            />
+      <form [formGroup]="emailForm">
+        <div class="modal-body">
+          <div class="form-group pt-3">
+            <div class="input-group">
+              <span class="input-group-text"
+                ><i class="fa fa-envelope"></i
+              ></span>
+              <input
+                type="email"
+                class="form-control"
+                formControlName="resetEmail"
+                placeholder="Email"
+              />
+            </div>
+          </div>
+          <div
+            class="validation ms-5"
+            *ngIf="this.emailForm.controls['resetEmail'].invalid && (this.emailForm.controls['resetEmail'].dirty || this.emailForm.controls['resetEmail'].touched)"
+          >
+            <small
+              *ngIf="this.emailForm.controls['resetEmail'].errors?.['required'] "
+              class="text-danger"
+              >Email is required</small
+            >
+            <small
+              *ngIf="this.emailForm.controls['resetEmail'].errors?.['email'] "
+              class="text-danger"
+              >Email is invalid</small
+            >
           </div>
         </div>
-        <small *ngIf="isRequired" class="text-danger"
-          >*Email is required*</small
-        >
-        <small *ngIf="!isValidEmail && !resetPasswordEmail" class="text-danger"
-          >*Email is invalid*</small
-        >
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          id="closeBtn"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >
-          Close
-        </button>
-        <button type="button" (click)="confirmToSend()" class="btn btn-primary">
-          Send
-        </button>
-      </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="closeBtn"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            (click)="confirmToSend()"
+            class="btn btn-primary"
+            [disabled]="emailForm.invalid"
+          >
+            Send
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

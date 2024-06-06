@@ -62,14 +62,14 @@ export class AppComponent {
       (res : ResponseModal) => {
         this.authService.logout();
 
-        this.toast.success(res.message);
+        // this.toast.success(res.message);
         this.spinnerService.hideSpinner();
 
         this.router.navigate(["/login"]);
       },
       (error) => {
         console.log(error);
-        this.toast.error("Error while logging out !, " + error.message);
+        // this.toast.error("Error while logging out !, " + error.message);
         this.spinnerService.hideSpinner();
       }
     )

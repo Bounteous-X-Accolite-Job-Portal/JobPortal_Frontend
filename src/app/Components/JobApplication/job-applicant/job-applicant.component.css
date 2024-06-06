@@ -69,6 +69,12 @@ select{
   }
 }
 
-@media (max-width: 490px) {
-
+.search-bar i {
+  color: grey;
+  margin-top: -2px;
+  margin-right: -70px;
+  z-index: 100;
+}
+input {
+  padding-left: 40px;
 }

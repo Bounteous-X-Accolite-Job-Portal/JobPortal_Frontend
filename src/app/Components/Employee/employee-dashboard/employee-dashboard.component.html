@@ -1,23 +1,34 @@
-<div style="display: flex; flex-direction: row;" class="wrapper">
+<div style="display: flex; flex-direction: row" class="wrapper">
   <div
     class="sidenav"
     [ngClass]="collapsed ? 'sidenav-collapsed' : 'sidenav'"
     (click)="toggleCollapse()"
   >
     <div class="logo-container">
-      <button class="logo" (click)="toggleCollapse()">{{this.name ? this.name.charAt(0) : 'U'}}</button>
-      <div class="logo-text" *ngIf="collapsed" style="font-size: medium; font-weight: 400;">{{this.name}}</div>
+      <button class="logo">{{ this.name ? this.name.charAt(0) : "U" }}</button>
+      <div class="logo-text" *ngIf="collapsed">{{ this.name }}</div>
       <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
         <i class="fal fa-times close-icon"></i>
       </button>
     </div>
     <ul class="sidenav-nav">
-      <li class="sidenav-nav-item float:left py-1" *ngFor="let data of sideBarData">
+      <li
+        class="sidenav-nav-item float:left py-1"
+        *ngFor="let data of sideBarData"
+      >
         <a
           [routerLink]="['/employee-dashboard/' + data.routeLink]"
           class="sidenav-nav-link w-100 px-3"
           routerLinkActive="active"
-          *ngIf="(!data.requiredPrivilege || hasPrivilege === data.requiredPrivilege) && (!data.requiredSpecialPrivilege || hasSpecialPrivilege === data.requiredSpecialPrivilege)"
+          data-toggle="tooltip"
+          data-placement="right"
+          title="{{ data.label }}"
+          *ngIf="
+            (!data.requiredPrivilege ||
+              hasPrivilege === data.requiredPrivilege) &&
+            (!data.requiredSpecialPrivilege ||
+              hasSpecialPrivilege === data.requiredSpecialPrivilege)
+          "
         >
           <i class="sidenav-link-icon ml-5" [class]="data.icon"></i>
           <span class="sidenav-link-text" *ngIf="collapsed">{{

@@ -13,9 +13,8 @@
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #0d016b;
   --bs-btn-disabled-border-color: #0d016b;
-  transition: all .3s;
+  transition: all 0.3s;
 }
-
 
 .btn-outline-primary {
   --bs-btn-border-radius: 25px;
@@ -48,14 +47,16 @@
   font-weight: 500;
 }
 
-/* .navbar{
-  position: fixed;
-  z-index: 1000;
-  width: 100vw;
-
+.navbar {
+  background-color: white !important;
+  /* box-shadow: 10px 10px 10px 15px #000000; */
+  box-shadow: 0.063rem 2rem 1.25rem 1.125rem #8690a3;
 }
 
-router-outlet{
-  position: absolute;
-  top: 20vw;
+/* .image-logo {
+  background: url("../assets/Logos/BxA_logo.webp");
+  height: "36px"; 
+  width: "250px";
+  margin-top: -1px; 
+  min-width: 200;
 } */
