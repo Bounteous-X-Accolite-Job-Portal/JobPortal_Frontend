@@ -9,6 +9,10 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
 
   // console.log('Interceptor hitted');
+  if (req.url.startsWith('https://api.cloudinary.com')) {
+      // If it is, pass the request through without modifying the headers
+      return next(req);
+  }
 
   const userToken = authService.getToken();
 
