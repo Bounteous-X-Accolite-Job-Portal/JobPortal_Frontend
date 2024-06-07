@@ -12,11 +12,10 @@
         </div>
         <div class="d-flex">
           <h2 class="me-3">Resume</h2>
-          <button class="btn " (click)="resToggle()">Show</button>
+          <button class="btn" (click)="resToggle()">Show</button>
         </div>
       </div>
     </div>
-
   <div class="d-flex justify-content-center my-5" style="background-color: aliceblue; width: 62%; height: 100vh;">
     <embed
       [src]="urlSafe"
@@ -45,7 +44,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
-          <button data-bs-dismiss="modal" (click)="update()" [disabled]="uploading"
+          <button (click)="update()" [disabled]="uploading"
                         class="btn btn-primary-1">
                         {{ uploading ? 'Uploading...' : 'Upload' }}
           </button>
@@ -82,41 +81,34 @@
 
 
 <!-- Resume does not exist -->
-<div class="frame" *ngIf="resumeExists==false">
-	<div class="center">
-		<div class="title">
-			<h1>Drop file to upload</h1>
-		</div>
-
-		<div class="dropzone">
-			<img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" />
-			<input type="file" (change)="handleFileChange($event) "accept=".pdf"  name="resumeUrl" id="resumeUrl" class="upload-input" />
-		</div>
-
-		<!-- <button type="button" class="btn" name="uploadbutton">Upload file</button> -->
-    <button (click)="uploadFile()" [disabled]="uploading"
-                        class="btn btn-primary-1">
-                        {{ uploading ? 'Uploading...' : 'Upload' }}
-          </button>
-
-	</div>
-</div>
-
-
-
- <!-- <div *ngIf="resumeExists==false" class="cont">
+ <div *ngIf="resumeExists==false" class="cont">
   <div class="col-lg-8">
-    <div class="feature-item rounded text-center p-4">
+    <div class="feature-item-1 rounded text-center p-4">
         <i class="fa fa-3x fa-plus mb-4 feature-icon"></i>
-        <h5 class="mb-3">Upload your resume here</h5>
-        <button type="button" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="false">
-          Click to add resume
-        </button>
-
-        <p class="m-3 fw-bold">Please add the link to your resume using the above button</p>
+        <h5 class="mb-3">Please add your resume</h5>
+        <p class="m-3 fw-bold">Drag and drop your resume or use the below button</p>
+        <div class="empty">**PDF format only**</div>
+        <div class="col-lg-8 d-flex justify-content-center">
+          <div class="center">
+            <div class="title">
+              <h1>Drop file to upload</h1>
+            </div>
+        
+            <div class="dropzone">
+              <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" />
+              <input type="file" (change)="handleFileChange($event) "accept=".pdf"  name="resumeUrl" id="resumeUrl" class="upload-input" />
+            </div>  
+            <button (click)="uploadFile()" [disabled]="uploading"
+                                class="btn btn-primary-1">
+                                {{ uploading ? 'Uploading...' : 'Upload' }}
+                  </button>
+        
+          </div>
+        </div>
     </div>
-  </div> -->
-
+  </div>
+  
+</div>
   <!-- Modal -->
   <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
