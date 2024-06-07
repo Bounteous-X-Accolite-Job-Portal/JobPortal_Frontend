@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { HttpClient } from '@angular/common/http';
+import { error } from 'console';
 
 @Component({
   selector: 'app-resume',
@@ -76,7 +77,7 @@ export class ResumeComponent {
     this.spinner.showSpinner();
     this.resumeService.getResumeByCandidateId(this.userId).subscribe(
       (res) => {
-        // console.log(res);
+        console.log(res);
         this.msg = res.message;
         if (res.resume == null) {
           this.toastr.info("No resume present");
@@ -84,7 +85,7 @@ export class ResumeComponent {
           this.userResume = { "resumeUrl": '', "resumeId": '', "candidateId": '' };
         }
         else {
-          this.toastr.success("Resume successfully retrieved");
+          // this.toastr.success("Resume successfully retrieved");
           this.resumeExists = true;
           this.userResume = res.resume;
           // this.resumeUrl = this.userResume.resumeUrl;
@@ -104,6 +105,8 @@ export class ResumeComponent {
   onDel() {
     this.resumeExists = !this.resumeExists;
   }
+
+
   add() {
     // console.log(this.resumeForm.value);
     this.resumeService.addResumeByCandidateId(this.resumeUrl).subscribe(
@@ -126,11 +129,21 @@ export class ResumeComponent {
     this.resumeService.removeResumeByResumeId(this.userResume.resumeId).subscribe(
       (res) => {
         console.log(res);
-        this.uploadFile();
+
+        if(res.status === 200){
+          this.uploadFile();
+        }
+        else{
+          this.toastr.error(res.message);
+        }
         // this.add();
+        // this.toastr.success("Resume linked updated successfully");
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error("Error in updating resume")
       }
     );
-    this.toastr.success("Resume linked updated successfully");
   }
 
   handleFileChange(event: any): void {
