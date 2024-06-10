@@ -57,7 +57,7 @@ export class DisablePrivilegeComponent {
         this.employees = res.employees;
 
         this.employees.forEach((employee) => {
-          console.log('Inactive ' + employee.inactive);
+          // console.log('Inactive ' + employee.inactive);
 
           if (!employee.inactive) {
             this.activeEmployees.push(employee);

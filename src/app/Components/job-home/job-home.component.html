@@ -1,27 +1,9 @@
 <div class="Jobhunt">
   <div class="Filters">
-    <div
-      style="
-        padding-left: 15px;
-        padding-right: 15px;
-        font-size: 27px;
-        margin-bottom: 0rem;
-        
-      "
-    >
-      Filters
-    </div>
+    <div class="fil">Filters</div>
+    
     <div>
-      <form
-        [formGroup]="filtersForm"
-        style="
-          display: flex;
-          flex-direction: column;
-          padding-left: 10%;
-          padding-right: 10%;
-          transition: all 1s;
-        "
-      >
+      <form [formGroup]="filtersForm">
         <div>
           <p>Job Category</p>
           <select
@@ -96,15 +78,18 @@
             </option>
           </select>
         </div>
-        <div class="d-flex justify-content-around" >
+        <div class="d-flex justify-content-around filter-btn">
           <button
-            (click)="FilterClosedJobToggle ? onSubmitForClosedJobs() : onSubmit()" class="btn btn-outline-primary"
-            >
+            (click)="
+              FilterClosedJobToggle ? onSubmitForClosedJobs() : onSubmit()
+            "
+            class="btn btn-primary text-style-add border-white"
+          >
             <span>Search</span>
           </button>
           <button
             (click)="resetFilters()"
-            class="btn btn-primary"
+            class="btn btn-primary text-style-add border-white"
           >
             <span>Reset</span>
           </button>
@@ -112,7 +97,7 @@
       </form>
     </div>
   </div>
-  <div id="filterRight" class="p-2" style="display: none">
+  <div id="filterRight" style="display: none">
     <a
       class="btn btn-primary"
       style="float: right"
@@ -204,7 +189,7 @@
     <div class="modal-content">
       <div class="modal-header px-3 py-2">
         <h5 class="modal-title" id="exampleModalLabel">Filters</h5>
-        <hr/>
+        <hr />
         <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
       </div>
       <div class="modal-body">
@@ -305,7 +290,10 @@
               >
                 Search
               </button>
-              <button (click)="resetFilters()" class="btn btn-outline-primary text-style-add">
+              <button
+                (click)="resetFilters()"
+                class="btn btn-outline-primary text-style-add"
+              >
                 <span>Reset</span>
               </button>
             </div>

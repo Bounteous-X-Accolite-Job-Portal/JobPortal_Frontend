@@ -35,7 +35,7 @@ body {
 
 .btn-primary-1 {
   --bs-btn-border-radius: 25px;
-  --bs-btn-bg: #0d016b;
+  --bs-btn-bg: #0d015b;
   --bs-btn-border-color: #0d016b;
   --bs-btn-hover-color: #0d016b;
   --bs-btn-hover-bg: #fff;
@@ -67,7 +67,6 @@ body {
   --bs-btn-disabled-bg: #0d016b;
   --bs-btn-disabled-border-color: #0d016b;
   transition: all 0.3s ease-in;
-  
 }
 
 .btn-outline-primary {
@@ -116,6 +115,10 @@ select {
   border-radius: 8px;
 }
 
+textarea {
+  border: 1px solid rgb(209, 206, 206);
+}
+
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: var(--bs-nav-pills-link-active-color);
@@ -133,6 +136,20 @@ select {
   /* letter-spacing: 2px; */
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   display: none;
- }
+}
+
+div::-webkit-scrollbar {
+  width: 0px;
+}
+
+.toast-success {
+  background-color: #130969;
+}
+
+@media (max-width: 768px) {
+  select {
+    width: 100%;
+  }
+}

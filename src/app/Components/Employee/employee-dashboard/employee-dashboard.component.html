@@ -5,7 +5,7 @@
     (click)="toggleCollapse()"
   >
     <div class="logo-container">
-      <button class="logo">{{ this.name ? this.name.charAt(0) : "U" }}</button>
+      <button class="logo" routerLink="employee-dashboard">{{ this.name ? this.name.charAt(0) : "U" }}</button>
       <div class="logo-text" *ngIf="collapsed">{{ this.name }}</div>
       <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
         <i class="fal fa-times close-icon"></i>

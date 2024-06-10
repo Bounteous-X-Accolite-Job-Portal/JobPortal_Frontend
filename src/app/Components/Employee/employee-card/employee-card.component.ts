@@ -30,7 +30,7 @@ export class EmployeeCardComponent {
   ){}
   
   ngOnInit(){
-    console.log("loaded : ",this.Employee);
+    // console.log("loaded : ",this.Employee);
     this.getDesignationByDesignationId(this.Employee.designationId);
   }
  
