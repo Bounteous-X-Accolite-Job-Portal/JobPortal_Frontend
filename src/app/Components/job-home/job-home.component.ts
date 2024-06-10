@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
 import { JobCardComponent } from '../job-card/job-card.component';
 import { JobService } from '../../Services/Job/job.service';
 import { JobType } from '../../Models/JobTypeResponse/JobType';
@@ -58,7 +58,8 @@ export class JobHomeComponent {
     private closedJobService: ClosedJobServiceService,
     private spinnerService: SpinnerService,
     private store: UserStoreService,
-    private authService: AuthService
+    private authService: AuthService,
+    private elementRef: ElementRef
   ) {
     this.checkUser();
     this.checkHasPrivilege();
@@ -403,4 +404,16 @@ export class JobHomeComponent {
         this.categoryjobPositions.push(pos);
     });
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    const close = this.elementRef.nativeElement.querySelector('.btn-close');
+    const specificWidth = 768; 
+    const windowWidth = window.innerWidth;
+
+    if ( close && windowWidth >= specificWidth) {
+      close.click();
+    }
+  }
+
 }

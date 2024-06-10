@@ -23,7 +23,7 @@ export const sideBarData = [
   {
     routeLink: 'referral',
     icon: 'fal fa-solid fa-handshake',
-    label: 'Referal',
+    label: 'Referral',
     requiredPrivilege: false,
     requiredSpecialPrivilege: false,
   },
@@ -64,7 +64,7 @@ export const sideBarData = [
   },
   {
     routeLink: 'settings',
-    icon: 'fal fa-cog',
+    icon: 'fa-solid fa-cog',
     label: 'Settings',
     requiredPrivilege: true,
     requiredSpecialPrivilege: false,
