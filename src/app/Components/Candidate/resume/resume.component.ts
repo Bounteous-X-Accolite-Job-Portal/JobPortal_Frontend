@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { HttpClient } from '@angular/common/http';
-import { error } from 'console';
+import { Console, error } from 'console';
 
 @Component({
   selector: 'app-resume',
@@ -34,6 +34,7 @@ export class ResumeComponent {
   uploading = false;
   uploadComplete = false;
   cldResponse: any;
+  temp : string = "";
   // productImageUrl: string | undefined;
   @Output() close = new EventEmitter<void>();
 
@@ -149,6 +150,7 @@ export class ResumeComponent {
   handleFileChange(event: any): void {
     this.file = event.target.files[0];
   }
+
   async uploadFile(): Promise<void> {
     if (!this.file) {
       return;
@@ -194,14 +196,16 @@ export class ResumeComponent {
           this.uploadComplete = true;
           this.uploading = false;
           this.cldResponse = response;
-          this.toastr.success('File uploaded', undefined, { timeOut: 5000 });
-          console.log(this.cldResponse.url);
-          this.userResume.resumeUrl = this.cldResponse.url;
-          this.resumeUrl = this.cldResponse.url;
-          this.urlSafe = this.cldResponse.url;
-          // this.resumeForm = this.cldResponse.url;
+          // console.log(this.cldResponse.url);
+          //  console.log((this.cldResponse.url))
+          this.temp = this.cldResponse.url;
+          this.temp = this.temp.replace("http://", "https://");
+          
+          this.userResume.resumeUrl = this.temp;
+          this.resumeUrl = this.temp;
+          this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.temp);
           this.add();
-          // this.update();
+          this.toastr.success('File uploaded', undefined, { timeOut: 5000 });
         }
       } catch (error) {
         this.toastr.error('Error uploading', undefined, { timeOut: 5000 });
@@ -216,5 +220,8 @@ export class ResumeComponent {
     return `uqid-${Date.now()}`;
   }
 
+  safe() {
+    return this.sanitizer.bypassSecurityTrustUrl(this.temp);
+  }
 
 }
