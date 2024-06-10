@@ -3,7 +3,7 @@
 <!-- Navbar -->
 <!-- Container wrapper -->
 <nav
-  class="navbar navbar-expand-lg navbar-light bg-body-secondary shadow-lg p-3 bg-white rounded"
+  class="navbar navbar-expand-lg bg-body-secondary shadow-lg p-3 bg-white rounded"
 >
   <div class="container-fluid">
     <a class="navbar-brand me-2" [routerLink]="['/']" target="_self">
@@ -17,24 +17,17 @@
       />
     </a>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarButtonsExample"
-      aria-controls="navbarButtonsExample"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div
       class="collapse navbar-collapse justify-content-between"
       id="navbarButtonsExample"
     >
       <div class="d-flex align-items-center justify-content-start">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li *ngIf="isLoggedIn" class="nav-item" (click)="checkEmployee()">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+          <li
+            *ngIf="isLoggedIn"
+            class="nav-item ms-2"
+            (click)="checkEmployee()"
+          >
             <a
               *ngIf="isEmployee"
               class="nav-link"
@@ -45,10 +38,10 @@
               >Profile</a
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item ms-2">
             <a class="nav-link" [routerLink]="['/jobs']">Jobs</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item ms-2">
             <a class="nav-link" [routerLink]="['/about']">About</a>
           </li>
         </ul>
@@ -87,7 +80,89 @@
         </div>
       </div>
     </div>
+    <div id="filterRight">
+      <button
+        class="navbar-toggler hamburger"
+        type="button"
+        (click)="togglePopover()"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div
+      class="popover"
+      *ngIf="isPopoverVisible"
+      (click)="togglePopover()"
+    >
+      
+      <div class="d-flex align-items-center bg-light">
+        <ul class="navbar-nav me-auto mb-lg-0 ms-4">
+          <li
+            *ngIf="isLoggedIn"
+            class="nav-item ms-2"
+            (click)="checkEmployee()"
+          >
+            <a
+              *ngIf="isEmployee"
+              class="nav-link"
+              [routerLink]="['/employee-dashboard']"
+              >Dashboard</a
+            >
+            <a *ngIf="!isEmployee" class="nav-link" [routerLink]="['/profile']"
+              >Profile</a
+            >
+          </li>
+          <li class="nav-item ms-2">
+            <a class="nav-link" [routerLink]="['/jobs']">Jobs</a>
+          </li>
+          <li class="nav-item ms-2">
+            <a class="nav-link" [routerLink]="['/about']">About</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div
+          *ngIf="!isLoggedIn"
+          class="d-flex flex-column aligh-items-center ms-4"
+        >
+          <a [routerLink]="['/login']">
+            <button
+              type="button"
+              class="btn btn-outline-primary px-3 mt-2 text-style-login"
+              style="font-weight: bold"
+            >
+              Login
+            </button>
+          </a>
+          <a [routerLink]="['/register']">
+            <button
+              type="button"
+              style="font-weight: 700"
+              class="btn btn-primary-1 px-3 mt-2 text-style-register"
+            >
+              Register
+            </button>
+          </a>
+        </div>
+        <div
+          *ngIf="isLoggedIn"
+          class="d-flex flex-column aligh-items-center ms-4"
+        >
+          <a (click)="logout()">
+            <button
+              type="button"
+              class="btn btn-outline-primary px-3 me-2 text-style-login"
+              style="font-weight: bold"
+            >
+              Logout
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
+
 </nav>
+
 
 <router-outlet></router-outlet>

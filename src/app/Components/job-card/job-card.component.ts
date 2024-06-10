@@ -54,7 +54,7 @@ export class JobCardComponent {
 
   ngOnInit(): void {
     this.spinnerService.showSpinner();
-    console.log("job details", this.job);
+    // console.log('job details', this.job);
 
     this.loadJobDetails();
 
@@ -129,7 +129,7 @@ export class JobCardComponent {
 
         this.spinnerService.hideSpinner();
 
-        console.log(this.job);
+        // console.log(this.job);
       },
       (error) => {
         console.log(error);
@@ -145,26 +145,27 @@ export class JobCardComponent {
       let date = this.job.lastDate.split('T');
       this.job.lastDate = date[0];
     }
+    if (this.closedJob !== undefined) {
+      let date = this.closedJob.lastDate.split('T');
+      this.closedJob.lastDate = date[0];
+    }
 
     this.spinnerService.hideSpinner();
   }
 
   public disableJob(): void {
     var response = confirm('Do you want to disable this job ? ');
-    if (response) 
-    {
+    if (response) {
       this.jobService.disableJob(this.job.jobId).subscribe(
         (res) => {
-          console.log(res);
+          // console.log(res);
           this.router.navigate(['jobs']);
         },
         (error) => {
           console.log(error);
         }
-      )
-    } 
-    else
-    {
+      );
+    } else {
       console.log('You Denied to Disable Job !!');
     }
   }

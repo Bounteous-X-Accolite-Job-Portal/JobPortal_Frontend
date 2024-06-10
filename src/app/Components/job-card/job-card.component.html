@@ -33,14 +33,14 @@
             <div class="option">{{jobcategory?.categoryName}}</div>
             <div class="option">{{jobPosition?.positionName}}</div>
         </div>
-        <div class="d-flex" style="flex-direction: row; justify-content: space-between;">
-          <div class="">
+        <div class="d-flex btns-list">
+          <div class="showMore">
             <button class="btn btn-primary-1 " [routerLink]="(job !== undefined ? ['/job-details', job.jobId] : ['/closedJob/job-details/', closedJob.closedJobId])">Click Here for Details..</button>
           </div>
-          <div class="">  
-            <button *ngIf="isEmployee && hasPrivilege" class="btn btn-primary-1 mb-2" [routerLink]="(job !== undefined ? ['/jobs', job.jobId , 'applicants'] : ['/closedJobs', closedJob.closedJobId , 'applicants'])">View Applicants</button>
+          <div class="viewApplicants">  
+            <button *ngIf="isEmployee && hasPrivilege" class="btn btn-primary-1" [routerLink]="(job !== undefined ? ['/jobs', job.jobId , 'applicants'] : ['/closedJobs', closedJob.closedJobId , 'applicants'])">View Applicants</button>
           </div>
-          <span *ngIf="isActive" class="btn btn-danger">
+          <span *ngIf="isActive" class="btn btn-danger dis">
             <a *ngIf="isEmployee && hasPrivilege" (click)="disableJob()">Disable Job </a>
           </span>
           <div class="">

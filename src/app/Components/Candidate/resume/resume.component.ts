@@ -17,7 +17,7 @@ import { error } from 'console';
   standalone: true,
   imports: [RouterLink, CommonModule, ReactiveFormsModule],
   templateUrl: './resume.component.html',
-  styleUrl: './resume.component.css'
+  styleUrl: './resume.component.css',
 })
 export class ResumeComponent {
 
