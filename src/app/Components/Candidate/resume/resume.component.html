@@ -1,30 +1,29 @@
 <!-- Resume exists -->
  <div *ngIf="resumeExists==true" class="cont">
-    <div class="col-lg-8">
-      <div class="feature-item rounded text-center p-4">
-          <i class="fa fa-3x fa-pen-to-square mb-4 feature-icon"></i>
-          <h5 class="mb-3">Update resume link from below</h5>
-          <button type="button" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="false">
-            Update link
-          </button>
-          <p class="my-5 fw-bold">View your resume <a [href]="urlSafe" target="_blank"><i class="fa fa-arrow-up-right-from-square mx-2 feature-icon"></i></a> </p>
+    <div class="col-lg-10">
+      <div class="feature-item rounded text-center p-3 mt-3">
+        <div class="d-flex align-items-center">
+          <div class="fw-bold fs-large me-2">
+            Click here to update resume
+          </div>
+          <div data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="false" style="cursor: pointer;">
+            <i class="fa fa-3x fa-pen-to-square feature-icon"></i>
+          </div>
+        </div>
+        <div class="d-flex">
+          <h2 class="me-3">Resume</h2>
+          <button class="btn" (click)="resToggle()">Show</button>
+        </div>
       </div>
     </div>
-
-  <!-- <div class="d-flex justify-content-center mt-5" style="background-color: aliceblue; width: 60%; height: 75%;">
+  <div class="d-flex justify-content-center my-5" style="background-color: aliceblue; width: 62%; height: 100vh;">
     <embed
       [src]="urlSafe"
-      [type]=""
       width="100%"
       height="100%"
     />
-    <iframe [src]="urlSafe" style="width:100%; height:100%;" frameborder="0" *ngIf="urlSafe"></iframe>
-  </div> -->
-  <!-- <a [href]="urlSafe" target="_blank">
-    <button type="button" class="px-5" aria-expanded="false">
-      View Resume
-    </button>
-  </a> -->
+    <!-- <iframe [src]="urlSafe" style="width:100%; height:100%;" frameborder="2" *ngIf="urlSafe"></iframe> -->
+  </div>
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -37,15 +36,19 @@
           </button>
         </div>
         <div class="modal-body">
-          <form [formGroup]="resumeForm" style="display: flex; flex-direction: column; align-items: center;">
-            <label for="resumeUrl">Enter the new url</label> 
+          <form style="display: flex; flex-direction: column; align-items: center;">
+            <label for="resumeUrl">Upload new file</label> 
             <br> 
-            <input type="url" name="resumeUrl" id="resumeUrl" formControlName="resumeUrl" style="width: 80%;">
+            <input type="file" (change)="handleFileChange($event) "accept=".pdf"  name="resumeUrl" id="resumeUrl"/>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary-1" data-bs-dismiss="modal"  (click)="update()" >Save changes</button>
+          <button (click)="update()" [disabled]="uploading"
+                        class="btn btn-primary-1">
+                        {{ uploading ? 'Uploading...' : 'Upload' }}
+          </button>
+          <!-- <button type="button" class="btn btn-primary-1" data-bs-dismiss="modal"  (click)="update()" >Save changes</button> -->
         </div>
       </div>
     </div>
@@ -80,18 +83,34 @@
 <!-- Resume does not exist -->
  <div *ngIf="resumeExists==false" class="cont">
   <div class="col-lg-8">
-    <div class="feature-item rounded text-center p-4">
+    <div class="feature-item-1 rounded text-center p-4">
         <i class="fa fa-3x fa-plus mb-4 feature-icon"></i>
-        <h5 class="mb-3">Add link here</h5>
-        <button type="button" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="false">
-          Click to add resume
-        </button>
-        <p class="m-3 fw-bold">Please add the link to your resume using the above button</p>
+        <h5 class="mb-3">Please add your resume</h5>
+        <p class="m-3 fw-bold">Drag and drop your resume or use the below button</p>
+        <div class="empty">**PDF format only**</div>
+        <div class="col-lg-8 d-flex justify-content-center">
+          <div class="center">
+            <div class="title">
+              <h1>Drop file to upload</h1>
+            </div>
+        
+            <div class="dropzone">
+              <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" />
+              <input type="file" (change)="handleFileChange($event) "accept=".pdf"  name="resumeUrl" id="resumeUrl" class="upload-input" />
+            </div>  
+            <button (click)="uploadFile()" [disabled]="uploading"
+                                class="btn btn-primary-1">
+                                {{ uploading ? 'Uploading...' : 'Upload' }}
+                  </button>
+        
+          </div>
+        </div>
     </div>
   </div>
-
+  
+</div>
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
@@ -113,4 +132,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
