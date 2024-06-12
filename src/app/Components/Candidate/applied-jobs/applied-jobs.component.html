@@ -1,5 +1,5 @@
-<div class="d-flex gradient-custom-2 justify-content-center flex-wrap" style="padding: 10vh;">
-    <div class="w-75 bg-white rounded p-5 mb-5" style="height: auto;">
+<div class="d-flex gradient-custom-2 justify-content-center flex-wrap my-5 mx-4">
+    <div class="w-100 bg-white rounded p-5 mb-5" style="height: auto;">
       <h2>Active Applications</h2>
       <hr>
       <div *ngIf="candidateJobs.length <= 0">No active applications to show.</div>
@@ -25,7 +25,7 @@
           <div *ngIf="notApplied" ><h2>No jobs applied till now!</h2></div>
       </div>
     </div>
-    <div *ngIf="rejectedApplicationData.length > 0" class="w-75 bg-white rounded p-5" style="height: auto;">
+    <div *ngIf="rejectedApplicationData.length > 0" class="w-100 bg-white rounded p-5" style="height: auto;">
       <h2>Rejected Applications</h2>
       <hr>
       <div class="table-responsive">

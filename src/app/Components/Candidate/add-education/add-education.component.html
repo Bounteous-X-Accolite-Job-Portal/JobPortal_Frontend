@@ -1,73 +1,52 @@
-<div
-  class="d-flex gradient-custom-2 justify-content-center"
-  style="padding: 20vh"
->
-  <div class="w-100 bg-white rounded p-5" style="height: auto">
-    <div><a routerLink=".."><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</a></div>
-    <div class="row w-full my-5 d-flex justify-content-center">
-      <div class="d-flex justify-content-center mb-3">
+<div class="d-flex gradient-custom-2 justify-content-center flex-wrap my-5 mx-4">
+  <div class="w-100 bg-white rounded p-5" style="height: auto; min-height: 70vh;">
+    <div>
+      <a routerLink=".."><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</a>
+    </div>
+    <div class="row w-full d-flex justify-content-center">
+      <div class="d-flex justify-content-center mb-2">
         <h2>Add Education</h2>
       </div>
       <hr />
       <form [formGroup]="addCandidateEducation" (ngSubmit)="addEducation()">
         <div class="form-group mb-3">
-          <label class="mx-2">Institution Name</label>
+          <label class="mb-2 d-block">Institution Name</label>
           <select formControlName="institutionId">
-            <option *ngFor="let inst of Institutions;"[value] = inst.institutionId>
+            <option *ngFor="let inst of Institutions" [value]="inst.institutionId">
               {{ inst.institutionOrSchool }}
             </option>
           </select>
         </div>
 
         <div class="form-group mb-3">
-          <label class="mx-2">Degree Name</label>
+          <label class="mb-2 d-block">Degree Name</label>
           <select formControlName="degreeId">
-            <option *ngFor="let degree of degrees"[value]=degree.degreeId>
+            <option *ngFor="let degree of degrees" [value]="degree.degreeId">
               {{ degree.degreeName }}
             </option>
           </select>
         </div>
 
         <div class="form-group mb-3">
-          <label for="Grade" class="mx-2">Grade</label>
-          <input
-            type="number"
-            class="form-control"
-            id="Grade"
-            placeholder="Enter Grade"
-            formControlName="grade"
-          />
+          <label for="Grade" class="mb-2 d-block">Grade</label>
+          <input type="number" class="form-control" id="Grade" placeholder="Enter Grade" formControlName="grade" />
         </div>
 
         <div class="row">
           <div class="col form-group mb-3">
             <label for="StartYear">Start Year</label>
-            <input
-              type="number"
-              class="form-control"
-              id="StartYear"
-              placeholder="Enter Start Year"
-              formControlName="startYear"
-            />
+            <input type="number" class="form-control" id="StartYear" placeholder="Enter Start Year"
+              formControlName="startYear" />
           </div>
 
           <div class="col form-group mb-3">
             <label for="EndYear">End Year</label>
-            <input
-              type="number"
-              class="form-control"
-              id="EndYear"
-              placeholder="Enter End Year"
-              formControlName="endYear"
-            />
+            <input type="number" class="form-control" id="EndYear" placeholder="Enter End Year"
+              formControlName="endYear" />
           </div>
         </div>
 
-        <button
-          type="submit"
-          class="btn btn-primary w-100"
-          [disabled]="!addCandidateEducation.valid"
-        >
+        <button type="submit" class="btn btn-primary w-100" [disabled]="!addCandidateEducation.valid">
           ADD
         </button>
       </form>
