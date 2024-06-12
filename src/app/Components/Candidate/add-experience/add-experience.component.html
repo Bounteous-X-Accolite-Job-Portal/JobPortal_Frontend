@@ -1,8 +1,5 @@
-<div
-  class="d-flex gradient-custom-2"
-  style="padding: 10vh"
-  >
-  <div class="w-100 bg-white rounded p-5" style="height: auto">
+<div class="d-flex gradient-custom-2 flex-wrap my-5 mx-4">
+  <div class="w-100 bg-white rounded" style="height: auto; min-height: 70vh;">
     <div><a routerLink=".."><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</a></div>
     <div class="row w-full d-flex justify-content-center">
       <div class="d-flex justify-content-center mb-3">
@@ -11,13 +8,8 @@
       <form [formGroup]="candidateExperience" (ngSubmit)="displayinfo()">
         <div class="form-group mb-3">
           <label for="experienceTitle">Job Title</label>
-          <input
-            type="text"
-            class="form-control"
-            id="experienceTitle"
-            placeholder="Add Title"
-            formControlName="experienceTitle"
-          />
+          <input type="text" class="form-control" id="experienceTitle" placeholder="Add Title"
+            formControlName="experienceTitle" />
         </div>
 
         <div class="form-group mb-3">
@@ -33,41 +25,28 @@
         <div class="form-group mb-3">
           <div>
             <label for="description" class="me-3">Description</label>
-            <textarea placeholder="Enter Job Description: " formControlName="description" class="w-100 rounded"></textarea>
+            <textarea placeholder="Enter Job Description: " formControlName="description"
+              class="w-100 rounded"></textarea>
           </div>
         </div>
 
         <div class="row">
           <div class="col form-group mb-3">
             <label for="startDate">Start Date</label>
-            <input
-              type="date"
-              class="form-control"
-              id="startDate"
-              placeholder="Enter Start Date"
-              formControlName="startDate"
-            />
+            <input type="date" class="form-control" id="startDate" placeholder="Enter Start Date"
+              formControlName="startDate" />
           </div>
 
           <div class="form-group mb-3">
             <label for="isCurrentlyWorking" class="me-3">Currently Working</label>
-            <input
-              [(ngModel)]="isWorking"
-              type="checkbox"
-              class="form-check-input"
-              formControlName="isCurrentlyWorking"
-            />
+            <input [(ngModel)]="isWorking" type="checkbox" class="form-check-input"
+              formControlName="isCurrentlyWorking" />
           </div>
 
-          <div class="col form-group mb-3" *ngIf = "!isWorking">
+          <div class="col form-group mb-3" *ngIf="!isWorking">
             <label for="endYear">End Date</label>
-            <input
-              type="date"
-              class="form-control"
-              id="endDate"
-              placeholder="Enter End Date"
-              formControlName="endDate"
-            />
+            <input type="date" class="form-control" id="endDate" placeholder="Enter End Date"
+              formControlName="endDate" />
           </div>
         </div>
 

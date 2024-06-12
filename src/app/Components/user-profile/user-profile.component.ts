@@ -42,7 +42,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     closeSidenav() {
-      this.collapsed = false;
+      this.collapsed = true;
     }
     toggleCollapse() {
       this.collapsed = !this.collapsed;
