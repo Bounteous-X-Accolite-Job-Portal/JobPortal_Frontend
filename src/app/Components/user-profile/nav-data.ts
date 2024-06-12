@@ -5,6 +5,11 @@ export const navbarData = [
     label: 'Personal Info',
   },
   {
+    routeLink: 'applied-jobs',
+    icon: 'fa-solid fa-bars-staggered',
+    label: 'Jobs Applied',
+  },
+  {
     routeLink: 'edu',
     icon: 'fa-solid fa-book',
     label: 'Education',
@@ -33,10 +38,5 @@ export const navbarData = [
     routeLink: 'changePassword',
     icon: 'fa-solid fa-key',
     label: 'Change Password',
-  },
-  {
-    routeLink: 'applied-jobs',
-    icon: 'fal fa-envelope',
-    label: 'Jobs Applied',
   },
 ];

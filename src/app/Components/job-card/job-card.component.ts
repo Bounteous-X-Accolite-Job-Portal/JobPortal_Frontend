@@ -156,13 +156,18 @@ export class JobCardComponent {
   public disableJob(): void {
     var response = confirm('Do you want to disable this job ? ');
     if (response) {
+      this.spinnerService.showSpinner();
       this.jobService.disableJob(this.job.jobId).subscribe(
         (res) => {
           // console.log(res);
+          this.spinnerService.hideSpinner();
           this.router.navigate(['jobs']);
+          
         },
         (error) => {
           console.log(error);
+          this.spinnerService.hideSpinner();
+          
         }
       );
     } else {

@@ -82,6 +82,23 @@ export class JobdetailsComponent {
     this.loadJobDetails();
   }
 
+  private rectifyDate(): void {
+    this.spinnerService.showSpinner();
+
+    if (this.job !== undefined) {
+      let date = this.job.lastDate.split('T');
+      let postDate = this.job.postDate.split('T');
+      this.job.lastDate = date[0];
+      this.job.postDate = postDate[0];  
+    }
+    if (this.closedJob !== undefined) {
+      let date = this.closedJob.lastDate.split('T');
+      this.closedJob.lastDate = date[0];
+    }
+
+    this.spinnerService.hideSpinner();
+  }
+
   getJobId() {
     this.spinnerService.showSpinner();
 
@@ -121,6 +138,8 @@ export class JobdetailsComponent {
           this.loadcheckCandidateApplicable();
         }
 
+        this.rectifyDate();
+        
         this.spinnerService.hideSpinner();
       });
     }
