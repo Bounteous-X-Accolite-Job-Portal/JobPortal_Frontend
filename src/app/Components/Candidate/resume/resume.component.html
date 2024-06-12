@@ -12,12 +12,9 @@
         </div>
         <div class="d-flex">
           <h2 class="me-3">Resume</h2>
-          <!-- <button class="btn" (click)="resToggle()">Show</button> -->
         </div>
       </div>
     </div>
-    <!-- <div>{{temp}}</div> -->
-    <!-- <div>{{urlSafe}}</div> -->
   <div class="d-flex justify-content-center my-5" style="background-color: aliceblue; width: 62%; height: 100vh;">
     <embed
       [src]="urlSafe"
@@ -97,8 +94,9 @@
             </div>
         
             <div class="dropzone">
-              <img src="https://100dayscss.com/codepen/upload.svg" class="upload-icon" />
-              <input type="file" (change)="handleFileChange($event) "accept=".pdf"  name="resumeUrl" id="resumeUrl" class="upload-input" />
+              <img *ngIf="!fileSelected" src="https://100dayscss.com/codepen/upload.svg" class="upload-icon" />
+              <img *ngIf="fileSelected" src="../../../../assets/Images/pdf.png" class="upload-icon"/>
+              <input type="file" (change)="handleFileChange($event)" accept=".pdf"  name="resumeUrl" id="resumeUrl" class="upload-input" />
             </div>  
             <button (click)="uploadFile()" [disabled]="uploading"
                                 class="btn btn-primary-1">
