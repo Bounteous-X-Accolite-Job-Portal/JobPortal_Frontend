@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
     public isRequired :boolean = true;
 
    
-  value: any;
+    value: any;
     id:string = "";
     public name : string = "User";
 
@@ -42,7 +42,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     closeSidenav() {
-      this.collapsed = false;
+      this.collapsed = true;
     }
     toggleCollapse() {
       this.collapsed = !this.collapsed;

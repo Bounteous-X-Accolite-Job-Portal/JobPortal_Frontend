@@ -149,57 +149,72 @@ export class JobHomeComponent {
   }
 
   private loadJobLocations(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllJobLocations().subscribe(
       (res) => {
         this.locations = res.allJobLocations;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
+        this.spinnerService.hideSpinner();
         console.error('Error loading job locations:', error);
       }
     );
   }
 
   private loadJobTypes(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllJobTypes().subscribe(
       (res) => {
         this.jobTypes = res.allJobTypes;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading job types:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
   private loadJobCategories(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
         this.jobCategories = res.allJobCategory;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading job categories:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
   private loadJobPositions(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllJobPosition().subscribe(
       (res) => {
         this.jobPositions = res.allJobPositions;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading job Positions:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
   private loadJobs(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllJobs().subscribe(
       (res) => {
         this.jobs = res.allJobs;
         this.Filterjobs = this.jobs;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading Jobs', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
@@ -209,12 +224,15 @@ export class JobHomeComponent {
   }
 
   private loadDegrees(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllDegrees().subscribe(
       (res) => {
         this.degrees = res.degrees;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading Degrees:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
