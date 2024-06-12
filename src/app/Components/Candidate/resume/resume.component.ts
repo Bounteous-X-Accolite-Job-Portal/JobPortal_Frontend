@@ -6,11 +6,10 @@ import { UserStoreService } from '../../../Services/user-store.service';
 import { AuthService } from '../../../Services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { ResumeServiceService } from '../../../Services/ResumeService/resume-service.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { HttpClient } from '@angular/common/http';
-import { Console, error } from 'console';
 
 @Component({
   selector: 'app-resume',
@@ -24,7 +23,6 @@ export class ResumeComponent {
   userId: string = "";
   resumeExists: boolean = false;
   msg: string = "";
-  // resumeForm!: FormGroup;
   userResume!: Resume;
   showRes:boolean=false;
 
@@ -35,7 +33,7 @@ export class ResumeComponent {
   uploadComplete = false;
   cldResponse: any;
   temp : string = "";
-  // productImageUrl: string | undefined;
+  fileSelected: boolean =false;
   @Output() close = new EventEmitter<void>();
 
 
@@ -44,7 +42,6 @@ export class ResumeComponent {
     private userStore: UserStoreService,
     private auth: AuthService,
     private toastr: ToastrService,
-    // private fb: FormBuilder,
     private sanitizer: DomSanitizer,
     private spinner: SpinnerService,
     private http: HttpClient
@@ -60,11 +57,6 @@ export class ResumeComponent {
         this.userId = val || idFromToken;
         // console.log("Logged User Id : ",this.userId);
       })
-
-
-    // this.resumeForm = this.fb.group({
-    //   resumeUrl:['']
-    // });
 
     this.getFunction();
   }
@@ -109,7 +101,6 @@ export class ResumeComponent {
 
 
   add() {
-    // console.log(this.resumeForm.value);
     this.resumeService.addResumeByCandidateId(this.resumeUrl).subscribe(
       (res) => {
         console.log(res);
@@ -125,8 +116,6 @@ export class ResumeComponent {
 
 
   update() {
-    // this.userResume.resumeUrl=this.resumeForm.value;
-    // console.log(this.resumeForm.value);
     this.resumeService.removeResumeByResumeId(this.userResume.resumeId).subscribe(
       (res) => {
         console.log(res);
@@ -149,6 +138,7 @@ export class ResumeComponent {
 
   handleFileChange(event: any): void {
     this.file = event.target.files[0];
+    this.fileSelected = true;
   }
 
   async uploadFile(): Promise<void> {
