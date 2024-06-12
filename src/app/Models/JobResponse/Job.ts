@@ -11,5 +11,5 @@ export interface Job{
     lastDate: string;
     locationId : string;
     positionId : string;
-    postDate:Date;
+    postDate: string;
 }
