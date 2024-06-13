@@ -46,7 +46,7 @@
           >
             <option value="">Select Job Location</option>
             <option *ngFor="let loc of locations" [value]="loc.locationId">
-              {{ loc.address }} {{ loc.city }} {{ loc.state }} {{ loc.country }}
+              {{ loc.city }} {{ loc.state }} {{ loc.country }}
             </option>
           </select>
         </div>
@@ -248,8 +248,7 @@
               >
                 <option value="">Select Job Location</option>
                 <option *ngFor="let loc of locations" [value]="loc.locationId">
-                  {{ loc.address }} {{ loc.city }} {{ loc.state }}
-                  {{ loc.country }}
+                  {{ loc.city }} {{ loc.state }} {{ loc.country }}
                 </option>
               </select>
             </div>
