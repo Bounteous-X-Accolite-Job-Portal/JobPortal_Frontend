@@ -88,8 +88,9 @@ h1 {
 	text-align: center;
 }
 
-.upload-icon {
-	margin: 25px 2px 2px 2px;
+.upload-icon{
+	margin: 20px 2px 20px 2px;
+	height: 45px;
 }
 
 .upload-input {

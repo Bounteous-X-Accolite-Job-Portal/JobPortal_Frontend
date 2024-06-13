@@ -1,19 +1,68 @@
 .gradient-custom-2 {
     /* fallback for old browsers */
     background: #fbc2eb;
-    
+
     /* Chrome 10-25, Safari 5.1-6 */
     background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
-    
+
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
 }
 
-input{
+input {
     border-style: none;
     background-color: #f8f9fa;
 }
 
-.btns{
-    margin-top: 10px;
+.img-thumbnail {
+    width: 80px;
+    z-index: 1;
+    height: 80px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 55%;
 }
+
+.profile-header {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+
+.profile-block {
+    display: flex;
+    background-color: #0a0156;
+    height: 150px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.edit-button{
+    z-index: 1; 
+    color: #000;
+    background-color: white; 
+    margin-right: 2rem;
+}
+
+@media (max-width: 481px) {
+    .profile-block {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 767px) {
+    .img-thumbnail {
+        display: none;
+    }
+}
+
+/* Media Query for low resolution  Tablets, Ipads */
+/* @media (min-width: 481px) and (max-width: 767px) {
+    body {
+        background-color: yellow;
+    }
+} */

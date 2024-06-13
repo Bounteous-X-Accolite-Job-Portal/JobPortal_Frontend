@@ -21,8 +21,7 @@ import { HttpClient } from '@angular/common/http';
 export class ResumeComponent {
   userId: string = '';
   resumeExists: boolean = false;
-  msg: string = '';
-  // resumeForm!: FormGroup;
+  msg: string = "";
   userResume!: Resume;
   showRes: boolean = false;
 
@@ -32,8 +31,8 @@ export class ResumeComponent {
   uploading = false;
   uploadComplete = false;
   cldResponse: any;
-  temp: string = '';
-  // productImageUrl: string | undefined;
+  temp : string = "";
+  fileSelected: boolean =false;
   @Output() close = new EventEmitter<void>();
 
   constructor(
@@ -41,24 +40,20 @@ export class ResumeComponent {
     private userStore: UserStoreService,
     private auth: AuthService,
     private toastr: ToastrService,
-    // private fb: FormBuilder,
     private sanitizer: DomSanitizer,
     private spinner: SpinnerService,
     private http: HttpClient
   ) {}
 
   ngOnInit(): void {
-    this.userStore.getIdFromStore().subscribe((val) => {
-      // console.log(val);
-      let idFromToken = this.auth.getIdFromToken();
-      // console.log(idFromToken);
-      this.userId = val || idFromToken;
-      // console.log("Logged User Id : ",this.userId);
-    });
-
-    // this.resumeForm = this.fb.group({
-    //   resumeUrl:['']
-    // });
+    this.userStore.getIdFromStore()
+      .subscribe((val) => {
+        // console.log(val);
+        let idFromToken = this.auth.getIdFromToken();
+        // console.log(idFromToken);
+        this.userId = val || idFromToken;
+        // console.log("Logged User Id : ",this.userId);
+      })
 
     this.getFunction();
   }
@@ -104,7 +99,6 @@ export class ResumeComponent {
   }
 
   add() {
-    // console.log(this.resumeForm.value);
     this.resumeService.addResumeByCandidateId(this.resumeUrl).subscribe(
       (res) => {
         console.log(res);
@@ -119,13 +113,9 @@ export class ResumeComponent {
   }
 
   update() {
-    // this.userResume.resumeUrl=this.resumeForm.value;
-    // console.log(this.resumeForm.value);
-    this.resumeService
-      .removeResumeByResumeId(this.userResume.resumeId)
-      .subscribe(
-        (res) => {
-          console.log(res);
+    this.resumeService.removeResumeByResumeId(this.userResume.resumeId).subscribe(
+      (res) => {
+        console.log(res);
 
           if (res.status === 200) {
             this.uploadFile();
@@ -144,6 +134,7 @@ export class ResumeComponent {
 
   handleFileChange(event: any): void {
     this.file = event.target.files[0];
+    this.fileSelected = true;
   }
 
   async uploadFile(): Promise<void> {
