@@ -49,7 +49,7 @@ export class AddEmployeeComponent implements OnInit {
     this.addEmployeeForm = new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl('', [
         Validators.required,
         Validators.minLength(10),

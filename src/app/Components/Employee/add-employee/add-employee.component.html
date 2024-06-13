@@ -6,7 +6,7 @@
       [formGroup]="addEmployeeForm"
       (ngSubmit)="onSubmit()"
     >
-      <div class="row">
+      <div class="formdiv row">
         <div class="mb-3 col">
           <label class="form-label">First Name</label>
           <input
@@ -44,7 +44,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="formdiv row">
         <div class="mb-3 col">
           <label class="form-label">Email</label>
           <input
@@ -52,13 +52,19 @@
             placeholder="Email"
             formControlName="email"
             class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
           />
-          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+          <!-- <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">a -->
+            <small
+            *ngIf="
+              f['email'].invalid &&
+              (f['email'].dirty || f['email'].touched)
+            "
+            class="block p-error"
+          >
             <div *ngIf="f['email'].errors?.['required']">Email is required</div>
             <div *ngIf="f['email'].errors?.['email']">Email is invalid</div>
+            </small>
           </div>
-        </div>
 
         <div class="mb-3 col">
           <label class="form-label">Phone Number</label>
@@ -70,13 +76,20 @@
             [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }"
             pattern="[0-9]{10}"
           />
-          <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+          <small
+            *ngIf="
+              f['phone'].invalid &&
+              (f['phone'].dirty || f['phone'].touched)
+            "
+            class="block p-error"
+          >
             <div *ngIf="f['phone'].errors?.['required']">Phone number is required</div>
-            <div *ngIf="f['phone'].errors?.['phone']">Phone number is invalid</div>
-          </div>
+            <div *ngIf="f['phone'].errors?.['minlength']">Minimum length is 10</div>
+            <div *ngIf="f['phone'].errors?.['maxlength']">Minimum length is 10</div>
+        </small>
         </div>
       </div>
-      <div class="row">
+      <div class="formdiv row">
         <div class="mb-3 col">
           <label class="form-label">Employee Id</label>
           <input
@@ -86,17 +99,24 @@
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f['empId'].errors }"
           />
-          <div *ngIf="submitted && f['empId'].errors" class="invalid-feedback">
+          <small
+            *ngIf="
+              f['empId'].invalid &&
+              (f['empId'].dirty || f['empId'].touched)
+            "
+            class="block p-error"
+          >
             <div *ngIf="f['empId'].errors?.['required']">
               Employee Id is required
             </div>
-          </div>
+          </small>
         </div>
         
         <div class="mb-3 col">
           <label class="form-label">Designation Id</label><br />
+          
           <select formControlName="designationId" style="width: 100%;">
-            <option value="">Select employee designation</option>
+            <option value="" disabled selected>Select employee designation</option>
             <option
               *ngFor="let designation of allDesignations"
               [value]="designation.designationId"
@@ -104,11 +124,22 @@
               {{ designation.designationName }}
             </option>
           </select>
+          <small
+            *ngIf="
+              f['designationId'].invalid &&
+              (f['designationId'].dirty || f['designationId'].touched)
+            "
+            class="block p-error"
+          >
+          <div *ngIf="f['designationId'].errors?.['required']">
+            Designation is required
+          </div>
+          </small>
         </div>
       </div>
     
       <div class="mb-3" style="float: right;">
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" [disabled]="addEmployeeForm.invalid">
           Add Employee
         </button>
       </div>

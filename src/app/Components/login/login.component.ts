@@ -39,8 +39,7 @@ export class LoginComponent {
     private userStore: UserStoreService,
     private spinnerService: SpinnerService,
     private forgetService: ChangePasswordService,
-    private toaster: ToastrService,
-
+    private toaster: ToastrService
   ) {}
 
   loginForm = this.fb.group({
@@ -50,13 +49,15 @@ export class LoginComponent {
       [
         Validators.required,
         Validators.minLength(6),
-        Validators.pattern('^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$'),
+        Validators.pattern(
+          '^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$'
+        ),
       ],
     ],
     rememberMe: [true],
   });
 
-  emailForm : any = this.fb.group({
+  emailForm: any = this.fb.group({
     resetEmail: [' ', [Validators.required, Validators.email]],
   });
 
@@ -96,7 +97,10 @@ export class LoginComponent {
 
             // console.log('CheckIsEmployee', tokenPayload['IsEmployee']);
 
-            if (tokenPayload['IsEmployee']) {
+            if (
+              this.userStore.checkIsEmployeeFromStore() ||
+              tokenPayload['IsEmployee']
+            ) {
               this.router.navigate(['/employee-dashboard']);
               this.authService.AuthEvent.emit(true);
             } else {
@@ -113,7 +117,7 @@ export class LoginComponent {
         (error: any) => {
           // console.log('hide spinner');
           this.spinnerService.hideSpinner();
-          this.toast.error("Could not login");
+          this.toast.error('Could not login');
           // console.log(error);
         }
       );
@@ -131,10 +135,12 @@ export class LoginComponent {
   //   return this.isValidEmail;
   // }
 
-  confirmToSend() { 
-      this.spinnerService.showSpinner();
-      console.log(this.emailForm.get('resetEmail').value);
-      this.forgetService.sendForgetPasswordLink(this.emailForm.get('resetEmail').value).subscribe({
+  confirmToSend() {
+    this.spinnerService.showSpinner();
+    console.log(this.emailForm.get('resetEmail').value);
+    this.forgetService
+      .sendForgetPasswordLink(this.emailForm.get('resetEmail').value)
+      .subscribe({
         next: (res: any) => {
           console.log(res);
           this.emailForm.reset();
@@ -144,11 +150,10 @@ export class LoginComponent {
         },
         error: (err: any) => {
           this.spinnerService.hideSpinner();
-            this.emailForm.reset();
-            document.getElementById('closeBtn')?.click();
-            this.toaster.error('Sorry! This email is not registered with us!' );
+          this.emailForm.reset();
+          document.getElementById('closeBtn')?.click();
+          this.toaster.error('Sorry! This email is not registered with us!');
           // }
-          
         },
       });
     // }
