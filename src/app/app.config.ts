@@ -18,8 +18,10 @@ export const appConfig: ApplicationConfig = {
     PermissionService,
     provideHttpClient(withInterceptors([tokenInterceptor])),
     provideAnimationsAsync(),
-    ReactiveFormsModule // Include ReactiveFormsModule here
-    ,
-    provideToastr()
+    ReactiveFormsModule, // Include ReactiveFormsModule here,
+    provideToastr({
+      timeOut: 5000,
+      closeButton: true,
+    })
   ]
 };
