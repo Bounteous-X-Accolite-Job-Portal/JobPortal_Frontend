@@ -30,12 +30,13 @@
       </a>
     </li>
   </ul>
+
+  <!-- Search bar -->
   <div class="d-flex flex-row mb-2 emp-card">
     <div class="d-flex justify-content-center align-items-center text-white search-bar">
       <i class="fa fa-search" aria-hidden="true"></i>
     </div>
     <div class="d-flex justify-content-center align-items-center col px-3">
-      <label for="search-text" hidden>Search for the interviewer</label>
       <input
         type="search"
         [(ngModel)]="searchText"
@@ -48,8 +49,10 @@
       />
     </div>
   </div>
+  
+  <!-- Card block -->
   <div class="mt-4 d-flex justify-content-center">
-    <div *ngIf="ActiveEmployeesToggle">
+    <div *ngIf="ActiveEmployeesToggle" class="activeEmp">
       <div *ngIf="showActiveEmployees.length == 0">
         You don't have any active employee.
       </div>
