@@ -16,14 +16,14 @@
         </div>
         <div class="card-body">
          
-          <span class="card-text">{{ (referral.job !== undefined && referral.job !== null) ?  referral.job.jobCode : referral.closedJob?.jobCode }} :  <i>{{ (referral.job !== undefined && referral.job !== null) ?  referral.job.jobTitle : referral.closedJob?.jobCode }}</i></span>
+          <span class="card-text"><strong>Job Code</strong> :  <i>{{ (referral.job !== undefined && referral.job !== null) ?  referral.job.jobTitle : referral.closedJob?.jobCode }}</i></span>
           
-          <span class="card-text btn btn-warning float-end">Status: {{ referral.statusData.statusName }}</span>
+          <span class="card-text btn btn-warning float-end"><strong>Status : </strong> {{ referral.statusData.statusName }}</span>
            
-          <p *ngIf="(referral.job !== undefined && referral.job !== null)" class="card-title">Job description - {{referral.job.jobDescription | slice:0:100}}
+          <p *ngIf="(referral.job !== undefined && referral.job !== null)" class="card-title"><strong> Job description -</strong>{{referral.job.jobDescription | slice:0:100}}
             <a [routerLink]="['/job-details', referral.job.jobId]" routerLinkActive="router-link-active"  *ngIf="referral.job.jobDescription.length > 100">...show more</a>
           </p>
-          <p *ngIf="(referral.closedJob !== undefined && referral.closedJob !== null)" class="card-title">Job description - {{referral.closedJob.jobDescription| slice:0:100}}
+          <p *ngIf="(referral.closedJob !== undefined && referral.closedJob !== null)" class="card-title"><strong> Job description -</strong> {{referral.closedJob.jobDescription| slice:0:100}}
             <a [routerLink]="['/closedJob/job-details', referral.closedJob.closedJobId]" *ngIf="referral.closedJob.jobDescription.length > 100">...show more</a>
           </p>
         </div>

@@ -2,14 +2,14 @@ export const sideBarData = [
   {
     routeLink: 'add-job',
     icon: 'fa-solid fa-plus',
-    label: 'Add New Job',
+    label: 'Add Job',
     requiredPrivilege: true,
     requiredSpecialPrivilege: false,
   },
   {
     routeLink: 'add-employee',
     icon: 'fa fa-user-plus',
-    label: 'Add New Employee',
+    label: 'Add Employee',
     requiredPrivilege: true,
     requiredSpecialPrivilege: false,
   },
@@ -56,17 +56,17 @@ export const sideBarData = [
     requiredSpecialPrivilege: true,
   },
   {
+    routeLink: 'settings',
+    icon: 'fa-solid fa-database',
+    label: 'Job Details',
+    requiredPrivilege: true,
+    requiredSpecialPrivilege: false,
+  },
+  {
     routeLink: 'change-password',
     icon: 'fas fa-key',
     label: 'Change Password',
     requiredPrivilege: false,
-    requiredSpecialPrivilege: false,
-  },
-  {
-    routeLink: 'settings',
-    icon: 'fa-solid fa-cog',
-    label: 'Settings',
-    requiredPrivilege: true,
     requiredSpecialPrivilege: false,
   },
 ];

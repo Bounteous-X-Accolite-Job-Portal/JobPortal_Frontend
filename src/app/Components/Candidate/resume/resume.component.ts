@@ -19,23 +19,21 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './resume.component.css',
 })
 export class ResumeComponent {
-
-  userId: string = "";
+  userId: string = '';
   resumeExists: boolean = false;
-  msg: string = "";
+  msg: string = '';
   userResume!: Resume;
-  showRes:boolean=false;
+  showRes: boolean = false;
 
-  resumeUrl: string = "";
-  urlSafe: SafeResourceUrl ="";
+  resumeUrl: string = '';
+  urlSafe: SafeResourceUrl = '';
   file: File | null = null;
   uploading = false;
   uploadComplete = false;
   cldResponse: any;
-  temp : string = "";
-  fileSelected: boolean =false;
+  temp: string = '';
+  fileSelected: boolean = false;
   @Output() close = new EventEmitter<void>();
-
 
   constructor(
     private resumeService: ResumeServiceService,
@@ -45,26 +43,23 @@ export class ResumeComponent {
     private sanitizer: DomSanitizer,
     private spinner: SpinnerService,
     private http: HttpClient
-  ) { }
-
+  ) {}
 
   ngOnInit(): void {
-    this.userStore.getIdFromStore()
-      .subscribe((val) => {
-        // console.log(val);
-        let idFromToken = this.auth.getIdFromToken();
-        // console.log(idFromToken);
-        this.userId = val || idFromToken;
-        // console.log("Logged User Id : ",this.userId);
-      })
+    this.userStore.getIdFromStore().subscribe((val) => {
+      // console.log(val);
+      let idFromToken = this.auth.getIdFromToken();
+      // console.log(idFromToken);
+      this.userId = val || idFromToken;
+      // console.log("Logged User Id : ",this.userId);
+    });
 
     this.getFunction();
   }
 
-  resToggle(){
-    this.showRes=!this.showRes;
+  resToggle() {
+    this.showRes = !this.showRes;
   }
-
 
   getFunction() {
     this.spinner.showSpinner();
@@ -73,16 +68,19 @@ export class ResumeComponent {
         console.log(res);
         this.msg = res.message;
         if (res.resume == null) {
-          this.toastr.info("No resume present");
+          this.toastr.info('No resume present');
           this.resumeExists = false;
-          this.userResume = { "resumeUrl": '', "resumeId": '', "candidateId": '' };
-        }
-        else {
+          this.userResume = { resumeUrl: '', resumeId: '', candidateId: '' };
+        } else {
           // this.toastr.success("Resume successfully retrieved");
           this.resumeExists = true;
           this.userResume = res.resume;
           // this.resumeUrl = this.userResume.resumeUrl;
-          this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.userResume.resumeUrl !==undefined ? this.userResume.resumeUrl: "");
+          this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(
+            this.userResume.resumeUrl !== undefined
+              ? this.userResume.resumeUrl
+              : ''
+          );
         }
         this.spinner.hideSpinner();
         // this.resumeForm.get('resumeUrl')?.setValue(this.userResume.resumeUrl || '');
@@ -90,50 +88,58 @@ export class ResumeComponent {
       (error) => {
         this.spinner.hideSpinner();
         console.log(error);
-        this.toastr.error("Error in retrieving resume");
+        this.toastr.error('Error in retrieving resume');
       }
-    )
+    );
   }
 
   onDel() {
     this.resumeExists = !this.resumeExists;
   }
 
-
   add() {
     this.resumeService.addResumeByCandidateId(this.resumeUrl).subscribe(
       (res) => {
         console.log(res);
-        this.toastr.success("Resume link added");
+        this.toastr.success('Resume link added');
         this.ngOnInit();
       },
       (error) => {
-        console.log("Error in adding resume link", error);
-        this.toastr.error("Could not add resume");
+        console.log('Error in adding resume link', error);
+        this.toastr.error('Could not add resume');
       }
     );
   }
 
-
   update() {
-    this.resumeService.removeResumeByResumeId(this.userResume.resumeId).subscribe(
-      (res) => {
-        console.log(res);
+    this.resumeService
+      .removeResumeByResumeId(this.userResume.resumeId)
+      .subscribe(
+        (res) => {
+          console.log(res);
 
-        if(res.status === 200){
-          this.uploadFile();
+          if (res.status === 200) {
+            this.uploadFile()
+              .then(() => {
+                document.getElementById('closedUpload')?.click();
+                this.toastr.success('Resume updated successfully', undefined, {
+                  timeOut: 5000,
+                });
+              })
+              .catch((err) => {
+                console.log('error while uploading data', err);
+              });
+          } else {
+            this.toastr.error(res.message);
+          }
+          // this.add();
+          // this.toastr.success("Resume linked updated successfully");
+        },
+        (error) => {
+          console.log(error);
+          this.toastr.error('Error in updating resume');
         }
-        else{
-          this.toastr.error(res.message);
-        }
-        // this.add();
-        // this.toastr.success("Resume linked updated successfully");
-      },
-      (error) => {
-        console.log(error);
-        this.toastr.error("Error in updating resume")
-      }
-    );
+      );
   }
 
   handleFileChange(event: any): void {
@@ -145,11 +151,13 @@ export class ResumeComponent {
     if (!this.file) {
       return;
     }
+
     const uniqueUploadId = this.generateUniqueUploadId();
     const chunkSize = 5 * 1024 * 1024;
     const totalChunks = Math.ceil(this.file.size / chunkSize);
     let currentChunk = 0;
     this.uploading = true;
+
     const uploadChunk = async (start: number, end: number): Promise<void> => {
       const formData = new FormData();
       formData.append('file', this.file!.slice(start, end));
@@ -157,11 +165,12 @@ export class ResumeComponent {
       formData.append('upload_preset', 'jobPortal_pdf');
       formData.append('folder', 'pdf');
 
-      console.log("file info ", this.file!.slice(start, end));
+      console.log('file info ', this.file!.slice(start, end));
 
       const contentRange = `bytes ${start}-${end - 1}/${this.file!.size}`;
       console.log(
-        `Uploading chunk for uniqueUploadId: ${uniqueUploadId}; start: ${start}, end: ${end - 1
+        `Uploading chunk for uniqueUploadId: ${uniqueUploadId}; start: ${start}, end: ${
+          end - 1
         }`
       );
       try {
@@ -189,23 +198,32 @@ export class ResumeComponent {
           // console.log(this.cldResponse.url);
           //  console.log((this.cldResponse.url))
           this.temp = this.cldResponse.url;
-          this.temp = this.temp.replace("http://", "https://");
-          
+          this.temp = this.temp.replace('http://', 'https://');
+
           this.userResume.resumeUrl = this.temp;
           this.resumeUrl = this.temp;
-          this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.temp);
+          this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(
+            this.temp
+          );
           this.add();
-          this.toastr.success('File uploaded', undefined, { timeOut: 5000 });
         }
       } catch (error) {
         this.toastr.error('Error uploading', undefined, { timeOut: 5000 });
         this.uploading = false;
       }
     };
+
     const start = 0;
     const end = Math.min(chunkSize, this.file.size);
-    uploadChunk(start, end);
+    uploadChunk(start, end)
+      .then(() => {
+        this.toastr.success('File uploaded', undefined, { timeOut: 5000 });
+      })
+      .catch(() => {
+        document.getElementById('closedUpload')?.click();
+      });
   }
+
   generateUniqueUploadId(): string {
     return `uqid-${Date.now()}`;
   }
@@ -213,5 +231,4 @@ export class ResumeComponent {
   safe() {
     return this.sanitizer.bypassSecurityTrustUrl(this.temp);
   }
-
 }
