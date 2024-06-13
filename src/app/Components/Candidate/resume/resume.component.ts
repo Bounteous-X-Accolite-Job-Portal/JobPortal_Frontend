@@ -85,7 +85,6 @@ export class ResumeComponent {
           this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.userResume.resumeUrl !==undefined ? this.userResume.resumeUrl: "");
         }
         this.spinner.hideSpinner();
-        // this.resumeForm.get('resumeUrl')?.setValue(this.userResume.resumeUrl || '');
       },
       (error) => {
         this.spinner.hideSpinner();
