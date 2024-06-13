@@ -3,7 +3,7 @@
     <div class="card-header bg-transparent pt-3 d-flex justify-content-between">
       <div class="top-cont">
         <h2>
-          <b>{{ job?.jobTitle }}</b>
+          <b>{{ job!== undefined ? job.jobTitle : closedJob?.jobTitle }}</b>
         </h2>
         <h5 class="card-body d-inline me-5">
           <i class="fal fa-address-card" aria-hidden="true"></i>
@@ -33,56 +33,62 @@
         </div>
       </div>
     </div>
-    
-    <div class="d-flex flex-row p-4">
-      <!-- <div class=""> -->
-        
-        <div class="d-flex flex-column me-4 col-md-3">
-          <h5 class="card-body">
-            <strong class="d-block">Post Date </strong
-            >{{ job !== undefined ? job.postDate : closedJob?.postDate }}
-          </h5>
-          <h5 class="card-body">
-            <strong  class="d-block">Job Position  </strong
-            >{{ jobPosition?.positionName | uppercase }}
-          </h5>
-          <h5 class="card-body">
-            <strong class="d-block">Job Category  </strong
-            >{{ jobcategory?.categoryName | uppercase }}
-          </h5>
-          <h5 class="card-body">
-            <strong class="d-block">Last Date  </strong
-            >{{ job !== undefined ? job.lastDate : closedJob?.lastDate }}
-          </h5>
-          
-          <h5 class="card-body">
-            <strong class="d-block">Location  </strong>{{ location?.address  | uppercase }} ,
-            {{ location?.city | uppercase}} , {{ location?.state | uppercase}} , {{ location?.country | uppercase }}
-          </h5>
-          
-        </div>
 
-       <div class="d-flex flex-column ms-3 col-md-8">
+    <div class="d-flex flex-row p-4 res">
+      <!-- <div class=""> -->
+
+      <div class="d-flex flex-column me-4 firstdiv">
         <h5 class="card-body">
-          <strong class="d-block mb-2 ">Qualifications Required </strong
-          >
+          <strong class="d-block">Post Date </strong
+          >{{ job !== undefined ? job.postDate : closedJob?.postDate }}
+        </h5>
+        <h5 class="card-body">
+          <strong class="d-block">Job Position </strong
+          >{{ jobPosition?.positionName | uppercase }}
+        </h5>
+        <h5 class="card-body">
+          <strong class="d-block">Job Category </strong
+          >{{ jobcategory?.categoryName | uppercase }}
+        </h5>
+        <h5 class="card-body">
+          <strong class="d-block">Last Date </strong
+          >{{ job !== undefined ? job.lastDate : closedJob?.lastDate }}
+        </h5>
+
+        <h5 class="card-body">
+          <!-- <div *ngIf="location?.locationId == undefined ">loading..</div> -->
+          <strong class="d-block">Location</strong
+          >{{ location?.address!= undefined ?  (location?.address | uppercase) : "loading.."}},{{
+             location?.city!= undefined ?  (location?.city | uppercase) : "loading.."}},{{  location?.state != undefined ?  (location?.state | uppercase) : "loading.." }},{{
+             location?.country!= undefined ?  (location?.country | uppercase) : "loading.."
+          }}
+        </h5>
+      </div>
+
+      <div class="d-flex flex-column ms-3">
+        <h5 class="card-body">
+          <strong class="d-block mb-2">Qualifications Required </strong>
         </h5>
         <h6 class="card-body">
           <p>Required Degree : {{ degree?.degreeName }}</p>
         </h6>
         <h6 class="card-body">
-          <p>Experience : {{ job !== undefined ? job.experience : closedJob?.experience }}
-          Years</p>
+          <p>
+            Experience :
+            {{
+              job !== undefined ? job.experience : closedJob?.experience
+            }}
+            Years
+          </p>
         </h6>
-         <h5 class="card-body lh-base">
-           <strong class="d-block my-2 ">Description  </strong 
-           >{{
-             job !== undefined ? job.jobDescription : closedJob?.jobDescription
-           }}
-         </h5>
-       </div>
+        <h5 class="card-body lh-base">
+          <strong class="d-block my-2">Description </strong
+          >{{
+            job !== undefined ? job.jobDescription : closedJob?.jobDescription
+          }}
+        </h5>
+      </div>
       <!-- </div> -->
-      
     </div>
   </div>
 </div>

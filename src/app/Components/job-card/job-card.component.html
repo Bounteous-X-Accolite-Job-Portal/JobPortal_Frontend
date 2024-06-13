@@ -2,52 +2,93 @@
   <div class="solution_cards_box">
     <div class="solution_card">
       <div class="hover_color_bubble"></div>
-      
-      <div class="solu_title" style="display: flex; flex-direction: row; width: 100%; justify-content: space-between;">
-        <h2>{{job !== undefined ? job.jobTitle : closedJob.jobTitle}}</h2>
-        <div class="so_top_icon" style="float: right;">
-          <img src="../../../assets/Logos/accolite_logo.jpg" alt="job-logo">
+
+      <div
+        class="solu_title"
+        style="
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          justify-content: space-between;
+        "
+      >
+        <h2>{{ job !== undefined ? job.jobTitle : closedJob.jobTitle }}</h2>
+        <div class="so_top_icon" style="float: right">
+          <img src="../../../assets/Logos/accolite_logo.jpg" alt="job-logo" />
         </div>
       </div>
       <div class="solu_description">
         <div class="three-div">
-        <div class="locationId">
-          <i class="fa-solid fa-location-dot d-inline" aria-hidden="true"></i>
+          <div class="locationId">
+            <i class="fa-solid fa-location-dot d-inline" aria-hidden="true"></i>
             <!-- <i class="fa fa-location-arrow d-inline" aria-hidden="true"></i> -->
             <span class="mx-3">
-            {{location?.city}} , {{location?.state}} , {{location?.country}}
+              {{ location?.city }} , {{ location?.state }} ,
+              {{ location?.country }}
             </span>
-        </div>
-        <div class="dateId">
+          </div>
+          <div class="dateId">
             <div class="block1">
-                <i class="fa fa-address-card" aria-hidden="true"></i>
-               <div class="mx-3">{{job !== undefined ? job.jobCode : closedJob.jobCode}}</div>
+              <i class="fa fa-address-card" aria-hidden="true"></i>
+              <div class="mx-3">
+                {{ job !== undefined ? job.jobCode : closedJob.jobCode }}
+              </div>
             </div>
             <div class="block2">
-                <i class="fa fa-calendar" aria-hidden="true"></i>
-                <div class="lastDate mx-3"><span>Last Date : </span> {{job !== undefined ? job.lastDate : closedJob.lastDate}}</div>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <div class="lastDate mx-3">
+                <span>Last Date : </span>
+                {{ job !== undefined ? job.lastDate : closedJob.lastDate }}
+              </div>
             </div>
+          </div>
         </div>
-      </div>
         <div class="details">
-            <div class="option">{{jobtype?.typeName}}</div>
-            <div class="option">{{jobcategory?.categoryName}}</div>
-            <div class="option">{{jobPosition?.positionName}}</div>
+          <div class="option">{{ jobtype?.typeName }}</div>
+          <div class="option">{{ jobcategory?.categoryName }}</div>
+          <div class="option">{{ jobPosition?.positionName }}</div>
         </div>
         <div class="d-flex btns-list">
           <div class="showMore">
-            <button class="btn btn-primary-1 " [routerLink]="(job !== undefined ? ['/job-details', job.jobId] : ['/closedJob/job-details/', closedJob.closedJobId])">Click Here for Details..</button>
+            <button
+              class="btn btn-primary-1"
+              [routerLink]="
+                job !== undefined
+                  ? ['/job-details', job.jobId]
+                  : ['/closedJob/job-details/', closedJob.closedJobId]
+              "
+            >
+              View Details
+            </button>
           </div>
-          <div class="viewApplicants">  
-            <button *ngIf="isEmployee && hasPrivilege" class="btn btn-primary-1" [routerLink]="(job !== undefined ? ['/jobs', job.jobId , 'applicants'] : ['/closedJobs', closedJob.closedJobId , 'applicants'])">View Applicants</button>
+          <div class="viewApplicants">
+            <button
+              *ngIf="isEmployee && hasPrivilege"
+              class="btn btn-primary-1"
+              [routerLink]="
+                job !== undefined
+                  ? ['/jobs', job.jobId, 'applicants']
+                  : ['/closedJobs', closedJob.closedJobId, 'applicants']
+              "
+            >
+              View Applicants
+            </button>
           </div>
           <span *ngIf="isActive" class="btn btn-danger dis">
-            <a *ngIf="isEmployee && hasPrivilege" (click)="disableJob()">Disable Job </a>
+            <a *ngIf="isEmployee && hasPrivilege" (click)="disableJob()"
+              >Disable Job
+            </a>
           </span>
           <div class="">
-            <a *ngIf="canEdit || isEmployee && hasPrivilege" class='btn btn-primary text-style-add' [routerLink]="['/edit-job',job.jobId]"><i class="fas fa-edit"></i></a>
+            <a
+              *ngIf="job !== undefined && isEmployee && hasPrivilege"
+              class="btn btn-primary text-style-add"
+              [routerLink]="['/edit-job', job.jobId]"
+              ><i class="fas fa-edit"></i
+            ></a>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
