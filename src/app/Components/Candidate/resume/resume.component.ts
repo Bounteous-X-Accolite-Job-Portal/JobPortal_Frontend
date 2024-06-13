@@ -21,7 +21,7 @@ import { HttpClient } from '@angular/common/http';
 export class ResumeComponent {
   userId: string = '';
   resumeExists: boolean = false;
-  msg: string = "";
+  msg: string = '';
   userResume!: Resume;
   showRes: boolean = false;
 
@@ -31,8 +31,8 @@ export class ResumeComponent {
   uploading = false;
   uploadComplete = false;
   cldResponse: any;
-  temp : string = "";
-  fileSelected: boolean =false;
+  temp: string = '';
+  fileSelected: boolean = false;
   @Output() close = new EventEmitter<void>();
 
   constructor(
@@ -46,14 +46,13 @@ export class ResumeComponent {
   ) {}
 
   ngOnInit(): void {
-    this.userStore.getIdFromStore()
-      .subscribe((val) => {
-        // console.log(val);
-        let idFromToken = this.auth.getIdFromToken();
-        // console.log(idFromToken);
-        this.userId = val || idFromToken;
-        // console.log("Logged User Id : ",this.userId);
-      })
+    this.userStore.getIdFromStore().subscribe((val) => {
+      // console.log(val);
+      let idFromToken = this.auth.getIdFromToken();
+      // console.log(idFromToken);
+      this.userId = val || idFromToken;
+      // console.log("Logged User Id : ",this.userId);
+    });
 
     this.getFunction();
   }
@@ -113,12 +112,23 @@ export class ResumeComponent {
   }
 
   update() {
-    this.resumeService.removeResumeByResumeId(this.userResume.resumeId).subscribe(
-      (res) => {
-        console.log(res);
+    this.resumeService
+      .removeResumeByResumeId(this.userResume.resumeId)
+      .subscribe(
+        (res) => {
+          console.log(res);
 
           if (res.status === 200) {
-            this.uploadFile();
+            this.uploadFile()
+              .then(() => {
+                document.getElementById('closedUpload')?.click();
+                this.toastr.success('Resume updated successfully', undefined, {
+                  timeOut: 5000,
+                });
+              })
+              .catch((err) => {
+                console.log('error while uploading data', err);
+              });
           } else {
             this.toastr.error(res.message);
           }
@@ -196,7 +206,6 @@ export class ResumeComponent {
             this.temp
           );
           this.add();
-          this.toastr.success('File uploaded', undefined, { timeOut: 5000 });
         }
       } catch (error) {
         this.toastr.error('Error uploading', undefined, { timeOut: 5000 });
@@ -206,7 +215,13 @@ export class ResumeComponent {
 
     const start = 0;
     const end = Math.min(chunkSize, this.file.size);
-    uploadChunk(start, end);
+    uploadChunk(start, end)
+      .then(() => {
+        this.toastr.success('File uploaded', undefined, { timeOut: 5000 });
+      })
+      .catch(() => {
+        document.getElementById('closedUpload')?.click();
+      });
   }
 
   generateUniqueUploadId(): string {
