@@ -206,7 +206,7 @@ export const routes: Routes = [
         component: OfferLetterComponent,
         canActivate: [hasPrivilegeGuard, hasSpecialPrivilegeGuard],
       },
-      // { path: '', component: ProfileComponent },
+      { path: '', component: ProfileComponent },
     ],
   },
   {
