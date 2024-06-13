@@ -2,27 +2,56 @@
   <!-- Toggle between componnets -->
   <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
     <li class="nav-item mx-2" role="presentation">
-      <a (click)="ActiveInterview()" [class.active]="ActiveInterviewToggle" class="nav-link" id="tab-login" data-mdb-pill-init role="tab" aria-controls="pills-login" aria-selected="true">
+      <a
+        (click)="ActiveInterview()"
+        [class.active]="ActiveInterviewToggle"
+        class="nav-link"
+        id="tab-login"
+        data-mdb-pill-init
+        role="tab"
+        aria-controls="pills-login"
+        aria-selected="true"
+      >
         Active Interviews
       </a>
     </li>
     <li class="nav-item mx-2" role="presentation">
-      <a (click)="InterviewDone()" [class.active]="!ActiveInterviewToggle" class="nav-link" id="tab-register" data-mdb-pill-init role="tab" aria-controls="pills-register" aria-selected="false">
+      <a
+        (click)="InterviewDone()"
+        [class.active]="!ActiveInterviewToggle"
+        class="nav-link"
+        id="tab-register"
+        data-mdb-pill-init
+        role="tab"
+        aria-controls="pills-register"
+        aria-selected="false"
+      >
         Interviews Done
       </a>
     </li>
   </ul>
   <div>
     <div *ngIf="ActiveInterviewToggle">
-      <div *ngIf="activeInterviews.length == 0">You don't have any interview in this section.</div>
+      <div *ngIf="activeInterviews.length == 0">
+        You don't have any interview in this section.
+      </div>
       <div *ngIf="activeInterviews.length != 0">
-        <app-interview-card *ngFor="let interview of activeInterviews" [interview]="interview"></app-interview-card>
+        <app-interview-card
+          *ngFor="let interview of activeInterviews"
+          [interview]="interview"
+        ></app-interview-card>
       </div>
     </div>
     <div *ngIf="!ActiveInterviewToggle">
-      <div *ngIf="doneInterviews.length == 0">You don't have any interview in this section.</div>
+      <div *ngIf="doneInterviews.length == 0">
+        You don't have any interview in this section.
+      </div>
       <div *ngIf="doneInterviews.length != 0">
-        <app-interview-card *ngFor="let interview of doneInterviews" [interview]="interview" [doneInterview]="true"></app-interview-card>
+        <app-interview-card
+          *ngFor="let interview of doneInterviews"
+          [interview]="interview"
+          [doneInterview]="true"
+        ></app-interview-card>
       </div>
     </div>
   </div>

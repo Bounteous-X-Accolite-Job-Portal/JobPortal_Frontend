@@ -1,42 +1,56 @@
-<div class="card m-3" style="width: 60vw; max-width: 60vw;">
+<div class="card m-3 employeeCard">
   <div class="card-body">
     <div class="d-flex flex-row">
       <div class="d-flex align-items-center">
         <span class="logo">
           <span class="logo-text">
             {{
-            Employee.firstName
-            ? Employee.firstName.charAt(0).toUpperCase()
-            : "U"
+              Employee.firstName
+                ? Employee.firstName.charAt(0).toUpperCase()
+                : "U"
             }}{{
-            Employee.lastName ? Employee.lastName.charAt(0).toUpperCase() : ""
+              Employee.lastName ? Employee.lastName.charAt(0).toUpperCase() : ""
             }}
           </span>
         </span>
       </div>
-      <div class="align-self-stretch" style="margin-left: 2rem">
-        <div class="d-flex flex-column">
-          <span>
-            <span style="font-size: large; font-weight: 500">
-              {{ Employee.firstName }} {{ Employee.lastName }}
+      <div class="empCard w-100">
+        <div class="Empl-details">
+          <div class="d-flex flex-column">
+            <span>
+              <span class="employeeText">
+                {{ Employee.firstName }} {{ Employee.lastName }}
+              </span>
+              ({{ Employee.empId }})
             </span>
-            ({{ Employee.empId }})
-          </span>
-          <span style="font-size: 1rem; margin-left: 1rem">
-            <i>{{ Designation ? Designation.designationName : "loading..." }}</i>
-          </span>
-          <span style="padding-top: 0.8rem;">
-            <span style="font-weight: 500;">{{ Employee ? Employee.email : "loading..." }}</span>
-          </span>
+            <span class="empDesignation">
+              <i>{{
+                Designation ? Designation.designationName : "loading..."
+              }}</i>
+            </span>
+            <span class="empEmail">
+              <span class="employeeText">{{
+                Employee ? Employee.email : "loading..."
+              }}</span>
+            </span>
+          </div>
         </div>
-      </div>
-      <div class="ms-auto">
-        <button *ngIf="!disabledEmployee" class="btn btn-danger" (click)="disableEmployee(Employee.employeeId)">
-          Disable
-        </button>
-        <button *ngIf="disabledEmployee" class="btn btn-warning" (click)="enableEmployee(Employee.employeeId)">
-          Enable
-        </button>
+        <div class="buttonComp">
+          <button
+            *ngIf="!disabledEmployee"
+            class="btn btn-danger"
+            (click)="disableEmployee(Employee.employeeId)"
+          >
+            Disable
+          </button>
+          <button
+            *ngIf="disabledEmployee"
+            class="btn btn-warning"
+            (click)="enableEmployee(Employee.employeeId)"
+          >
+            Enable
+          </button>
+        </div>
       </div>
     </div>
   </div>
