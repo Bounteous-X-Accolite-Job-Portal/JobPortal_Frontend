@@ -148,7 +148,7 @@ div{
 
 .mobileNavbar-icon{
     position: absolute;
-    z-index: 99999;
+    z-index: 500;
     background: #0a0156;
     padding-top: 0.7rem;
     padding-left: 3vw;

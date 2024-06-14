@@ -20,6 +20,7 @@ export class EmployeeDashboardComponent implements OnInit {
 
   mobileSideBar : boolean = false;
   mobilePanel : boolean = false;
+  runOpenFun : boolean = false;
   
   public name : string = "Employee";
   hasPrivilege : boolean = false;
@@ -92,8 +93,6 @@ export class EmployeeDashboardComponent implements OnInit {
     this.collapsed = !this.collapsed;
   }
 
-  runOpenFun : boolean = false;
-
   mobileSideViewOpen(){
     this.mobileSideBar = false;
     this.mobilePanel = true;
@@ -108,8 +107,11 @@ export class EmployeeDashboardComponent implements OnInit {
 
   @HostListener("document:click", ["$event"])
   onClick(event: MouseEvent){
-    if (!this.runOpenFun && this.mobilePanel === true && this.mobileSideBar === false) {
+    if (!this.runOpenFun && this.mobilePanel) {
         this.mobileSideViewClose();      
+    }
+    else{
+      this.runOpenFun = false;
     }
   }
 }
