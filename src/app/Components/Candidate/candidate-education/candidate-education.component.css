@@ -1,0 +1,10 @@
+.empty{
+    color: gray;
+    text-align: center;
+}
+
+.upper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

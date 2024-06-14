@@ -66,7 +66,7 @@ export class AppliedJobsComponent {
     this.candidService.getAllJobApplicationByCandidate(id).subscribe(
       (res) => {
         this.candidateApplications = res.allJobApplications;
-        console.log("fetched applications : ",this.candidateApplications);
+        // console.log("fetched applications : ",this.candidateApplications);
         this.toastr.success("Jobs fetched successfully");
 
         for(let i = 0; i < this.candidateApplications.length; i++){
@@ -89,7 +89,7 @@ export class AppliedJobsComponent {
 
     this.closedApplicationService.getAllClosedApplicationsByCandidateId(candidateId).subscribe(
       (res) => {
-        console.log("rejected applications", res);
+        // console.log("rejected applications", res);
 
         for (let index = 0; index < res.allJobApplications.length; index++) {
           if(res.allJobApplications[index].jobId !== undefined && res.allJobApplications[index].jobId !== null){

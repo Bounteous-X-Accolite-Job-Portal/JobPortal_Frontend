@@ -1,0 +1,19 @@
+.small-card{
+    width: 22vw;
+    height: 9vh;
+    justify-content:center;
+    border: 3px solid #dbdbdb;
+}
+
+.card-body{
+    background: #f9f9f9;
+}
+
+.small-card div{
+    justify-content: space-between;
+
+}
+
+.add-btn{
+    float: right;
+}

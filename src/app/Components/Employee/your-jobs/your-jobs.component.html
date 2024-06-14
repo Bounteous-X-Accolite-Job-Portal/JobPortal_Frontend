@@ -1,12 +1,17 @@
 <div class="p-4">
   <div class="mb-5">
-    <form [formGroup]="filtersForm" class="d-flex flex-row align-items-center overflow-scroll">
+    <form
+      [formGroup]="filtersForm"
+      class="d-flex flex-row align-items-center overflow-scroll"
+    >
       <div>
         <!-- <p>Job Category</p> -->
         <select
           formControlName="jobCategory"
           (change)="loadJobPositionsByCategoryId()"
-          data-bs-toggle="tooltip" data-bs-placement="right" title="Job Category Selector"
+          data-bs-toggle="tooltip"
+          data-bs-placement="right"
+          title="Job Category Selector"
         >
           <option value="">Category</option>
           <option *ngFor="let cat of jobCategories" [value]="cat.categoryId">
@@ -16,7 +21,12 @@
       </div>
       <div>
         <!-- <p>Job Position</p> -->
-        <select formControlName="jobPosition" data-bs-toggle="tooltip" data-bs-placement="right" title="Job Position Selector">
+        <select
+          formControlName="jobPosition"
+          data-bs-toggle="tooltip"
+          data-bs-placement="right"
+          title="Job Position Selector"
+        >
           <option value="">Position</option>
           <option
             *ngFor="let pos of categoryjobPositions"
@@ -28,16 +38,26 @@
       </div>
       <div>
         <!-- <p>Job Location</p> -->
-        <select formControlName="location" data-bs-toggle="tooltip" data-bs-placement="right" title="Job Location Selector">
+        <select
+          formControlName="location"
+          data-bs-toggle="tooltip"
+          data-bs-placement="right"
+          title="Job Location Selector"
+        >
           <option value="">Location</option>
           <option *ngFor="let loc of locations" [value]="loc.locationId">
-            {{ loc.address }} {{ loc.city }} {{ loc.state }} {{ loc.country }}
+            {{ loc.city }} {{ loc.state }} {{ loc.country }}
           </option>
         </select>
       </div>
       <div>
         <!-- <p>Job Type</p> -->
-        <select formControlName="jobType" data-bs-toggle="tooltip" data-bs-placement="right" title="Job Type Selector">
+        <select
+          formControlName="jobType"
+          data-bs-toggle="tooltip"
+          data-bs-placement="right"
+          title="Job Type Selector"
+        >
           <option value="">Type</option>
           <option *ngFor="let typ of jobTypes" [value]="typ.jobTypeId">
             {{ typ.typeName }}
@@ -47,10 +67,19 @@
 
       <div class="button-div d-flex flex-row mx-2">
         <button
-          type="button" class="btn btn-info m-2" (click)="ActiveJobToggle ? onSubmit() : onSubmitForClosedJobs()">
+          type="button"
+          class="btn btn-info m-2"
+          (click)="ActiveJobToggle ? onSubmit() : onSubmitForClosedJobs()"
+        >
           Search
         </button>
-        <button type="button" class="btn btn-secondary m-2" (click)="resetFilters()">Reset</button>
+        <button
+          type="button"
+          class="btn btn-secondary m-2"
+          (click)="resetFilters()"
+        >
+          Reset
+        </button>
       </div>
     </form>
   </div>
@@ -93,6 +122,7 @@
             *ngFor="let job of Filterjobs"
             [job]="job"
             [canEdit]="true"
+            [isActive]="true"
           ></app-job-card>
         </div>
       </div>

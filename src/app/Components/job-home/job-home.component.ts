@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
 import { JobCardComponent } from '../job-card/job-card.component';
 import { JobService } from '../../Services/Job/job.service';
 import { JobType } from '../../Models/JobTypeResponse/JobType';
@@ -58,7 +58,8 @@ export class JobHomeComponent {
     private closedJobService: ClosedJobServiceService,
     private spinnerService: SpinnerService,
     private store: UserStoreService,
-    private authService: AuthService
+    private authService: AuthService,
+    private elementRef: ElementRef
   ) {
     this.checkUser();
     this.checkHasPrivilege();
@@ -148,57 +149,72 @@ export class JobHomeComponent {
   }
 
   private loadJobLocations(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllJobLocations().subscribe(
       (res) => {
         this.locations = res.allJobLocations;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
+        this.spinnerService.hideSpinner();
         console.error('Error loading job locations:', error);
       }
     );
   }
 
   private loadJobTypes(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllJobTypes().subscribe(
       (res) => {
         this.jobTypes = res.allJobTypes;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading job types:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
   private loadJobCategories(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllJobCategories().subscribe(
       (res) => {
         this.jobCategories = res.allJobCategory;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading job categories:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
   private loadJobPositions(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllJobPosition().subscribe(
       (res) => {
         this.jobPositions = res.allJobPositions;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading job Positions:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
 
   private loadJobs(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllJobs().subscribe(
       (res) => {
         this.jobs = res.allJobs;
         this.Filterjobs = this.jobs;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading Jobs', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
@@ -208,12 +224,15 @@ export class JobHomeComponent {
   }
 
   private loadDegrees(): void {
+    this.spinnerService.showSpinner();
     this.jobService.getAllDegrees().subscribe(
       (res) => {
         this.degrees = res.degrees;
+        this.spinnerService.hideSpinner();
       },
       (error) => {
         console.error('Error loading Degrees:', error);
+        this.spinnerService.hideSpinner();
       }
     );
   }
@@ -403,4 +422,16 @@ export class JobHomeComponent {
         this.categoryjobPositions.push(pos);
     });
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    const close = this.elementRef.nativeElement.querySelector('.btn-close');
+    const specificWidth = 768; 
+    const windowWidth = window.innerWidth;
+
+    if ( close && windowWidth >= specificWidth) {
+      close.click();
+    }
+  }
+
 }

@@ -1,223 +1,212 @@
-  body {
-    background: #fff;
-    font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    color: rgba(0,0,0,0.6);
-  }
-  .profile-page {
-    display: flex;
-    min-height: 100vh;
-    padding-top: 5rem;
-    background: #2b2980;
+body {
+  background: #fff;
+  font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  color: rgba(0, 0, 0, 0.6);
+}
+.profile-page {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 2rem;
+  /* background: #2b2980;
     
-    /* Chrome 10-25, Safari 5.1-6 */
     background: -webkit-linear-gradient(to right, rgb(68, 34, 148), rgba(166, 193, 238, 1));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgb(148, 67, 141), rgba(166, 193, 238, 1))
-    }
-  @media (max-width: 990px) {
-    .profile-page {
-      padding-top: 0;
-    }
+    background: linear-gradient(to bottom, rgb(148, 67, 141), rgba(166, 193, 238, 1)); */
+}
+.profile-page .content {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  margin: auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+  backdrop-filter: blur(40px);
+  shape-outside: ellipse(100px 200px at 50% 50%);
+  /* box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);  */
+}
+.profile-page .content__cover {
+  position: relative;
+}
+.profile-page .content__bull {
+  display: none;
+  height: 12rem;
+  position: relative;
+  overflow: hidden;
+}
+.profile-page .content__avatar {
+  width: 8rem;
+  height: 8rem;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, 50%);
+  background-size: cover;
+  background-color: #052c65;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+  margin-bottom: 3rem;
+}
+.profile-page .content__avatar .logotext {
+  width: 12rem;
+  height: 12rem;
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  z-index: 2;
+  transform: translate(0%, 50%);
+  background-size: cover;
+  border-radius: 50%;
+  font-size: 3rem;
+}
+.profile-page .content__avatar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 50%;
+}
+.profile-page .content__title {
+  margin-top: 2rem;
+  text-align: center;
+  order: 1;
+}
+.profile-page .content__title h1 {
+  margin-bottom: 0.1rem;
+  font-size: 2.4rem;
+}
+.profile-page .content__title span {
+  font-size: 1rem;
+}
+.profile-page .content__description {
+  margin-top: 2.5rem;
+  text-align: center;
+  order: 2;
+}
+.profile-page .content__description p {
+  margin-bottom: 0.2rem;
+  font-size: 1.2rem;
+}
+.profile-page .content__list {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  list-style-type: none;
+  order: 3;
+}
+.profile-page .content__list li {
+  padding: 0 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+}
+.profile-page .content__list li span {
+  display: block;
+  margin-bottom: 0.1rem;
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+@media (max-width: 990px) {
+  .profile-page {
+    padding-top: 0;
   }
+
   .profile-page .content {
-    display: flex;
-    flex-direction: column;
-    max-width: 800px;
-    width: 100%;
-    position: relative;
-    z-index: 2;
-    margin: auto;
-    padding: 2rem;
-    background: #fff;
+    max-width: 420px;
+    padding: 0;
     border-radius: 2rem;
-    box-shadow: 0 15px 35px rgba(50,50,93,0.1), 0 5px 15px rgba(0,0,0,0.07);
+    padding-bottom: 1rem;
   }
-  @media (max-width: 990px) {
-    .profile-page .content {
-      max-width: 420px;
-      padding: 0;
-      border-radius: 2rem;
-      padding-bottom: 1rem;
-    }
-  }
-  .profile-page .content__cover {
-    position: relative;
-  }
+
   .profile-page .content__bull {
-    display: none;
-    height: 12rem;
-    position: relative;
-    overflow: hidden;
+    display: block;
+    height: 3rem;
   }
-  @media (max-width: 990px) {
-    .profile-page .content__bull {
-      display: block;
-      height: 3rem;
-    }
-  }
+
   .profile-page .content__avatar {
     width: 8rem;
     height: 8rem;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    z-index: 2;
-    transform: translate(-50%, 50%);
-    background-size: cover;
-    background-color: #052c65;
-    color: white;
-    border-radius: 50%;
-    box-shadow: 0 15px 35px rgba(50,50,93,0.1), 0 5px 15px rgba(0,0,0,0.07);
-    margin-bottom: 3rem;
-  }
-  .profile-page .content__avatar .logotext{
-    width: 12rem;
-    height: 12rem;
-    position: absolute;
-    bottom: 0;
-    left: 25%;
-    z-index: 2;
-    transform: translate(0%, 50%);
-    background-size: cover;
-    border-radius: 50%;
-    font-size: 3rem;
-  }
-  .profile-page .content__avatar::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-radius: 50%;
-  }
-  @media (max-width: 990px) {
-    .profile-page .content__avatar {
-      width: 8rem;
-      height: 8rem;
-      border: 0.3rem solid #fff;
-      box-shadow: none;
-    }
+    border: 0.3rem solid #fff;
+    box-shadow: none;
   }
   .profile-page .content__title {
-    margin-top: 3rem;
-    text-align: center;
-    order: 1;
-  }
-  @media (max-width: 990px) {
-    .profile-page .content__title {
-      margin-top: 2rem;
-    }
+    margin-top: 2rem;
   }
   .profile-page .content__title h1 {
-    margin-bottom: 0.1rem;
-    font-size: 2.4rem;
+    font-size: 1.8rem;
   }
-  @media (max-width: 990px) {
-    .profile-page .content__title h1 {
-      font-size: 1.8rem;
-    }
-  }
+
   .profile-page .content__title span {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
-  @media (max-width: 990px) {
-    .profile-page .content__title span {
-      font-size: 0.9rem;
-    }
-  }
+
   .profile-page .content__description {
-    margin-top: 2.5rem;
-    text-align: center;
-    order: 2;
-  }
-  @media (max-width: 990px) {
-    .profile-page .content__description {
-      margin-top: 1.5rem;
-      order: 3;
-    }
-  }
-  .profile-page .content__description p {
-    margin-bottom: 0.2rem;
-    font-size: 1.2rem;
-  }
-  @media (max-width: 990px) {
-    .profile-page .content__description p {
-      font-size: 1rem;
-    }
-  }
-  .profile-page .content__list {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-    list-style-type: none;
+    margin-top: 1.5rem;
     order: 3;
   }
-  @media (max-width: 990px) {
-    .profile-page .content__list {
-      margin-top: 1.5rem;
-      order: 2;
-    }
-  }
-  .profile-page .content__list li {
-    padding: 0 1.5rem;
-    text-align: center;
+
+  .profile-page .content__description p {
     font-size: 1rem;
   }
-  @media (max-width: 990px) {
-    .profile-page .content__list li {
-      font-size: 0.8rem;
-    }
+
+  .profile-page .content__list {
+    margin-top: 1.5rem;
+    order: 2;
+  }
+
+  .profile-page .content__list li {
+    font-size: 0.8rem;
   }
   .profile-page .content__list li span {
-    display: block;
-    margin-bottom: 0.1rem;
-    font-weight: bold;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
-  @media (max-width: 990px) {
-    .profile-page .content__list li span {
-      font-size: 1.2rem;
-    }
+}
+
+@-moz-keyframes floating {
+  0% {
+    -webkit-transform: rotate(0deg) translate(-10px) rotate(0deg);
+    transform: rotate(0deg) translate(-10px) rotate(0deg);
   }
-  @-moz-keyframes floating {
-    0% {
-      -webkit-transform: rotate(0deg) translate(-10px) rotate(0deg);
-      transform: rotate(0deg) translate(-10px) rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
-      transform: rotate(360deg) translate(-10px) rotate(-360deg);
-    }
+  100% {
+    -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
+    transform: rotate(360deg) translate(-10px) rotate(-360deg);
   }
-  @-webkit-keyframes floating {
-    0% {
-      -webkit-transform: rotate(0deg) translate(-10px) rotate(0deg);
-      transform: rotate(0deg) translate(-10px) rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
-      transform: rotate(360deg) translate(-10px) rotate(-360deg);
-    }
+}
+@-webkit-keyframes floating {
+  0% {
+    -webkit-transform: rotate(0deg) translate(-10px) rotate(0deg);
+    transform: rotate(0deg) translate(-10px) rotate(0deg);
   }
-  @-o-keyframes floating {
-    0% {
-      -webkit-transform: rotate(0deg) translate(-10px) rotate(0deg);
-      transform: rotate(0deg) translate(-10px) rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
-      transform: rotate(360deg) translate(-10px) rotate(-360deg);
-    }
+  100% {
+    -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
+    transform: rotate(360deg) translate(-10px) rotate(-360deg);
   }
-  @keyframes floating {
-    0% {
-      -webkit-transform: rotate(0deg) translate(-10px) rotate(0deg);
-      transform: rotate(0deg) translate(-10px) rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
-      transform: rotate(360deg) translate(-10px) rotate(-360deg);
-    }
+}
+@-o-keyframes floating {
+  0% {
+    -webkit-transform: rotate(0deg) translate(-10px) rotate(0deg);
+    transform: rotate(0deg) translate(-10px) rotate(0deg);
   }
+  100% {
+    -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
+    transform: rotate(360deg) translate(-10px) rotate(-360deg);
+  }
+}
+@keyframes floating {
+  0% {
+    -webkit-transform: rotate(0deg) translate(-10px) rotate(0deg);
+    transform: rotate(0deg) translate(-10px) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
+    transform: rotate(360deg) translate(-10px) rotate(-360deg);
+  }
+}

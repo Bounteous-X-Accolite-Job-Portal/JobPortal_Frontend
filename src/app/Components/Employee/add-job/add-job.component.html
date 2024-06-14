@@ -89,7 +89,7 @@
         <select formControlName="locationId">
           <option value="" selected>Select job location</option>
           <option *ngFor="let loc of locations" [value]="loc.locationId">
-            {{ loc.address }} {{ loc.city }} {{ loc.state }} {{ loc.country }}
+            {{ loc.city }} {{ loc.state }} {{ loc.country }}
           </option>
         </select>
       </div>

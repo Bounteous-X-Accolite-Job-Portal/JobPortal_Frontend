@@ -30,6 +30,7 @@ export class JobCardComponent {
   @Input() job!: Job;
   @Input() closedJob!: ClosedJob;
   @Input() canEdit!: boolean;
+  @Input() isActive!: boolean;
 
   isEmployee: boolean = false;
   hasPrivilege: boolean = false;
@@ -44,7 +45,8 @@ export class JobCardComponent {
     private jobService: JobService,
     private spinnerService: SpinnerService,
     private store: UserStoreService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router : Router
   ) {
     this.checkUser();
     this.checkHasPrivilege();
@@ -52,7 +54,7 @@ export class JobCardComponent {
 
   ngOnInit(): void {
     this.spinnerService.showSpinner();
-    console.log("job details", this.job);
+    // console.log('job details', this.job);
 
     this.loadJobDetails();
 
@@ -127,7 +129,7 @@ export class JobCardComponent {
 
         this.spinnerService.hideSpinner();
 
-        console.log(this.job);
+        // console.log(this.job);
       },
       (error) => {
         console.log(error);
@@ -143,26 +145,32 @@ export class JobCardComponent {
       let date = this.job.lastDate.split('T');
       this.job.lastDate = date[0];
     }
+    if (this.closedJob !== undefined) {
+      let date = this.closedJob.lastDate.split('T');
+      this.closedJob.lastDate = date[0];
+    }
 
     this.spinnerService.hideSpinner();
   }
 
   public disableJob(): void {
     var response = confirm('Do you want to disable this job ? ');
-    if (response) 
-    {
-      console.log('Job Disabled !!');
+    if (response) {
+      this.spinnerService.showSpinner();
       this.jobService.disableJob(this.job.jobId).subscribe(
         (res) => {
-          console.log(res);
+          // console.log(res);
+          this.spinnerService.hideSpinner();
+          this.router.navigate(['jobs']);
+          
         },
         (error) => {
           console.log(error);
+          this.spinnerService.hideSpinner();
+          
         }
-      )
-    } 
-    else
-    {
+      );
+    } else {
       console.log('You Denied to Disable Job !!');
     }
   }

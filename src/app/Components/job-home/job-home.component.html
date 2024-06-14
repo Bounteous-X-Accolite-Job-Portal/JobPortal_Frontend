@@ -1,25 +1,9 @@
 <div class="Jobhunt">
   <div class="Filters">
-    <div
-      style="
-        padding-left: 15px;
-        padding-right: 15px;
-        font-size: 27px;
-        margin-bottom: 0rem;
-      "
-    >
-      Filters
-    </div>
+    <div class="fil">Filters</div>
+    
     <div>
-      <form
-        [formGroup]="filtersForm"
-        style="
-          display: flex;
-          flex-direction: column;
-          padding-left: 10%;
-          padding-right: 10%;
-        "
-      >
+      <form [formGroup]="filtersForm">
         <div>
           <p>Job Category</p>
           <select
@@ -62,7 +46,7 @@
           >
             <option value="">Select Job Location</option>
             <option *ngFor="let loc of locations" [value]="loc.locationId">
-              {{ loc.address }} {{ loc.city }} {{ loc.state }} {{ loc.country }}
+              {{ loc.city }} {{ loc.state }} {{ loc.country }}
             </option>
           </select>
         </div>
@@ -94,33 +78,32 @@
             </option>
           </select>
         </div>
-        <div class="d-flex justify-content-around" id="btn-styling">
+        <div class="d-flex justify-content-around filter-btn">
           <button
-            style="--clr: #8a2be2"
             (click)="
               FilterClosedJobToggle ? onSubmitForClosedJobs() : onSubmit()
             "
+            class="btn btn-primary text-style-add border-white"
           >
-            <span>Search</span><i></i>
+            <span>Search</span>
           </button>
           <button
-            style="--clr: #8a2be2"
             (click)="resetFilters()"
-            class="reset-btn"
+            class="btn btn-primary text-style-add border-white"
           >
-            <span>Reset</span><i></i>
+            <span>Reset</span>
           </button>
         </div>
       </form>
     </div>
   </div>
-  <div id="filterRight" class="p-2" style="display: none">
+  <div id="filterRight" style="display: none">
     <a
       class="btn btn-primary"
       style="float: right"
       data-bs-toggle="modal"
       data-bs-target="#filterModal"
-      ><i class="fa-solid fa-filter">Filter</i></a
+      ><i class="fa fa-filter"><span>Filter</span></i></a
     >
   </div>
   <div
@@ -166,6 +149,7 @@
             <app-job-card
               *ngFor="let job of Filterjobs"
               [job]="job"
+              [isActive]="true"
             ></app-job-card>
           </div>
         </div>
@@ -177,6 +161,7 @@
             <app-job-card
               *ngFor="let closedJob of filteredClosedJobs"
               [closedJob]="closedJob"
+              [isActive]="false"
             ></app-job-card>
           </div>
         </div>
@@ -204,6 +189,7 @@
     <div class="modal-content">
       <div class="modal-header px-3 py-2">
         <h5 class="modal-title" id="exampleModalLabel">Filters</h5>
+        <hr />
         <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
       </div>
       <div class="modal-body">
@@ -262,8 +248,7 @@
               >
                 <option value="">Select Job Location</option>
                 <option *ngFor="let loc of locations" [value]="loc.locationId">
-                  {{ loc.address }} {{ loc.city }} {{ loc.state }}
-                  {{ loc.country }}
+                  {{ loc.city }} {{ loc.state }} {{ loc.country }}
                 </option>
               </select>
             </div>
@@ -295,21 +280,20 @@
                 </option>
               </select>
             </div>
-            <div class="d-flex justify-content-around" id="btn-styling">
+            <div class="d-flex justify-content-around">
               <button
-                style="--clr: #8a2be2"
+                class="btn btn-primary text-style-add"
                 (click)="
                   FilterClosedJobToggle ? onSubmitForClosedJobs() : onSubmit()
                 "
               >
-                <span>Search</span><i></i>
+                Search
               </button>
               <button
-                style="--clr: #8a2be2"
                 (click)="resetFilters()"
-                class="reset-btn"
+                class="btn btn-outline-primary text-style-add"
               >
-                <span>Reset</span><i></i>
+                <span>Reset</span>
               </button>
             </div>
           </form>

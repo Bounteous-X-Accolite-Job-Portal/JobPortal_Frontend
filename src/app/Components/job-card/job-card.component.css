@@ -1,161 +1,223 @@
-  
-  .our_solution_category .solution_cards_box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .solution_cards_box .solution_card {
-    background: #fff;
-    width: 80%;
-    box-shadow: 0 2px 4px 0 rgba(136, 144, 195, 0.2),
-    0 5px 15px 0 rgba(37, 44, 97, 0.15);
-    border-radius: 15px;
-    margin-bottom: 2.5rem;
-    padding: 1rem 2rem;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    transition: 0.2s;
-    font-weight: bolder;
-  }
-  
-  .solution_cards_box .solution_card:hover {
-    background: #7a30f0;
-    color: #fff;
-    transform: scale(1.07);
-    z-index: 9;
-  }
-  
-  .solution_cards_box .solution_card:hover::before {
-    background: rgb(85 108 214 / 10%);
-  }
-  
-  .solution_cards_box .solution_card:hover .solu_title h3,
-  .solution_cards_box .solution_card:hover .solu_description p {
-    color: #fff;
-  }
-  
-  .solution_cards_box .solution_card:before {
-    content: "";
-    background: rgb(85 108 214 / 5%);
-    z-index: -1;
-    transform: rotate(42deg);
-  }
-  
-  .solution_cards_box .solution_card:hover .solu_description button {
-    background: #fff !important;
-    color: #0d016b;
-  }
-  
-  .solution_card .solu_title h3 {
-    color: #212121;
-    font-size: 1.3rem;
-    margin-top: 13px;
-    margin-bottom: 13px;
-  }
-  
-  .solution_card .solu_description p {
-    font-size: 15px;
-    margin-bottom: 15px;
-  }
-  
-  .solution_card .solu_description button {
-    border: 0;
-    border-radius: 15px;
-    background: linear-gradient(
-      140deg,
-      #0d016b 0%,
-      #0d016b 50%,
-      #0d016b 75%
-    ) !important;
-    color: #fff;
-    font-weight: 500;
-    font-size: 1rem;
-    padding: 5px 16px;
-  }
-  
-  
-  
-  .hover_color_bubble {
-    position: absolute;
-    background: rgba(16, 30, 90, 0.15);
-    width: 100rem;
-    height: 100rem;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    top: 16rem;
-    border-radius: 50%;
-    transform: rotate(-36deg);
-    left: -18rem;
-    transition: 0.4s;
-  }
-  
-  .solution_cards_box .solution_card:hover .hover_color_bubble {
-    top: 0rem;
-  }
-  
-  .solution_cards_box .solution_card .so_top_icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #ffffff;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .solution_cards_box .solution_card .so_top_icon img {
-    width: 40px;
-    height: 50px;
-    object-fit: contain;
-  }
-  
-  /*start media query*/
-  @media screen and (min-width: 320px) {
-    
-    .our_solution_category {
-      width: 100%;
-      margin: 0 auto;
-    }
-  
-    .our_solution_category .solution_cards_box {
-      flex: auto;
-    }
-  }
-  @media only screen and (min-width: 768px) {
-    .our_solution_category .solution_cards_box {
-      flex: 1;
-    }
-  }
-  
-.dateId{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
+.our_solution_category .solution_cards_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.block1 , .block2
-{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-right: 2vh;
+.solution_cards_box .solution_card {
+  background: #fff;
+  width: 80%;
+  box-shadow: 0 2px 4px 0 rgba(136, 144, 195, 0.2),
+    0 5px 15px 0 rgba(37, 44, 97, 0.15);
+  border-radius: 15px;
+  margin-bottom: 2.5rem;
+  padding: 1rem 2rem;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: 0.2s;
+  font-weight: bolder;
 }
 
-.details
-{
-    width: 100%;
+.solution_cards_box .solution_card:hover {
+  background: #7a30f0;
+  color: #fff;
+  transform: scale(1.07);
+  z-index: 9;
+}
+
+.solution_cards_box .solution_card:hover::before {
+  background: rgb(85 108 214 / 10%);
+}
+
+.solution_cards_box .solution_card:hover .solu_title h3,
+.solution_cards_box .solution_card:hover .solu_description p {
+  color: #fff;
+}
+
+.solution_cards_box .solution_card:before {
+  content: "";
+  background: rgb(85 108 214 / 5%);
+  z-index: -1;
+  transform: rotate(42deg);
+}
+
+.solution_cards_box .solution_card:hover .solu_description button {
+  background: #fff !important;
+  color: #0d016b;
+}
+
+.solution_card .solu_title h3 {
+  color: #212121;
+  font-size: 1.3rem;
+  margin-top: 13px;
+  margin-bottom: 13px;
+}
+
+.solution_card .solu_description p {
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.details {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+  border: 5px solid whitesmoke;
+  border-radius: 20px;
+}
+
+.block1,
+.block2 {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  /* justify-content: center; */
+  margin-right: 2vh;
+  float:left;
+}
+.solution_card .solu_description button {
+  border: 0;
+  border-radius: 15px;
+  background: linear-gradient(
+    140deg,
+    #0d016b 0%,
+    #0d016b 50%,
+    #0d016b 75%
+  ) !important;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 5px 16px;
+}
+
+.hover_color_bubble {
+  position: absolute;
+  background: rgba(16, 30, 90, 0.15);
+  width: 100rem;
+  height: 100rem;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  top: 16rem;
+  border-radius: 50%;
+  transform: rotate(-36deg);
+  left: -18rem;
+  transition: 0.4s;
+}
+
+.solution_cards_box .solution_card:hover .hover_color_bubble {
+  top: 0rem;
+}
+
+.solution_cards_box .solution_card .so_top_icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #ffffff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.solution_cards_box .solution_card .so_top_icon img {
+  width: 40px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.dateId,
+.locationId {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.btns-list {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dis {
+  border-radius: 18px;
+}
+/*start media query*/
+@media only screen and (min-width: 768px) {
+  .our_solution_category .solution_cards_box {
+    flex: 1;
+  }
+}
+@media (max-width: 768px) {
+  .dateId{
+    flex-direction: column;
+  }
+  .dateId {
+    align-items: flex-start;
+    padding-top: 4px;
+    margin-bottom: 0;
+  }
+  .locationId {
+    padding-top: 0;
+  }
+  .three-div {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top:3vh;
-    margin-bottom:3vh;
-    border: 5px solid whitesmoke;
-    border-radius: 20px;
+    flex-direction: column-reverse;
+  }
+  .btns-list {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .btns-list div {
+    margin-bottom: 7px;
+  }
+  .dis {
+    max-width: fit-content;
+  }
+  .solution_cards_box .solution_card {
+    width: 87%;
+  }
+  .solution_card{
+    font-size: .9rem;
+  }
+  .our_solution_category{
+    font-size: 1rem;
+  }
+  .solution_cards_box .solution_card .so_top_icon {
+    width: 40px;
+    height: 40px;
+  }
+  .solu_title h2{
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .details{
+    flex-direction: column;
+    width: 85%;
+  }
+}
+@media screen and (max-width: 320px) {
+  .lastDate span{
+    display: block;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 320px) {
+  .our_solution_category {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .our_solution_category .solution_cards_box {
+    flex: auto;
+  }
+  
 }

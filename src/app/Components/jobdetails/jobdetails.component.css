@@ -15,6 +15,7 @@
   p:not(:last-child) {
     margin-bottom: 1.5em;
   }
+
   
 .cont{
     font: 1em/1.618 Inter, sans-serif;
@@ -25,7 +26,7 @@
     margin: 0;
     padding: 3rem 0;
     color: #224;
-    background: url(../../../assets/Images/bgcolor1.jpg) center/cover no-repeat fixed;
+    background: url(../../../assets/Images/bgcolor1.jpg) center/cover no-repeat fixed; 
   }
   
   .card {
@@ -39,15 +40,41 @@
     border-radius: 20px;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+    overflow: scroll;
   }
 
   .card-body{
     font-size: 1rem;
     padding: 0;
-    margin: 0.7rem;
+    /* margin: 0.7rem; */
+    text-align: justify;
+
   }
   
   .card-footer {
     font-size: 1rem;
+  }
+  
+  .firstdiv{
+    width: 20vw;
+  }
+
+  @media (max-width: 480px) {
+    .res{
+      flex-direction: column-reverse;
+    }
+   }
+  @media (max-width: 440px) {
+   .card-header{
+    display: flex;
+    flex-direction: column;
+   } 
+   .card{
+    border-radius: 0;
+    min-width: 100%;
+   }
+   .res{
+    padding: 10px !important;
+   }
   }
   

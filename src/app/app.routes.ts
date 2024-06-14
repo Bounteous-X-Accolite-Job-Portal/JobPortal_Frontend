@@ -53,6 +53,8 @@ import { CrudStatusJobDataComponent } from './Components/Employee/crud-status-jo
 import { EmailComponentChangePasswordComponent } from './Components/email-component-change-password/email-component-change-password.component';
 import { OfferLetterComponent } from './Components/Employee/offer-letter/offer-letter.component';
 import { hasPrivilegeChildGuard } from './Guards/has-privilege-child.guard';
+import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
+import { UploadComponent } from './Components/upload/upload.component';
 
 export const routes: Routes = [
   {
@@ -111,24 +113,18 @@ export const routes: Routes = [
     component: JobdetailsComponent,
   },
   {
+    path: 'upload',
+    component: UploadComponent,
+  },
+  {
     path: 'closedJob/job-details/:closedJobId',
     component: JobdetailsComponent,
     canActivate: [authGuard, employeeGuardGuard, hasPrivilegeGuard]
   },
-  // {
-  //   path: 'user-profile',
-  //   component: UserProfileComponent,
-  //   canActivate: [authGuard, candidateGuard]
-  // },
   {
     path: 'try',
     component: TryComponent,
   },
-  // {
-  //   path: 'update',
-  //   component: UpdateEducationComponent,
-  //   canActivate: [authGuard, candidateGuard]
-  // },
   {
     path: 'crud-job-data',
     component: CrudCategoryJobDataComponent,
@@ -210,7 +206,7 @@ export const routes: Routes = [
         component: OfferLetterComponent,
         canActivate: [hasPrivilegeGuard, hasSpecialPrivilegeGuard],
       },
-      { path: '**', component: ProfileComponent },
+      { path: '', component: ProfileComponent },
     ],
   },
   {
@@ -252,9 +248,13 @@ export const routes: Routes = [
         path: 'changePassword',
         component: EmailComponentChangePasswordComponent,
       },
-      { path: '**', component: PersonalInfoComponent },
+      { path: '', component: PersonalInfoComponent },
     ],
   },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
+  }
 ];
 
 export default routes;

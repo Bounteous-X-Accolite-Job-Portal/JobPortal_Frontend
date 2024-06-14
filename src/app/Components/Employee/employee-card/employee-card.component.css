@@ -1,3 +1,8 @@
+.employeeCard{
+    width: 60vw;
+    min-width: 60vw;
+}
+
 .logo {
     background: #b1aaaa;
     text-align: center;
@@ -10,4 +15,87 @@
     font-size: 1.5rem;
     font-weight: 900;
     border: none;
+}
+
+
+.Empl-details{
+    margin-left: 2rem;
+}
+
+.empCard{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+}
+
+.buttonComp{
+    display: flex;
+    height: 6vh;
+}
+
+.employeeText{
+    font-size: large;
+    font-weight: bold;
+}
+
+.empEmail{
+    padding-top: 0.8rem;
+}
+
+.empDesignation{
+    font-size: 1rem; 
+    margin-left: 1rem;
+}
+
+@media (max-width: 480px) {
+    .logo {
+        /* background-color: red; */
+        display: none;
+    }
+    .empCard{
+        flex-direction: column !important;
+    }
+    .Empl-details{
+        margin-left: 0;
+    }
+    .employeeText{
+        font-size: medium;
+    }
+    .buttonComp{
+        justify-content: end;
+        margin-top: 0.8rem;
+        height: 4vh;
+    }
+    .empEmail{
+        padding-top: 0.3rem;
+    }
+    .empDesignation{
+        font-size: 1rem; 
+        margin-left: 0;
+    }
+}
+
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+    .logo {
+        display: none;
+    }
+    .Empl-details{
+        margin-left: 0;
+    }
+    .empCard{
+        flex-direction: column !important;
+    }
+    .buttonComp{
+        justify-content: end;
+        margin-top: 1rem;
+        height: 5vh;
+    }
+    .empEmail{
+        padding-top: 0.3rem;
+    }
+    .empDesignation{
+        font-size: 1rem; 
+        margin-left: 0;
+    }
 }

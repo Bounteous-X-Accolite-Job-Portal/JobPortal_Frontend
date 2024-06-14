@@ -1,4 +1,4 @@
-select{
+select {
   width: 15vw;
   height: 6vh;
   border-radius: 1rem;
@@ -10,11 +10,11 @@ select{
 
 ::-webkit-scrollbar {
   width: 0px;
-  background: transparent; /* make scrollbar transparent */
+  background: transparent;
 }
 
 @media (max-width: 990px) {
-  select{
+  select {
     width: 13vw;
     height: 5vh;
     border-radius: 1rem;
@@ -24,16 +24,16 @@ select{
     margin: 0.4rem;
   }
 
-  .mx-2{
+  .mx-2 {
     margin-left: 0.4rem !important;
     margin-right: 0.2rem !important;
   }
 
-  .m-2{
+  .m-2 {
     margin: 0.2rem !important;
   }
 
-  .btn{
+  .btn {
     padding-left: 0.55rem !important;
     padding-right: 0.55rem !important;
     padding-top: 0.25rem !important;
@@ -42,7 +42,7 @@ select{
 }
 
 @media (max-width: 768px) {
-  select{
+  select {
     width: 10vw;
     height: 4vh;
     border-radius: 1rem;
@@ -52,16 +52,16 @@ select{
     margin: 0.3rem;
   }
 
-  .mx-2{
+  .mx-2 {
     margin-left: 0.1rem !important;
     margin-right: 0.1rem !important;
   }
 
-  .m-2{
+  .m-2 {
     margin: 0.1rem !important;
   }
 
-  .btn{
+  .btn {
     padding-left: 0.4rem !important;
     padding-right: 0.4rem !important;
     padding-top: 0.1rem !important;
@@ -70,5 +70,4 @@ select{
 }
 
 @media (max-width: 490px) {
-
 }
