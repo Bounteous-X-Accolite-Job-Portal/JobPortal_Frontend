@@ -3,7 +3,7 @@
     <div class="card-header bg-transparent pt-3 d-flex justify-content-between">
       <div class="top-cont">
         <h2>
-          <b>{{ job!== undefined ? job.jobTitle : closedJob?.jobTitle }}</b>
+          <b>{{ job !== undefined ? job.jobTitle : closedJob?.jobTitle }}</b>
         </h2>
         <h5 class="card-body d-inline me-5">
           <i class="fal fa-address-card" aria-hidden="true"></i>
@@ -58,9 +58,25 @@
         <h5 class="card-body">
           <!-- <div *ngIf="location?.locationId == undefined ">loading..</div> -->
           <strong class="d-block">Location</strong
-          >{{ location?.address!= undefined ?  (location?.address | uppercase) : "loading.."}},{{
-             location?.city!= undefined ?  (location?.city | uppercase) : "loading.."}},{{  location?.state != undefined ?  (location?.state | uppercase) : "loading.." }},{{
-             location?.country!= undefined ?  (location?.country | uppercase) : "loading.."
+          >{{
+            location?.address != undefined
+              ? (location?.address | uppercase)
+              : "loading.."
+          }},{{
+            location?.city != undefined
+              ? (location?.city | uppercase)
+              : "loading.."
+          }},{{
+            location?.state != undefined
+              ? (location?.state | uppercase)
+              : "loading.."
+          }}
+          </h5>
+          <h5>
+          {{
+            location?.country != undefined
+              ? (location?.country | uppercase)
+              : "loading.."
           }}
         </h5>
       </div>
@@ -75,9 +91,7 @@
         <h6 class="card-body">
           <p>
             Experience :
-            {{
-              job !== undefined ? job.experience : closedJob?.experience
-            }}
+            {{ job !== undefined ? job.experience : closedJob?.experience }}
             Years
           </p>
         </h6>
