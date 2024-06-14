@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { navbarData } from './nav-data';
 import { CommonModule } from '@angular/common';
 import { UserStoreService } from '../../Services/user-store.service';
-import { AuthService } from '../../Services/auth.service';import { ChangePasswordService } from '../../Services/ChangePassword/change-password.service';
- 
+import { AuthService } from '../../Services/auth.service';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,6 +20,9 @@ export class UserProfileComponent implements OnInit {
     public isValidEmail!:boolean;
     public isRequired :boolean = true;
 
+    mobileSideBar : boolean = false;
+    mobilePanel : boolean = false;
+    runOpenFun : boolean = false;
    
     value: any;
     id:string = "";
@@ -27,8 +30,20 @@ export class UserProfileComponent implements OnInit {
 
     constructor(
         private userStore : UserStoreService, 
-        private auth : AuthService
-    ) { }
+        private auth : AuthService,
+        private breakpointObserver: BreakpointObserver,
+    ) { 
+      this.breakpointObserver.observe([
+        "(max-width: 481px)"
+      ]).subscribe((result: BreakpointState) => {
+        if (result.matches) {
+            // hide stuff  
+            this.mobileSideBar = true;   
+        } else {
+            // show stuff
+        }
+      });
+    }
 
     ngOnInit(): void {
         this.userStore.getNameFromStore()
@@ -46,5 +61,27 @@ export class UserProfileComponent implements OnInit {
     }
     toggleCollapse() {
       this.collapsed = !this.collapsed;
+    }
+
+    mobileSideViewOpen(){
+      this.mobileSideBar = false;
+      this.mobilePanel = true;
+      this.runOpenFun = true;
+    }
+  
+    mobileSideViewClose(){
+      this.mobileSideBar = true;
+      this.mobilePanel = false;
+      this.runOpenFun = false;
+    }
+  
+    @HostListener("document:click", ["$event"])
+    onClick(event: MouseEvent){
+      if (!this.runOpenFun && this.mobilePanel) {
+          this.mobileSideViewClose();      
+      }
+      else{
+        this.runOpenFun = false;
+      }
     }
 }
