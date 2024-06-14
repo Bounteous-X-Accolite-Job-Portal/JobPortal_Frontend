@@ -40,7 +40,7 @@ export class AddEmployeeComponent implements OnInit {
 
   constructor(
     private addEmployeeService: EmployeeService,
-    private spinnerService: SpinnerService,
+    private spinnerService: SpinnerService
   ) {
     this.loadDesignations();
   }
@@ -52,6 +52,7 @@ export class AddEmployeeComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl('', [
         Validators.required,
+        Validators.pattern('[6789][0-9]{9}'),
         Validators.minLength(10),
         Validators.maxLength(10),
       ]),
@@ -69,7 +70,7 @@ export class AddEmployeeComponent implements OnInit {
 
     this.addEmployeeService.getAllDesignations().subscribe(
       (res) => {
-        this.allDesignations =  res.allDesignations
+        this.allDesignations = res.allDesignations;
         // console.log(res.allDesignations);
         this.spinnerService.hideSpinner();
       },
@@ -94,11 +95,10 @@ export class AddEmployeeComponent implements OnInit {
     };
 
     if (this.addEmployeeForm.invalid) {
-      this.toaster.error("Invalid form, please fill all the details !");
+      this.toaster.error('Invalid form, please fill all the details !');
       this.spinnerService.hideSpinner();
       return;
-    } 
-    else {
+    } else {
       // console.log(employee);
 
       this.addEmployeeService.addEmployee(employee).subscribe(
@@ -116,19 +116,19 @@ export class AddEmployeeComponent implements OnInit {
 
             this.spinnerService.hideSpinner();
           } else {
-            this.toaster.error(
-              data.message
-            );
+            this.toaster.error(data.message);
             // console.log('error');
             this.spinnerService.hideSpinner();
           }
         },
         (error) => {
           // console.log(error);
-          this.toaster.error("Some error occured while registering" + error.message);
+          this.toaster.error(
+            'Some error occured while registering' + error.message
+          );
           this.spinnerService.hideSpinner();
         }
-    );
+      );
     }
   }
 }
