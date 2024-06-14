@@ -138,8 +138,7 @@ div{
 }
 
 .navbarMobileView{
-    height: 92vh; 
-    top: 8vh; 
+    height: 100vh; 
     padding: 1rem;
     background: #0a0156;
     color: white;
