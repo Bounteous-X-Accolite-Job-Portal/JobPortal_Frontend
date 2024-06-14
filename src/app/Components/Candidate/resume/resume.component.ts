@@ -83,7 +83,6 @@ export class ResumeComponent {
           );
         }
         this.spinner.hideSpinner();
-        // this.resumeForm.get('resumeUrl')?.setValue(this.userResume.resumeUrl || '');
       },
       (error) => {
         this.spinner.hideSpinner();

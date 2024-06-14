@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { sideBarData } from './side-bar';
 import { UserStoreService } from '../../../Services/user-store.service';
 import { AuthService } from '../../../Services/auth.service';
 import { SpinnerService } from '../../../Services/spinner.service';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -16,6 +17,10 @@ import { SpinnerService } from '../../../Services/spinner.service';
 export class EmployeeDashboardComponent implements OnInit {
   collapsed : boolean = false;
   sideBarData = sideBarData;
+
+  mobileSideBar : boolean = false;
+  mobilePanel : boolean = false;
+  runOpenFun : boolean = false;
   
   public name : string = "Employee";
   hasPrivilege : boolean = false;
@@ -25,9 +30,21 @@ export class EmployeeDashboardComponent implements OnInit {
     private userStore : UserStoreService, 
     private authService : AuthService,
     private spinnerService : SpinnerService,
+    private breakpointObserver: BreakpointObserver,
   ) { 
     this.checkHasPrivilege();
     this.checkHasSpecialPrivilege();
+
+    this.breakpointObserver.observe([
+      "(max-width: 481px)"
+    ]).subscribe((result: BreakpointState) => {
+      if (result.matches) {
+          // hide stuff  
+          this.mobileSideBar = true;   
+      } else {
+          // show stuff
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -74,5 +91,27 @@ export class EmployeeDashboardComponent implements OnInit {
 
   toggleCollapse() {
     this.collapsed = !this.collapsed;
+  }
+
+  mobileSideViewOpen(){
+    this.mobileSideBar = false;
+    this.mobilePanel = true;
+    this.runOpenFun = true;
+  }
+
+  mobileSideViewClose(){
+    this.mobileSideBar = true;
+    this.mobilePanel = false;
+    this.runOpenFun = false;
+  }
+
+  @HostListener("document:click", ["$event"])
+  onClick(event: MouseEvent){
+    if (!this.runOpenFun && this.mobilePanel) {
+        this.mobileSideViewClose();      
+    }
+    else{
+      this.runOpenFun = false;
+    }
   }
 }
