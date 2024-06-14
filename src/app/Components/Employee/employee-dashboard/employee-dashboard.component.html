@@ -1,4 +1,7 @@
 <div style="display: flex; flex-direction: row" class="wrapper">
+  <a class="mobileNavbar" (click)="mobileSideViewOpen()" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+    <i *ngIf="mobileSideBar" class="fa-solid fa-angles-right mobileNavbar-icon"></i>
+  </a>
   <div
     class="sidenav"
     [ngClass]="collapsed ? 'sidenav-collapsed' : 'sidenav'"
@@ -40,5 +43,42 @@
   </div>
   <div class="comp gradient-custom-2" style="width: 100%">
     <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!-- mobile view side navbar -->
+<div class="offcanvas offcanvas-start navbarMobileView" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header mobileNav-header">
+    <button class="mobile-logo" [routerLink]="['/employee-dashboard']">{{ this.name ? this.name.charAt(0) : "U" }}</button>
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">{{ this.name.split(" ")[0] }}</h5>
+    <a class="text-reset closingBtn" (click)="mobileSideViewClose()" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fa-solid fa-angles-left"></i></a>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="mobile-nav">
+      <li
+        class="mobile-nav-item float:left py-1"
+        *ngFor="let data of sideBarData"
+      >
+        <a
+          [routerLink]="['/employee-dashboard/' + data.routeLink]"
+          class="mobile-nav-link w-100"
+          routerLinkActive="active"
+          data-toggle="tooltip"
+          data-placement="right"
+          title="{{ data.label }}"
+          *ngIf="
+            (!data.requiredPrivilege ||
+              hasPrivilege === data.requiredPrivilege) &&
+            (!data.requiredSpecialPrivilege ||
+              hasSpecialPrivilege === data.requiredSpecialPrivilege)
+          "
+        >
+          <i class="mobile-link-icon ml-5" [class]="data.icon"></i>
+          <span class="mobile-link-text">{{
+            data.label
+          }}</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </div>
