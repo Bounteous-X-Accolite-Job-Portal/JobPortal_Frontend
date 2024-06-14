@@ -21,5 +21,25 @@
     background-color: hsla(0, 0%, 100%, 0.9) !important;
     backdrop-filter: saturate(200%) blur(25px);
   }
+
+  .p-error{
+    color:red;
+  }
   
   
+@media screen and (max-width: 768px) {
+  .formdiv{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container{
+    max-width: 90vw !important;
+  }
+  .card{
+   padding:0.8rem !important;
+  }
+ 
+}

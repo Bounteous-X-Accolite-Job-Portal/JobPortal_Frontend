@@ -32,7 +32,10 @@
   </ul>
   <div>
     <div *ngIf="ActiveInterviewToggle">
-      <div *ngIf="activeInterviews.length == 0">
+      <div
+        *ngIf="activeInterviews.length == 0"
+        class="text-center mt-5 text-muted fs-30"
+      >
         You don't have any interview in this section.
       </div>
       <div *ngIf="activeInterviews.length != 0">

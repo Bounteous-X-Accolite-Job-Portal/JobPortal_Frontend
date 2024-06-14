@@ -3,3 +3,12 @@
   backdrop-filter: saturate(200%) blur(25px);
 }
 
+@media screen and (max-width: 480px) {
+   .container{
+     max-width: 90vw !important;
+   }
+   .card{
+    padding:0.8rem !important;
+   }
+  
+}

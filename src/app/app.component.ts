@@ -107,6 +107,7 @@ export class AppComponent {
     if (popover && hamburger && !(popover.contains(event.target) || hamburger.contains(event.target))) {
       this.hidePopover();
     }
+    
   }
 
   @HostListener('window:resize', ['$event'])

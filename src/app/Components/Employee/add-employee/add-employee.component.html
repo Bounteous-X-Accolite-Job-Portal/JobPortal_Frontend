@@ -1,102 +1,126 @@
 <div class="container mw-80">
   <div class="card bg-glass px-5 mt-3">
-    <h3 class="my-4">Add Employee</h3>
+    <h3 class="mt-4">Add Employee</h3><hr/>
+    <div class="mb-2"></div>
     <form
       *ngIf="!loading"
       [formGroup]="addEmployeeForm"
       (ngSubmit)="onSubmit()"
     >
-      <div class="row">
+      <div class="formdiv row">
         <div class="mb-3 col">
-          <label class="form-label">First Name</label>
+          <label class="form-label">First Name<sup style="color:red;"> *</sup></label>
           <input
             type="text"
             placeholder="First Name"
             formControlName="firstName"
             class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
           />
-          <div
-            *ngIf="submitted && f['firstName'].errors"
-            class="invalid-feedback"
-          >
+          <small
+          *ngIf="
+            f['firstName'].invalid &&
+            (f['firstName'].dirty || f['firstName'].touched)
+          "
+          class="block p-error"
+        >
             <div *ngIf="f['firstName'].errors?.['required']">
               First Name is required
             </div>
-          </div>
+          </small>
         </div>
         <div class="mb-3 col">
-          <label class="form-label">Last Name</label>
+          <label class="form-label">Last Name<sup style="color:red;"> *</sup></label>
           <input
             type="text"
             placeholder="Last Name"
             formControlName="lastName"
             class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
           />
-          <div
-            *ngIf="submitted && f['lastName'].errors"
-            class="invalid-feedback"
-          >
+         <small
+          *ngIf="
+            f['lastName'].invalid &&
+            (f['lastName'].dirty || f['lastName'].touched)
+          "
+          class="block p-error"
+        >
             <div *ngIf="f['lastName'].errors?.['required']">
               Last Name is required
             </div>
-          </div>
+          </small>
         </div>
       </div>
-      <div class="row">
+      <div class="formdiv row">
         <div class="mb-3 col">
-          <label class="form-label">Email</label>
+          <label class="form-label">Email<sup style="color:red;"> *</sup></label>
           <input
             type="text"
             placeholder="Email"
             formControlName="email"
             class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
           />
-          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+          <!-- <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">a -->
+            <small
+            *ngIf="
+              f['email'].invalid &&
+              (f['email'].dirty || f['email'].touched)
+            "
+            class="block p-error"
+          >
             <div *ngIf="f['email'].errors?.['required']">Email is required</div>
             <div *ngIf="f['email'].errors?.['email']">Email is invalid</div>
+            </small>
           </div>
-        </div>
 
         <div class="mb-3 col">
-          <label class="form-label">Phone Number</label>
+          <label class="form-label">Phone Number<sup style="color:red;"> *</sup></label>
           <input
             type="tel"
             placeholder="Phone Number"
             formControlName="phone"
             class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }"
-            pattern="[0-9]{10}"
+            
           />
-          <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+          <small
+            *ngIf="
+              f['phone'].invalid &&
+              (f['phone'].dirty || f['phone'].touched)
+            "
+            class="block p-error"
+          >
             <div *ngIf="f['phone'].errors?.['required']">Phone number is required</div>
-            <div *ngIf="f['phone'].errors?.['phone']">Phone number is invalid</div>
-          </div>
+            <div *ngIf="f['phone'].errors?.['minlength']">Minimum length is 10</div>
+            <div *ngIf="f['phone'].errors?.['maxlength']">Minimum length is 10</div>
+            <div *ngIf="f['phone'].errors?.['pattern']">Phone No. must start with (6, 7, 8, 9) & must only include numbers</div>
+        </small>
         </div>
       </div>
-      <div class="row">
+      <div class="formdiv row">
         <div class="mb-3 col">
-          <label class="form-label">Employee Id</label>
+          <label class="form-label">Employee Id<sup style="color:red;"> *</sup></label>
           <input
             type="text"
             placeholder="Employee Id"
             formControlName="empId"
             class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['empId'].errors }"
           />
-          <div *ngIf="submitted && f['empId'].errors" class="invalid-feedback">
+          <small
+            *ngIf="
+              f['empId'].invalid &&
+              (f['empId'].dirty || f['empId'].touched)
+            "
+            class="block p-error"
+          >
             <div *ngIf="f['empId'].errors?.['required']">
               Employee Id is required
             </div>
-          </div>
+          </small>
         </div>
         
         <div class="mb-3 col">
-          <label class="form-label">Designation Id</label><br />
+          <label class="form-label">Designation Id<sup style="color:red;"> *</sup></label><br />
+          
           <select formControlName="designationId" style="width: 100%;">
-            <option value="">Select employee designation</option>
+            <option value="" disabled selected>Select employee designation</option>
             <option
               *ngFor="let designation of allDesignations"
               [value]="designation.designationId"
@@ -104,11 +128,22 @@
               {{ designation.designationName }}
             </option>
           </select>
+          <small
+            *ngIf="
+              f['designationId'].invalid &&
+              (f['designationId'].dirty || f['designationId'].touched)
+            "
+            class="block p-error"
+          >
+          <div *ngIf="f['designationId'].errors?.['required']">
+            Designation is required
+          </div>
+          </small>
         </div>
       </div>
     
-      <div class="mb-3" style="float: right;">
-        <button class="btn btn-primary">
+      <div class="my-3" style="float: right;">
+        <button class="btn btn-primary mb-2" [disabled]="addEmployeeForm.invalid">
           Add Employee
         </button>
       </div>
