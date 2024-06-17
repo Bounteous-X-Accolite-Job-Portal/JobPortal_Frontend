@@ -8,6 +8,16 @@
 	justify-content: center;
 }
 
+
+.emded-div{
+	background-color: aliceblue; 
+	width: 62%; 
+	height: 80vh;
+	display: flex;
+	justify-content: center;
+	margin: 5vh 0 5vh 0;
+}
+
 .btn {
 	display: block;
     padding: 0.5rem 1rem;
@@ -104,4 +114,21 @@ h1 {
 
 .empty{
 	color: gray;
+}
+
+
+@media (max-width: 480px) {
+	.emded-div{
+		width: 82%; 
+		height: 50vh;
+		margin: 5vh 0 5vh 0;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+	.emded-div{
+		width: 82%; 
+		height: 65vh;
+		margin: 5vh 0 5vh 0;
+	}
 }
