@@ -116,6 +116,9 @@ div{
 .sidenav-link-text{
     margin-left: 1.6rem;
 }
+/* .offcanvas-header{
+    background: #fff ;
+} */
 
 .sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-nav-icon {
     font-size: 22px;
