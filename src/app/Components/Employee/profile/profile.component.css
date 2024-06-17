@@ -7,7 +7,7 @@ body {
 }
 .profile-page {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   padding-top: 2rem;
   /* background: #2b2980;
     
@@ -114,6 +114,26 @@ body {
   font-weight: bold;
   font-size: 1.6rem;
 }
+
+@media (max-width:481px){
+  .profile-page {
+    padding: 1rem 0.8rem;
+    height: 88vh;
+  }
+
+  .content__list{
+    flex-direction: column;
+  }
+
+  .content__list li{
+    padding-bottom: 1rem !important;
+  }
+
+  .content__description{
+    margin-top: 0 !important;
+  }
+}
+
 @media (max-width: 990px) {
   .profile-page {
     padding-top: 0;

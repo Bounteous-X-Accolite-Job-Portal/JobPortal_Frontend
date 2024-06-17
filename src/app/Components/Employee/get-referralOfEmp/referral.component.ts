@@ -60,7 +60,7 @@ export class ReferralComponent {
 
     this.referalService.getreferral(this.empId).subscribe(
       (res: GetReferral) => {
-        console.log("response ar referral",res);
+        // console.log("response ar referral",res);
 
         for (let i = 0; i < res.referrals.length; i++) {
           const jobId = res.referrals[i].jobId;

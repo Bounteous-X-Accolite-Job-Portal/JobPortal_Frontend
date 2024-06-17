@@ -219,10 +219,6 @@ export class JobHomeComponent {
     );
   }
 
-  addrefrral(jobId: string) {
-    console.log('passed jobId ; ', jobId);
-  }
-
   private loadDegrees(): void {
     this.spinnerService.showSpinner();
     this.jobService.getAllDegrees().subscribe(

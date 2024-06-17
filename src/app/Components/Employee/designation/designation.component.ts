@@ -18,6 +18,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-designation',
@@ -42,7 +43,8 @@ export class DesignationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private designationWithPrivilege: DesignationWithPrivilegeService,
     private userStore: UserStoreService,
-    private authService: AuthService
+    private authService: AuthService,
+    public breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit() {
@@ -52,6 +54,14 @@ export class DesignationComponent implements OnInit {
     this.form = this.formBuilder.group({
       newDesignation: ['', [Validators.required]],
     });
+
+    this.breakpointObserver
+      .observe(['(max-width: 481px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          document.getElementById("AddModal")?.classList.add("modal-dialog-centered");
+        }
+      });
   }
 
   get f() {
