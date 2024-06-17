@@ -10,7 +10,7 @@ select {
 
 .jobFilterMobile{
   display: none;
-  z-index: 99999 !important;
+  z-index: 499 !important;
 }
 
 ::-webkit-scrollbar {
