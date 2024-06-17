@@ -16,12 +16,12 @@
     padding-left: 7px;
 }
 
-/* .icon{
-    background: #b1aaaa;
-    width: 3rem;
-    min-width: 3rem;
-    height: 3rem;
-    min-height: 3rem;
-    border-radius: 100%;
-    padding: 1rem;
-} */
+@media (max-width: 481px) {
+    .ms-5{
+        margin-left: 1rem !important;
+    }
+
+    .addDesignationButton{
+        font-size: 1rem !important;
+    }
+}
