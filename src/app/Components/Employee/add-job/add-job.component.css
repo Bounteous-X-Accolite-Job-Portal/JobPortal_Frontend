@@ -3,12 +3,15 @@
   backdrop-filter: saturate(200%) blur(25px);
 }
 
-@media screen and (max-width: 480px) {
-   .container{
-     max-width: 90vw !important;
-   }
-   .card{
+@media screen and (max-width: 4801px) {
+  .card{
     padding:0.8rem !important;
-   }
-  
+  }
+  .AddButton{
+    margin-top: 2rem !important;
+  }
+
+  .belowForm{
+    margin-top: 1rem !important;
+  }
 }

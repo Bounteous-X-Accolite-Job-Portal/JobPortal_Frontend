@@ -4,7 +4,7 @@
             <h2 style="display: inline;">Designations</h2>
         </span>
         <span *ngIf="hasSpecialPrivilege" style="float: right;">
-            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#addDesignationModal" (click)="clickOnAddDesignationButton()">Add Designation</button>
+            <button type="button" class="btn btn-primary btn-lg addDesignationButton" data-bs-toggle="modal" data-bs-target="#addDesignationModal" (click)="clickOnAddDesignationButton()">Add Designation</button>
         </span>
     </div>
     <div *ngFor="let element of allDesignations" class="card mb-3">
@@ -34,7 +34,7 @@
 
 <!-- Modal for add designation -->
 <div class="modal fade" id="addDesignationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="AddModal">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Add New Designation to Company</h5>

@@ -1,0 +1,9 @@
+@media (max-width: 481px) {
+    .email{
+        font-size: 0.8rem !important;
+    }
+
+    .offerLetterButton{
+        font-size: 0.7rem !important;
+    }
+}

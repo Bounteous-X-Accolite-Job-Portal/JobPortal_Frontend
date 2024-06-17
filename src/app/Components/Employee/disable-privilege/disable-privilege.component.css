@@ -23,6 +23,12 @@ input {
   padding-left: 40px;
 }
 
+@media (max-width: 481px){
+  .mb-5{
+    margin-bottom: 2rem !important;
+  }
+}
+
 @media screen and (max-width: 768px){
   .emp-card{
     flex-direction: column;
