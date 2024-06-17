@@ -7,7 +7,7 @@
       [attr.data-bs-target]="'#profileModal' + applicant.applicationId"
     >
       {{ applicant.candidate.firstName }} {{ applicant.candidate.lastName }} (
-      {{ applicant.candidate.email }} )
+      <span class="email">{{ applicant.candidate.email }}</span> )
     </span>
     <span
       *ngIf="
