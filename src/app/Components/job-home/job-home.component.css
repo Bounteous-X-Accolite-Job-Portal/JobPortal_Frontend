@@ -80,9 +80,7 @@ form {
 
 .jobFilterMobile{
   display: none;
-  position: fixed !important;
   z-index: 499 !important;
-  top: 90vh !important;
 }
 
 .jobFilterMobile button{
