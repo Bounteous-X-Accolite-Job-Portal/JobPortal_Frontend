@@ -1,3 +1,13 @@
+
+.search-bar i {
+  color: grey;
+  margin-top: -2px;
+  margin-right: -70px;
+  z-index: 100;
+}
+input {
+  padding-left: 40px;
+}
 select{
   width: 15vw;
   height: 6vh;
@@ -6,6 +16,11 @@ select{
   font-family: Verdana;
   padding: 0.5rem;
   margin: 0.6rem;
+}
+#filterRight span {
+  font-family: "Roboto";
+  font-weight: 400;
+  padding-left: 5px;
 }
 
 ::-webkit-scrollbar {
@@ -68,13 +83,35 @@ select{
     padding-bottom: 0.1rem !important;
   }
 }
+@media screen and (max-width: 480px) {
+  .top-div{
+    padding: 8px !important;
+  }
+  #filterRight{
+    display:block !important;
+  }
+  .filterFull{
+    display: none !important; 
+  }
+  select{
+    width: 75vw !important;
+    height: 40px !important;
+    font-size:medium;
+  }
+  .btns{
+    margin-top: 30px;
+    justify-content: space-around;
+    width: 80%;
+  }
+  .search, .reset{
+    padding: 10px !important;
+    font-weight: 600;
+  }
+  .modal-dialog {
+    position: fixed;
+    width: 90vw !important;
+    top: 8vh !important;
+    left: 1.5rem;
+  }
 
-.search-bar i {
-  color: grey;
-  margin-top: -2px;
-  margin-right: -70px;
-  z-index: 100;
-}
-input {
-  padding-left: 40px;
 }
