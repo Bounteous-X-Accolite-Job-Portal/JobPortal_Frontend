@@ -51,10 +51,12 @@ input {
 @media (max-width: 481px) {
     .profile-block {
         flex-direction: column;
+        justify-content: center;
     }
 }
 
 @media (max-width: 767px) {
+
     .img-thumbnail {
         display: none;
     }
