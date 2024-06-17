@@ -107,13 +107,14 @@ export class SkillsComponent {
           // console.log(res);
           // this.ngOnInit();
           this.toastr.success('Skills Added !!');
+          this.skillForm.reset();
         },
         (error) => {
           console.log(error);
         }
       );
   }
-
+  
   public updateskills(): void {
     this.userSkills.candidateSkills = this.userSkills.candidateSkills.concat(
       ',',
@@ -125,6 +126,7 @@ export class SkillsComponent {
         // console.log(res);
         this.loadCandidateSkills();
         this.toastr.success('Skills Updated!!');
+        this.skillForm.reset();
       },
       (error) => {
         console.log(error);
