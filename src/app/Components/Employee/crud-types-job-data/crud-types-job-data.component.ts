@@ -28,7 +28,7 @@ export class CrudTypesJobDataComponent {
   deleteByJobTypeId(jobTypeId: string) : void{
     this.crudJobDataService.deleteTypeByTypeId(jobTypeId).subscribe(
       (res) => {
-        console.log("Job type Deleted!");
+        // console.log("Job type Deleted!");
         this.loadJobTypes();
       },
       (error) => {

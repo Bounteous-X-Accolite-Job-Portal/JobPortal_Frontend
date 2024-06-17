@@ -82,10 +82,8 @@ constructor(private router:Router) {}
   }
 
   public addEducation() : void{
-    console.log(this.addCandidateEducation.value);
       this.httpService.addCandidateEducation(this.addCandidateEducation.value).subscribe(
         (res) => {
-          console.log(res);
           this.toastr.success("Education Added Successfully!!");
           this.router.navigate(['profile','edu']);
         },

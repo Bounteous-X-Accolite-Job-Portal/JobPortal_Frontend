@@ -207,10 +207,10 @@ export class ApplicantCardComponent implements OnInit {
   getSuccessStatusId(){
     this.applicationService.getSuccessStatus().subscribe(
       (res)=>{
-        console.log(res);
+        // console.log(res);
         this.getStatusId = res;
         if(res ==  -1){
-          console.log("Status doesn't exist");
+          // console.log("Status doesn't exist");
         }
       },
       (error)=>{

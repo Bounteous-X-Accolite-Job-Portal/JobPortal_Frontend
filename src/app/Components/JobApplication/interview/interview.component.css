@@ -1,0 +1,12 @@
+/* .container{
+    background: #F1E3EB;
+} */
+
+
+@media screen and (max-width: 480px) {
+
+    .card{
+     padding: 1.2rem !important;
+    }
+   
+  }

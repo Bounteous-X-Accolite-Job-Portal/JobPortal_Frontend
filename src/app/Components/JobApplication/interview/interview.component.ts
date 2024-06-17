@@ -5,6 +5,7 @@ import {
   FormsModule,
   FormGroup,
   FormControl,
+  Validators,
 } from '@angular/forms';
 import { environment } from '../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
@@ -47,9 +48,9 @@ export class InterviewComponent implements OnInit {
 
   ngOnInit() {
     this.addInterviewForm = new FormGroup({
-      interviewDate: new FormControl(Date),
-      interviewTime: new FormControl(''),
-      interviewerId: new FormControl(''),
+      interviewDate: new FormControl(Date, Validators.required),
+      interviewTime: new FormControl('', Validators.required),
+      interviewerId: new FormControl('', Validators.required),
       link: new FormControl(''),
     });
 
@@ -62,9 +63,7 @@ export class InterviewComponent implements OnInit {
     this.employeeService.getAllEmployee().subscribe(
       (result: AllEmployee) => {
         // console.log("all employees", result);
-
         this.employee = result.employees;
-
         this.spinnerService.hideSpinner();
       },
       (error) => {
@@ -72,7 +71,6 @@ export class InterviewComponent implements OnInit {
         this.spinnerService.hideSpinner();
       }
     )
-
   }
 
   filterItems(searchText: string) {
@@ -99,6 +97,10 @@ export class InterviewComponent implements OnInit {
     this.spinnerService.hideSpinner();
   }
 
+  get f(){
+    return this.addInterviewForm.controls;
+  }
+
   getEmployeeId(employee : Employee) {
     this.spinnerService.showSpinner();
 
@@ -119,8 +121,6 @@ export class InterviewComponent implements OnInit {
       interviewerId: this.employeeIdOfInterviewer,
       link: this.addInterviewForm.value.link,
     };
-
-    // console.log(data);
 
     if (this.addInterviewForm.valid) {
       this.interviewService.addInterview(data)

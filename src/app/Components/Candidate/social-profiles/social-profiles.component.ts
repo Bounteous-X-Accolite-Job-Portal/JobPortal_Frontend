@@ -99,7 +99,7 @@ export class SocialProfilesComponent {
   }
 
   public funaddSocialMedia(): void {
-    console.log(this.mediaForm.value);
+    // console.log(this.mediaForm.value);
     this.candidService.addSocialMedia(this.mediaForm.value).subscribe(
       (res) => {
         // console.log(res);

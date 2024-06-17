@@ -1,19 +1,35 @@
 <div class="container mw-80 ">
   <div class="card bg-glass p-5 mt-3">
+    <div style="float: right; cursor: pointer;margin-bottom: 20px;">
+      <span (click)="backClicked()"><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</span>
+    </div>
       <div>
-        <div style="float: right; cursor: pointer;">
-          <span (click)="backClicked()"><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</span>
-        </div>
         <h1 class="mb-3">Schedule Interview</h1>
       </div>
       <form [formGroup]="addInterviewForm" (ngSubmit)="onSubmit()">
         <div class="mb-4 col">
           <label class="form-label">Interview Date</label>
           <input type="date" formControlName="interviewDate" class="form-control" />
+          <small
+          *ngIf="f['interviewDate']?.invalid && (f['interviewDate'].dirty || f['interviewDate'].touched)"
+          class="block p-error"
+        >
+          <div *ngIf="f['interviewDate'].errors?.['required']">
+            Interview date is required
+          </div>
+        </small>
         </div>
         <div class="mb-4 col">
           <label class="form-label">Interview Time</label>
           <input type="time" formControlName="interviewTime" class="form-control" />
+          <small
+          *ngIf="f['interviewTime']?.invalid && (f['interviewTime'].dirty || f['interviewTime'].touched)"
+          class="block p-error"
+        >
+          <div *ngIf="f['interviewTime'].errors?.['required']">
+            Interview time is required
+          </div>
+        </small>
         </div>
         <div class="mb-4 col">
           <label for="search-text">Search for the interviewer</label>

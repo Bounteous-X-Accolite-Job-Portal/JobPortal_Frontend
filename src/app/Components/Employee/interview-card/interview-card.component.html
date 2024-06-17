@@ -16,22 +16,22 @@
     </div>
     <div class="card-body">
       <div *ngIf="interview.Job != null">
-        <p class="card-title">Position - {{interview.Job.jobTitle}} ({{interview.Job.jobCode}})</p>
-        <p class="card-title">Experience for Job - {{interview.Job.experience}}</p>
-        <p class="card-title">Job description - {{interview.Job.jobDescription | slice:0:100}}
+        <p class="card-title"><strong>Position - </strong>{{interview.Job.jobTitle}} ({{interview.Job.jobCode}})</p>
+        <p class="card-title"><strong>Experience for Job - </strong>{{interview.Job.experience}}</p>
+        <p class="card-title"><strong>Job description - </strong>{{interview.Job.jobDescription | slice:0:100}}
           <a [routerLink]="['/job-details', interview.Job.jobId]" routerLinkActive="router-link-active"  *ngIf="interview.Job.jobDescription.length > 100">...show more</a>
         </p>
       </div>
       <div *ngIf="interview.ClosedJob != null">
-        <p class="card-title">Position - {{interview.ClosedJob.jobTitle}} ({{interview.ClosedJob.jobCode}})</p>
-        <p class="card-title">Experience for Job - {{interview.ClosedJob.experience}}</p>
-        <p class="card-title">Job description - {{interview.ClosedJob.jobDescription | slice:0:100}}
+        <p class="card-title"><strong>Position - </strong>{{interview.ClosedJob.jobTitle}} ({{interview.ClosedJob.jobCode}})</p>
+        <p class="card-title"><strong>Experience for Job - </strong>{{interview.ClosedJob.experience}}</p>
+        <p class="card-title"><strong>Job description -</strong> {{interview.ClosedJob.jobDescription | slice:0:100}}
           <a [routerLink]="['/closedJob/job-details', interview.ClosedJob.closedJobId]" *ngIf="interview.ClosedJob.jobDescription.length > 100">...show more</a>
         </p>
       </div>
       <div>
         <span style="float:left">
-          Join on : {{interview.interviewDate}} , {{interview.interviewTime}} (24-hrs clock)
+        <strong>Join on : </strong>{{interview.interviewDate}} , {{interview.interviewTime}} (24-hrs clock)
         </span>
         <span *ngIf="!doneInterview" style="float:right">
           <a href='{{interview.link}}' target="_blank">
