@@ -1,0 +1,25 @@
+.categoryWrapper{
+    padding: 4vh 2vw !important;
+}
+
+.content{
+    min-width: 50vw;
+}
+
+@media (max-width : 481px){
+    .categoryWrapper{
+        padding: 6vw 1vw !important;
+    }
+
+    .p-4{
+        padding: 0.8rem !important;
+    }
+
+    .backButton{
+        float: right !important;
+    }
+
+    .content{
+        min-width: 80vw;
+    }
+}
