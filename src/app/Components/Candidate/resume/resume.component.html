@@ -5,7 +5,7 @@
       <div class="d-flex align-items-center">
         <!-- <div class="fw-bold fs-large me-2">Click here to update resume</div> -->
         <div data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="false" style="cursor: pointer"
-          data-bs-toggle="tooltip" data-bs-placement="right" title="Update Resume">
+          data-bs-placement="right" title="Update Resume">
           <i class="fa fa-2x fa-pen-to-square feature-icon"></i>
         </div>
       </div>
@@ -25,7 +25,7 @@
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
           <h5 class="modal-title" id="exampleModalLabel">Update resume</h5>
-          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <button type="button" class="close rounded" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -43,7 +43,6 @@
           <button (click)="update()" [disabled]="uploading" class="btn btn-primary-1">
             {{ uploading ? "Uploading..." : "Upload" }}
           </button>
-          <!-- <button type="button" class="btn btn-primary-1" data-bs-dismiss="modal"  (click)="update()" >Save changes</button> -->
         </div>
       </div>
     </div>
