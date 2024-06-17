@@ -17,10 +17,18 @@ select{
   padding: 0.5rem;
   margin: 0.6rem;
 }
-#filterRight span {
-  font-family: "Roboto";
-  font-weight: 400;
-  padding-left: 5px;
+
+.jobFilterMobile{
+  display: none;
+  z-index: 499 !important;
+}
+
+.jobFilterMobile button{
+  padding: 1rem 1.5rem !important;
+}
+
+.jobFilterMobile i{
+  font-size: 1.4rem !important;
 }
 
 ::-webkit-scrollbar {
@@ -82,16 +90,18 @@ select{
     padding-top: 0.1rem !important;
     padding-bottom: 0.1rem !important;
   }
+  .filterFull{
+    display: none;
+  }
+  
+  .jobFilterMobile{
+    display: block !important;
+  }
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 481px) {
   .top-div{
     padding: 8px !important;
-  }
-  #filterRight{
-    display:block !important;
-  }
-  .filterFull{
-    display: none !important; 
+    padding-top: 3rem !important;
   }
   select{
     width: 75vw !important;
@@ -114,4 +124,17 @@ select{
     left: 1.5rem;
   }
 
+  .filterFull{
+    display: none !important;
+  }
+  
+  .jobFilterMobile{
+    display: block !important;
+  }
+  .mb-5{
+    margin-bottom: 1.7rem !important;
+  }
+  .brTag{
+    display: none !important;
+  }
 }

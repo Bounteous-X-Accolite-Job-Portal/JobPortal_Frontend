@@ -97,14 +97,6 @@ form {
     height: auto;
   }
 
-  .Filters {
-    display: none !important;
-  }
-
-  .jobFilterMobile {
-    display: block !important;
-  }
-
   /* Filter modal */
   .modal-dialog {
     position: fixed;
@@ -126,6 +118,10 @@ form {
 }
 
 @media (max-width: 481px) {
+  .Filters {
+    display: none !important;
+  }
+
   .jobFilterMobile {
     display: block !important;
   }
@@ -138,6 +134,10 @@ form {
     height: 40vh !important;
     left: 15vw !important;
     top: 6vh !important;
+  }
+
+  .Filters {
+    display: none !important;
   }
 
   .jobFilterMobile {
