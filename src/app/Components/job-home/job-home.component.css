@@ -78,25 +78,23 @@ form {
   margin-bottom: 1.1rem;
 }
 
-#filterRight span {
-  font-family: "Roboto";
-  font-weight: 400;
-  padding-left: 5px;
+.jobFilterMobile{
+  display: none;
+  z-index: 499 !important;
+}
+
+.jobFilterMobile button{
+  padding: 1rem 1.5rem !important;
+}
+
+.jobFilterMobile i{
+  font-size: 1.4rem !important;
 }
 
 @media (max-width: 768px) {
   .Jobhunt {
     flex-direction: column;
     height: auto;
-  }
-
-  .Filters {
-    display: none !important;
-  }
-  #filterRight {
-    display: block !important;
-    padding: 10px;
-    background-color: #dccff0;
   }
 
   /* Filter modal */
@@ -119,11 +117,16 @@ form {
   }
 }
 
-/* @media (min-width: 768px) {
-  #filterModal{
+@media (max-width: 481px) {
+  .Filters {
     display: none !important;
   }
-} */
+
+  .jobFilterMobile {
+    display: block !important;
+  }
+}
+
 @media (max-width: 560px) {
   .modal-dialog {
     position: relative;
@@ -131,6 +134,14 @@ form {
     height: 40vh !important;
     left: 15vw !important;
     top: 6vh !important;
+  }
+
+  .Filters {
+    display: none !important;
+  }
+
+  .jobFilterMobile {
+    display: block !important;
   }
 }
 

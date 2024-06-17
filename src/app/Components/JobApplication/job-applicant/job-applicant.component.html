@@ -1,7 +1,7 @@
-<div class="p-5 pt-3">
+<div class="p-5 pt-3 top-div">
     <h3>-- All Applicants on the Job Posting --</h3>
-    <div>
-        <form [formGroup]="filtersForm" class="d-flex flex-row align-items-center overflow-scroll">
+    <div class="filterFull">
+        <form [formGroup]="filtersForm" class="d-flex flex-row align-items-center justify-content-evenly overflow-scroll">
           <div>
               <!-- <p>Degree</p> -->
               <select formControlName="degree" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their degrees">
@@ -45,10 +45,21 @@
             </div>
         </form>
     </div>
-
+    <div class="jobFilterMobile position-fixed bottom-0 end-0 rounded-circle m-4">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#filterModal"
+        >
+          <i class="fa-solid fa-filter"></i>
+        </button>
+    </div>
+    <br class="brTag" />
+    <br/>
     <div class="d-flex flex-row mb-5">
         <div class="d-flex justify-content-center align-items-center search-bar"><i class="fa fa-search" aria-hidden="true"></i></div>
-        <div class="d-flex justify-content-center align-items-center col px-3">
+        <div class="d-flex justify-content-center align-items-center col px-2">
             <label for="search-text" hidden>Search for the interviewer</label>
             <input
                 type="search"
@@ -79,4 +90,72 @@
         <app-applicant-card *ngFor="let item of showApplicants" [applicant]="item" (changeStatusEmitter)="changeStatus($event)"></app-applicant-card>
     </div>
     
+</div>
+
+
+<!-- Filter modal -->
+
+<div
+  class="modal fade"
+  id="filterModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header py-2">
+        <h5 class="modal-title" id="exampleModalLabel">Filters</h5>
+        <hr />
+        <a class="btn-close" id="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+      </div>
+      <div class="modal-body">
+        <div class="py-3">
+           <form [formGroup]="filtersForm" class="d-flex flex-column align-items-center justify-content-evenly overflow-scroll">
+          <div>
+              <!-- <p>Degree</p> -->
+              <select formControlName="degree" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their degrees">
+                <option value="">Select Degree</option>
+                  <option *ngFor="let deg of degrees" [value]="deg.degreeId">
+                      {{deg.degreeName}}
+                  </option>
+              </select>
+          </div>
+            <div>
+                <!-- <p>Education Institution</p> -->
+                <select formControlName="institute" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their previous institution name">
+                    <option value="">Select Institution</option>
+                    <option *ngFor="let inst of educationInstitutions" [value]="inst.institutionId">
+                        {{inst.institutionOrSchool}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <!-- <p>Past Company</p> -->
+                <select formControlName="company" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their previous company name">
+                    <option value="">Select Company</option>
+                    <option *ngFor="let cmp of companies" [value]="cmp.companyId">
+                        {{cmp.companyName}}
+                    </option>
+                </select>
+            </div>
+            <div>      
+                <!-- <p>Application Status</p> -->
+                <select formControlName="status" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their application status">
+                    <option value="">Select Status</option>
+                    <option *ngFor="let stat of allStatus" [value]="stat.statusId">
+                        {{stat.statusName}}
+                    </option>
+                </select>
+            </div>
+            
+            <div class="d-flex flex-row mx-2 btns">
+                <button type="button" class="btn btn-info m-2 search" (click)=onSubmit()><span>Search</span><i></i></button>
+                <button type="button" class="btn btn-secondary m-2 reset" (click)=resetFilters()><span>Reset</span><i></i></button>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

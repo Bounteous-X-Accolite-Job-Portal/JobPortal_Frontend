@@ -7,7 +7,7 @@
       [attr.data-bs-target]="'#profileModal' + applicant.applicationId"
     >
       {{ applicant.candidate.firstName }} {{ applicant.candidate.lastName }} (
-      {{ applicant.candidate.email }} )
+      <span class="email">{{ applicant.candidate.email }}</span> )
     </span>
     <span
       *ngIf="
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-6 experienceSec">
         <div class="card text-center">
           <div class="card-header">Experiences</div>
           <div class="card-body">
@@ -107,7 +107,7 @@
   <div class="card-header">
     <div>
       <span style="float: left"
-        >Interviews -
+        >
         <a
           class="btn-secondary btn-sm"
           style="cursor: pointer"
@@ -115,7 +115,7 @@
           [attr.data-bs-target]="'#interviewModal' + applicant.applicationId"
           (click)="GetAllApplicantInterview(applicant.applicationId)"
         >
-          Click to view All Interviews
+          View all Interviews
         </a>
       </span>
       <span style="float: right">
