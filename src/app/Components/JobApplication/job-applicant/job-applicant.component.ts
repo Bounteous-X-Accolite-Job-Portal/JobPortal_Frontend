@@ -215,14 +215,14 @@ export class JobApplicantComponent implements OnInit {
   public onSubmit(): void {
     this.spinnerService.showSpinner();
     // console.log(this.filtersForm.value);
-
+    document.getElementById('btn-close')?.click();
     this.filterJobs(
       this.filtersForm.get('degree')?.value,
       this.filtersForm.get('company')?.value,
       this.filtersForm.get('institute')?.value,
       this.filtersForm.get('status')?.value
     );
-
+    
     this.spinnerService.hideSpinner();
   }
 
@@ -313,7 +313,7 @@ export class JobApplicantComponent implements OnInit {
   }
 
   private displayFilterEmptyToast(): void {
-    this.toastr.error('NO Filter Selected !!');
+    this.toastr.info('NO Filter Selected !!');
   }
 
   private displayApplicationToast(): void {
@@ -325,7 +325,7 @@ export class JobApplicantComponent implements OnInit {
   }
 
   private displayEmptyApplicationToast(): void {
-    this.toastr.error('No Applications Found !!');
+    this.toastr.info('No Applications Found !!');
   }
 
   search(searchText: string) {
