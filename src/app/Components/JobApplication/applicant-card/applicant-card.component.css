@@ -6,4 +6,14 @@
     .email{
         font-size: 0.9rem !important;
     }
+
+    .experienceSec{
+        margin-bottom: 1rem !important;
+    }
+}
+
+@media (max-width : 600px) {
+    .experienceSec{
+        margin-bottom: 1rem !important;
+    }
 }
