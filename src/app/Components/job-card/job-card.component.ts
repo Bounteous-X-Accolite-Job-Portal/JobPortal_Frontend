@@ -171,7 +171,7 @@ export class JobCardComponent {
         }
       );
     } else {
-      console.log('You Denied to Disable Job !!');
+      // console.log('You Denied to Disable Job !!');
     }
   }
 }

@@ -112,7 +112,6 @@ export class AppliedJobsComponent {
             let closedJobId = res.allJobApplications[index].closedJobId;
             this.closedJobService.getClosedJobById(closedJobId === undefined ? "3fa85f64-5717-4562-b3fc-2c963f66afa6" : closedJobId).subscribe(
               (closedJob) => {
-                console.log("closed job data", closedJob);
 
                 let data : coupledData = {
                   application : res.allJobApplications[index],

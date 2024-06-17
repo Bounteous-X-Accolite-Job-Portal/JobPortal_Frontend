@@ -70,11 +70,11 @@ export class EditJobComponent {
     this.loadJob(id);
 
     this.userStore.getIdFromStore().subscribe((val) => {
-      console.log(val);
+      // console.log(val);
       let idFromToken = this.auth.getIdFromToken();
-      console.log(idFromToken);
+      // console.log(idFromToken);
       this.userId = val || idFromToken;
-      console.log('Logged User Id : ', this.userId);
+      // console.log('Logged User Id : ', this.userId);
     });
 
     this.locations.push({
@@ -117,9 +117,8 @@ export class EditJobComponent {
   private loadJob(id: string): void {
     this.jobService.getJobById(id).subscribe(
       (res) => {
-        console.log('feteched : ', res);
         this.job = res.job;
-        console.log(this.job);
+        // console.log(this.job);
 
         this.jobForm.get('jobCode')?.setValue(this.job.jobCode);
         this.jobForm.get('jobDescription')?.setValue(this.job.jobDescription);
@@ -197,7 +196,6 @@ export class EditJobComponent {
 
   onSubmit(): void {
     this.isLoading = true;
-    console.log('job form :', this.jobForm.value);
 
     this.job.jobCode = this.jobForm.get('jobCode')?.value || '';
     this.job.jobDescription = this.jobForm.get('jobDescription')?.value || '';
@@ -210,7 +208,6 @@ export class EditJobComponent {
     this.job.experience = this.jobForm.get('experience')?.value || '';
     this.job.lastDate = this.jobForm.get('lastDate')?.value || '';
 
-    console.log('updt job : ', this.job);
     this.jobService.updateJob(this.job).subscribe(
       (res) => {
         // console.log(res);

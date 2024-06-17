@@ -53,7 +53,7 @@ export class AddReferralComponent implements OnInit {
 
     this.referralService.addreferral(this.referralForm.value).subscribe(
       (res: AddReferralResponse) => {
-        console.log(res);
+        // console.log(res);
 
         if (res.status == 200) {
           this.toastr.success(

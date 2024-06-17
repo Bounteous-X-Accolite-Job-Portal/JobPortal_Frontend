@@ -65,7 +65,6 @@ export class ResumeComponent {
     this.spinner.showSpinner();
     this.resumeService.getResumeByCandidateId(this.userId).subscribe(
       (res) => {
-        console.log(res);
         this.msg = res.message;
         if (res.resume == null) {
           this.toastr.info('No resume present');
@@ -99,7 +98,6 @@ export class ResumeComponent {
   add() {
     this.resumeService.addResumeByCandidateId(this.resumeUrl).subscribe(
       (res) => {
-        console.log(res);
         this.toastr.success('Resume link added');
         this.ngOnInit();
       },
@@ -115,7 +113,6 @@ export class ResumeComponent {
       .removeResumeByResumeId(this.userResume.resumeId)
       .subscribe(
         (res) => {
-          console.log(res);
 
           if (res.status === 200) {
             this.uploadFile()
@@ -164,14 +161,14 @@ export class ResumeComponent {
       formData.append('upload_preset', 'jobPortal_pdf');
       formData.append('folder', 'pdf');
 
-      console.log('file info ', this.file!.slice(start, end));
+      //console.log('file info ', this.file!.slice(start, end));
 
       const contentRange = `bytes ${start}-${end - 1}/${this.file!.size}`;
-      console.log(
-        `Uploading chunk for uniqueUploadId: ${uniqueUploadId}; start: ${start}, end: ${
-          end - 1
-        }`
-      );
+      // console.log(
+      //   `Uploading chunk for uniqueUploadId: ${uniqueUploadId}; start: ${start}, end: ${
+      //     end - 1
+      //   }`
+      // );
       try {
         const response = await this.http
           .post(
