@@ -1,3 +1,9 @@
 .popover{
     z-index: 1060;
 }
+
+@media (max-width : 481px){
+    .email{
+        font-size: 0.9rem !important;
+    }
+}
