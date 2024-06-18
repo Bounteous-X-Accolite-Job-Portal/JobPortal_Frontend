@@ -8,3 +8,24 @@
     justify-content: space-between;
     align-items: center;
 }
+
+
+.outer-div{
+    height: auto; 
+    min-height: 70vh;
+}
+
+@media (max-width: 480px){
+    .outer-div{
+        padding: 3% !important;
+        min-height: auto !important;
+    }
+
+    .table{
+        font-size: small;
+    }
+
+    .backdrop{
+        margin: 15% 5px 0 5px !important;
+    }
+}

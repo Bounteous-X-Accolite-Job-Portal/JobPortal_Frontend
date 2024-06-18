@@ -1,11 +1,11 @@
 <div class="p-5 pt-3 top-div">
-    <h3>-- All Applicants on the Job Posting --</h3>
+    <h3>-- All Applicants on the Job Posting -- </h3>
     <div class="filterFull">
         <form [formGroup]="filtersForm" class="d-flex flex-row align-items-center justify-content-evenly overflow-scroll">
           <div>
               <!-- <p>Degree</p> -->
               <select formControlName="degree" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their degrees">
-                <option value="">Select Degree</option>
+                <option value="" selected>Select Degree</option>
                   <option *ngFor="let deg of degrees" [value]="deg.degreeId">
                       {{deg.degreeName}}
                   </option>
@@ -14,7 +14,7 @@
             <div>
                 <!-- <p>Education Institution</p> -->
                 <select formControlName="institute" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their previous institution name">
-                    <option value="">Select Institution</option>
+                    <option value="" selected>Select Institution</option>
                     <option *ngFor="let inst of educationInstitutions" [value]="inst.institutionId">
                         {{inst.institutionOrSchool}}
                     </option>
@@ -23,7 +23,7 @@
             <div>
                 <!-- <p>Past Company</p> -->
                 <select formControlName="company" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their previous company name">
-                    <option value="">Select Company</option>
+                    <option value="" selected>Select Company</option>
                     <option *ngFor="let cmp of companies" [value]="cmp.companyId">
                         {{cmp.companyName}}
                     </option>
@@ -32,7 +32,7 @@
             <div>      
                 <!-- <p>Application Status</p> -->
                 <select formControlName="status" data-bs-toggle="tooltip" data-bs-placement="right" title="Find candidates using their application status">
-                    <option value="">Select Status</option>
+                    <option value="" selected>Select Status</option>
                     <option *ngFor="let stat of allStatus" [value]="stat.statusId">
                         {{stat.statusName}}
                     </option>
@@ -69,7 +69,7 @@
                 id="search-text"
                 aria-describedby="search-text"
                 (input)="search(searchText)"
-                placeholder="Search using applicant's name, email or skills"
+                placeholder="Search using applicant's name, email"
             />
         </div>
     </div>

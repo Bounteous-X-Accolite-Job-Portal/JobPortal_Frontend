@@ -1,68 +1,90 @@
-<div class="container mw-80 ">
+<div class="container mw-80">
   <div class="card bg-glass p-5 mt-3">
-    <div style="float: right; cursor: pointer;margin-bottom: 20px;">
-      <span (click)="backClicked()"><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i>Back</span>
+    <div style="float: right; cursor: pointer; margin-bottom: 20px">
+      <span (click)="backClicked()"
+        ><i class="fa fa-angle-double-left me-2" aria-hidden="true"></i
+        >Back</span
+      >
     </div>
-      <div>
-        <h1 class="mb-3">Schedule Interview</h1>
-      </div>
-      <form [formGroup]="addInterviewForm" (ngSubmit)="onSubmit()">
-        <div class="mb-4 col">
-          <label class="form-label">Interview Date</label>
-          <input type="date" formControlName="interviewDate" class="form-control" />
-          <small
-          *ngIf="f['interviewDate']?.invalid && (f['interviewDate'].dirty || f['interviewDate'].touched)"
+    <div>
+      <h1 class="mb-3">Schedule Interview</h1>
+    </div>
+    <form [formGroup]="addInterviewForm">
+      <div class="mb-4 col">
+        <label class="form-label">Interview Date</label>
+        <input
+          type="date"
+          formControlName="interviewDate"
+          class="form-control"
+        />
+        <small
+          *ngIf="
+            f['interviewDate']?.invalid &&
+            (f['interviewDate'].dirty || f['interviewDate'].touched)
+          "
           class="block p-error"
         >
           <div *ngIf="f['interviewDate'].errors?.['required']">
             Interview date is required
           </div>
         </small>
-        </div>
-        <div class="mb-4 col">
-          <label class="form-label">Interview Time</label>
-          <input type="time" formControlName="interviewTime" class="form-control" />
-          <small
-          *ngIf="f['interviewTime']?.invalid && (f['interviewTime'].dirty || f['interviewTime'].touched)"
+      </div>
+      <div class="mb-4 col">
+        <label class="form-label">Interview Time</label>
+        <input
+          type="time"
+          formControlName="interviewTime"
+          class="form-control"
+        />
+        <small
+          *ngIf="
+            f['interviewTime']?.invalid &&
+            (f['interviewTime'].dirty || f['interviewTime'].touched)
+          "
           class="block p-error"
         >
           <div *ngIf="f['interviewTime'].errors?.['required']">
             Interview time is required
           </div>
         </small>
-        </div>
-        <div class="mb-4 col">
-          <label for="search-text">Search for the interviewer</label>
-          <input
-            type="text"
-            [(ngModel)]="searchText"
-            [ngModelOptions]="{ standalone: true }"
-            class="form-control"
-            id="search-text"
-            aria-describedby="search-text"
-            (input)="filterItems(searchText)"
-            placeholder="Enter name to search Interviewer"
-            autofocus
-          />
-          <ul class="list-group list-group-flush" *ngIf="isListVisible">
-            <li
-              class="list-group-item"
-              *ngFor="let e of filteredEmployees"
-              (click)="getEmployeeId(e)"
-            >
-              {{ e.firstName }} {{ e.lastName }} ({{ e.empId }}) 
-            </li>
-          </ul>
-        </div>
-        <div class="mb-4 col">
-          <label class="form-label">Meeting Link</label>
-          <input type="text" formControlName="link" class="form-control" placeholder="Meeting Link for interview" />
-        </div>
-        <div class="mb-3" style="float: right;">
-          <button class="btn btn-primary-1">
-            Schedule Interview
-          </button>
-        </div>
-      </form>
+      </div>
+      <div class="mb-4 col">
+        <label for="search-text">Search for the interviewer</label>
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          [ngModelOptions]="{ standalone: true }"
+          class="form-control"
+          id="search-text"
+          aria-describedby="search-text"
+          (input)="filterItems(searchText)"
+          placeholder="Enter name to search Interviewer"
+          autofocus
+        />
+        <ul class="list-group list-group-flush" *ngIf="isListVisible">
+          <li
+            class="list-group-item"
+            *ngFor="let e of filteredEmployees"
+            (click)="getEmployeeId(e)"
+          >
+            {{ e.firstName }} {{ e.lastName }} ({{ e.empId }})
+          </li>
+        </ul>
+      </div>
+      <div class="mb-4 col">
+        <label class="form-label">Meeting Link</label>
+        <input
+          type="text"
+          formControlName="link"
+          class="form-control"
+          placeholder="Meeting Link for interview"
+        />
+      </div>
+      <div class="mb-3" style="float: right">
+        <button class="btn btn-primary-1" (click)="onSubmit()">
+          Schedule Interview
+        </button>
+      </div>
+    </form>
   </div>
 </div>

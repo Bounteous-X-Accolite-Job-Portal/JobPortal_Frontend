@@ -340,8 +340,6 @@ export class JobdetailsComponent {
   }
 
   public Refer(jobId?:string):void{
-    // console.log(jobId);
-    this.jobService.jobId = jobId || "";
-    this.router.navigate(['employee-dashboard','addReferral']);
+    this.router.navigate(['employee-dashboard','addReferral',jobId]);
   }
 }

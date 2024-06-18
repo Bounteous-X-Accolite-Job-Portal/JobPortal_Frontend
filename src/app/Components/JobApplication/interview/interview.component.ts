@@ -31,33 +31,33 @@ export class InterviewComponent implements OnInit {
   addInterviewForm!: FormGroup;
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private route: ActivatedRoute,
     private spinnerService: SpinnerService,
     private employeeService: EmployeeService,
     private _location: Location,
-    private toast : ToastrService,
-    private interviewService : InterviewService
+    private toast: ToastrService,
+    private interviewService: InterviewService
   ) {}
 
   searchText = '';
-  employeeIdOfInterviewer = "";
+  employeeIdOfInterviewer = '';
   isListVisible = false;
   employee: Employee[] = [];
   filteredEmployees: Employee[] = [];
 
   ngOnInit() {
     this.addInterviewForm = new FormGroup({
-      interviewDate: new FormControl(Date, Validators.required),
+      interviewDate: new FormControl('', Validators.required),
       interviewTime: new FormControl('', Validators.required),
-      interviewerId: new FormControl('', Validators.required),
+      // interviewerId: new FormControl('', Validators.required),
       link: new FormControl(''),
     });
 
     this.fetchAllEmployees();
   }
 
-  fetchAllEmployees(){
+  fetchAllEmployees() {
     this.spinnerService.showSpinner();
 
     this.employeeService.getAllEmployee().subscribe(
@@ -70,7 +70,7 @@ export class InterviewComponent implements OnInit {
         console.log(error);
         this.spinnerService.hideSpinner();
       }
-    )
+    );
   }
 
   filterItems(searchText: string) {
@@ -97,16 +97,24 @@ export class InterviewComponent implements OnInit {
     this.spinnerService.hideSpinner();
   }
 
-  get f(){
+  get f() {
     return this.addInterviewForm.controls;
   }
 
-  getEmployeeId(employee : Employee) {
+  getEmployeeId(employee: Employee) {
     this.spinnerService.showSpinner();
 
-    this.searchText = employee.firstName + " " + employee.lastName + " (" + employee.empId + ")";
+    this.searchText =
+      employee.firstName +
+      ' ' +
+      employee.lastName +
+      ' (' +
+      employee.empId +
+      ')';
     this.employeeIdOfInterviewer = employee.employeeId;
     this.isListVisible = false;
+
+    console.log('interviewer id ', this.employeeIdOfInterviewer);
 
     this.spinnerService.hideSpinner();
   }
@@ -123,25 +131,24 @@ export class InterviewComponent implements OnInit {
     };
 
     if (this.addInterviewForm.valid) {
-      this.interviewService.addInterview(data)
-        .subscribe(
-          (response : AddInterviewResponse) => {
-            // console.log('success : ', response);
-            this.toast.success(response.message);
+      this.interviewService.addInterview(data).subscribe(
+        (response: AddInterviewResponse) => {
+          // console.log('success : ', response);
+          this.toast.success(response.message);
 
-            this.addInterviewForm.reset();
-            this.employeeIdOfInterviewer = "";
+          this.addInterviewForm.reset();
+          this.employeeIdOfInterviewer = '';
 
-            this.spinnerService.hideSpinner();
-          },
-          (error) => {
-            console.error('Error sending POST request:', error);
-            this.toast.error("Error while scheduling interview");
-            this.spinnerService.hideSpinner();
-          }
-        );
+          this.spinnerService.hideSpinner();
+        },
+        (error) => {
+          console.error('Error sending POST request:', error);
+          this.toast.error('Error while scheduling interview');
+          this.spinnerService.hideSpinner();
+        }
+      );
     } else {
-      this.addInterviewForm.markAllAsTouched();
+      this.toast.error('invalid form');
       this.spinnerService.hideSpinner();
     }
   }
