@@ -349,6 +349,7 @@ export class JobApplicantComponent implements OnInit {
         .toLowerCase()
         .includes(searchText);
       const email = item.candidate.email.toLowerCase().includes(searchText);
+      
 
       return firstName || lastName || email;
     });
