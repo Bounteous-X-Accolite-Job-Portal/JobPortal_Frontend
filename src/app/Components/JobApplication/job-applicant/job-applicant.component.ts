@@ -59,7 +59,7 @@ export class JobApplicantComponent implements OnInit {
     private toastr: ToastrService,
     private statusService: StatusService,
     private candidService: CandidateService,
-    private getStatusService : StatusServiceService
+    private getStatusService: StatusServiceService
   ) {}
 
   ngOnInit(): void {
@@ -222,7 +222,7 @@ export class JobApplicantComponent implements OnInit {
       this.filtersForm.get('institute')?.value,
       this.filtersForm.get('status')?.value
     );
-    
+
     this.spinnerService.hideSpinner();
   }
 
@@ -309,6 +309,14 @@ export class JobApplicantComponent implements OnInit {
     this.filterapplicants = this.applicants;
     this.showApplicants = this.applicants;
     this.searchText = '';
+    
+    this.filtersForm = this.fb.group({
+      degree: [''],
+      institute: [''],
+      company: [''],
+      status: [''],
+    });
+
     this.displayResetToast();
   }
 
@@ -349,7 +357,6 @@ export class JobApplicantComponent implements OnInit {
         .toLowerCase()
         .includes(searchText);
       const email = item.candidate.email.toLowerCase().includes(searchText);
-      
 
       return firstName || lastName || email;
     });
@@ -358,33 +365,36 @@ export class JobApplicantComponent implements OnInit {
     this.spinnerService.hideSpinner();
   }
 
-  changeStatus(data : {applicationId : Guid, statusId: number}){
-    this.getStatusService.getstatus(data.statusId).subscribe(
-      (status) => {
-        for (let i = 0; i < this.applicants.length; i++) {
-          if (this.applicants[i].applicationId === data.applicationId) {
-              this.applicants[i].status.statusId = status.statusViewModel.statusId;
-              this.applicants[i].status.statusName = status.statusViewModel.statusName;
-              break;
-          }
-        }
-    
-        for (let i = 0; i < this.filterapplicants.length; i++) {
-          if (this.filterapplicants[i].applicationId === data.applicationId) {
-              this.filterapplicants[i].status.statusId = status.statusViewModel.statusId;
-              this.filterapplicants[i].status.statusName = status.statusViewModel.statusName;
-              break;
-          }
-        }
-    
-        for (let i = 0; i < this.showApplicants.length; i++) {
-          if (this.showApplicants[i].applicationId === data.applicationId) {
-              this.showApplicants[i].status.statusId = status.statusViewModel.statusId;
-              this.showApplicants[i].status.statusName = status.statusViewModel.statusName;
-              break;
-          }
+  changeStatus(data: { applicationId: Guid; statusId: number }) {
+    this.getStatusService.getstatus(data.statusId).subscribe((status) => {
+      for (let i = 0; i < this.applicants.length; i++) {
+        if (this.applicants[i].applicationId === data.applicationId) {
+          this.applicants[i].status.statusId = status.statusViewModel.statusId;
+          this.applicants[i].status.statusName =
+            status.statusViewModel.statusName;
+          break;
         }
       }
-    )
+
+      for (let i = 0; i < this.filterapplicants.length; i++) {
+        if (this.filterapplicants[i].applicationId === data.applicationId) {
+          this.filterapplicants[i].status.statusId =
+            status.statusViewModel.statusId;
+          this.filterapplicants[i].status.statusName =
+            status.statusViewModel.statusName;
+          break;
+        }
+      }
+
+      for (let i = 0; i < this.showApplicants.length; i++) {
+        if (this.showApplicants[i].applicationId === data.applicationId) {
+          this.showApplicants[i].status.statusId =
+            status.statusViewModel.statusId;
+          this.showApplicants[i].status.statusName =
+            status.statusViewModel.statusName;
+          break;
+        }
+      }
+    });
   }
 }

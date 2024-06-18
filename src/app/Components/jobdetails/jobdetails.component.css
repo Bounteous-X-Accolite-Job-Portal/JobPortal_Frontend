@@ -68,7 +68,7 @@
     }
     .res{
       flex-direction: column-reverse;
-      padding:0 !important;
+      padding-top: 10px !important;
     }
     .jobCode{
       margin-right: 10px !important;
@@ -79,7 +79,7 @@
     .firstdiv{
       /* height: auto; */
       /* align-items: flex-start !important; */
-      justify-content:flex-start !important;
+      justify-content: flex-start !important;
     }
    }
   @media (max-width: 440px) {

@@ -6,104 +6,102 @@ import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PermissionService {
-
   constructor(
-    private auth : AuthService,
+    private auth: AuthService,
     private router: Router,
     private store: UserStoreService,
-    private toast : ToastrService
-  ) { }
+    private toast: ToastrService
+  ) {}
 
   canActivate(): boolean {
-    if(this.auth.isLoggedIn()){
+    if (this.auth.isLoggedIn()) {
       return true;
     }
 
     // this.toast.info("Please login to access that resource.");
-    this.router.navigate(['login'])
+    this.router.navigate(['login']);
     return false;
   }
 
-  canActivateChild() : boolean {
-    if(this.auth.isLoggedIn()){
+  canActivateChild(): boolean {
+    if (this.auth.isLoggedIn()) {
       return true;
     }
 
     // this.toast.info("Please login to access that resource.");
-    this.router.navigate(['login'])
+    this.router.navigate(['login']);
     return false;
   }
 
-  isLoggedIn() : boolean {
-    if(!this.auth.isLoggedIn()){
+  isLoggedIn(): boolean {
+    if (!this.auth.isLoggedIn()) {
       return true;
     }
 
-    this.router.navigate([''])
+    this.router.navigate(['']);
     return false;
   }
 
-  isEmployee() : boolean {
+  isEmployee(): boolean {
     let bool = this.auth.checkIsEmployeeFromToken();
-    this.store.checkIsEmployeeFromStore().subscribe(val => {
-        bool = bool || val;
-    })
+    this.store.checkIsEmployeeFromStore().subscribe((val) => {
+      bool = bool || val;
+    });
 
-    
-    if(bool){
+    if (bool) {
       return true;
     }
 
-    this.toast.info("You are not authorised to access that resource.");
-    this.router.navigate([''])
+    // this.toast.info("You are not authorised to access that resource.");
+    this.router.navigate(['']);
     return false;
   }
 
-  isCandidate() : boolean {
+  isCandidate(): boolean {
     let bool = this.auth.checkIsEmployeeFromToken();
-    this.store.checkIsEmployeeFromStore().subscribe(val => {
-        bool = bool || val;
-    })
+    this.store.checkIsEmployeeFromStore().subscribe((val) => {
+      bool = bool || val;
+    });
 
-    if(!bool){
+    if (!bool) {
       return true;
     }
 
-    this.toast.info("You are not authorised to access that resource.");
-    this.router.navigate([''])
+    // this.toast.info("You are not authorised to access that resource.");
+    this.router.navigate(['']);
     return false;
   }
 
-  hasPrivilege() : boolean {
+  hasPrivilege(): boolean {
     let bool = this.auth.checkHasPrivilegeFromToken();
-    this.store.checkHasPrivilegeFromStore().subscribe(val => {
-        bool = bool || val;
-    })
+    this.store.checkHasPrivilegeFromStore().subscribe((val) => {
+      bool = bool || val;
+    });
 
-    if(bool){
+    if (bool) {
       return true;
     }
 
-    this.toast.info("You are not authorised to access that resource.");
-    this.router.navigate(['employee-dashboard'])
+    this.toast.info('You are not authorised to access that resource.');
+    this.router.navigate(['employee-dashboard']);
     return false;
   }
 
-  hasSpecialPrivilege() : boolean {
+  hasSpecialPrivilege(): boolean {
     let bool = this.auth.checkHasSpecialPrivilegeFromToken();
-    this.store.checkHasSpecialPrivilegeFromStore().subscribe(val => {
-        bool = bool || val;
-    })
+    this.store.checkHasSpecialPrivilegeFromStore().subscribe((val) => {
+      bool = bool || val;
+    });
 
-    if(bool){
+    if (bool) {
       return true;
     }
 
-    this.toast.info("You are not authorised to access that resource.");
-    this.router.navigate(['employee-dashboard'])
+    this.toast.info('You are not authorised to access that resource.');
+    this.router.navigate(['employee-dashboard']);
     return false;
   }
 }
