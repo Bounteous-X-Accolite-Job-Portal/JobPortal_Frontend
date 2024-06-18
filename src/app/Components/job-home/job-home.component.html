@@ -97,15 +97,6 @@
       </form>
     </div>
   </div>
-  <div id="filterRight" style="display: none">
-    <a
-      class="btn btn-primary"
-      style="float: right"
-      data-bs-toggle="modal"
-      data-bs-target="#filterModal"
-      ><i class="fa fa-filter"><span>Filter</span></i></a
-    >
-  </div>
   <div
     *ngIf="isEmployee && hasPrivilege"
     class="jobListing w-100"
@@ -175,6 +166,16 @@
       style="width: 100%"
     ></app-job-card>
   </div>
+</div>
+<div class="jobFilterMobile position-fixed bottom-0 end-0 rounded-circle m-4">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#filterModal"
+    >
+      <i class="fa-solid fa-filter"></i>
+    </button>
 </div>
 
 <!-- Filter Modal -->

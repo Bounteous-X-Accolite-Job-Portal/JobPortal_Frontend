@@ -26,7 +26,7 @@
                 <i class="fas fa-globe fa-lg text-warning"></i>
                 <p class="mb-0">Portfolio Site link</p>
                 <input type="text" formControlName="link1" />
-                <a [href]="socialMedia.link1" target="_blank"
+                <a [href]="socialMedia!=null?socialMedia.link1:'ndfbhfbsfbsfbs'" target="_blank" [ngStyle]="link1 ? {} : { 'pointer-events': 'none', 'color': 'grey' }"
                   ><i class="fa-solid fa-arrow-up-right-from-square"></i
                 ></a>
               </li>
@@ -37,7 +37,7 @@
                 <i class="fab fa-github fa-lg" style="color: #333333"></i>
                 <p class="mb-0">GitHub link</p>
                 <input type="text" formControlName="link2" />
-                <a [href]="socialMedia.link2" target="_blank"
+                <a [href]="socialMedia!=null?socialMedia.link2:''" target="_blank" [ngStyle]="link2 ? {} : { 'pointer-events': 'none', 'color': 'grey' }"
                   ><i class="fa-solid fa-arrow-up-right-from-square"></i
                 ></a>
               </li>
@@ -48,7 +48,7 @@
                 <i class="fab fa-linkedin fa-lg" style="color: #3b5998"></i>
                 <p class="mb-0">LinkedIn link</p>
                 <input type="text" formControlName="link3" />
-                <a [href]="socialMedia.link3" target="_blank"
+                <a [href]="socialMedia!=null?socialMedia.link3:'..'" target="_blank" [ngStyle]="link3 ? {} : { 'pointer-events': 'none', 'color': 'grey' }"
                   ><i class="fa-solid fa-arrow-up-right-from-square"></i
                 ></a>
               </li>

@@ -15,9 +15,10 @@ import {
 } from '@angular/forms';
 import { InterviewFeedbackService } from '../../../Services/InterviewFeedback/interview-feedback.service';
 import { AddInterviewFeedbackResponse } from '../../../Models/InterviewFeedback/AddInterviewFeedbackResponse';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { ToastrService } from 'ngx-toastr';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-interview-card',
@@ -44,7 +45,8 @@ export class InterviewCardComponent implements OnInit {
     private formBuilder: FormBuilder,
     private interviewFeedbackService: InterviewFeedbackService,
     private spinnerService: SpinnerService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit() {
@@ -53,6 +55,15 @@ export class InterviewCardComponent implements OnInit {
       feedback: ['', [Validators.required, Validators.minLength(50)]],
       additionalLink: [''],
     });
+
+    this.breakpointObserver
+      .observe(['(max-width: 481px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          document.getElementById("verticallyCentered")?.classList.add("modal-dialog-centered");
+          document.getElementById("verticalCenter")?.classList.add("modal-dialog-centered");
+        }
+      });
   }
 
   newFeedback() {
