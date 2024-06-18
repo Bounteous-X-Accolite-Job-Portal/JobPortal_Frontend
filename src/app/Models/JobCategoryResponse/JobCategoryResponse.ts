@@ -1,7 +1,7 @@
 import { JobCategory } from "./JobCategory";
 
 export interface JobCategoryResponse{
-    status: string;
+    status: number;
     message: string;
     jobCategory: JobCategory;
 }

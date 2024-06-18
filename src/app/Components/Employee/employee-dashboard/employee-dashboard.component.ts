@@ -32,9 +32,6 @@ export class EmployeeDashboardComponent implements OnInit {
     private spinnerService : SpinnerService,
     private breakpointObserver: BreakpointObserver,
   ) { 
-    this.checkHasPrivilege();
-    this.checkHasSpecialPrivilege();
-
     this.breakpointObserver.observe([
       "(max-width: 481px)"
     ]).subscribe((result: BreakpointState) => {
@@ -48,6 +45,9 @@ export class EmployeeDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkHasPrivilege();
+    this.checkHasSpecialPrivilege();
+    
     this.userStore.getNameFromStore()
     .subscribe((val) => {
         let nameFromToken = this.authService.getNameFromToken();
