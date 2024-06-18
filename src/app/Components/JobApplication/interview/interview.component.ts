@@ -148,7 +148,7 @@ export class InterviewComponent implements OnInit {
         }
       );
     } else {
-      this.addInterviewForm.markAllAsTouched();
+      this.toast.error('invalid form');
       this.spinnerService.hideSpinner();
     }
   }
