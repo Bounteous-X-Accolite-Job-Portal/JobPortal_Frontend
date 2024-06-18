@@ -4,6 +4,7 @@ import {
   ReactiveFormsModule,
   FormBuilder,
   FormGroup,
+  Validators,
 } from '@angular/forms';
 import { candidateEducation } from '../../../Models/EducationResponse/candidateEducation';
 import { EducationInstitution } from '../../../Models/InstitutionResponse/EducationInstitution';
@@ -54,12 +55,16 @@ constructor(private router:Router , private fb : FormBuilder , private spinner :
 
     this.updateCandidateEducation = this.fb.group({
       institutionOrSchoolName:[''],
-      startYear:[''],
+      startYear:['', Validators.required],
       endYear:[''],
-      grade:[''],
+      grade:['', Validators.required],
       institutionId:[''],
       degreeId:['']
     });
+  }
+
+  get f() {
+    return this.updateCandidateEducation.controls;
   }
 
   private loadAllInstitutions(): void {
