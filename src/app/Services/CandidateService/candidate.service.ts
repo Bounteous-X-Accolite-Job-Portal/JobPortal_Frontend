@@ -22,6 +22,7 @@ import { candidateExperience } from '../../Models/ExperienceResponse/candidateEx
 import { StatusResponse } from '../../Models/StatusResponse/StatusResponse';
 import { AllCompanyResponse } from '../../Models/CompanyResponse/AllCompanyResponse';
 import { Candidate } from '../../Models/Backend/Candidate';
+import { CompanyResponse } from '../../Models/CompanyResponse/CompanyResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -107,11 +108,11 @@ export class CandidateService {
   getAllCompanies():Observable<AllCompanyResponse>{
     return this.http.get<AllCompanyResponse>(environment.baseURL+'Company/getAllCompanies');
   }
-  addInstitution(institution: any ):Observable<any>{
-    return this.http.post(environment.baseURL + 'EducationInstitution/addInstitution',institution);
+  addInstitution(institution: any ):Observable<InstitutionResponse>{
+    return this.http.post<InstitutionResponse>(environment.baseURL + 'EducationInstitution/addInstitution',institution);
   }
-  addCompany(company: any):Observable<any>{
-    return this.http.post(environment.baseURL + 'Company/addCompany', company);
+  addCompany(company: any):Observable<CompanyResponse>{
+    return this.http.post<CompanyResponse>(environment.baseURL + 'Company/addCompany', company);
   }
   getStatusByStatusId(id:number):Observable<StatusResponse>{
     return this.http.get<StatusResponse>(environment.baseURL+'JobStatus/'+id);

@@ -108,13 +108,19 @@ export class SettingsComponent implements OnInit {
     this.crudJobService.addCategory(this.addCategoryForm.value).subscribe(
       (response) => {
         // console.log('success : ', response);
-        this.toastr.success('Categories added successfully!');
+        if(response.status === 200){
+          this.toastr.success('Categories added successfully!');
 
-        this.addCategoryForm.reset();
-        document.getElementById('categoryPopUpCloseBtn')?.click();
-        this.spinnerService.hideSpinner();
+          this.addCategoryForm.reset();
+          document.getElementById('categoryPopUpCloseBtn')?.click();
+          this.spinnerService.hideSpinner();
 
-        this.route.navigate(['crud-category-job-data'], { relativeTo: this.router});
+          this.route.navigate(['crud-category-job-data'], { relativeTo: this.router});
+        }
+        else{
+          this.toastr.error(response.message);
+          this.spinnerService.hideSpinner();
+        }
       },
       (error) => {
         // console.error('Error adding categories:', error);
@@ -131,13 +137,19 @@ export class SettingsComponent implements OnInit {
     this.crudJobService.addPosition(this.addPositionForm.value).subscribe(
       (response) => {
         // console.log('success : ', response);
-        this.toastr.success('Position added successfully!');
+        if(response.status === 200){
+          this.toastr.success('Position added successfully!');
 
-        this.addPositionForm.reset();
-        document.getElementById('positionPopUpCloseBtn')?.click();
-        this.spinnerService.hideSpinner();
+          this.addPositionForm.reset();
+          document.getElementById('positionPopUpCloseBtn')?.click();
+          this.spinnerService.hideSpinner();
 
-        this.route.navigate(['crud-position-job-data'], { relativeTo: this.router});
+          this.route.navigate(['crud-position-job-data'], { relativeTo: this.router});
+        }
+        else{
+          this.toastr.error(response.message);
+          this.spinnerService.hideSpinner();
+        }
       },
       (error) => {
         // console.error('Error adding positions:', error);
@@ -153,13 +165,19 @@ export class SettingsComponent implements OnInit {
     this.crudJobService.addLocation(this.addLocationForm.value).subscribe(
       (response) => {
         // console.log('success : ', response);
-        this.toastr.success('Location added successfully!');
+        if(response.status === 200){
+          this.toastr.success('Location added successfully!');
 
-        this.addLocationForm.reset();
-        document.getElementById('locationPopUpCloseBtn')?.click();
-        this.spinnerService.hideSpinner();
+          this.addLocationForm.reset();
+          document.getElementById('locationPopUpCloseBtn')?.click();
+          this.spinnerService.hideSpinner();
 
-        this.route.navigate(['crud-location-job-data'], { relativeTo: this.router});
+          this.route.navigate(['crud-location-job-data'], { relativeTo: this.router});
+        }
+        else{
+          this.toastr.error(response.message);
+          this.spinnerService.hideSpinner();
+        }
       },
       (error) => {
         // console.error('Error adding locations:', error);
@@ -175,13 +193,19 @@ export class SettingsComponent implements OnInit {
     this.crudJobService.addTypes(this.addTypeForm.value).subscribe(
       (response) => {
         // console.log('success : ', response);
-        this.toastr.success('Job type added successfully!');
+        if(response.status === 200){
+          this.toastr.success('Job type added successfully!');
 
-        this.addTypeForm.reset();
-        document.getElementById('jobTypePopUpCloseBtn')?.click();
-        this.spinnerService.hideSpinner();
+          this.addTypeForm.reset();
+          document.getElementById('jobTypePopUpCloseBtn')?.click();
+          this.spinnerService.hideSpinner();
 
-        this.route.navigate(['crud-types-job-data'], { relativeTo: this.router});
+          this.route.navigate(['crud-types-job-data'], { relativeTo: this.router});
+        }
+        else{
+          this.toastr.error(response.message);
+          this.spinnerService.hideSpinner();
+        }
       },
       (error) => {
         // console.error('Error adding jobtype:', error);
@@ -197,13 +221,19 @@ export class SettingsComponent implements OnInit {
     this.crudJobService.addDegree(this.addDegreeForm.value).subscribe(
       (response) => {
         // console.log('success : ', response);
-        this.toastr.success('Degree added successfully!');
-        
-        this.addDegreeForm.reset();
-        document.getElementById('degreePopUpCloseBtn')?.click();
-        this.spinnerService.hideSpinner();
+        if(response.status === 200){
+          this.toastr.success('Degree added successfully!');
+          
+          this.addDegreeForm.reset();
+          document.getElementById('degreePopUpCloseBtn')?.click();
+          this.spinnerService.hideSpinner();
 
-        this.route.navigate(['crud-degree-data'], { relativeTo: this.router});
+          this.route.navigate(['crud-degree-data'], { relativeTo: this.router});
+        }
+        else{
+          this.toastr.error(response.message);
+          this.spinnerService.hideSpinner();
+        }
       },
       (error) => {
         // console.error('Error adding degree:', error);
@@ -220,13 +250,19 @@ export class SettingsComponent implements OnInit {
       .subscribe(
         (response) => {
           // console.log('success : ', response);
-          this.toastr.success('Institution added successfully!');
+          if(response.status === 200){
+            this.toastr.success('Institution added successfully!');
 
-          this.addInstitutionForm.reset();
-          document.getElementById('institutionPopUpCloseBtn')?.click();
-          this.spinnerService.hideSpinner();
+            this.addInstitutionForm.reset();
+            document.getElementById('institutionPopUpCloseBtn')?.click();
+            this.spinnerService.hideSpinner();
 
-          this.route.navigate(['crud-institution-data'], { relativeTo: this.router});
+            this.route.navigate(['crud-institution-data'], { relativeTo: this.router});
+          }
+          else{
+            this.toastr.error(response.message);
+            this.spinnerService.hideSpinner();
+          }
         },
         (error) => {
           // console.error('Error adding institutions', error);
@@ -243,13 +279,19 @@ export class SettingsComponent implements OnInit {
       .subscribe(
         (response) => {
           // console.log('success : ', response);
-          this.toastr.success('Company added successfully!');
-          
-          this.addCompanyForm.reset();
-          document.getElementById('companyPopUpCloseBtn')?.click();
-          this.spinnerService.hideSpinner();
+          if(response.status === 200){
+            this.toastr.success('Company added successfully!');
+            
+            this.addCompanyForm.reset();
+            document.getElementById('companyPopUpCloseBtn')?.click();
+            this.spinnerService.hideSpinner();
 
-          this.route.navigate(['crud-company-data'], { relativeTo: this.router});
+            this.route.navigate(['crud-company-data'], { relativeTo: this.router});
+          }
+          else{
+            this.toastr.error(response.message);
+            this.spinnerService.hideSpinner();
+          }
         },
         (error) => {
           // console.error('Error adding Companys', error);
@@ -266,13 +308,19 @@ export class SettingsComponent implements OnInit {
     .subscribe(
       (res) =>{
         // console.log(res);
-        this.toastr.success('Status Added successfully!');
+        if(res.status === 200){
+          this.toastr.success('Status Added successfully!');
 
-        this.addStatusForm.reset();
-        document.getElementById('statusPopUpCloseBtn')?.click();
-        this.spinnerService.hideSpinner();
+          this.addStatusForm.reset();
+          document.getElementById('statusPopUpCloseBtn')?.click();
+          this.spinnerService.hideSpinner();
 
-        this.route.navigate(['crud-status-job-data'], { relativeTo: this.router});
+          this.route.navigate(['crud-status-job-data'], { relativeTo: this.router});
+        }
+        else{
+          this.toastr.error(res.message);
+          this.spinnerService.hideSpinner();
+        }
       },
       (error)=>{
         // console.log(error);
