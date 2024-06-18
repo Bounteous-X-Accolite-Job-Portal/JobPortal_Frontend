@@ -23,10 +23,10 @@ export class UpdateExperienceComponent {
   isWorking: boolean = false;
   formBuilder = inject(FormBuilder);
   updatecandidateExperience = this.formBuilder.group({
-    experienceTitle: [''],
+    experienceTitle: ['', Validators.required],
     companyId: [''] ,
-    description: [''],
-    startDate: [null as Date | null],
+    description: ['', Validators.required],
+    startDate: [null as Date | null, Validators.required],
     endDate: [null as Date | null],
     isCurrentlyWorking: [false],
   });
@@ -49,6 +49,10 @@ export class UpdateExperienceComponent {
       empId: '',
     });
     this.loadAllComapnies();
+  }
+
+  get f() {
+    return this.updatecandidateExperience.controls;
   }
 
   private loadAllComapnies(): void {

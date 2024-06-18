@@ -41,14 +41,11 @@ export class AddExperienceComponent {
   constructor(private toastr : ToastrService , private router:Router) {}
 
   ngOnInit(): void {
-    // this.companies.push({
-    //   companyId: 'null',
-    //   companyName: 'Select Company Name : ',
-    //   baseUrl: '',
-    //   companyDescription: '',
-    //   empId: '',
-    // });
     this.loadAllComapnies();
+  }
+
+  get f() {
+    return this.candidateExperience.controls;
   }
 
   private loadAllComapnies(): void {
