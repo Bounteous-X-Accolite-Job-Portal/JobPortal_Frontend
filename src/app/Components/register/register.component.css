@@ -58,3 +58,10 @@
   --bs-btn-disabled-border-color: #0d016b;
   transition: all .3s;
 }
+
+@media screen and (max-width: 600px) {
+  .form-outline{
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
