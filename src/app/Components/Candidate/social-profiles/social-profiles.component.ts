@@ -129,7 +129,7 @@ export class SocialProfilesComponent {
       (res) => {
         // console.log(res);
         this.ngOnInit();
-        this.toastr.success('Socail Media Profiles Updated!!');
+        this.toastr.success('Social Media Profiles Updated!!');
       },
       (error) => {
         console.log(error);

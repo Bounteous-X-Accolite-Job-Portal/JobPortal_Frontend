@@ -17,3 +17,14 @@
 .add-btn{
     float: right;
 }
+
+
+@media screen and (max-width: 480px) {
+    .top-card{
+        padding: 10px !important;
+        width: 90% !important;
+    }
+    .small-card{
+        width: 50vw;
+    }
+}
