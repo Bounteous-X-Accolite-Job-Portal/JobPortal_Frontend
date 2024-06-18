@@ -9,22 +9,22 @@
           </div>
           <h4 class="text-center"><b> Add your profile URLs</b></h4><br>
           <form [formGroup]="mediaForm" class="formstyle"
-            style="display: flex; align-items: center; flex-direction: column; width: 100% ;margin: 0; ">
+            style="display: flex; align-items: center; flex-direction: column; width: 100% ;margin:0; ">
             <button class="btn btn-primary w-35" *ngIf="enableAddButton" (click)="activeAddSocialMedia()">
               Add URLs
             </button>
-            <button class="btn btn-primary w-35" *ngIf="enableEditButton" (click)="activeEditSocialMedia()">
+            <button class="btn btn-primary w-35 mb-2" *ngIf="enableEditButton" (click)="activeEditSocialMedia()">
               Edit URLs
             </button>
             <ul class="list-group list-group-flush rounded-3 w-100 mx-3">
               <li class="list-group-item d-flex justify-content-between align-items-center p-3 ">
                 <div class="Portfoliocontainer">
                   <i class="fas fa-globe fa-lg text-warning "></i>
-                  <p class="ms-3 d-inline"><b>Portfolio Site Url</b></p>
+                  <p class="ms-3 d-inline"><b>Portfolio Url</b></p>
                 </div>
                 <div class="linkContainer">
                   <input type="text" formControlName="link1" style="width: 50vw;"/>
-                  <a [href]="socialMedia.link1" target="_blank"><i
+                  <a [href]="socialMedia!=null? socialMedia.link1:''" target="_blank" [ngStyle]="link1?{}:{'pointer-events': 'none', 'color':'grey'}"><i
                       class="fa-solid fa-arrow-up-right-from-square ms-3"></i></a>
                 </div>
               </li>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="linkContainer">
                   <input type="text" formControlName="link2" style="width: 50vw;"/>
-                  <a [href]="socialMedia.link2" target="_blank"><i
+                  <a [href]="socialMedia!=null? socialMedia.link2:''" target="_blank"  [ngStyle]="link2?{}:{'pointer-events': 'none', 'color':'grey'}"><i
                       class="fa-solid fa-arrow-up-right-from-square ms-3"></i></a>
                 </div>
               </li>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="linkContainer">
                   <input type="text" formControlName="link3" style="width: 50vw;" />
-                  <a [href]="socialMedia.link3" target="_blank"><i
+                  <a [href]="socialMedia!=null? socialMedia.link3:''" target="_blank" [ngStyle]="link3?{}:{'pointer-events': 'none', 'color':'grey'}"><i
                       class="fa-solid fa-arrow-up-right-from-square ms-3"></i></a>
                 </div>
               </li>
