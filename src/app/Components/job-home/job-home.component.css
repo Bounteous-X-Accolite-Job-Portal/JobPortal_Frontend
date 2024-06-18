@@ -136,7 +136,7 @@ form {
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 768px) {
   .modal-dialog {
     position: relative;
     width: 70vw !important;

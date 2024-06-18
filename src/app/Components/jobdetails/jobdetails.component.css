@@ -60,15 +60,33 @@
   }
 
   @media (max-width: 480px) {
+    .card{
+      padding: 15px !important;
+    }
+    .card-header{
+      padding: 0 !important;
+    }
     .res{
       flex-direction: column-reverse;
+      padding:0 !important;
+    }
+    .jobCode{
+      margin-right: 10px !important;
+    }
+    .top-cont h2{
+      font-size: 1.3rem;
+    }
+    .firstdiv{
+      /* height: auto; */
+      /* align-items: flex-start !important; */
+      justify-content:flex-start !important;
     }
    }
   @media (max-width: 440px) {
-   .card-header{
+   /* .card-header{
     display: flex;
     flex-direction: column;
-   } 
+   }  */
    .card{
     border-radius: 0;
     min-width: 100%;
@@ -76,5 +94,13 @@
    .res{
     padding: 10px !important;
    }
+   
   }
+
+  @media (max-width: 380px) {
+    .card-header{
+    display: flex;
+    flex-direction: column;
+   } 
+   }
   
