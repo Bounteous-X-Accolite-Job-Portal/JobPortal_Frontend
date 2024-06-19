@@ -48,13 +48,18 @@ constructor(private router:Router) {}
 
     this.addCandidateEducation = new FormGroup({
       institutionOrSchoolName:new FormControl(""),
-      startYear:new FormControl("2020"),
+      startYear:new FormControl("2020", Validators.required),
       endYear:new FormControl("2022"),
-      grade:new FormControl(""),
+      grade:new FormControl("", Validators.required),
       institutionId:new FormControl("mps"),
       degreeId:new FormControl(""),
     });  
   }
+
+  get f() {
+    return this.addCandidateEducation.controls;
+  }
+
 
   private loadAllInstitutions(): void {
     this.httpService.getAllInstitutions().subscribe(

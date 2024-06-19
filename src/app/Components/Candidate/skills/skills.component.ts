@@ -117,8 +117,7 @@ export class SkillsComponent {
   
   public updateskills(): void {
     this.userSkills.candidateSkills = this.userSkills.candidateSkills.concat(
-      ',',' ',
-      this.skillForm.value.candidateSkills
+      ',',' ',this.skillForm.value.candidateSkills
     );
     // console.log(this.userSkills);
     this.candidService.updateSkillsOfCandidate(this.userSkills).subscribe(

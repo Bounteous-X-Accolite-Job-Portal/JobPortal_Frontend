@@ -98,13 +98,12 @@ export class LoginComponent {
             // console.log('CheckIsEmployee', tokenPayload['IsEmployee']);
 
             if (
-              this.userStore.checkIsEmployeeFromStore() ||
-              tokenPayload['IsEmployee']
+              !tokenPayload['IsEmployee']
             ) {
-              this.router.navigate(['/employee-dashboard']);
+              this.router.navigate(['/jobs']);
               this.authService.AuthEvent.emit(true);
             } else {
-              this.router.navigate(['/jobs']);
+              this.router.navigate(['/employee-dashboard']);
               this.authService.AuthEvent.emit(true);
             }
           } else {

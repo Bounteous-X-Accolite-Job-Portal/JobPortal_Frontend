@@ -95,20 +95,24 @@ export class ApplicantCardComponent implements OnInit {
       this.applicationService.changeApplicationStatus(this.applicant.applicationId, newStatusId).subscribe(
         (res: ApplicationResponse) => {
           // console.log("change application status response", res)
+          if(res.status === 200){
 
-          let emitData = {
-            applicationId : res.application.applicationId,
-            statusId : newStatusId
+            let emitData = {
+              applicationId : res.application.applicationId,
+              statusId : newStatusId
+            }
+            this.changeStatusEmitter.emit(emitData);
+            this.toaster.success("Successfully changed the application status !");
+            // document.getElementById("closePopUp")?.click();
+            this.modalClose.nativeElement.click();
+            this.form.reset();
           }
-          this.changeStatusEmitter.emit(emitData);
-          this.toaster.success("Successfully changed the application status !");
-          // document.getElementById("closePopUp")?.click();
-          this.modalClose.nativeElement.click();
-          this.form.reset();
+          else{
+            this.toaster.error(res.message);
+          }
+
           this.isSubmitted = false;
           this.spinnerService.hideSpinner();
-
-          
         },
         (error) => {
           this.toaster.error("Some error occured while changing status. Please try again !");

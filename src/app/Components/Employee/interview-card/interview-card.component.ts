@@ -113,7 +113,13 @@ export class InterviewCardComponent implements OnInit {
         (data: AddInterviewFeedbackResponse) => {
           // console.log('Status', data.status, 'data message', data.message);
           this.submitting = false;
-          this.toastr.success('Feedback added successfully!');
+
+          if(data.status === 200){
+            this.toastr.success('Feedback added successfully!');
+          }
+          else{
+            this.toastr.error(data.message);
+          }
         },
         (error) => {
           // console.log(error);

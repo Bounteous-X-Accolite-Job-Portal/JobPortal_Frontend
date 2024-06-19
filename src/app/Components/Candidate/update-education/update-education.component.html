@@ -28,6 +28,11 @@
         <div class="form-group mb-3 fw-bold">
           <label for="Grade">Grade</label>
           <input type="number" class="form-control" id="Grade" placeholder="Enter Grade" formControlName="grade" />
+          <small *ngIf="f['grade'].invalid && (f['grade'].dirty || f['grade'].touched)" class="d-block text-danger">
+            <div *ngIf="f['grade'].errors?.['required']">
+              Grade is required
+            </div>
+          </small>
         </div>
 
         <div class="row">
@@ -35,16 +40,26 @@
             <label for="StartYear">Start Year</label>
             <input type="number" class="form-control" id="StartYear" placeholder="Enter Start Year"
               formControlName="startYear" />
+              <small *ngIf="f['startYear'].invalid && (f['startYear'].dirty || f['startYear'].touched)" class="d-block text-danger">
+                <div *ngIf="f['startYear'].errors?.['required']">
+                  Start year is required
+                </div>
+              </small>
           </div>
 
           <div class="col form-group mb-3 fw-bold">
             <label for="EndYear">End Year</label>
             <input type="number" class="form-control" id="EndYear" placeholder="Enter End Year"
               formControlName="endYear" />
+              <small *ngIf="f['endYear'].invalid && (f['endYear'].dirty || f['endYear'].touched)" class="d-block text-danger">
+                <div *ngIf="f['endYear'].errors?.['required']">
+                  End year is required
+                </div>
+              </small>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary w-100">
+        <button type="submit" class="btn btn-primary w-100" [disabled]="updateCandidateEducation.invalid">
           Update
         </button>
       </form>

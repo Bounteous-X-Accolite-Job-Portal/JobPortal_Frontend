@@ -11,6 +11,11 @@
           <label for="experienceTitle">Job Title</label>
           <input type="text" class="form-control" id="experienceTitle" placeholder="Add Title"
             formControlName="experienceTitle" />
+            <small *ngIf="f['experienceTitle'].invalid && (f['experienceTitle'].dirty || f['experienceTitle'].touched)" class="d-block text-danger">
+              <div *ngIf="f['experienceTitle'].errors?.['required']">
+                Title is required
+              </div>
+            </small>
         </div>
 
         <div class="form-group mb-3 fw-bold">
@@ -27,6 +32,11 @@
             <label for="description" class="d-block mb-2">Description</label>
             <textarea placeholder="Enter Job Description: " formControlName="description"
               class="w-100 rounded"></textarea>
+              <small *ngIf="f['description'].invalid && (f['description'].dirty || f['description'].touched)" class="d-block text-danger">
+                <div *ngIf="f['description'].errors?.['required']">
+                  Job description is required
+                </div>
+              </small>
           </div>
         </div>
 
@@ -35,6 +45,11 @@
             <label for="startDate">Start Date</label>
             <input type="date" class="form-control" id="startDate" placeholder="Enter Start Date"
               formControlName="startDate" />
+              <small *ngIf="f['startDate'].invalid && (f['startDate'].dirty || f['startDate'].touched)" class="d-block text-danger">
+                <div *ngIf="f['startDate'].errors?.['required']">
+                  Job description is required
+                </div>
+              </small>
           </div>
 
           <div class="form-group mb-3 fw-bold">
@@ -51,7 +66,7 @@
         </div>
 
 
-        <button type="submit" class="btn btn-primary w-100">
+        <button type="submit" class="btn btn-primary w-100" [disabled]="updatecandidateExperience.invalid">
           Update Experience
         </button>
       </form>

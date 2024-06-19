@@ -8,7 +8,7 @@ select {
   margin: 0.6rem;
 }
 
-.jobFilterMobile{
+.jobFilterMobile {
   display: none;
   z-index: 499 !important;
 }
@@ -75,19 +75,19 @@ select {
 }
 
 @media (max-width: 481px) {
-  .p-4{
+  .p-4 {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
 
-  .jobFilter{
+  .jobFilter {
     display: none;
   }
 
-  .jobFilterMobile{
+  .jobFilterMobile {
     display: block;
   }
-  
+
   select {
     width: 70vw;
     height: 6vh;
@@ -98,15 +98,15 @@ select {
     margin: 0.6rem;
   }
 
-  button{
+  button {
     font-size: larger !important;
   }
 
-  .m-2{
+  .m-2 {
     margin: 0.8rem !important;
   }
 
-  i{
+  i {
     padding: 0.8rem !important;
   }
 }
