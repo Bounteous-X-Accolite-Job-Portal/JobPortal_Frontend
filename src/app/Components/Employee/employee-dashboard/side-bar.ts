@@ -31,7 +31,7 @@ export const sideBarData = [
     routeLink: 'your-jobs',
     icon: 'fa-solid fa-briefcase',
     label: 'Your Jobs',
-    requiredPrivilege: false,
+    requiredPrivilege: true,
     requiredSpecialPrivilege: false,
   },
   {
