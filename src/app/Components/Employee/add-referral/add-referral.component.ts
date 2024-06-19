@@ -28,36 +28,34 @@ export class AddReferralComponent implements OnInit {
   jobId: string = '';
 
   constructor(
-    private formBuilder: FormBuilder,
     private referralService: ReferralServiceService,
     private route: ActivatedRoute,
     private router: Router,
-    private jobService: JobService,
     private toastr: ToastrService
   ) {}
 
   ngOnInit() {
-    this.jobId = this.jobService.jobId;
-
     this.referralForm= new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
+      jobId: new FormControl('')
     })
   }
 
 
   
   addreferal() {
-    this.referralObj.jobId = this.jobId;
+    const id = String(this.route.snapshot.params['id']);
+    this.referralForm.get('jobId')?.setValue(id);
 
     this.referralService.addreferral(this.referralForm.value).subscribe(
       (res: AddReferralResponse) => {
-        console.log(res);
+        // console.log(res);
 
         if (res.status == 200) {
           this.toastr.success(
-            'Successfully Referred ' + this.referralObj.firstName
+            'Successfully Referred ' + this.referralForm.get('firstName')?.value
           );
           this.referralForm.reset();
         } else {

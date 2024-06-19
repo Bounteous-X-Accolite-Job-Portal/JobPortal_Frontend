@@ -73,11 +73,18 @@ export class EmailComponentChangePasswordComponent {
 
     // console.log(this.pwdForm.value);
     this.changePasswordService.changePassword(this.pwdForm.value).subscribe(
-      (res)=>{
-        // console.log(res);
+      (res:any)=>{
+  
+        console.log(res);
+        if(res.status==200){
         this.pwdForm.reset();
         this.toast.success("Successfully changed password !");
-        this.spinnerService.hideSpinner();
+        
+        this.spinnerService.hideSpinner();}
+        else{
+          this.toast.error("Wrong Password");
+          this.spinnerService.hideSpinner();
+        }
       },
       (error)=>{
         console.log(error);

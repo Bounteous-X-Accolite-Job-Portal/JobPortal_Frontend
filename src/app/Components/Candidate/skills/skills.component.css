@@ -17,3 +17,15 @@
 .add-btn{
     float: right;
 }
+
+@media screen and (max-width: 480px) {
+    .custom-container{
+        padding: 0 !important;
+    }
+    .card{
+        padding: 0 !important;
+    }
+    .card-body{
+        width: 40vw;
+    }
+}

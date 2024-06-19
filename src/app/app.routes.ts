@@ -153,7 +153,8 @@ export const routes: Routes = [
       },
       { path: 'interview-hub', component: InterviewHubComponent },
       { path: 'referral', component: ReferralComponent },
-      { path: 'addReferral', component: AddReferralComponent },
+      { path: 'addReferral', component: AddReferralComponent
+      },
       {
         path: 'allEmployees',
         component: DisablePrivilegeComponent,
