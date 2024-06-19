@@ -112,7 +112,7 @@ export class SocialProfilesComponent {
         this.socialMedia.link2 = this.mediaForm.value.link2;
         this.socialMedia.link3 = this.mediaForm.value.link3;
         this.ngOnInit();
-        this.toastr.success('Socail Media Profiles Added!!');
+        this.toastr.success('Social Media Profiles Added!!');
       },
       (error) => {
         console.log(error);

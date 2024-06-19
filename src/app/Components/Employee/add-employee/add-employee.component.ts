@@ -104,7 +104,7 @@ export class AddEmployeeComponent implements OnInit {
       this.addEmployeeService.addEmployee(employee).subscribe(
         (data: any) => {
           // console.log('Status', data.status, 'data message', data.message);
-
+          console.log(data);
           if (data.status == 200) {
             this.loading = false;
 
