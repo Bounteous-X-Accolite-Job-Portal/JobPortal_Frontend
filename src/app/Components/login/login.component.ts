@@ -50,7 +50,7 @@ export class LoginComponent {
         Validators.required,
         Validators.minLength(6),
         Validators.pattern(
-          '^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$'
+          '^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=~!?_-]).*$'
         ),
       ],
     ],
