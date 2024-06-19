@@ -47,7 +47,7 @@
     margin-left: 1rem;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 481px) {
     .logo {
         /* background-color: red; */
         display: none;
@@ -72,6 +72,11 @@
     .empDesignation{
         font-size: 1rem; 
         margin-left: 0;
+    }
+
+    .employeeCard{
+        width: 80vw;
+        min-width: 75vw;
     }
 }
 

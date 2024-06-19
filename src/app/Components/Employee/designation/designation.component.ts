@@ -18,6 +18,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-designation',
@@ -42,7 +43,8 @@ export class DesignationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private designationWithPrivilege: DesignationWithPrivilegeService,
     private userStore: UserStoreService,
-    private authService: AuthService
+    private authService: AuthService,
+    public breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit() {
@@ -52,6 +54,14 @@ export class DesignationComponent implements OnInit {
     this.form = this.formBuilder.group({
       newDesignation: ['', [Validators.required]],
     });
+
+    this.breakpointObserver
+      .observe(['(max-width: 481px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          document.getElementById("AddModal")?.classList.add("modal-dialog-centered");
+        }
+      });
   }
 
   get f() {
@@ -133,20 +143,26 @@ export class DesignationComponent implements OnInit {
           .subscribe(
             (privilegeRes: DesignationWithPrivilegeResponse) => {
               // console.log("privilege in add designation", privilegeRes);
+              
+              if(privilegeRes.status === 200){
+                let designation: DesignationAndPrivilege = {
+                  designation: res.designation,
+                  privilege:
+                    privilegeRes.designationWithPrivilege != null
+                      ? privilegeRes.designationWithPrivilege
+                      : undefined,
+                };
+                this.allDesignations.push(designation);
 
-              let designation: DesignationAndPrivilege = {
-                designation: res.designation,
-                privilege:
-                  privilegeRes.designationWithPrivilege != null
-                    ? privilegeRes.designationWithPrivilege
-                    : undefined,
-              };
-              this.allDesignations.push(designation);
+                this.toaster.success('Successfully added new designation !');
 
-              this.toaster.success('Successfully added new designation !');
+                document.getElementById('closeButton')?.click();
+              }
+              else{
+                this.toaster.error(privilegeRes.message);
+              }
+
               this.spinnerService.hideSpinner();
-
-              document.getElementById('closeButton')?.click();
             },
             (error) => {
               // console.log(error);
@@ -170,17 +186,23 @@ export class DesignationComponent implements OnInit {
       this.designationService.deleteDesignation(id).subscribe(
         (res: DesignationResponse) => {
           // console.log("deleted designation", res);
+          
+          if(res.status === 200){
+            this.allDesignations = this.removeDesignationFromAllDesignations(
+              this.allDesignations,
+              res
+            );
 
-          this.allDesignations = this.removeDesignationFromAllDesignations(
-            this.allDesignations,
-            res
-          );
+            this.toaster.success(
+              'Successfully deleted designation - ' +
+                res.designation.designationName +
+                ' !'
+            );
+          }
+          else{
+            this.toaster.error(res.message);
+          }
 
-          this.toaster.success(
-            'Successfully deleted designation - ' +
-              res.designation.designationName +
-              ' !'
-          );
           this.spinnerService.hideSpinner();
         },
         (error) => {
@@ -217,13 +239,19 @@ export class DesignationComponent implements OnInit {
       (result) => {
         // console.log("add privilege", result);
 
-        this.addPrivilegeToDesignation(
-          this.allDesignations,
-          designationId,
-          result.designationWithPrivilege
-        );
+        if(result.status === 200){
+          this.addPrivilegeToDesignation(
+            this.allDesignations,
+            designationId,
+            result.designationWithPrivilege
+          );
 
-        this.toaster.success('Successfully added privilege to designation !');
+          this.toaster.success('Successfully added privilege to designation !');
+        }
+        else{
+          this.toaster.error(result.message);
+        }
+
         this.spinnerService.hideSpinner();
       },
       (error) => {
@@ -252,15 +280,20 @@ export class DesignationComponent implements OnInit {
     this.designationWithPrivilege.removePrivilege(privilegeId).subscribe(
       (result) => {
         // console.log("remove privilege", result);
+        if(result.status === 200){
+          this.removePrivilegeFromDesignation(
+            this.allDesignations,
+            result.designationWithPrivilege.designationId
+          );
 
-        this.removePrivilegeFromDesignation(
-          this.allDesignations,
-          result.designationWithPrivilege.designationId
-        );
-
-        this.toaster.success(
-          'Successfully removed privilege from designation !'
-        );
+          this.toaster.success(
+            'Successfully removed privilege from designation !'
+          );
+        }
+        else{
+          this.toaster.error(result.message);
+        }
+        
         this.spinnerService.hideSpinner();
       },
       (error) => {

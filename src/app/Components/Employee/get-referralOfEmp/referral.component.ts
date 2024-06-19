@@ -20,7 +20,7 @@ import { SpinnerService } from '../../../Services/spinner.service';
 @Component({
   selector: 'app-referral',
   standalone: true,
-  imports: [CommonModule,FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './referral.component.html',
   styleUrl: './referral.component.css',
 })
@@ -30,20 +30,20 @@ export class ReferralComponent {
   value: any;
   empId: string = '';
 
-  referral : ReferralCompleteResponse[] = [];
+  referral: ReferralCompleteResponse[] = [];
 
   constructor(
     private referalService: ReferralServiceService,
     private jobService: JobService,
-    private closedJobService : ClosedJobServiceService,
+    private closedJobService: ClosedJobServiceService,
     private candidateService: CandidateService,
     private userStore: UserStoreService,
     private auth: AuthService,
     private StatusService: StatusServiceService,
     private toastr: ToastrService,
     private spinnerService: SpinnerService,
-    private applicationService : ApplicationServiceService,
-    private closedApplicationService : ClosedApplicationService
+    private applicationService: ApplicationServiceService,
+    private closedApplicationService: ClosedApplicationService
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +60,7 @@ export class ReferralComponent {
 
     this.referalService.getreferral(this.empId).subscribe(
       (res: GetReferral) => {
-        console.log("response ar referral",res);
+        // console.log("response ar referral",res);
 
         for (let i = 0; i < res.referrals.length; i++) {
           const jobId = res.referrals[i].jobId;
@@ -70,111 +70,140 @@ export class ReferralComponent {
           let statusId = res.referrals[i].statusId;
           const closedApplicationId = res.referrals[i].closedApplicationId;
 
-          if((applicationId === undefined || applicationId === null) && (closedApplicationId === undefined || closedApplicationId === null)) {
+          if (
+            (applicationId === undefined || applicationId === null) &&
+            (closedApplicationId === undefined || closedApplicationId === null)
+          ) {
             forkJoin({
-              candidateDetails: this.candidateService.getCandidateById(candidateId),
-              jobDetails: this.jobService.getJobById(jobId ? jobId.toString() : "3fa85f64-5717-4562-b3fc-2c963f66afa6"),
-              closedJobDetails: this.closedJobService.getClosedJobById(closedJobId ? closedJobId.toString() : "3fa85f64-5717-4562-b3fc-2c963f66afa6"),
+              candidateDetails:
+                this.candidateService.getCandidateById(candidateId),
+              jobDetails: this.jobService.getJobById(
+                jobId
+                  ? jobId.toString()
+                  : '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+              ),
+              closedJobDetails: this.closedJobService.getClosedJobById(
+                closedJobId
+                  ? closedJobId.toString()
+                  : '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+              ),
               statusDetails: this.StatusService.getstatus(statusId),
             }).subscribe(
               (result) => {
                 // console.log("all data ", result);
-                
-                let data : ReferralCompleteResponse = {
-                  candidate : result.candidateDetails.candidate,
-                  job : result.jobDetails.job,
-                  statusData : result.statusDetails.statusViewModel,
-                  closedJob : result.closedJobDetails.closedJob
-                }
-                
+
+                let data: ReferralCompleteResponse = {
+                  candidate: result.candidateDetails.candidate,
+                  job: result.jobDetails.job,
+                  statusData: result.statusDetails.statusViewModel,
+                  closedJob: result.closedJobDetails.closedJob,
+                };
+
                 this.referral.push(data);
 
                 // console.log(result);
-            },
-            (error) => {
-              // console.log(error);
-              this.toastr.error('Error: ', error);
-            })
-          }
-          else{
-            if(applicationId !== undefined && applicationId !== null){
-              this.applicationService.getApplicationsById(applicationId.toString()).subscribe(
-                (element) => {
+              },
+              (error) => {
+                // console.log(error);
+                this.toastr.error('Error: ', error);
+              }
+            );
+          } else {
+            if (applicationId !== undefined && applicationId !== null) {
+              this.applicationService
+                .getApplicationsById(applicationId.toString())
+                .subscribe((element) => {
                   forkJoin({
-                    candidateDetails: this.candidateService.getCandidateById(candidateId),
-                    jobDetails: this.jobService.getJobById(jobId ? jobId.toString() : "3fa85f64-5717-4562-b3fc-2c963f66afa6"),
-                    closedJobDetails: this.closedJobService.getClosedJobById(closedJobId ? closedJobId.toString() : "3fa85f64-5717-4562-b3fc-2c963f66afa6"),
-                    statusDetails: this.StatusService.getstatus(element.application.statusId),
+                    candidateDetails:
+                      this.candidateService.getCandidateById(candidateId),
+                    jobDetails: this.jobService.getJobById(
+                      jobId
+                        ? jobId.toString()
+                        : '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+                    ),
+                    closedJobDetails: this.closedJobService.getClosedJobById(
+                      closedJobId
+                        ? closedJobId.toString()
+                        : '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+                    ),
+                    statusDetails: this.StatusService.getstatus(
+                      element.application.statusId
+                    ),
                   }).subscribe(
                     (result) => {
                       // console.log("all data ", result);
-      
-                      let data : ReferralCompleteResponse = {
-                        candidate : result.candidateDetails.candidate,
-                        job : result.jobDetails.job,
-                        statusData : result.statusDetails.statusViewModel,
-                        closedJob : result.closedJobDetails.closedJob
-                      }
-                      
+
+                      let data: ReferralCompleteResponse = {
+                        candidate: result.candidateDetails.candidate,
+                        job: result.jobDetails.job,
+                        statusData: result.statusDetails.statusViewModel,
+                        closedJob: result.closedJobDetails.closedJob,
+                      };
+
                       this.referral.push(data);
-      
+
                       // console.log(result);
-                  },
-                  (error) => {
-                    // console.log(error);
-                    this.toastr.error('Error: ', error);
-                  })
-                }
-              )
-            }
-            else if(closedApplicationId !== undefined && closedApplicationId !== null){
-              this.closedApplicationService.getClosedApplicationById(closedApplicationId.toString()).subscribe(
-                (element) => {
+                    },
+                    (error) => {
+                      // console.log(error);
+                      this.toastr.error('Error: ', error);
+                    }
+                  );
+                });
+            } else if (
+              closedApplicationId !== undefined &&
+              closedApplicationId !== null
+            ) {
+              this.closedApplicationService
+                .getClosedApplicationById(closedApplicationId.toString())
+                .subscribe((element) => {
                   forkJoin({
-                    candidateDetails: this.candidateService.getCandidateById(candidateId),
-                    jobDetails: this.jobService.getJobById(jobId ? jobId.toString() : "3fa85f64-5717-4562-b3fc-2c963f66afa6"),
-                    closedJobDetails: this.closedJobService.getClosedJobById(closedJobId ? closedJobId.toString() : "3fa85f64-5717-4562-b3fc-2c963f66afa6"),
-                    statusDetails: this.StatusService.getstatus(element.application.statusId),
+                    candidateDetails:
+                      this.candidateService.getCandidateById(candidateId),
+                    jobDetails: this.jobService.getJobById(
+                      jobId
+                        ? jobId.toString()
+                        : '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+                    ),
+                    closedJobDetails: this.closedJobService.getClosedJobById(
+                      closedJobId
+                        ? closedJobId.toString()
+                        : '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+                    ),
+                    statusDetails: this.StatusService.getstatus(
+                      element.application.statusId
+                    ),
                   }).subscribe(
                     (result) => {
                       // console.log("all data ", result);
-      
-                      let data : ReferralCompleteResponse = {
-                        candidate : result.candidateDetails.candidate,
-                        job : result.jobDetails.job,
-                        statusData : result.statusDetails.statusViewModel,
-                        closedJob : result.closedJobDetails.closedJob
-                      }
-                      
+
+                      let data: ReferralCompleteResponse = {
+                        candidate: result.candidateDetails.candidate,
+                        job: result.jobDetails.job,
+                        statusData: result.statusDetails.statusViewModel,
+                        closedJob: result.closedJobDetails.closedJob,
+                      };
+
                       this.referral.push(data);
-      
+
                       // console.log(result);
-                  },
-                  (error) => {
-                    // console.log(error);
-                    this.toastr.error('Error: ', error);
-                  })
-                }
-              )
+                    },
+                    (error) => {
+                      // console.log(error);
+                      this.toastr.error('Error: ', error);
+                    }
+                  );
+                });
             }
           }
         }
 
         this.spinnerService.hideSpinner();
-    },
-    (error) => {
-      console.log("Error fetching referrals:", error);
-      this.spinnerService.hideSpinner();
-    }
-);
-
-
-
+      },
+      (error) => {
+        console.log('Error fetching referrals:', error);
+        this.spinnerService.hideSpinner();
+      }
+    );
+  }
 }
-
-
-  
-}
-
-
-

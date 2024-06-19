@@ -1,7 +1,7 @@
 import { EducationInstitution } from "./EducationInstitution";
 
 export interface InstitutionResponse{
-    status : string;
+    status : number;
     message : string;
     educationInstitution : EducationInstitution;
 }

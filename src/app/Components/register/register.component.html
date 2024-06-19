@@ -3,17 +3,11 @@
   <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
     <div class="row gx-lg-5 align-items-center mb-5">
       <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-        <h1
-          class="my-5 display-inline fw-bold ls-tight"
-          style="color: hsl(218, 81%, 95%)"
-        >
+        <h1 class="my-5 display-inline fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
           The best jobs <br />
           <span style="color: hsl(218, 81%, 75%)">in Bounteous X Accolite</span>
         </h1>
-        <p
-          class="mb-4 opacity-70"
-          style="color: hsl(218, 81%, 85%); text-align: justify;"
-        >
+        <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%); text-align: justify;">
           Bounteous x Accolite accelerates the future for the world’s most
           ambitious brands through a range of services including Strategy,
           Analytics, Digital Engineering, Cloud, Data & AI, Experience Design,
@@ -25,14 +19,8 @@
       </div>
 
       <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-        <div
-          id="radius-shape-1"
-          class="position-absolute rounded-circle shadow-5-strong"
-        ></div>
-        <div
-          id="radius-shape-2"
-          class="position-absolute shadow-5-strong"
-        ></div>
+        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
@@ -40,44 +28,59 @@
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input
-                      type="text"
-                      id="FirstName"
-                      class="form-control bg-light text-dark"
-                      formControlName="firstName"
-                    />
+                    <input type="text" id="FirstName" class="form-control bg-light text-dark"
+                      formControlName="firstName" />
                     <label class="form-label" for="FirstName">First name</label>
                   </div>
+                  <small
+                  *ngIf="
+                    f['firstName'].invalid &&
+                    (f['firstName'].dirty || f['firstName'].touched)
+                  "
+                  class="block p-error"
+                >
+                  <div *ngIf="f['firstName'].errors?.['required']">
+                    First Name is required
+                  </div>
+                  <div *ngIf="f['firstName'].errors?.['pattern']">
+                    Please input valid name
+                  </div>
+                </small>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input
-                      type="text"
-                      id="LastName"
-                      class="form-control bg-light text-dark"
-                      formControlName="lastName"
-                    />
+                    <input type="text" id="LastName" class="form-control bg-light text-dark"
+                      formControlName="lastName" />
 
                     <label class="form-label" for="LastName">Last name</label>
                   </div>
+                  <small
+                  *ngIf="
+                    f['lastName'].invalid &&
+                    (f['lastName'].dirty || f['lastName'].touched)
+                  "
+                  class="block p-error"
+                >
+                  <div *ngIf="f['lastName'].errors?.['required']">
+                    Last Name is required
+                  </div>
+                  <div *ngIf="f['lastName'].errors?.['pattern']">
+                    Please input valid name
+                  </div>
+                </small>
                 </div>
               </div>
 
               <!-- Email input -->
-              <div class="form-outline mb-4">
-                <input
-                  type="email"
-                  id="Email"
-                  class="form-control bg-light text-dark"
-                  formControlName="email"
-                />
-                <small
-                  *ngIf="
-                    f['email'].invalid &&
-                    (f['email'].dirty || f['email'].touched)
-                  "
-                  class="block p-error"
-                >
+              <div class="mb-4">
+                <div class="form-outline">
+                  <input type="email" id="Email" class="form-control bg-light text-dark" formControlName="email" />
+
+                  <label class="form-label" for="Email">Email address</label>
+                </div><small *ngIf="
+                f['email'].invalid &&
+                (f['email'].dirty || f['email'].touched)
+              " class="block p-error">
                   <div *ngIf="f['email'].errors?.['required']">
                     Email is required
                   </div>
@@ -85,85 +88,61 @@
                     Email should be valid
                   </div>
                 </small>
-                <label class="form-label" for="Email">Email address</label>
               </div>
 
               <!-- Password input -->
-              <div class="form-outline mb-4">
-                <input
-                  type="password"
-                  id="Password"
-                  class="form-control bg-light text-dark"
-                  formControlName="password"
-                />
-                <small
-                  *ngIf="
-                    f['password'].invalid &&
-                    (f['password'].dirty || f['password'].touched)
-                  "
-                  class="block p-error"
-                >
+              <div class="mb-4">
+                <div class="form-outline">
+                  <input type="password" id="Password" class="form-control bg-light text-dark"
+                    formControlName="password" />
+                  <label class="form-label" for="Password">Password</label>
+                </div>
+                <small *ngIf="
+                  f['password'].invalid &&
+                  (f['password'].dirty || f['password'].touched)
+                " class="block p-error">
                   <div *ngIf="f['password'].errors?.['required']">
                     Password is required
                   </div>
                   <!-- <div *ngIf="f['password'].errors?.['password']">
-                    Password should be valid
-                  </div> -->
+                  Password should be valid
+                </div> -->
                   <div *ngIf="f['password'].errors?.['minlength']">
                     Minimum length should be 6
                   </div>
                   <div *ngIf="f['password'].errors?.['pattern']">
-                      Password must contain atleast one Uppercase, one lowercase, one special character  and one digit.
+                    Password must contain atleast one Uppercase, one lowercase, one special character and one digit.
                   </div>
                 </small>
-                <label class="form-label" for="Password">Password</label>
               </div>
 
-              <div class="form-outline mb-4">
-                <input
-                  type="password"
-                  id="ConfirmPassword"
-                  class="form-control"
-                  formControlName="confirmPassword"
-                />
-                <small
-                  *ngIf="
-                    f['confirmPassword'].invalid &&
-                    (f['confirmPassword'].dirty || f['confirmPassword'].touched)
-                  "
-                  class="block p-error"
-                >
+              <div class="mb-4">
+                <div class="form-outline">
+                  <input type="password" id="ConfirmPassword" class="form-control" formControlName="confirmPassword" />
+                  <label class="form-label" for="ConfirmPassword">Confirm Password</label>
+                </div>
+                <small *ngIf="
+                  f['confirmPassword'].invalid &&
+                  (f['confirmPassword'].dirty || f['confirmPassword'].touched)
+                " class="block p-error">
                   <div *ngIf="f['confirmPassword'].errors?.['required']">
                     Confirm Password is required
                   </div>
-                  <div
-                    *ngIf="f['confirmPassword'].errors?.['passwordMismatch']"
-                  >
+                  <div *ngIf="f['confirmPassword'].errors?.['passwordMismatch']">
                     Confirm Password should be same as Password
                   </div>
                 </small>
-                <label class="form-label" for="ConfirmPassword"
-                  >Confirm Password</label
-                >
               </div>
               <div class="p-error">{{ message }}</div>
 
               <div class="d-flex justify-content-center ">
-                <button
-                  (click)="onSubmitRegister()"
-                  [disabled]="registerForm.invalid"
-                  type="submit"
-                  class="btn btn-primary-1 btn-block px-3"
-                >
+                <button (click)="onSubmitRegister()" [disabled]="registerForm.invalid" type="submit"
+                  class="btn btn-primary-1 btn-block px-3">
                   Sign up
                 </button>
               </div>
-              <span class="d-flex justify-content-center mt-2"
-                >Already have an account?
-                <a routerLink="../login" style="color: #0a0150" class="ms-2"
-                  >Login</a
-                ></span
-              >
+              <span class="d-flex justify-content-center mt-2">Already have an account?
+                <a routerLink="../login" style="color: #0a0150" class="ms-2">Login</a></span>
             </form>
           </div>
         </div>

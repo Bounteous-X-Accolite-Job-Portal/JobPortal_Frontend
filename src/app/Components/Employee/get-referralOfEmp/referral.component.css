@@ -39,6 +39,17 @@
   margin-bottom: 10px;
   font-size: 16px;
 }
+
+@media (max-width: 481px) {
+  .emailContainer {
+    font-size: 1rem;
+  }
+
+  .statusButton{
+    font-size: 0.8rem;
+  }
+}
+
 @media (max-width: 600px) {
   .container {
     padding: 0 10px;

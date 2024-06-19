@@ -1,7 +1,7 @@
 import { position } from "./position";
 
 export interface JobPositionResponse{
-    status: string;
+    status: number;
     message: string;
     jobPosition: position;
 }

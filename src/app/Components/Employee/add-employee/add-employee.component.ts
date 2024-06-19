@@ -122,7 +122,7 @@ export class AddEmployeeComponent implements OnInit {
           }
         },
         (error) => {
-          // console.log(error);
+          console.log(error);
           this.toaster.error(
             'Some error occured while registering' + error.message
           );

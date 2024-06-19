@@ -99,7 +99,7 @@ export class SkillsComponent {
   }
 
   public addskills(): void {
-    console.log('forms value : ', this.skillForm.value);
+    // console.log('forms value : ', this.skillForm.value);
     this.candidService
       .addSkilsOfCandidate(this.skillForm.get('candidateSkills')?.value)
       .subscribe(
@@ -107,24 +107,25 @@ export class SkillsComponent {
           // console.log(res);
           // this.ngOnInit();
           this.toastr.success('Skills Added !!');
+          this.skillForm.reset();
         },
         (error) => {
           console.log(error);
         }
       );
   }
-
+  
   public updateskills(): void {
     this.userSkills.candidateSkills = this.userSkills.candidateSkills.concat(
-      ',',
-      this.skillForm.value.candidateSkills
+      ',',' ',this.skillForm.value.candidateSkills
     );
-    console.log(this.userSkills);
+    // console.log(this.userSkills);
     this.candidService.updateSkillsOfCandidate(this.userSkills).subscribe(
       (res) => {
         // console.log(res);
         this.loadCandidateSkills();
         this.toastr.success('Skills Updated!!');
+        this.skillForm.reset();
       },
       (error) => {
         console.log(error);
@@ -151,13 +152,13 @@ export class SkillsComponent {
   }
 
   public displayValues(): void {
-    console.log(this.skillForm.value);
-    console.log(this.skillForm.get('skills')?.value);
+    // console.log(this.skillForm.value);
+    // console.log(this.skillForm.get('skills')?.value);
     this.displayskills();
   }
 
   public deleteSkill(index: number): void{
-    console.log(this.arrayOfSkills[index]);
+    // console.log(this.arrayOfSkills[index]);
     // console.log(this.arrayOfSkills);
     if (index > -1) { 
     this.arrayOfSkills.splice(index, 1); 

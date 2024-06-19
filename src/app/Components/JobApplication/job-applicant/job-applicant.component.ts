@@ -59,7 +59,7 @@ export class JobApplicantComponent implements OnInit {
     private toastr: ToastrService,
     private statusService: StatusService,
     private candidService: CandidateService,
-    private getStatusService : StatusServiceService
+    private getStatusService: StatusServiceService
   ) {}
 
   ngOnInit(): void {
@@ -215,7 +215,7 @@ export class JobApplicantComponent implements OnInit {
   public onSubmit(): void {
     this.spinnerService.showSpinner();
     // console.log(this.filtersForm.value);
-
+    document.getElementById('btn-close')?.click();
     this.filterJobs(
       this.filtersForm.get('degree')?.value,
       this.filtersForm.get('company')?.value,
@@ -309,11 +309,19 @@ export class JobApplicantComponent implements OnInit {
     this.filterapplicants = this.applicants;
     this.showApplicants = this.applicants;
     this.searchText = '';
+    
+    this.filtersForm = this.fb.group({
+      degree: [''],
+      institute: [''],
+      company: [''],
+      status: [''],
+    });
+
     this.displayResetToast();
   }
 
   private displayFilterEmptyToast(): void {
-    this.toastr.error('NO Filter Selected !!');
+    this.toastr.info('NO Filter Selected !!');
   }
 
   private displayApplicationToast(): void {
@@ -325,7 +333,7 @@ export class JobApplicantComponent implements OnInit {
   }
 
   private displayEmptyApplicationToast(): void {
-    this.toastr.error('No Applications Found !!');
+    this.toastr.info('No Applications Found !!');
   }
 
   search(searchText: string) {
@@ -357,33 +365,36 @@ export class JobApplicantComponent implements OnInit {
     this.spinnerService.hideSpinner();
   }
 
-  changeStatus(data : {applicationId : Guid, statusId: number}){
-    this.getStatusService.getstatus(data.statusId).subscribe(
-      (status) => {
-        for (let i = 0; i < this.applicants.length; i++) {
-          if (this.applicants[i].applicationId === data.applicationId) {
-              this.applicants[i].status.statusId = status.statusViewModel.statusId;
-              this.applicants[i].status.statusName = status.statusViewModel.statusName;
-              break;
-          }
-        }
-    
-        for (let i = 0; i < this.filterapplicants.length; i++) {
-          if (this.filterapplicants[i].applicationId === data.applicationId) {
-              this.filterapplicants[i].status.statusId = status.statusViewModel.statusId;
-              this.filterapplicants[i].status.statusName = status.statusViewModel.statusName;
-              break;
-          }
-        }
-    
-        for (let i = 0; i < this.showApplicants.length; i++) {
-          if (this.showApplicants[i].applicationId === data.applicationId) {
-              this.showApplicants[i].status.statusId = status.statusViewModel.statusId;
-              this.showApplicants[i].status.statusName = status.statusViewModel.statusName;
-              break;
-          }
+  changeStatus(data: { applicationId: Guid; statusId: number }) {
+    this.getStatusService.getstatus(data.statusId).subscribe((status) => {
+      for (let i = 0; i < this.applicants.length; i++) {
+        if (this.applicants[i].applicationId === data.applicationId) {
+          this.applicants[i].status.statusId = status.statusViewModel.statusId;
+          this.applicants[i].status.statusName =
+            status.statusViewModel.statusName;
+          break;
         }
       }
-    )
+
+      for (let i = 0; i < this.filterapplicants.length; i++) {
+        if (this.filterapplicants[i].applicationId === data.applicationId) {
+          this.filterapplicants[i].status.statusId =
+            status.statusViewModel.statusId;
+          this.filterapplicants[i].status.statusName =
+            status.statusViewModel.statusName;
+          break;
+        }
+      }
+
+      for (let i = 0; i < this.showApplicants.length; i++) {
+        if (this.showApplicants[i].applicationId === data.applicationId) {
+          this.showApplicants[i].status.statusId =
+            status.statusViewModel.statusId;
+          this.showApplicants[i].status.statusName =
+            status.statusViewModel.statusName;
+          break;
+        }
+      }
+    });
   }
 }

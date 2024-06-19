@@ -18,14 +18,13 @@
     float: right;
 }
 
+
 @media screen and (max-width: 480px) {
-    .custom-container{
-        padding: 0 !important;
+    .top-card{
+        padding: 10px !important;
+        width: 90% !important;
     }
-    .card{
-        padding: 0 !important;
-    }
-    .card-body{
-        width: 40vw;
+    .small-card{
+        width: 50vw;
     }
 }

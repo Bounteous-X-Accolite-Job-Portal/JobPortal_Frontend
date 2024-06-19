@@ -26,8 +26,8 @@ export class SocialProfilesComponent {
     private userStore: UserStoreService,
     private auth: AuthService,
     private toastr: ToastrService,
-    private fb : FormBuilder,
-    private spinner : SpinnerService
+    private fb: FormBuilder,
+    private spinner: SpinnerService
   ) {}
 
   mediaForm!: FormGroup;
@@ -41,19 +41,22 @@ export class SocialProfilesComponent {
   enableEditButton: boolean = false;
   enableBack: boolean = false;
 
+  link1: boolean = true;
+  link2: boolean = true;
+  link3: boolean = true;
+
   ngOnInit(): void {
+    this.mediaForm = this.fb.group({
+      link1: [''],
+      link2: [''],
+      link3: [''],
+    });
     this.userStore.getIdFromStore().subscribe((val) => {
       // console.log(val);
       let idFromToken = this.auth.getIdFromToken();
       // console.log(idFromToken);
       this.userId = val || idFromToken;
       // console.log('Logged User Id : ', this.userId);
-    });
-
-    this.mediaForm = this.fb.group({
-      link1:[''],
-      link2:[''],
-      link3:['']
     });
 
     this.loadSocialMediaDetails();
@@ -77,17 +80,18 @@ export class SocialProfilesComponent {
         this.mediaForm.get('link3')?.setValue(this.socialMedia.link3 || '');
 
         this.disablefields();
+        this.enableLinks();
         this.spinner.hideSpinner();
       },
       (error) => {
-        this.toastr.error("Error in fetching links")
+        this.toastr.error('Error in fetching links');
         console.log(error);
         this.spinner.hideSpinner();
       }
     );
   }
 
-  private checkSocialMedia(){
+  private checkSocialMedia() {
     if (this.socialMedia == null) {
       this.socialMedia = { link1: '', link2: '', link3: '' };
       this.enableAddButton = true;
@@ -99,7 +103,7 @@ export class SocialProfilesComponent {
   }
 
   public funaddSocialMedia(): void {
-    console.log(this.mediaForm.value);
+    // console.log(this.mediaForm.value);
     this.candidService.addSocialMedia(this.mediaForm.value).subscribe(
       (res) => {
         // console.log(res);
@@ -125,7 +129,7 @@ export class SocialProfilesComponent {
       (res) => {
         // console.log(res);
         this.ngOnInit();
-        this.toastr.success('Socail Media Profiles Updated!!');
+        this.toastr.success('Social Media Profiles Updated!!');
       },
       (error) => {
         console.log(error);
@@ -159,5 +163,25 @@ export class SocialProfilesComponent {
     this.mediaForm.controls['link2'].enable();
     this.mediaForm.controls['link3'].enable();
     this.enableBack = true;
+  }
+
+  public enableLinks(): void {
+    if (this.socialMedia.link1 != null && this.socialMedia.link1.length > 0) {
+      this.link1 = true;
+    }
+    else
+      this.link1 = false;
+
+    if (this.socialMedia.link2 != null && this.socialMedia.link2.length > 0) {
+      this.link2 = true;
+    }
+    else
+      this.link2 = false;
+    
+    if (this.socialMedia.link3 != null && this.socialMedia.link3.length > 0) {
+      this.link3 = true;
+    }
+    else
+      this.link3 = false;
   }
 }

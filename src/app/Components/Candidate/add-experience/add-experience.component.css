@@ -1,0 +1,10 @@
+.outer-div{
+    height: auto; 
+    min-height: 70vh;
+}
+
+@media (max-width:480px){
+    .outer-div{
+        padding: 5% !important;
+    }
+}

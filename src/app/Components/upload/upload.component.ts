@@ -41,14 +41,14 @@ export class UploadComponent {
       formData.append('upload_preset', 'jobPortal_pdf');
       formData.append('folder', 'pdf');
 
-      console.log("file info ", this.file!.slice(start, end));
+      // console.log("file info ", this.file!.slice(start, end));
 
       const contentRange = `bytes ${start}-${end - 1}/${this.file!.size}`;
-      console.log(
-        `Uploading chunk for uniqueUploadId: ${uniqueUploadId}; start: ${start}, end: ${
-          end - 1
-        }`
-      );
+      // console.log(
+      //   `Uploading chunk for uniqueUploadId: ${uniqueUploadId}; start: ${start}, end: ${
+      //     end - 1
+      //   }`
+      // );
       try {
         const response = await this.http
           .post(
@@ -72,7 +72,7 @@ export class UploadComponent {
           this.uploading = false;
           this.cldResponse = response;
           this.toastr.success('File uploaded', undefined, { timeOut: 5000 });
-          console.log(this.cldResponse.url);
+          //console.log(this.cldResponse.url);
           // this.product.productImageUrl = this.cldResponse.url;
         }
       } catch (error) {

@@ -23,7 +23,6 @@ import { Guid } from 'guid-typescript';
   providedIn: 'root',
 })
 export class JobService {
-  public jobId!:string;
   constructor(private http: HttpClient) {}
 
     getAllJobs():Observable<AllJob>{

@@ -40,6 +40,12 @@ input {
     justify-content: space-between;
 }
 
+.valid-block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .edit-button{
     z-index: 1; 
@@ -51,10 +57,12 @@ input {
 @media (max-width: 481px) {
     .profile-block {
         flex-direction: column;
+        justify-content: center;
     }
 }
 
 @media (max-width: 767px) {
+
     .img-thumbnail {
         display: none;
     }

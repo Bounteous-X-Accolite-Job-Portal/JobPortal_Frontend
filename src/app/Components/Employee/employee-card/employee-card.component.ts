@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-card',
@@ -26,7 +25,6 @@ export class EmployeeCardComponent {
     private employeeService: EmployeeService,
     private spinnerService: SpinnerService,
     private toasterService: ToastrService,
-    private router : Router
   ){}
   
   ngOnInit(){
