@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResetPassword } from '../../Models/ResetPassword';
 import { environment } from '../../../environments/environment.development';
+import { ResponseModal } from '../../Models/ResponseModal';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class ChangePasswordService {
   constructor(private http: HttpClient) {}
   
   changePassword(resetPasswordObj: ResetPassword) {
-    return this.http.post<ResetPassword>(
+    return this.http.post<ResponseModal>(
       environment.baseURL+'ChangePassword/ChangePassword',
       resetPasswordObj
     );
