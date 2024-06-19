@@ -82,7 +82,7 @@ export class EmailComponentChangePasswordComponent {
         
         this.spinnerService.hideSpinner();}
         else{
-          this.toast.error("Wrong Password");
+          this.toast.error("Current Password is Wrong");
           this.spinnerService.hideSpinner();
         }
       },
