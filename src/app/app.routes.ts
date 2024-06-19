@@ -5,7 +5,6 @@ import { RegisterComponent } from './Components/register/register.component';
 import { AddJobComponent } from './Components/Employee/add-job/add-job.component';
 import { JobHomeComponent } from './Components/job-home/job-home.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
-import { TryComponent } from './Components/try/try.component';
 import { ExperienceComponent } from './Components/Candidate/experience/experience.component';
 import { PersonalInfoComponent } from './Components/Candidate/personal-info/personal-info.component';
 import { SkillsComponent } from './Components/Candidate/skills/skills.component';
@@ -120,10 +119,6 @@ export const routes: Routes = [
     path: 'closedJob/job-details/:closedJobId',
     component: JobdetailsComponent,
     canActivate: [authGuard, employeeGuardGuard, hasPrivilegeGuard]
-  },
-  {
-    path: 'try',
-    component: TryComponent,
   },
   {
     path: 'crud-job-data',
