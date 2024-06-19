@@ -50,7 +50,12 @@ export class EmailComponentChangePasswordComponent {
   {
     this.pwdForm = this.fb.group({
       currentPassword:['',Validators.required],
-      newPassword:['',Validators.required],
+      newPassword:['',[Validators.required,
+        Validators.minLength(6),
+        Validators.pattern(
+          '^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=~!?_-]).*$'
+        ),
+      ]],
       confirmPassword:['',Validators.required],
       email:['']
     },
@@ -76,11 +81,12 @@ export class EmailComponentChangePasswordComponent {
       (res:any)=>{
   
         console.log(res);
-        if(res.status==200){
-        this.pwdForm.reset();
-        this.toast.success("Successfully changed password !");
-        
-        this.spinnerService.hideSpinner();}
+        if(res.status===200){
+          this.pwdForm.reset();
+          this.toast.success("Successfully changed password !");
+          
+          this.spinnerService.hideSpinner();
+        }
         else{
           this.toast.error("Current Password is Wrong");
           this.spinnerService.hideSpinner();

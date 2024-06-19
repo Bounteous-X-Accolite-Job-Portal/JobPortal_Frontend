@@ -57,7 +57,9 @@ export class AddReferralComponent implements OnInit {
           this.toastr.success(
             'Successfully Referred ' + this.referralForm.get('firstName')?.value
           );
+          
           this.referralForm.reset();
+          this.router.navigate(['../referral']);
         } else {
           this.toastr.error(res.message);
         }
