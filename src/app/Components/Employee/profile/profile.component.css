@@ -188,6 +188,16 @@ body {
   .profile-page .content__list li span {
     font-size: 1.2rem;
   }
+  .profile-page .content__avatar .logotext {
+    width: 5rem;
+    height: 8rem;
+    left: 23%;
+    font-size: 2rem;
+  }
+  .profile-page .content__avatar {
+    width: 5rem;
+    height: 5rem;
+  }
 }
 
 @-moz-keyframes floating {

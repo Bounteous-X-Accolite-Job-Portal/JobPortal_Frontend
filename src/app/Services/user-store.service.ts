@@ -2,73 +2,72 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserStoreService {
-  private email$ = new BehaviorSubject<string>("");
+  private email$ = new BehaviorSubject<string>('');
   private isEmployee$ = new BehaviorSubject<boolean>(false);
-  private role$ = new BehaviorSubject<string>("");
-  private id$ = new BehaviorSubject<string>("");
-  private name$ = new BehaviorSubject<string>("");
+  private role$ = new BehaviorSubject<string>('');
+  private id$ = new BehaviorSubject<string>('');
+  private name$ = new BehaviorSubject<string>('');
   private hasPrivilege$ = new BehaviorSubject<boolean>(false);
   private hasSpecialPrivilege$ = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
-  
-  public getEmailFromStore(){
+  constructor() {}
+
+  public getEmailFromStore() {
     return this.email$.asObservable();
   }
 
-  public setEmailForStore(email : string){
+  public setEmailForStore(email: string) {
     this.email$.next(email);
   }
 
-  public getNameFromStore(){
+  public getNameFromStore() {
     return this.name$.asObservable();
   }
 
-  public setNameForStore(name : string){
+  public setNameForStore(name: string) {
     this.name$.next(name);
   }
 
-  public checkIsEmployeeFromStore(){
+  public checkIsEmployeeFromStore() {
     return this.isEmployee$.asObservable();
   }
-  
-  public setIsEmployeeForStore(isEmployee : boolean){
+
+  public setIsEmployeeForStore(isEmployee: boolean) {
     this.isEmployee$.next(isEmployee);
   }
 
-  public checkHasPrivilegeFromStore(){
+  public checkHasPrivilegeFromStore() {
     return this.hasPrivilege$.asObservable();
   }
-  
-  public setHasPrivilegeForStore(hasPrivilege : boolean){
+
+  public setHasPrivilegeForStore(hasPrivilege: boolean) {
     this.hasPrivilege$.next(hasPrivilege);
   }
 
-  public checkHasSpecialPrivilegeFromStore(){
+  public checkHasSpecialPrivilegeFromStore() {
     return this.hasSpecialPrivilege$.asObservable();
   }
-  
-  public setHasSpecialPrivilegeForStore(hasSpecialPrivilege : boolean){
+
+  public setHasSpecialPrivilegeForStore(hasSpecialPrivilege: boolean) {
     this.hasSpecialPrivilege$.next(hasSpecialPrivilege);
   }
-  
-  public getRoleFromStore(){
+
+  public getRoleFromStore() {
     return this.role$.asObservable();
   }
 
-  public setRoleForStore(role : string){
+  public setRoleForStore(role: string) {
     this.role$.next(role);
   }
 
-  public getIdFromStore(){
+  public getIdFromStore() {
     return this.id$.asObservable();
   }
 
-  public setIdForStore(id : string){
+  public setIdForStore(id: string) {
     this.id$.next(id);
   }
 }
-

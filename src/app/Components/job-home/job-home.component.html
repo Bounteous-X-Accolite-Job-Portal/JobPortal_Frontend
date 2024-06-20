@@ -2,12 +2,17 @@
   <div class="Filters">
     <div class="fil">Filters</div>
 
-    <div>
+    <div style="width: 85%">
       <form [formGroup]="filtersForm">
         <div>
           <p>Job Category</p>
-          <select formControlName="jobCategory" (change)="loadJobPositionsByCategoryId()" data-bs-toggle="tooltip"
-            data-bs-placement="right" title="Job Category Selector">
+          <select
+            formControlName="jobCategory"
+            (change)="loadJobPositionsByCategoryId()"
+            data-bs-toggle="tooltip"
+            data-bs-placement="right"
+            title="Job Category Selector"
+          >
             <option value="">Select Job Category</option>
             <option *ngFor="let cat of jobCategories" [value]="cat.categoryId">
               {{ cat.categoryName }} {{ cat.categoryCode }}
@@ -16,18 +21,29 @@
         </div>
         <div>
           <p>Job Position</p>
-          <select formControlName="jobPosition" data-bs-toggle="tooltip" data-bs-placement="right"
-            title="Job Position Selector">
+          <select
+            formControlName="jobPosition"
+            data-bs-toggle="tooltip"
+            data-bs-placement="right"
+            title="Job Position Selector"
+          >
             <option value="">Select Job Position</option>
-            <option *ngFor="let pos of categoryjobPositions" [value]="pos.positionId">
+            <option
+              *ngFor="let pos of categoryjobPositions"
+              [value]="pos.positionId"
+            >
               {{ pos.positionName }}
             </option>
           </select>
         </div>
         <div>
           <p>Job Location</p>
-          <select formControlName="location" data-bs-toggle="tooltip" data-bs-placement="right"
-            title="Job Location Selector">
+          <select
+            formControlName="location"
+            data-bs-toggle="tooltip"
+            data-bs-placement="right"
+            title="Job Location Selector"
+          >
             <option value="">Select Job Location</option>
             <option *ngFor="let loc of locations" [value]="loc.locationId">
               {{ loc.city }} {{ loc.state }} {{ loc.country }}
@@ -36,8 +52,12 @@
         </div>
         <div>
           <p>Job Type</p>
-          <select formControlName="jobType" data-bs-toggle="tooltip" data-bs-placement="right"
-            title="Job Type Selector">
+          <select
+            formControlName="jobType"
+            data-bs-toggle="tooltip"
+            data-bs-placement="right"
+            title="Job Type Selector"
+          >
             <option value="">Select Job Type</option>
             <option *ngFor="let typ of jobTypes" [value]="typ.jobTypeId">
               {{ typ.typeName }}
@@ -46,7 +66,12 @@
         </div>
         <div>
           <p>Degree</p>
-          <select formControlName="degree" data-bs-toggle="tooltip" data-bs-placement="right" title="Degree Selector">
+          <select
+            formControlName="degree"
+            data-bs-toggle="tooltip"
+            data-bs-placement="right"
+            title="Degree Selector"
+          >
             <option value="">Select Degree</option>
             <option *ngFor="let deg of degrees" [value]="deg.degreeId">
               {{ deg.degreeName }}
@@ -54,29 +79,55 @@
           </select>
         </div>
         <div class="d-flex justify-content-around filter-btn">
-          <button (click)="
+          <button
+            (click)="
               FilterClosedJobToggle ? onSubmitForClosedJobs() : onSubmit()
-            " class="btn btn-primary text-style-add border-white">
+            "
+            class="btn btn-primary text-style-add border-white"
+          >
             <span>Search</span>
           </button>
-          <button (click)="resetFilters()" class="btn btn-primary text-style-add border-white">
+          <button
+            (click)="resetFilters()"
+            class="btn btn-primary text-style-add border-white"
+          >
             <span>Reset</span>
           </button>
         </div>
       </form>
     </div>
   </div>
-  <div *ngIf="isEmployee && hasPrivilege" class="jobListing w-100" style="align-items: start">
+  <div
+    *ngIf="isEmployee && hasPrivilege"
+    class="jobListing w-100"
+    style="align-items: start"
+  >
     <ul class="nav nav-pills nav-justified w-100" id="ex1" role="tablist">
       <li class="nav-item mx-2" role="presentation">
-        <a (click)="ActiveJobs()" [class.active]="ActiveJobToggle" class="nav-link" id="tab-login" data-mdb-pill-init
-          role="tab" aria-controls="pills-login" aria-selected="true">
+        <a
+          (click)="ActiveJobs()"
+          [class.active]="ActiveJobToggle"
+          class="nav-link"
+          id="tab-login"
+          data-mdb-pill-init
+          role="tab"
+          aria-controls="pills-login"
+          aria-selected="true"
+        >
           Active Jobs
         </a>
       </li>
       <li class="nav-item mx-2" role="presentation">
-        <a (click)="ClosedJobs()" [class.active]="!ActiveJobToggle" class="nav-link" id="tab-register"
-          data-mdb-pill-init role="tab" aria-controls="pills-register" aria-selected="false">
+        <a
+          (click)="ClosedJobs()"
+          [class.active]="!ActiveJobToggle"
+          class="nav-link"
+          id="tab-register"
+          data-mdb-pill-init
+          role="tab"
+          aria-controls="pills-register"
+          aria-selected="false"
+        >
           Closed Jobs
         </a>
       </li>
@@ -87,7 +138,11 @@
         <div *ngIf="jobs.length == 0">You don't have any active job.</div>
         <div *ngIf="jobs.length != 0">
           <div class="">
-            <app-job-card *ngFor="let job of Filterjobs" [job]="job" [isActive]="true"></app-job-card>
+            <app-job-card
+              *ngFor="let job of Filterjobs"
+              [job]="job"
+              [isActive]="true"
+            ></app-job-card>
           </div>
         </div>
       </div>
@@ -95,8 +150,11 @@
         <div *ngIf="closedJobs.length == 0">You don't have any closed job.</div>
         <div *ngIf="closedJobs.length != 0">
           <div class="">
-            <app-job-card *ngFor="let closedJob of filteredClosedJobs" [closedJob]="closedJob"
-              [isActive]="false"></app-job-card>
+            <app-job-card
+              *ngFor="let closedJob of filteredClosedJobs"
+              [closedJob]="closedJob"
+              [isActive]="false"
+            ></app-job-card>
           </div>
         </div>
       </div>
@@ -107,13 +165,24 @@
 
     <div class="content">
       <div class="d-flex flex-row mb-4 jobSearch">
-        <div class="d-flex justify-content-center align-items-center text-grey search-bar">
+        <div
+          class="d-flex justify-content-center align-items-center text-grey search-bar"
+        >
           <i class="fa fa-search" aria-hidden="true"></i>
         </div>
-        <div class="d-flex justify-content-center align-items-center col px-3 inputDiv">
-          <input type="search" [(ngModel)]="searchText" [ngModelOptions]="{ standalone: true }"
-            class="form-control d-block" id="search-text" aria-describedby="search-text" (input)="search(searchText)"
-            placeholder="Search using JobId/JobCode or JobName" />
+        <div
+          class="d-flex justify-content-center align-items-center col px-3 inputDiv"
+        >
+          <input
+            type="search"
+            [(ngModel)]="searchText"
+            [ngModelOptions]="{ standalone: true }"
+            class="form-control d-block"
+            id="search-text"
+            aria-describedby="search-text"
+            (input)="search(searchText)"
+            placeholder="Search using JobId/JobCode or JobName"
+          />
         </div>
       </div>
       <div *ngIf="searchJobs.length === 0" class="d-block">
@@ -121,19 +190,34 @@
       </div>
 
       <div *ngIf="searchJobs.length !== 0" class="top-job-card">
-        <app-job-card *ngFor="let job of searchJobs" [job]="job" style="width: 100%"></app-job-card>
+        <app-job-card
+          *ngFor="let job of searchJobs"
+          [job]="job"
+          style="width: 100%"
+        ></app-job-card>
       </div>
     </div>
   </div>
 </div>
 <div class="jobFilterMobile position-fixed bottom-0 end-0 rounded-circle m-4">
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filterModal">
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#filterModal"
+  >
     <i class="fa-solid fa-filter"></i>
   </button>
 </div>
 
 <!-- Filter Modal -->
-<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="filterModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header px-3 py-2">
@@ -143,36 +227,58 @@
       </div>
       <div class="modal-body">
         <div class="py-3 px-1">
-          <form [formGroup]="filtersForm" style="
+          <form
+            [formGroup]="filtersForm"
+            style="
               display: flex;
               flex-direction: column;
               padding-left: 10%;
               padding-right: 10%;
-            ">
+            "
+          >
             <div>
               <p>Job Category</p>
-              <select formControlName="jobCategory" (change)="loadJobPositionsByCategoryId()" data-bs-toggle="tooltip"
-                data-bs-placement="right" title="Job Category Selector">
+              <select
+                formControlName="jobCategory"
+                (change)="loadJobPositionsByCategoryId()"
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                title="Job Category Selector"
+              >
                 <option value="">Select Job Category</option>
-                <option *ngFor="let cat of jobCategories" [value]="cat.categoryId">
+                <option
+                  *ngFor="let cat of jobCategories"
+                  [value]="cat.categoryId"
+                >
                   {{ cat.categoryName }} {{ cat.categoryCode }}
                 </option>
               </select>
             </div>
             <div>
               <p>Job Position</p>
-              <select formControlName="jobPosition" data-bs-toggle="tooltip" data-bs-placement="right"
-                title="Job Position Selector">
+              <select
+                formControlName="jobPosition"
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                title="Job Position Selector"
+              >
                 <option value="">Select Job Position</option>
-                <option *ngFor="let pos of categoryjobPositions" [value]="pos.positionId">
+                <option
+                  *ngFor="let pos of categoryjobPositions"
+                  [value]="pos.positionId"
+                >
                   {{ pos.positionName }}
                 </option>
               </select>
             </div>
             <div>
               <p>Job Location</p>
-              <select formControlName="location" data-bs-toggle="tooltip" data-bs-placement="right"
-                title="Job Location Selector">
+              <select
+                formControlName="location"
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                title="Job Location Selector"
+              >
                 <option value="">Select Job Location</option>
                 <option *ngFor="let loc of locations" [value]="loc.locationId">
                   {{ loc.city + ", " }} {{ loc.state + ", " }} {{ loc.country }}
@@ -181,8 +287,12 @@
             </div>
             <div>
               <p>Job Type</p>
-              <select formControlName="jobType" data-bs-toggle="tooltip" data-bs-placement="right"
-                title="Job Type Selector">
+              <select
+                formControlName="jobType"
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                title="Job Type Selector"
+              >
                 <option value="">Select Job Type</option>
                 <option *ngFor="let typ of jobTypes" [value]="typ.jobTypeId">
                   {{ typ.typeName }}
@@ -191,8 +301,12 @@
             </div>
             <div>
               <p>Degree</p>
-              <select formControlName="degree" data-bs-toggle="tooltip" data-bs-placement="right"
-                title="Degree Selector">
+              <select
+                formControlName="degree"
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                title="Degree Selector"
+              >
                 <option value="">Select Degree</option>
                 <option *ngFor="let deg of degrees" [value]="deg.degreeId">
                   {{ deg.degreeName }}
@@ -200,12 +314,18 @@
               </select>
             </div>
             <div class="d-flex justify-content-around">
-              <button class="btn btn-primary text-style-add" (click)="
+              <button
+                class="btn btn-primary text-style-add"
+                (click)="
                   FilterClosedJobToggle ? onSubmitForClosedJobs() : onSubmit()
-                ">
+                "
+              >
                 Search
               </button>
-              <button (click)="resetFilters()" class="btn btn-outline-primary text-style-add">
+              <button
+                (click)="resetFilters()"
+                class="btn btn-outline-primary text-style-add"
+              >
                 <span>Reset</span>
               </button>
             </div>

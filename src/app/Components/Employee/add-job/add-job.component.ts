@@ -172,8 +172,13 @@ export class AddJobComponent implements OnInit {
       this.addJobService.addJobs(this.jobData).subscribe(
         (res) => {
           // console.log('success ', res);
-          this.toast.success("Job Posted Successfully !!");
-          this.jobForm.reset();
+          if(res.status === 200 ){
+            this.toast.success(res.message);
+            this.jobForm.reset();
+          }
+          else{
+            this.toast.error(res.message);
+          }
           this.spinnerService.hideSpinner();
           this.submitted = false;
         },
