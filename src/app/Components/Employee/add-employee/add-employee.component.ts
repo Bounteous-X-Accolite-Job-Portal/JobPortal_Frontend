@@ -52,9 +52,8 @@ export class AddEmployeeComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl('', [
         Validators.required,
-        Validators.pattern('[6789][0-9]{9}'),
-        Validators.minLength(10),
-        Validators.maxLength(10),
+        Validators.pattern('[0-9]{10}'),
+
       ]),
       empId: new FormControl('', Validators.required),
       designationId: new FormControl('', Validators.required),
@@ -104,7 +103,7 @@ export class AddEmployeeComponent implements OnInit {
       this.addEmployeeService.addEmployee(employee).subscribe(
         (data: any) => {
           // console.log('Status', data.status, 'data message', data.message);
-
+          console.log(data);
           if (data.status == 200) {
             this.loading = false;
 
@@ -122,7 +121,7 @@ export class AddEmployeeComponent implements OnInit {
           }
         },
         (error) => {
-          // console.log(error);
+          console.log(error);
           this.toaster.error(
             'Some error occured while registering' + error.message
           );

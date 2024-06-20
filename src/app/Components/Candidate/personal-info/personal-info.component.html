@@ -48,14 +48,41 @@
                     <div class="font-italic mb-2 d-inline">Phone :</div>
                     <input type="text" class="font-italic mb-1 w-75" formControlName="phone" />
                   </div>
+                  <div class="valid-block">
+                    <small *ngIf="f['phone'].invalid && (f['phone'].dirty || f['phone'].touched)" class="d-block text-danger">
+                      <div *ngIf="f['phone'].errors?.['required']">
+                        Phone is required
+                      </div>
+                      <div *ngIf="f['phone'].errors?.['pattern']">Phone No. must be of 10 digits and should include only numbers</div>
+                  </small>
+                  </div>
+                  
                   <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
                     <div class="font-italic mb-2 d-inline">Address :</div>
                     <input type="text" class="font-italic mb-1 w-75" formControlName="addressLine1" />
                   </div>
+
+                  <div class="valid-block">
+                    <small *ngIf="f['addressLine1'].invalid && (f['addressLine1'].dirty || f['addressLine1'].touched)" class="d-block text-danger">
+                      <div *ngIf="f['addressLine1'].errors?.['required']">
+                        Address is required
+                      </div>
+                  </small>
+                  </div>
+
                   <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
                     <div class="font-italic mb-2 d-inline">City :</div>
                     <input type="text" class="font-italic mb-1 w-75" formControlName="city" />
                   </div>
+
+                  <div class="valid-block">
+                    <small *ngIf="f['city'].invalid && (f['city'].dirty || f['city'].touched)" class="d-block text-danger">
+                      <div *ngIf="f['city'].errors?.['required']">
+                        City is required
+                      </div>
+                  </small>
+                  </div>
+
                   <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
                     <div class="font-italic mb-2 d-inline">State :</div>
                     <input type="text" class="font-italic mb-1 w-75" formControlName="state" />
@@ -71,7 +98,8 @@
                 </form>
               </div>
             </div>
-            <button *ngIf="isAccessible" (click)="funUpdateProfile()" class="btn btn-primary text-style-add mx-3">
+            <button *ngIf="isAccessible" [disabled]="profileForm.invalid" (click)="funUpdateProfile()"
+              class="btn btn-primary text-style-add mx-3">
               UPDATE
             </button>
             <button *ngIf="isAccessible" (click)="disableFields()" class="btn btn-outline-primary text-style-del">

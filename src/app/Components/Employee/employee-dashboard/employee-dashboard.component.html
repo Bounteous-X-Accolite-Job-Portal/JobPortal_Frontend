@@ -26,12 +26,7 @@
           data-toggle="tooltip"
           data-placement="right"
           title="{{ data.label }}"
-          *ngIf="
-            (!data.requiredPrivilege ||
-              hasPrivilege === data.requiredPrivilege) &&
-            (!data.requiredSpecialPrivilege ||
-              hasSpecialPrivilege === data.requiredSpecialPrivilege)
-          "
+          *ngIf="(!data.requiredPrivilege || hasPrivilege === data.requiredPrivilege) && (!data.requiredSpecialPrivilege || hasSpecialPrivilege === data.requiredSpecialPrivilege)"
         >
           <i class="sidenav-link-icon ml-5" [class]="data.icon"></i>
           <span class="sidenav-link-text" *ngIf="collapsed">{{

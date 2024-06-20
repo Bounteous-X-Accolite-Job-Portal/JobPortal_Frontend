@@ -1,7 +1,7 @@
 import { Degree } from "./Degree";
 
 export interface DegreeResponse{
-    status : string;
+    status : number;
     message : string;
     degree : Degree;
 }

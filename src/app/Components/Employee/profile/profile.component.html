@@ -38,7 +38,7 @@
       <p>Email - {{ employee != undefined ? employee.email : "loading..." }}</p>
     </div>
     <ul class="content__list">
-      <li>
+      <li *ngIf="hasPrivilege || hasSpecialPrivilege">
         <span>{{ jobsAdded }}</span
         >Job Added
       </li>

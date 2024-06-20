@@ -40,6 +40,12 @@ input {
     justify-content: space-between;
 }
 
+.valid-block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .edit-button{
     z-index: 1; 

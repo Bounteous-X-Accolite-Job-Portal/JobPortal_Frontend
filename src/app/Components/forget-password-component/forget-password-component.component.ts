@@ -47,7 +47,9 @@ export class ForgetPasswordComponentComponent implements OnInit {
       [
         Validators.required,
         Validators.minLength(6),
-        Validators.pattern('^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$'),
+        Validators.pattern(
+          '^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=~!?_-]).*$'
+        ),
       ],
     ],
       confirmPassword: [ '',  Validators.required]
@@ -87,14 +89,18 @@ export class ForgetPasswordComponentComponent implements OnInit {
       this.resetPasswordService.resetPassword(this.forgetPasswordForm.value).subscribe(
         (res)=>{
           this.spinnerService.hideSpinner();
-          this.toaster.success("Password Reset Successfully!!");
-          this.forgetPasswordForm.reset();
-          this.router.navigate(['/login']);
+          if(res.status === 200 ){
+            this.toaster.success("Password Reset Successfully!!");
+            this.forgetPasswordForm.reset();
+            this.router.navigate(['/login']);
+          }else{
+            this.toaster.error(res.message);
+          }
           
         },
         (error)=>{
           this.spinnerService.hideSpinner();
-          this.toaster.error("Error : ", error);
+          this.toaster.error("Error : ", error.message);
           // console.log(error);
         }
       )

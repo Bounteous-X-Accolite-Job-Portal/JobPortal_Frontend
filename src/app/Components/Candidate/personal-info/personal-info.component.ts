@@ -3,7 +3,7 @@ import { Candidate } from '../../../Models/Backend/Candidate';
 import { UserStoreService } from '../../../Services/user-store.service';
 import { AuthService } from '../../../Services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CandidateService } from '../../../Services/CandidateService/candidate.service';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { CommonModule } from '@angular/common';
@@ -39,7 +39,7 @@ export class PersonalInfoComponent {
     this.loadCandidateInfo();
 
     this.profileForm = this.fb.group({
-      phone: [''],
+      phone: ['', [Validators.pattern('[0-9]{10}'),]],
       addressLine1:[''],
       city:[''],
       state:[''],
@@ -91,6 +91,10 @@ export class PersonalInfoComponent {
         }
       )
   } 
+
+  get f() {
+    return this.profileForm.controls;
+  }
 
   public disableFields(): void{
     this.isAccessible = false;

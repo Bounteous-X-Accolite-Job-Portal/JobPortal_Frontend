@@ -7,15 +7,12 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { environment } from '../../../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
 import { Employee } from '../../../Models/Backend/Employee/Employee';
 import { AllEmployee } from '../../../Models/Backend/Employee/AllEmployee';
 import { FilterPipe } from '../../../Models/filter.pipe';
 import { ActivatedRoute } from '@angular/router';
 import { SpinnerService } from '../../../Services/spinner.service';
 import { EmployeeService } from '../../../Services/AddEmployee/employee.service';
-import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
 import { AddInterviewResponse } from '../../../Models/InterviewResponse/AddInterviewResponse';
 import { InterviewService } from '../../../Services/InterviewService/interview.service';
@@ -31,7 +28,6 @@ export class InterviewComponent implements OnInit {
   addInterviewForm!: FormGroup;
 
   constructor(
-    private http: HttpClient,
     private route: ActivatedRoute,
     private spinnerService: SpinnerService,
     private employeeService: EmployeeService,
@@ -134,10 +130,15 @@ export class InterviewComponent implements OnInit {
       this.interviewService.addInterview(data).subscribe(
         (response: AddInterviewResponse) => {
           // console.log('success : ', response);
-          this.toast.success(response.message);
+          if(response.status === 200){
+            this.toast.success(response.message);
 
-          this.addInterviewForm.reset();
-          this.employeeIdOfInterviewer = '';
+            this.addInterviewForm.reset();
+            this.employeeIdOfInterviewer = '';
+          }
+          else{
+            this.toast.error(response.message);
+          }
 
           this.spinnerService.hideSpinner();
         },
