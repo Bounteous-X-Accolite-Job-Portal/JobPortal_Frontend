@@ -52,9 +52,8 @@ export class AddEmployeeComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl('', [
         Validators.required,
-        Validators.pattern('[6789][0-9]{9}'),
-        Validators.minLength(10),
-        Validators.maxLength(10),
+        Validators.pattern('[0-9]{10}'),
+
       ]),
       empId: new FormControl('', Validators.required),
       designationId: new FormControl('', Validators.required),

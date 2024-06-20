@@ -39,9 +39,9 @@ export class PersonalInfoComponent {
     this.loadCandidateInfo();
 
     this.profileForm = this.fb.group({
-      phone: ['', [Validators.required,Validators.pattern('[- +()0-9]{10}')]],
-      addressLine1:['',[Validators.required, Validators.pattern('^[A-Za-z]+(?: [A-Za-z]+)*$')]],
-      city:['', Validators.required],
+      phone: ['', [Validators.pattern('[0-9]{10}'),]],
+      addressLine1:[''],
+      city:[''],
       state:[''],
       country:[''],
       zipCode:['']
