@@ -53,9 +53,7 @@
                       <div *ngIf="f['phone'].errors?.['required']">
                         Phone is required
                       </div>
-                      <div *ngIf="f['phone'].errors?.['pattern']">
-                        Phone should consist of 10 numbers only
-                      </div>
+                      <div *ngIf="f['phone'].errors?.['pattern']">Phone No. must be of 10 digits and should include only numbers</div>
                   </small>
                   </div>
                   

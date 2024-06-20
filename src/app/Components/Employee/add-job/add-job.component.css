@@ -3,7 +3,7 @@
   backdrop-filter: saturate(200%) blur(25px);
 }
 
-@media screen and (max-width: 4801px) {
+@media screen and (max-width: 480px) {
   .card{
     padding:0.8rem !important;
   }

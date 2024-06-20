@@ -344,19 +344,19 @@ export class JobApplicantComponent implements OnInit {
     if (!searchText.trim()) {
       this.showApplicants = this.applicants.slice();
       this.spinnerService.hideSpinner();
-      return;
+      return; 
     }
 
-    this.showApplicants = [];
+    this.showApplicants = []; 
 
     this.showApplicants = this.filterapplicants.filter((item) => {
       const firstName = item.candidate.firstName
         .toLowerCase()
-        .includes(searchText);
+        .includes(searchText.toLowerCase());
       const lastName = item.candidate.lastName
         .toLowerCase()
-        .includes(searchText);
-      const email = item.candidate.email.toLowerCase().includes(searchText);
+        .includes(searchText.toLowerCase());
+      const email = item.candidate.email.toLowerCase().includes(searchText.toLowerCase());
 
       return firstName || lastName || email;
     });

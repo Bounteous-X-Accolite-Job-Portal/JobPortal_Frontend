@@ -23,7 +23,7 @@ div {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   width: 75%;
   flex-wrap: wrap;
   overflow-y: scroll;
@@ -59,7 +59,7 @@ p {
   font-weight: bolder;
 }
 
-.filter-btn{
+.filter-btn {
   margin-top: 1rem;
   width: 90%;
 }
@@ -80,23 +80,62 @@ form {
   margin-bottom: 1.1rem;
 }
 
-.jobFilterMobile{
+.jobFilterMobile {
   display: none;
   z-index: 499 !important;
 }
 
-.jobFilterMobile button{
+.jobFilterMobile button {
   padding: 1rem 1.5rem !important;
 }
 
-.jobFilterMobile i{
+.jobFilterMobile i {
   font-size: 1.4rem !important;
 }
+
+input {
+  float: top;
+  padding-left: 40px;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  border-radius: 30px;
+  box-shadow: 2px 2px 2px #36364b;
+  height: 50px;
+  z-index: 2;
+}
+
+.top-job-card {
+  width: 100% !important;
+}
+
+.jobSearch {
+  width: 65% !important;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100% !important;
+  align-items: center;
+}
+
+.search-bar i {
+  color: grey;
+  margin-top: -2px;
+  margin-right: -70px;
+  z-index: 3;
+  margin-bottom: 1.5rem;
+}
+
+.inputDiv {
+  width: 50vw;
+}
+
 @media (max-width: 980px) {
   select {
     width: 90%;
   }
-  form{
+  form {
     padding-left: 5%;
   }
 }

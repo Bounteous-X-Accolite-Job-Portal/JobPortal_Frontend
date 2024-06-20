@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, NgModule, OnInit, inject } from '@angular/core';
 import { JobCardComponent } from '../job-card/job-card.component';
 import { JobService } from '../../Services/Job/job.service';
 import { JobType } from '../../Models/JobTypeResponse/JobType';
@@ -9,7 +9,7 @@ import { position } from '../../Models/JobPositionResponse/position';
 import { Job } from '../../Models/JobResponse/Job';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Degree } from '../../Models/DegreeResponse/Degree';
 import { ClosedJob } from '../../Models/ClosedJobResponse/ClosedJob';
 import { ClosedJobServiceService } from '../../Services/ClosedJob/closed-job-service.service';
@@ -22,7 +22,7 @@ import { AuthService } from '../../Services/auth.service';
   standalone: true,
   selector: 'app-job-home',
   templateUrl: './job-home.component.html',
-  imports: [CommonModule, JobCardComponent, ReactiveFormsModule, ToastrModule],
+  imports: [CommonModule, JobCardComponent, ReactiveFormsModule, ToastrModule, FormsModule],
   styleUrls: ['./job-home.component.css'],
   moduleId: module.id,
 })
@@ -45,12 +45,14 @@ export class JobHomeComponent {
 
   closedJobs: ClosedJob[] = [];
   filteredClosedJobs: ClosedJob[] = [];
+  searchJobs: Job[] = [];
 
   filtersForm !: FormGroup;
 
   isEmployee: boolean = false;
   hasPrivilege: boolean = false;
   isLoggedIn: boolean = false;
+  searchText: string ='';
 
   constructor(
     private jobService: JobService,
@@ -210,6 +212,7 @@ export class JobHomeComponent {
       (res) => {
         this.jobs = res.allJobs;
         this.Filterjobs = this.jobs;
+        this.searchJobs= this.jobs;
         this.spinnerService.hideSpinner();
       },
       (error) => {
@@ -370,7 +373,10 @@ export class JobHomeComponent {
         this.Filterjobs.push(job);
       }
     });
-    if (this.Filterjobs.length > 0) this.displayJobsToast();
+    if (this.Filterjobs.length > 0){
+      this.displayJobsToast();
+      this.searchJobs = this.Filterjobs;
+    }
     else {
       this.displayEmptyJobsToast();
       this.resetFilters();
@@ -379,6 +385,7 @@ export class JobHomeComponent {
 
   public resetFilters(): void {
     this.Filterjobs = this.jobs;
+    this.searchJobs = this.jobs;
     this.filteredClosedJobs = this.closedJobs;
     this.categoryjobPositions = [];
 
@@ -392,6 +399,34 @@ export class JobHomeComponent {
 
     this.displayResetToast();
   }
+
+  search(searchText: string) {
+    // if (!this.searchText) return;
+
+    this.spinnerService.showSpinner();
+
+    if (!searchText || !searchText.trim()) {
+      this.searchJobs = this.jobs.slice();
+      this.spinnerService.hideSpinner();
+      return;
+    }
+    
+    // this.searchJobs = [];
+    searchText = searchText.trim().toLowerCase(); 
+    
+    this.searchJobs = this.Filterjobs.filter((item) => {
+      const jobTitle = item.jobTitle.toLowerCase().includes(searchText.toLowerCase());
+    //  console.log(jobTitle);
+      const jobCode = item.jobCode.toLowerCase().includes(searchText.toLowerCase());
+      
+      return jobTitle || jobCode;
+    });
+    
+   // console.log(this.searchJobs);
+    // console.log('Filtered applicants:', this.showApplicants);
+    this.spinnerService.hideSpinner();
+  }
+
 
   private displayResetToast(): void {
     this.toaster.success('Filters Reset Successfully !!');
