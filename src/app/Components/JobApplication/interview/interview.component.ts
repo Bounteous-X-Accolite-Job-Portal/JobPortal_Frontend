@@ -110,7 +110,7 @@ export class InterviewComponent implements OnInit {
     this.employeeIdOfInterviewer = employee.employeeId;
     this.isListVisible = false;
 
-    console.log('interviewer id ', this.employeeIdOfInterviewer);
+    //console.log('interviewer id ', this.employeeIdOfInterviewer);
 
     this.spinnerService.hideSpinner();
   }
