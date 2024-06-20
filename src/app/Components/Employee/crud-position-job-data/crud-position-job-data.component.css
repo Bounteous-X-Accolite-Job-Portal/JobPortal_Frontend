@@ -1,6 +1,9 @@
 .categoryWrapper{
     padding: 4vh 2vw !important;
 }
+.desc{
+    text-align: justify;
+}
 
 @media (max-width : 481px){
     .categoryWrapper{
