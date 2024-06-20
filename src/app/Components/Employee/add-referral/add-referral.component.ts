@@ -38,11 +38,14 @@ export class AddReferralComponent implements OnInit {
     this.referralForm= new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required,  Validators.email]),
       jobId: new FormControl('')
     })
   }
 
+  get f(){
+    return this.referralForm.controls;
+  }
 
   
   addreferal() {
@@ -59,7 +62,7 @@ export class AddReferralComponent implements OnInit {
           );
           
           this.referralForm.reset();
-          this.router.navigate(['../referral']);
+          this.router.navigate(['../employee-dashboard/referral']);
         } else {
           this.toastr.error(res.message);
         }
