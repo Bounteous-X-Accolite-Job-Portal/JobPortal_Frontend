@@ -87,10 +87,10 @@ export class InterviewComponent implements OnInit {
     }
 
     this.filteredEmployees = this.employee.filter((item) => {
-      const firstnameMatch = item.firstName.toLowerCase().includes(searchText);
-      const lastnameMatch = item.lastName.toLowerCase().includes(searchText);
-      const emailMatch = item.email.toLowerCase().includes(searchText);
-      const idMatch = item.empId.toString().includes(searchText);
+      const firstnameMatch = item.firstName.toLowerCase().includes(searchText.toLowerCase());
+      const lastnameMatch = item.lastName.toLowerCase().includes(searchText.toLowerCase());
+      const emailMatch = item.email.toLowerCase().includes(searchText.toLowerCase());
+      const idMatch = item.empId.toString().includes(searchText.toLowerCase());
       return firstnameMatch || lastnameMatch || emailMatch || idMatch;
     });
 

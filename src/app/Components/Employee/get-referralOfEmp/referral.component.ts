@@ -98,6 +98,7 @@ export class ReferralComponent {
           }
           else{
             if(applicationId !== undefined && applicationId !== null){
+              this.spinnerService.showSpinner();
               this.applicationService.getApplicationsById(applicationId.toString()).subscribe(
                 (element) => {
                   forkJoin({
@@ -117,17 +118,19 @@ export class ReferralComponent {
                       }
                       
                       this.referral.push(data);
-      
+                      this.spinnerService.hideSpinner();
                       // console.log(result);
                   },
                   (error) => {
                     // console.log(error);
+                    this.spinnerService.hideSpinner();
                     this.toastr.error('Error: ', error);
                   })
                 }
               )
             }
             else if(closedApplicationId !== undefined && closedApplicationId !== null){
+              this.spinnerService.showSpinner();
               this.closedApplicationService.getClosedApplicationById(closedApplicationId.toString()).subscribe(
                 (element) => {
                   forkJoin({
@@ -147,11 +150,12 @@ export class ReferralComponent {
                       }
                       
                       this.referral.push(data);
-      
+                      this.spinnerService.hideSpinner();
                       // console.log(result);
                   },
                   (error) => {
                     // console.log(error);
+                    this.spinnerService.hideSpinner();
                     this.toastr.error('Error: ', error);
                   })
                 }

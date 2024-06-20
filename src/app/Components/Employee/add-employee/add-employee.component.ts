@@ -108,7 +108,7 @@ export class AddEmployeeComponent implements OnInit {
           if (data.status == 200) {
             this.loading = false;
 
-            this.toaster.success('Successfully added employee.');
+            this.toaster.success(data.message);
             // console.log('success adding employee');
 
             this.submitted = false;
