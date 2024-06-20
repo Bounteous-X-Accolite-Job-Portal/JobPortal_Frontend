@@ -416,13 +416,13 @@ export class JobHomeComponent {
     
     this.searchJobs = this.Filterjobs.filter((item) => {
       const jobTitle = item.jobTitle.toLowerCase().includes(searchText.toLowerCase());
-      console.log(jobTitle);
+    //  console.log(jobTitle);
       const jobCode = item.jobCode.toLowerCase().includes(searchText.toLowerCase());
       
       return jobTitle || jobCode;
     });
     
-    console.log(this.searchJobs);
+   // console.log(this.searchJobs);
     // console.log('Filtered applicants:', this.showApplicants);
     this.spinnerService.hideSpinner();
   }
