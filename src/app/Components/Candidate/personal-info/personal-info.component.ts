@@ -40,7 +40,7 @@ export class PersonalInfoComponent {
 
     this.profileForm = this.fb.group({
       phone: ['', [Validators.required,Validators.pattern('[- +()0-9]{10}')]],
-      addressLine1:['',[Validators.required, Validators.pattern('^[A-Za-z]+(?: [A-Za-z]+)*$')]],
+      addressLine1:['',],
       city:['', Validators.required],
       state:[''],
       country:[''],

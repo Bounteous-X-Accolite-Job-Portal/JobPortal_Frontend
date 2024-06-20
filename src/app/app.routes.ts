@@ -65,11 +65,11 @@ export const routes: Routes = [
     path: 'landing',
     component: LandingComponent,
   },
-  { 
-    path: 'referral', 
-    component: ReferralComponent,
-    canActivate: [authGuard, employeeGuardGuard]
-  },
+  // { 
+  //   path: 'referral', 
+  //   component: ReferralComponent,
+  //   canActivate: [authGuard, employeeGuardGuard]
+  // },
   {
     path: 'about',
     component: AboutComponent,
