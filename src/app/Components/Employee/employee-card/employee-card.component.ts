@@ -52,9 +52,11 @@ export class EmployeeCardComponent {
   }
   
   disableEmployee(employeeId: any){
+
     this.spinnerService.showSpinner();
     // console.log(employeeId);
-
+    var result = confirm('Do you want to Disable this Employer ? ');
+    if (result) {
     this.employeeService.disableEmployee(employeeId).subscribe(
       (res)=>{
         // console.log(res);
@@ -73,12 +75,16 @@ export class EmployeeCardComponent {
         this.spinnerService.hideSpinner();
       }
     )
+    }
+    else
+      this.spinnerService.hideSpinner();
   }
 
   enableEmployee(employeeId : string){
     this.spinnerService.showSpinner();
     // console.log(employeeId);
-
+    var result = confirm('Do you want to Enable this Employer ? ');
+    if (result) {
     this.employeeService.enableEmployeeAccount(employeeId).subscribe(
       (res)=>{
         // console.log(res);
@@ -100,4 +106,7 @@ export class EmployeeCardComponent {
       }
     )
   }
+  else
+    this.spinnerService.hideSpinner();
+}
 }
