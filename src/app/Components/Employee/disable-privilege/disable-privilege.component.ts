@@ -119,26 +119,26 @@ export class DisablePrivilegeComponent {
     if (!text.trim()) {
       this.showActiveEmployees = this.activeEmployees.slice();
       this.showDisabledEmployees = this.disabledEmployees.slice();
-      this.spinnerService.hideSpinner();
+      this.spinnerService.hideSpinner();  
       return;
     }
 
     if(this.ActiveEmployeesToggle){
       this.showActiveEmployees = this.activeEmployees.filter((item) => {
-        const firstName = item.firstName.toLowerCase().includes(text);
-        const lastName = item.lastName.toLowerCase().includes(text);
-        const email = item.email.toLowerCase().includes(text);
-        const empId = item.empId.toLowerCase().includes(text);
+        const firstName = item.firstName.toLowerCase().includes(text.toLowerCase());
+        const lastName = item.lastName.toLowerCase().includes(text.toLowerCase());
+        const email = item.email.toLowerCase().includes(text.toLowerCase());
+        const empId = item.empId.toLowerCase().includes(text.toLowerCase());
   
         return firstName || lastName || email || empId;
       });
     }
     else{
       this.showDisabledEmployees = this.disabledEmployees.filter((item) => {
-        const firstName = item.firstName.toLowerCase().includes(text);
-        const lastName = item.lastName.toLowerCase().includes(text);
-        const email = item.email.toLowerCase().includes(text);
-        const empId = item.empId.toLowerCase().includes(text);
+        const firstName = item.firstName.toLowerCase().includes(text.toLowerCase());
+        const lastName = item.lastName.toLowerCase().includes(text.toLowerCase());
+        const email = item.email.toLowerCase().includes(text.toLowerCase());
+        const empId = item.empId.toLowerCase().includes(text.toLowerCase());
   
         return firstName || lastName || email || empId;
       });
