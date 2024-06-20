@@ -17,7 +17,7 @@
                 <tr *ngFor="let cat of jobCategories">
                     <td>{{ cat.categoryCode }}</td>
                     <td>{{ cat.categoryName }}</td>
-                    <td>{{ cat.description }}</td>
+                    <td class="desc">{{ cat.description }}</td>
                     <td>
                         <button class="delete-outer"><a id="delete" (click)="deleteCategoryById(cat.categoryId)"><i class="fa fa-trash"></i></a> </button>
                         <!-- <a id="edit" class="font-weight-bold btn btn-primary text-style-add"><i class="fas fa-edit"></i></a>  -->
